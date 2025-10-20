@@ -1,11 +1,11 @@
-# Parametrización EMK - JBE
+# Parametrización EMK - lacali
 
-Este repositorio contiene la configuración y personalización del sistema EMK para JBE.
+Este repositorio contiene la configuración y personalización del sistema EMK para lacali.
 
 ## Estructura del Proyecto
 
 ```
-parametrizacion_emaku_jbe/
+parametrizacion_emaku_lacali/
 ├── transacciones/       # Definiciones de formularios (XML)
 ├── sentencias_sql/      # Consultas SQL
 ├── templates/           # Plantillas
