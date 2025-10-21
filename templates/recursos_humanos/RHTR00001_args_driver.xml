@@ -1,0 +1,63 @@
+<container>
+    <!--  0 Inserta en general -->
+     <arg>MTINS0156</arg>
+    <!--  1 Inserta en info_empleado -->
+     <arg>MTINS0157</arg>
+    <!--  2 Inserta en direcciones -->
+     <arg>MTINS0158</arg>
+    <!--  3 Inserta en telefonos 1 -->
+     <arg>MTINS0159</arg>
+    <!--  4 Inserta en telefonos 2 -->
+     <arg>MTINS0159</arg>
+     <!-- 4b Inserta en emails -->
+     <arg>MTINS0168</arg>
+     <!-- 4c Inserta en informacion afiliacion -->
+     <arg>MTINS0205</arg>
+    <!--  5 Borra de contactos_clientes -->
+     <arg>MTDEL0064</arg>
+    <!--  6 Inserta en contactos_clientes -->
+     <arg>MTINS0160</arg>
+    <!--  7 Borra enfermedades_empleado -->
+     <arg>MTDEL0046</arg>
+    <!--  8 Inserta en enfermedades_empleado -->
+     <arg>MTINS0161</arg>
+    <!--  9 Borra deportes_empleado -->
+     <arg>MTDEL0047</arg>
+     <!-- 10 Inserta en deportes_empleado -->
+     <arg>MTINS0162</arg>
+
+     <!-- 11 Borra de medicacion_permanente_empleado -->
+     <arg>MTDEL0048</arg>
+     <!-- 12 Inserta en medicacion_permanente_empleado -->
+     <arg>MTINS0163</arg>
+
+     <!-- 13 Borra de informacion_familiar_empleado -->
+     <arg>MTDEL0049</arg>
+     <!-- 14 Inserta en informacion_familiar_empleado -->
+     <arg>MTINS0164</arg>
+
+     <!-- 15 Borra de informacion_academica_empleado -->
+     <arg>MTDEL0050</arg>
+     <!-- 16 Inserta en informacion_academica_empleado -->
+     <arg>MTINS0165</arg>
+
+     <!-- 17 Borra de referencias_empleado -->
+     <arg>MTDEL0051</arg>
+     <!-- 18 Inserta en referencias_empleado -->
+     <arg>MTINS0166</arg>
+
+     <!-- 19 Borra de experiencia_laboral_empleado -->
+     <arg>MTDEL0052</arg>
+     <!-- 20 Inserta en experiencia_laboral_empleado -->
+     <arg>MTINS0167</arg>
+
+     <!-- 21 Borra documentos conductor -->
+     <arg>TEDEL0007</arg>
+     <!-- 22 Inserta documentos conductor -->
+     <arg>TEINS0010</arg>
+     <!-- 23 actualiza periodo_vacaciones en causacion_novedades_nomina -->
+     <arg>LCUPD0049</arg>
+     <!-- 24 -->
+     <arg attribute="saveImage">MTUPD0059</arg>
+
+</container>
