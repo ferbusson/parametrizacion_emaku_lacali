@@ -1918,7 +1918,7 @@
                     <subarg>
                         <arg attribute="label">GUARDAR</arg>
                         <arg attribute="icon">/icons/ico_guardarcomo.png</arg>
-                    </subarg>                    
+                    </subarg>                     
                     <subarg>
                         <arg attribute="label">NEW</arg>
                         <arg attribute="icon">/icons/ico_nuevo.png</arg>
