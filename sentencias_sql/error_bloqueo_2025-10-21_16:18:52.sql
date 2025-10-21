@@ -54,3 +54,26 @@
         WHERE
             foo.id_char = a.id_char;
 2025-10-21 16:18:52.257 -05 [2865286] emaku@lacali ERROR:  current transaction is aborted, commands ignored until end of transaction block
+
+
+
+--Solution:
+
+INSERT INTO general(
+    id_char, dv, nombre1, nombre2, apellido1, apellido2
+) 
+SELECT
+    a.id_char,
+    a.dv,
+    COALESCE(TRIM(a.nombre1),' '),
+    COALESCE(TRIM(a.nombre2),' '),
+    COALESCE(TRIM(a.apellido1),' '),
+    COALESCE(TRIM(a.apellido2),' ')
+FROM aux_general a
+ON CONFLICT (id_char)  -- Must match the unique constraint/index
+DO UPDATE SET
+    dv = EXCLUDED.dv,
+    nombre1 = EXCLUDED.nombre1,
+    nombre2 = EXCLUDED.nombre2,
+    apellido1 = EXCLUDED.apellido1,
+    apellido2 = EXCLUDED.apellido2;
