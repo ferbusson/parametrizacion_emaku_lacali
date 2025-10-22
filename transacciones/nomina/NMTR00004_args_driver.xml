@@ -1,0 +1,865 @@
+<container>
+  <subarg>
+    <arg attribute="idDocument">NM</arg>
+    <arg attribute="consecutive" />
+    <arg attribute="actionDocument">createDocument</arg>
+    <arg attribute="cash" />
+  </subarg>
+
+  <!-- 0 Centro costo -->
+  <arg attribute="addKey"/>
+
+  <!-- 1 Aportes Patronales OK -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">4</arg>
+          <arg attribute="accountTh">2</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">1</arg>
+          <arg attribute="accountData">4</arg>
+          <arg attribute="accountTh">3</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Cuenta -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0008</arg>
+        <arg attribute="fields">3,4,4,1</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">"b".startsWith("2") &amp;&amp; e&gt;0</arg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0010</arg>
+        <arg attribute="fields">7,5,0,1,2,3,4,6</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">e&gt;0</arg>
+      </parameters>
+    </LNData>
+  </subarg>
+
+  <!-- 2 Prestaciones Sociales OK -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">4</arg>
+          <arg attribute="accountTh">2</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">1</arg>
+          <arg attribute="accountData">4</arg>
+          <arg attribute="accountTh">3</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Cuenta -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0008</arg>
+        <arg attribute="fields">3,4,4,1</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">e&gt;0</arg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0010</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="fields">7,5,0,1,2,3,4,6</arg>
+        <arg attribute="conditional">e&gt;0</arg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 3 Salario Base -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <!-- AGREGADO -->
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">3</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+
+    <LNData><!-- Concepcion Nomina -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0010</arg>
+        <arg attribute="fields">7,5,0,3,1,4,2,6</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">c&gt;0</arg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 4 Devengado % -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <!-- AGREGADO -->
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">3</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0010</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="fields">7,5,0,3,1,4,2,6</arg>
+        <arg attribute="conditional">c&gt;0</arg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 5 Devengado x valor -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <!-- AGREGADO -->
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">3</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0010</arg>
+        <arg attribute="fields">7,5,0,3,1,4,2,6</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+      <!--<arg attribute="conditional">"d".startsWith("2") &amp;&amp; c&gt;0</arg>-->
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 6 Deducido Porcentual -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <!-- AGREGADO -->
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">3</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">4</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Cuenta -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0008</arg>
+        <arg attribute="fields">1,2,2,0</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">"a".startsWith("2") &amp;&amp; c&gt;0</arg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina 15-->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0010</arg>
+        <arg attribute="fields">7,5,3,0,4,1,2,6</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">c&gt;0</arg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 7 Deducido x valor -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <!-- AGREGADO -->
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">3</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">4</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Cuenta -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0008</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="fields">1,2,2,0</arg>
+        <arg attribute="conditional">"a".startsWith("2") &amp;&amp; c&gt;0</arg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0010</arg>
+        <arg attribute="fields">7,5,3,0,4,1,2,6</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">c&gt;0</arg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 8 Salario por Pagar -->
+  <subarg>
+    <!-- COMENTADO -->
+    <!-- <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData> -->
+    <LNData><!-- Cuenta -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <!-- returnCol tabla: a0 cta cre, b1 id_tercero, c2 t pagar, d3 id_concepto_causacion, e4 nulo, f5 dias -->
+        <arg attribute="sql">NMINS0008</arg> 
+        <arg attribute="fields">1,2,2,0</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">"a".startsWith("2") &amp;&amp; c&gt;0</arg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 9 Horar Extra Ordinaria HED y HEN -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">3</arg>
+          <arg attribute="accountData">4</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <!-- AGREGADO -->
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">6</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">8</arg>
+          <arg attribute="accountData">4</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+
+    <LNData><!-- Concepcion Nomina -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0026</arg> <!-- inserta en causacion_nomina -->
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="fields">10,5,0,6,1,6,2,9,12,14</arg>
+        <arg attribute="conditional">c&gt;0</arg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0026</arg> <!-- inserta en causacion_nomina -->
+        <arg attribute="fields">10,7,3,8,1,8,4,9,13,15</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">e&gt;0</arg>
+      </parameters>
+    </LNData>
+    <!-- Causacion extras nomina -->
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0017</arg> <!-- inserta en causacion_extras_nomina -->        
+        <arg attribute="fields">10,5,7,11,12,13,14,15,2,4</arg>
+        <!-- k10-documento, f5-id_concepto_causacion, h7-id_concepto_causacion2, l11-valorSB, m12-HED, n13-HEN, o14-p1, p15-p2, c2-Valor HED, e4-Valor HEN -->
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">c&gt;0||e&gt;0</arg> 
+        <!-- condicional si Valor HED > 0 or Valor HEN > 0 | los valores llegan decimales float8 -->
+      </parameters>
+    </LNData>
+  </subarg>
+
+  <!-- 10 Horar Extra Dominical  HEDDF HENDF-->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">3</arg>
+          <arg attribute="accountData">4</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <!-- AGREGADO -->
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">6</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">8</arg>
+          <arg attribute="accountData">4</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina HD -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0026</arg>
+        <arg attribute="fields">10,5,0,6,1,6,2,9,12,14</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">c&gt;0</arg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina HN-->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0026</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="fields">10,7,3,8,1,8,4,9,13,15</arg>
+        <arg attribute="conditional">e&gt;0</arg>
+      </parameters>
+    </LNData>
+
+    <!-- Causacion extras nomina -->
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0018</arg>
+        <arg attribute="fields">10,5,7,11,12,13,14,15,2,4</arg>
+        <!-- k10-documento, f5-id_concepto_causacion, h7-id_concepto_causacion2, l11-valorSB, m12-HEDDF, n13-HENDF, o14-p1, p15-p2, c2-Valor HEDDF, e4-Valor HENDF -->
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">c&gt;0||e&gt;0</arg> 
+        <!-- condicional si Valor HEDDF > 0 or Valor HENDF > 0 | los valores llegan decimales float8 -->
+      </parameters>
+    </LNData>
+
+  </subarg>
+  <!-- 11 Recargos HRN y HRNDF -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">3</arg>
+          <arg attribute="accountData">4</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <!-- AGREGADO -->
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">6</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">8</arg>
+          <arg attribute="accountData">4</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina HD -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0026</arg>
+        <arg attribute="fields">10,5,0,6,1,6,2,9,12,14</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">c&gt;0</arg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina HN-->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0026</arg>
+        <arg attribute="fields">10,7,3,8,1,8,4,9,13,15</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">e&gt;0</arg>
+      </parameters>
+    </LNData>
+    <!-- Causacion extras nomina -->
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0019</arg>
+        <arg attribute="fields">10,5,7,11,12,13,14,15,2,4</arg>
+        <!-- k10-documento, f5-id_concepto_causacion, h7-id_concepto_causacion2, l11-valorSB, m12-HRN, n13-HRNDF, o14-p1, p15-p2, c2-Valor HRN, e4-Valor HRNDF -->
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">c&gt;0||e&gt;0</arg> 
+        <!-- condicional si Valor HRN > 0 or Valor HRNDF > 0 | los valores llegan decimales float8 -->
+      </parameters>
+    </LNData>
+
+  </subarg>
+  <!-- 12 Dominicales HRDDF -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <!-- AGREGADO -->
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">4</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+
+    <LNData><!-- Concepcion Nomina -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0026</arg>
+        <arg attribute="fields">6,3,0,4,1,1,2,5,8,9</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">c&gt;0</arg>
+      </parameters>
+    </LNData>
+    <!-- Causacion extras nomina -->
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0020</arg>
+        <arg attribute="fields">6,3,7,8,9,2</arg>
+        <!-- g6-documento, d3-id_concepto_causacion, h7-valorSB, i8-HRDDF, j9-p1, c2-valor HRDDF -->
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">c&gt;0</arg>
+
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 13 cartera Abonos autorizados --> <!-- CONFIRMAR SE DEJA IGUAL -->
+  <subarg>
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">INS0082</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="fields">7,0,2,3,4,6</arg>
+        <arg attribute="conditional">c&gt;0</arg> <!-- Por confirmar: c corresponde a returnCol2: valor abono  -->
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Abono a cartera segun comprobante de Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">5</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">7</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0010</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="fields">11,8,9,5,9,7,2,10</arg>
+        <arg attribute="conditional">c&gt;0</arg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 14 cartera descuento en abonos autorizados --> <!-- CONFIRMAR SE DEJA IGUAL -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Descuento en cartera segun comprobante de Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">12</arg>
+          <arg attribute="accountData">4</arg>
+          <arg attribute="accountTh">9</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0010</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="fields">11,14,12,5,9,7,4,10</arg>
+        <arg attribute="conditional">e&gt;0</arg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 15 Devengado Provisionados -->
+  <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <!-- AGREGADO -->
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Causacion Nomina</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getname</arg>
+        <subarg>
+          <arg attribute="accountKey">3</arg>
+          <arg attribute="accountData">2</arg>
+          <arg attribute="accountTh">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+    <LNData><!-- Concepcion Nomina -->
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">NMINS0010</arg>
+        <arg attribute="fields">7,5,0,3,1,4,2,6</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+        <arg attribute="conditional">c&gt;0</arg>
+      </parameters>
+    </LNData>
+  </subarg>
+
+  <!-- 16 enlaza NM con registro extras nomina y registro novedades nomina por medio de info_documento-->
+  <arg>NMUPD0003</arg>
+
+  <!-- 17 inserta en info_causacion_nomina-->
+  <arg>NMINS0025</arg>
+
+  <!-- 18 inserta en info_causacion_nomina-->
+  <arg>NMINS0036</arg>
+  
+</container>
+
