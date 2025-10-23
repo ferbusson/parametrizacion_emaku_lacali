@@ -1,0 +1,16 @@
+tasks:
+review the file, content: XML 
+it represents a table, the args are the parameters of the table
+the subargs are the columns of the table
+each column is represented by a letter corresponding to the column position (first column is a, second is b, etc)
+in the args there are beanshell scripts and formulas that use the columns to calculate the values
+map each column to its corresponding letter and number, number starting from 0, Ex: 
+a (0) → Documento
+b (1) → Nombre ...etc, place the mapping at the beginning of the file
+then replace the beanshell scripts and formulas with the corresponding column name
+place the resulting beanshell scripts and formulas after the current beanshell scripts and formulas
+add a comment to the columns that correspond to the abbreviations from the novedades_nomina table with the description
+identify the line where the attribute singleSendRecord is used 
+then count the list of elements in the singleSendRecord attribute
+identify the positions of those different from NR and add a comment with the positionin the list and the name of the column based on the mapping and the number, ex:
+<!-- Position mapping: 0=Documento, 34=devbaseliquidacion, 35=Valor -->
