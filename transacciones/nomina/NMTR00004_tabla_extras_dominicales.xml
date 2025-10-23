@@ -1,0 +1,331 @@
+<panel name="Ext Dom" icon="/icons/ico_ext_nocturno_16x16.png" type="BorderLayout">
+
+a (0) → Documento
+b (1) → Nombre
+c (2) → Salario Base
+d (3) → Dias
+e (4) → ValorSB
+f (5) → HEDDF
+g (6) → VR HEDDF
+h (7) → HENDF
+i (8) → VR HENDF
+j (9) → Total
+k (10) → id_cta_debito_diurno_d
+l (11) → id_cta_credito_diurno_
+m (12) → id_cta_debito_nocturno_d
+n (13) → id_cta_credito_nocturno_d
+o (14) → p1
+p (15) → p2
+q (16) → IDTerceroDebito
+r (17) → IDConceptoCausacion
+s (18) → IDConceptoCausacion2
+t (19) → IG
+u (20) → IL
+v (21) → LM
+w (22) → LP
+x (23) → LR
+y (24) → LN
+z (25) → SC
+aa (26) → IN
+ab (27) → RE
+ac (28) → VC
+ad (29) → VP
+zz → External value "dias"
+
+table: novedades_nomina
+id_novedad_nomina | sigla |        descripcion         
+-------------------+-------+----------------------------
+                 4 | IL    | Incapacidad Laboral
+                 5 | LM    | Licencia de Maternidad
+                 6 | LP    | Licencia de Paternidad
+                 7 | LR    | Licencia Remunerada
+                 8 | LN    | Licencia No Remunerada
+                 9 | SC    | Suspensión de Contrato
+                10 | IN    | Ingreso
+                11 | RE    | Retiro
+                12 | VC    | Vacaciones Disfrutadas
+                13 | VP    | Vacaciones Pagadas
+                 3 | IG    | Incapacidad General
+                16 | IE    | Incapacidad x cobrar a EPS
+
+<!-- Translated beanshell: Dias=
+                                IN_Ingreso!=0&amp;&amp;RE_Retiro!=0?
+                                  (RE_Retiro+1)-IN_Ingreso:
+                                IN_Ingreso-IN_Ingreso>0?
+                                  IN_Ingreso-RE_Retiro-LR_LicenciaRemunerada-LN_LicenciaNoRemunerada-IG_IncapacidadGeneral-IL_IncapacidadLaboral-LM_LicenciaMaternidad-LP_LicenciaPaternidad-SC_SuspensionContrato-VC_VacacionesDisfrutadas:
+                                RE_Retiro!=0?
+                                  RE_Retiro-LR_LicenciaRemunerada-LN_LicenciaNoRemunerada-IG_IncapacidadGeneral-IL_IncapacidadLaboral-LM_LicenciaMaternidad-LP_LicenciaPaternidad-SC_SuspensionContrato-VC_VacacionesDisfrutadas:
+                                IN_Ingreso!=0?
+                                  dias-(IN_Ingreso-1)-LR_LicenciaRemunerada-LN_LicenciaNoRemunerada-IG_IncapacidadGeneral-IL_IncapacidadLaboral-LM_LicenciaMaternidad-LP_LicenciaPaternidad-SC_SuspensionContrato-VC_VacacionesDisfrutadas:
+                                dias-LR_LicenciaRemunerada-LN_LicenciaNoRemunerada-IG_IncapacidadGeneral-IL_IncapacidadLaboral-LM_LicenciaMaternidad-LP_LicenciaPaternidad-SC_SuspensionContrato-VC_VacacionesDisfrutadas -->
+
+                    <component locate="Center">
+                        <driver id="edominicales">client.gui.components.TableFindData</driver>
+                        <parameters>
+                            <arg attribute="name">extdom</arg>
+                            <arg attribute="returnNullValue">true</arg>
+                            <arg attribute="rows">100</arg>                            
+                            <arg attribute="keySQL">NMSEL0027</arg>
+                            <arg attribute="driverEvent" id="division">client.gui.components.XMLComboBox</arg>
+                            <arg attribute="sendRecordOnSelectedRow">true</arg>
+                            <arg attribute="initSendRecord">true</arg>
+                            <arg attribute="singleSendRecord">0,NR,NR,NR,NR,NR,NR,NR,NR,NR,NR,NR,NR,9,NR,NR</arg>
+                            <!-- mapping singleSendRecord (positions != NR): Position 0 → Documento, Position 13 → id_cta_credito_nocturno_d -->
+                            <arg attribute="externalValue">dias,client.gui.components.TableDataFields,zz</arg>
+                            <arg attribute="tagData">0</arg>
+
+                            <arg attribute="colorBackground">255,242,156</arg>
+                            <arg attribute="colorSelected">255,242,176</arg>
+                            <arg attribute="protectSelected">true</arg>
+                            <arg attribute="beanshell">d=
+                                aa!=0&amp;&amp;ab!=0?
+                                  (ab+1)-aa:
+                                aa-aa>0?
+                                  aa-ab-x-y-t-u-v-w-z-ac:
+                                ab!=0?
+                                  ab-x-y-t-u-v-w-z-ac:
+                                aa!=0?
+                                  zz-(aa-1)-x-y-t-u-v-w-z-ac:
+                                zz-x-y-t-u-v-w-z-ac</arg>
+                            <!-- Translated beanshell: Dias=
+                                IN!=0&amp;&amp;RE!=0?
+                                  (RE+1)-IN:
+                                IN-IN>0?
+                                  IN-RE-LR-LN-IG-IL-LM-LP-SC-VC:
+                                RE!=0?
+                                  RE-LR-LN-IG-IL-LM-LP-SC-VC:
+                                IN!=0?
+                                  dias-(IN-1)-LR-LN-IG-IL-LM-LP-SC-VC:
+                                dias-LR-LN-IG-IL-LM-LP-SC-VC -->
+                            <arg attribute="formula">j=g+i</arg>
+                            <!-- Translated formula: Total=VR_HEDDF+VR_HENDF -->
+                            <arg attribute="conditionalColor">255,87,51:t!=0||u!=0||v!=0||w!=0||x!=0||y!=0||z!=0||aa!=0||ab!=0||ac!=0||ad!=0</arg>
+                            <!-- Translated conditionalColor: 255,87,51:IG!=0||IL!=0||LM!=0||LP!=0||LR!=0||LN!=0||SC!=0||IN!=0||RE!=0||VC!=0||VP!=0 -->
+                            <subarg><!-- a 0 -->
+                                <arg attribute="name">Documento</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="returnCol">10</arg>
+                            </subarg>
+                            <subarg><!-- b 1 -->
+                                <arg attribute="name">Nombre</arg>
+                                <arg attribute="length">230</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>
+                            <subarg><!-- c 2-->
+                                <arg attribute="name">Salario Base</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">DECIMAL</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="roundDecimal">0</arg>
+                            </subarg>
+                            <subarg><!-- d 3 -->
+                                <arg attribute="name">Dias</arg>
+                                <arg attribute="length">50</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="returnCol">9</arg>
+                            </subarg>
+                            <subarg><!-- e 4 -->
+                                <arg attribute="name">ValorSB</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">DECIMAL</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="roundDecimal">0</arg>
+                                <arg attribute="returnCol">11</arg>
+                            </subarg>
+                            <subarg><!-- f -->
+                                <arg attribute="name">HEDDF</arg>
+                                <arg attribute="length">70</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="returnCol">12</arg>
+                            </subarg>
+                            <subarg><!-- g -->
+                                <arg attribute="name">VR HEDDF</arg>
+                                <arg attribute="length">90</arg>
+                                <arg attribute="type">DECIMAL</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="roundDecimal">0</arg>
+                                <arg attribute="returnCol">2</arg>
+                            </subarg>
+                            <subarg><!-- h -->
+                                <arg attribute="name">HENDF</arg>
+                                <arg attribute="length">75</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="returnCol">13</arg>
+                            </subarg>
+                            <subarg><!-- i -->
+                                <arg attribute="name">VR HENDF</arg>
+                                <arg attribute="length">90</arg>
+                                <arg attribute="type">DECIMAL</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="returnCol">4</arg>
+                            </subarg>
+                            <subarg><!-- j -->
+                                <arg attribute="name">Total</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">DECIMAL</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="roundDecimal">0</arg>
+                            </subarg>
+                            <subarg><!-- k -->
+                                <arg attribute="name">id_cta_debito_diurno_d</arg>
+                                <arg attribute="length">70</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="returnCol">0</arg>
+                            </subarg>
+                            <subarg><!-- l -->
+                                <arg attribute="name">id_cta_credito_diurno_</arg>
+                                <arg attribute="length">70</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="returnCol">6</arg>
+                            </subarg>
+                            <subarg><!-- m -->
+                                <arg attribute="name">id_cta_debito_nocturno_d</arg>
+                                <arg attribute="length">70</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="returnCol">3</arg>
+                            </subarg>
+                            <subarg><!-- n -->
+                                <arg attribute="name">id_cta_credito_nocturno_d</arg>
+                                <arg attribute="length">70</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="returnCol">8</arg>
+                            </subarg>
+                            <subarg><!-- o -->
+                                <arg attribute="name">p1</arg>
+                                <arg attribute="length">50</arg>
+                                <arg attribute="type">DECIMAL</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="roundDecimal">2</arg>
+                                <arg attribute="returnCol">14</arg>
+                            </subarg>
+                            <subarg><!-- p -->
+                                <arg attribute="name">p2</arg>
+                                <arg attribute="length">50</arg>
+                                <arg attribute="type">DECIMAL</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="roundDecimal">2</arg>
+                                <arg attribute="returnCol">15</arg>
+                            </subarg>
+                            <subarg><!-- q  -->
+                                <arg attribute="name">IDTerceroDebito</arg>
+                                <arg attribute="length">105</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="returnCol">1</arg>
+                            </subarg>
+                            <subarg><!-- r -->
+                                <arg attribute="name">IDConceptoCausacion</arg>
+                                <arg attribute="length">105</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="returnCol">5</arg>
+                            </subarg>
+                            <subarg><!-- s -->
+                                <arg attribute="name">IDConceptoCausacion2</arg>
+                                <arg attribute="length">105</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="returnCol">7</arg>
+                            </subarg>
+                            <subarg><!-- t - IG: Incapacidad General -->
+                                <arg attribute="length">40</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>                            
+                            <subarg><!-- u - IL: Incapacidad Laboral -->
+                                <arg attribute="length">40</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>                            
+                            <subarg><!-- v - LM: Licencia de Maternidad -->
+                                <arg attribute="length">40</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>                            
+                            <subarg><!-- w - LP: Licencia de Paternidad -->
+                                <arg attribute="length">40</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>                            
+                            <subarg><!-- x - LR: Licencia Remunerada -->
+                                <arg attribute="length">40</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>                            
+                            <subarg><!-- y - LN: Licencia No Remunerada -->
+                                <arg attribute="length">40</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>                            
+                            <subarg><!-- z - SC: Suspensión de Contrato -->
+                                <arg attribute="length">40</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>
+                            <subarg><!-- aa - IN: Ingreso -->
+                                <arg attribute="length">40</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>                            
+                            <subarg><!-- ab - RE: Retiro -->
+                                <arg attribute="length">40</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>
+                            <subarg><!-- ac - VC: Vacaciones Disfrutadas -->
+                                <arg attribute="length">40</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>                            
+                            <subarg><!-- ad - VP: Vacaciones Pagadas -->
+                                <arg attribute="length">40</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>                                                                                   
+                        </parameters>
+                    </component>
+                </panel>

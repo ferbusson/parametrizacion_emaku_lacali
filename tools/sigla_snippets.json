@@ -1,0 +1,23 @@
+{
+  "addSiglaDescriptions": {
+    "prefix": "add-sigla",
+    "body": [
+      "<!-- $1 - $2: $3 -->"
+    ],
+    "description": "Add sigla description comment"
+  },
+  "siglaMapping": {
+    "IG": "Incapacidad General",
+    "IL": "Incapacidad Laboral", 
+    "LM": "Licencia de Maternidad",
+    "LP": "Licencia de Paternidad",
+    "LR": "Licencia Remunerada",
+    "LN": "Licencia No Remunerada",
+    "SC": "Suspensión de Contrato",
+    "IN": "Ingreso",
+    "RE": "Retiro",
+    "VC": "Vacaciones Disfrutadas",
+    "VP": "Vacaciones Pagadas",
+    "IE": "Incapacidad x cobrar a EPS"
+  }
+}
