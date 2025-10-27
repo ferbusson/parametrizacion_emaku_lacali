@@ -3889,8 +3889,8 @@
                           (zz-(z+(ab-1))):
                         (ac-ab)>0?
                           (ac-ab-z-aa):
-                        (am==19||am==20)?
-                            zz:
+                        <!-- (am==19||am==20)? comentado revision 27 Oct 2025 con Maria E problema liquidacion de Septiembre
+                            zz: -->
                         (z!=0||aa!=0)?
                           zz-(z+aa):                        
                         (ab!=0)?
