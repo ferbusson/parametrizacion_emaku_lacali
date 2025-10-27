@@ -1,0 +1,72 @@
+Tables in NMTR00004_perfil.xml
+
+Primary Tables (Main Components):
+
+sbase - Salario Base (Base Salary)
+devporcentual - Devengado Porcentual (Percentage Earnings)
+devxvalor - Devengado por Valor (Earnings by Value)
+devprovisionados - Devengados Provisionados (Provisioned Earnings)
+eordinaria - Extras Ordinarias (Ordinary Overtime)
+edominicales - Extras Dominicales (Sunday Overtime)
+recargos - Recargos (Surcharges)
+dominicales - Domingos y Festivos (Sundays and Holidays)
+deducidos - Deducidos Porcentuales (Percentage Deductions)
+deducidocons - Deducidos por Valor (Value Deductions)
+cartera - Cartera (Portfolio)
+carterat - Cartera Temporal (Temporary Portfolio)
+apatronales - Aportes Patronales (Employer Contributions)
+psociales - Prestaciones Sociales (Social Benefits)
+spagar - Salarios por Pagar (Salaries Payable)
+
+Relationship Matrix through driverEventRecord:
+1. devporcentual (Dev %) depends on:
+dominicales
+eordinaria
+edominicales
+recargos
+
+2. deducidos (Deducido porcentual) depends on:
+sbase
+dominicales
+eordinaria
+edominicales
+recargos
+devporcentual
+devxvalor
+devprovisionados
+
+3. deducidocons (Deducido por Valor) depends on:
+sbase
+
+4. apatronales (Aportes Patronales) depends on:
+devporcentual
+devxvalor
+devprovisionados
+dominicales
+eordinaria
+edominicales
+recargos
+sbase
+
+5. psociales (Prestaciones Sociales) depends on:
+devporcentual
+devxvalor
+devprovisionados
+dominicales
+eordinaria
+edominicales
+recargos
+sbase
+
+6. spagar (Salarios x Pagar) - MAIN CONSOLIDATION TABLE depends on:
+dominicales
+eordinaria
+edominicales
+recargos
+carterat
+deducidos
+devporcentual
+devxvalor
+deducidocons
+devprovisionados
+sbase
