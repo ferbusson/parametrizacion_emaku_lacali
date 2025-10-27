@@ -4,7 +4,7 @@ SELECT
 	TRIM(i.nombre) AS nombre,
 	TRIM(m.descripcion) AS marca,
 	TRIM(l.descripcion) AS linea,
-	COALESCE(inv.valor_ent,0)/inv.entrada AS pcosto,
+	COALESCE(inv.valor_ent,0) AS pcosto,
 	inv.entrada
 FROM
 	documentos d,
