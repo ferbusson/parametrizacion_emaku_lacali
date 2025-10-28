@@ -1,6 +1,6 @@
 <FORM>
     <preferences>
-        <size width="500" height="240" />
+        <size width="500" height="260" />
         <name>Informe de Entradas Almacén Detallado por Productos</name>
         <icon>REPORT</icon>
         <iconificable />
@@ -11,7 +11,7 @@
     <panel locate="West" type="FlowLayout" />
     <panel locate="East" type="FlowLayout" />
     <panel locate="Center" type="BorderLayout">
-        <panel locate="West" type="GridLayout" rows="5" cols="1">
+        <panel locate="West" type="GridLayout" rows="6" cols="1">
             <component>
                 <driver>common.gui.components.XMLLabel</driver>
                 <parameters>
@@ -42,8 +42,14 @@
                     <arg attribute="text">Nombre</arg>
                 </parameters>
             </component>
+            <component>
+                <driver>common.gui.components.XMLLabel</driver>
+                <parameters>
+                    <arg attribute="text">Línea</arg>
+                </parameters>
+            </component>
         </panel>
-        <panel locate="Center" type="GridLayout" rows="5" cols="1">
+        <panel locate="Center" type="GridLayout" rows="6" cols="1">
           <component locate="Center">
             <driver id="tipodocumento">client.gui.components.XMLComboBox</driver>
             <parameters>
@@ -103,6 +109,16 @@
                     </subarg>
                 </parameters>
             </component>
+            <component>
+              <driver id="seccion">client.gui.components.XMLComboBox</driver>
+              <parameters>
+                <arg attribute="sqlCombo">SEL0368</arg>
+                <arg attribute="selectedIndex">0</arg>
+                <arg attribute="exportValue">seccion</arg>
+                <arg attribute="clean">false</arg>
+                <arg attribute="preferredLength">230</arg>
+              </parameters>
+            </component>
         </panel>
     </panel>
     <component locate="South">
@@ -153,6 +169,10 @@
                     <driver id="descripcion">common.gui.components.GenericData</driver>
                     <method>clean</method>
                 </component>
+                <component>
+                    <driver id="seccion">client.gui.components.XMLComboBox</driver>
+                    <method>clean</method>
+                </component>
             </object>
             <object>
                 <name>EXCEL</name>
@@ -166,6 +186,7 @@
                             <arg attribute="importValue">fechai</arg>
                             <arg attribute="importValue">fechaf</arg>
                             <arg attribute="importValue">nittercero</arg>
+                            <arg attribute="importValue">seccion</arg>
                         </subarg>
                     </parameters>
                 </component>

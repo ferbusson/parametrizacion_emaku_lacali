@@ -1,3 +1,4 @@
+--query:
 /*
     Logica del reporte:
     Listar los documentos que se hayan seleccionado en el combo que se encuentren en el rango de fechas que se seleccione y que pertenezcan al tercero seleccionado.
@@ -19,11 +20,11 @@ SELECT
     case when foo.id_linea is null or foo.id_linea = '' then '-1' else foo.id_linea end as id_linea
 FROM
     (SELECT
-        '?'::CHARACTER(2) AS codigo_tipo,
-        '?'::DATE AS fechai,
-        '?'::DATE AS fechaf,
-        '?'::VARCHAR AS id_char,
-        '?'::varchar id_linea) AS foo
+        'EA'::CHARACTER(2) AS codigo_tipo,
+        '2025-10-25'::DATE AS fechai,
+        '2025-10-31'::DATE AS fechaf,
+        ''::VARCHAR AS id_char,
+        '12'::varchar id_linea) AS foo
 LEFT OUTER JOIN
     general g
 ON
@@ -72,7 +73,7 @@ SELECT
     d.fecha AS fecha_factura_proveedor,
     d.codigo_tipo||'-'||d.numero::BIGINT AS numero,
     m.descripcion AS marca,
-    COALESCE(sm.descripcion,'') AS submarca,
+    --COALESCE(sm.descripcion,'') AS submarca,
     l.descripcion AS linea,
     g.descripcion AS grupo,
     sg.descripcion AS sub_grupo,
@@ -103,11 +104,9 @@ LEFT OUTER JOIN
     submarcas sm
 ON
     i.id_submarca = sm.id_submarca
-where	
-    rm.fecha::DATE BETWEEN a.fechai AND a.fechaf and
+WHERE
     d.ndocumento = rm.ndocumento AND
-    d.estado AND
-    rm.id_tipo_modificacion = 0 AND
+        rm.id_tipo_modificacion = 0 AND
     d.ndocumento = dp.ndocumento AND
     d.ndocumento = t.ndocumento AND
     CASE WHEN a.id = '-1' THEN TRUE ELSE a.id = t.id END AND
@@ -119,8 +118,9 @@ where
     i.id_sgrupo = sg.id_sgrupo AND
     d.ndocumento = dd.ndocumento AND
     CASE WHEN a.codigo_tipo = 'RC' THEN d.codigo_tipo IN ('RC','AT') ELSE d.codigo_tipo = a.codigo_tipo END and
-    case when a.id_linea = '-1' then true else a.id_linea::integer = l.id_linea end
-    
+    case when a.id_linea = '-1' then true else a.id_linea::integer = l.id_linea end and
+    d.estado AND
+    rm.fecha::DATE BETWEEN a.fechai AND a.fechaf
 UNION ALL
 SELECT
     d.ndocumento,
@@ -322,3 +322,37 @@ ORDER BY
     acd.prefijo DESC,
     a.orden ASC,
     acd.numero_orden ASC;
+
+--explain analyze verbose result:
+Node Type	Entity	Cost	Rows	Time	Condition
+Hash Join	[NULL]	1503249.72 - 20062511.94	72	20521.226	(i.id_linea = l.id_linea)
+Merge Join	[NULL]	1503247.97 - 18226207.10	561	20520.863	[NULL]
+Sort	[NULL]	1354155.84 - 1370528.77	6784134	15767.109	[NULL]
+Hash Join	[NULL]	12856.83 - 271804.95	6784813	4438.528	(dp.id_prod_serv = ps.id_prod_serv)
+Seq Scan	datos_prod	0.00 - 167962.84	6784896	768.102	[NULL]
+Hash	[NULL]	11677.07 - 11677.07	91841	207.792	[NULL]
+Hash Join	[NULL]	5434.22 - 11677.07	91841	176.765	(i.id_sgrupo = sg.id_sgrupo)
+Hash Join	[NULL]	5400.93 - 10346.03	91844	154.959	(i.id_marca = m.id_marca)
+Hash Join	[NULL]	5355.30 - 9002.52	91882	135.195	(ps.id_item = i.id_item)
+Seq Scan	prod_serv	0.00 - 2335.71	91889	12.428	[NULL]
+Hash	[NULL]	4175.34 - 4175.34	91863	62.165	[NULL]
+Hash Join	[NULL]	6.37 - 4175.34	91863	39.844	(i.id_grupo = g.id_grupo)
+Hash	[NULL]	26.39 - 26.39	1542	0.360	[NULL]
+Seq Scan	marcas	0.00 - 26.39	1542	0.183	[NULL]
+Hash	[NULL]	19.24 - 19.24	1127	0.279	[NULL]
+Seq Scan	sgrupo	0.00 - 19.24	1127	0.140	[NULL]
+Materialize	[NULL]	148952.71 - 16429038.03	490	3990.338	[NULL]
+Merge Join	[NULL]	148952.71 - 16393224.22	12	3990.297	[NULL]
+Index Scan	registro_modificacion	0.43 - 82944.44	2553973	676.456	(rm.id_tipo_modificacion = 0)
+Materialize	[NULL]	148692.81 - 13490415.41	8922	3168.054	[NULL]
+Nested Loop	[NULL]	148692.81 - 13168551.83	8922	3165.978	[NULL]
+Merge Join	[NULL]	148692.81 - 293986.46	1132171	2735.070	[NULL]
+Merge Join	[NULL]	148510.86 - 241677.66	1149874	2042.033	[NULL]
+Index Scan	documentos	0.43 - 67347.00	2546909	595.730	d.estado
+Materialize	[NULL]	148260.37 - 154029.53	1151968	985.920	[NULL]
+Sort	[NULL]	148260.37 - 151144.95	1151968	873.165	[NULL]
+Index Only Scan	datos_documento	0.43 - 41465.90	1174494	350.353	[NULL]
+Materialize	[NULL]	0.00 - 24.55	1	0.000	[NULL]
+Seq Scan	aux_parametros_repo	0.00 - 19.70	1	0.006	[NULL]
+Hash	[NULL]	1.33 - 1.33	31	0.015	[NULL]
+Seq Scan	linea	0.00 - 1.33	31	0.010	[NULL]
