@@ -6,6 +6,7 @@
         <iconificable />
         <resizable />
         <closable />
+        <notCleanExportValue>codigotipo</notCleanExportValue>
     </preferences>
     <panel locate="North" type="FlowLayout" />
     <panel locate="West" type="FlowLayout" />
