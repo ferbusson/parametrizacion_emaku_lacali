@@ -108,7 +108,7 @@ WHERE
 	c.id_clasificacion_concepto_causacion NOT IN (5,22,23,56,24)) OR -- exceptuando auxili transporte e incapacidades que tienen su propio apartado mas abajo e incapacidades 24 porque tambien tienen su apartado
     
     (c.id_movimiento_nomina IN (7) AND -- devengado por valor
-	c.id_clasificacion_concepto_causacion IN (54,57) ) -- 50:Viaticos NS 54: viaticos NS 57:Auxilios (No base salario)
+	c.id_clasificacion_concepto_causacion IN (54,57,55) ) -- 50:Viaticos NS 54: viaticos NS 57:Auxilios (No base salario) Oct 29 2025: se agrega 55: prima (no base salario) para tener en cuenta prima extra legal adm llamado Johana
     ) AND
 	d.ndocumento=cn.ndocumento AND
 	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND

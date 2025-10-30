@@ -1,9 +1,27 @@
+--borrador
 DROP TABLE IF EXISTS args_nomina;
 CREATE TEMP TABLE args_nomina AS
 SELECT
 	'?'::DATE AS fechai,
 	'?'::DATE AS fechaf,
 	TRIM('?'::VARCHAR) AS id_division;
+
+DROP TABLE IF EXISTS aux_ultimo_temporal;
+CREATE TEMP TABLE aux_ultimo_temporal AS
+SELECT
+	MAX(cn.ndocumento) AS ndocumento
+FROM
+	documentos d,
+	causacion_nomina_borrador cn,
+	args_nomina an
+WHERE
+	d.ndocumento = cn.ndocumento AND
+	d.estado AND
+	d.codigo_tipo = 'VN' AND
+	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
+	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+GROUP BY
+	cn.id_division_nomina;
 
 /*
 * AUXILIO DE TRANSPORTE
@@ -14,27 +32,139 @@ CREATE TEMP TABLE transporte_nomina AS
 SELECT 
 	d.ndocumento,
 	cn.id_tercero,
-	sum(cn.valor) AS aux_transporte
+	cn.valor AS aux_transporte
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c	
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_movimiento_nomina=7 AND -- devengado por valor
 	c.id_clasificacion_concepto_causacion = 5 AND -- 5 auxilio transporte
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE end
-group by
-		d.ndocumento,
-		cn.id_tercero;
+	d.ndocumento=cn.ndocumento;
+
+
+/* Horas extras diurna ordinaria */
+DROP TABLE IF EXISTS hed;
+CREATE TEMP TABLE hed AS
+SELECT
+    d.ndocumento,
+    ce.id_tercero,
+    ce.tiempo AS thed,
+    ce.valor AS vhed
+FROM
+    aux_ultimo_temporal d,
+    causacion_extras_nomina_borrador ce,
+    concepto_causacion cc
+WHERE
+    d.ndocumento=ce.ndocumento AND
+    cc.id_concepto_causacion = ce.id_concepto_causacion AND
+    cc.id_clasificacion_concepto_causacion = 2; -- 2 hora extra diurna
+
+/* Horas extras noctura ordinaria */
+DROP TABLE IF EXISTS hen;
+CREATE TEMP TABLE hen AS
+SELECT
+    d.ndocumento,
+    ce.id_tercero,
+    ce.tiempo AS then,
+    ce.valor AS vhen
+FROM
+    aux_ultimo_temporal d,
+    causacion_extras_nomina_borrador ce,
+    concepto_causacion cc
+WHERE
+    d.ndocumento=ce.ndocumento AND
+    cc.id_concepto_causacion = ce.id_concepto_causacion AND
+    cc.id_clasificacion_concepto_causacion = 27; -- 27 hora extra nocturna
+
+/* Horas extras diurna dominical */
+DROP TABLE IF EXISTS heddf;
+CREATE TEMP TABLE heddf AS
+SELECT 
+    d.ndocumento,
+    ce.id_tercero,
+    ce.tiempo AS theddf,
+    ce.valor AS vheddf
+FROM
+    aux_ultimo_temporal d,
+    causacion_extras_nomina_borrador ce,
+    concepto_causacion cc
+WHERE
+    d.ndocumento=ce.ndocumento AND
+    cc.id_concepto_causacion = ce.id_concepto_causacion AND
+    cc.id_clasificacion_concepto_causacion = 4; -- 4  Hora Extra Diurna Dominical y Festivos
+
+/* Horas extras nocturna dominical */
+DROP TABLE IF EXISTS hendf;
+CREATE TEMP TABLE hendf AS
+SELECT
+    d.ndocumento,
+    ce.id_tercero,
+    ce.tiempo AS thendf,
+    ce.valor AS vhendf
+FROM
+    aux_ultimo_temporal d,
+    causacion_extras_nomina_borrador ce,
+    concepto_causacion cc
+WHERE
+    d.ndocumento=ce.ndocumento AND
+    cc.id_concepto_causacion = ce.id_concepto_causacion AND
+    cc.id_clasificacion_concepto_causacion = 29; -- 29 Hora Extra Nocturna Dominical y Festivos
+
+/* Recargo Noctuhrn Ordinario */
+DROP TABLE IF EXISTS hrn;
+CREATE TEMP TABLE hrn AS
+SELECT
+    d.ndocumento,
+    ce.id_tercero,
+    ce.tiempo AS thrn,
+    ce.valor AS vhrn
+FROM
+    aux_ultimo_temporal d,
+    causacion_extras_nomina_borrador ce,
+    concepto_causacion cc
+WHERE
+    d.ndocumento=ce.ndocumento AND
+    cc.id_concepto_causacion = ce.id_concepto_causacion AND
+    cc.id_clasificacion_concepto_causacion = 3; -- hora recargo nocturno
+
+/* Recargo Nocturno Dominical */
+DROP TABLE IF EXISTS hrndf;
+CREATE TEMP TABLE hrndf AS
+SELECT
+    d.ndocumento,
+    ce.id_tercero,
+    ce.tiempo AS thrndf,
+    ce.valor AS vhrndf
+FROM
+    aux_ultimo_temporal d,
+    causacion_extras_nomina_borrador ce,
+    concepto_causacion cc
+WHERE
+    d.ndocumento=ce.ndocumento AND
+    cc.id_concepto_causacion = ce.id_concepto_causacion AND
+    cc.id_clasificacion_concepto_causacion = 30; -- 30 hora recargo nocturno dominical y festivos
+
+/* Dominical o Festivo */
+DROP TABLE IF EXISTS hrddf;
+CREATE TEMP TABLE hrddf AS
+SELECT
+    d.ndocumento,
+    ce.id_tercero,
+    ce.tiempo AS thrddf,
+    ce.valor AS vhrddf
+FROM
+    aux_ultimo_temporal d,
+    causacion_extras_nomina_borrador ce,
+    concepto_causacion cc
+WHERE
+    d.ndocumento=ce.ndocumento AND
+    cc.id_concepto_causacion = ce.id_concepto_causacion AND
+    cc.id_clasificacion_concepto_causacion = 28; -- 28 hora recargo diurno dominical y festivos
 
 /*
-* EXTRAS
+* EXTRAS TOTAL
 */
 
 DROP TABLE IF EXISTS extras_nomina;
@@ -44,19 +174,14 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS extras
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_movimiento_nomina = 1 AND -- devengado obligatorio
-	c.id_clasificacion_concepto_causacion not in (1,45) AND -- 1 salario 45 apoyo de sostenimiento Oct 30 2024
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	c.id_clasificacion_concepto_causacion != 1 AND -- 1 salario
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -71,10 +196,9 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS otr_devengados
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	(
@@ -84,11 +208,7 @@ WHERE
     (c.id_movimiento_nomina IN (7) AND -- devengado por valor
 	c.id_clasificacion_concepto_causacion IN (54,57,55) ) -- 50:Viaticos NS 54: viaticos NS 57:Auxilios (No base salario) Oct 29 2025: se agrega 55: prima (no base salario) para tener en cuenta prima extra legal adm llamado Johana
     ) AND
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -104,19 +224,15 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS sal_pen
 FROM
-	documentos d,
-	causacion_nomina cn,
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
 	concepto_causacion c,
 	args_nomina an
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_movimiento_nomina = 2 AND -- deducido porcentual
 	c.id_clasificacion_concepto_causacion IN (8,9,15) AND --8 salud 9 pensiones obligatorio 15 fondo solidaridad pensional
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -132,19 +248,14 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS ret_fte
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_movimiento_nomina = 6 AND -- deducido porcentual
 	c.id_clasificacion_concepto_causacion=14 AND -- 14 retencion en la fuente
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -160,18 +271,14 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS valor
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
+	--c.id_movimiento_nomina IN (5,7) AND
 	c.id_clasificacion_concepto_causacion=50 AND -- 50 comisiones
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -187,19 +294,15 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS valor
 FROM
-	documentos d,
-	causacion_nomina cn,
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
 	concepto_causacion c,
 	args_nomina an
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_movimiento_nomina IN (7) AND
 	c.id_clasificacion_concepto_causacion=52 AND -- 52 Bonificacion (No Base Salario)
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -217,18 +320,14 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS incapacidad
 FROM
-	documentos d,
-	causacion_nomina cn,
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
 	concepto_causacion c,
 	args_nomina an
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_clasificacion_concepto_causacion in (22,23,24,56) AND -- 22 incapacidades generales 23 lic paternidad o maternidad 24 licencia remunerada 56 incapacidades laborales
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -242,18 +341,13 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS pagos_terceros
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_clasificacion_concepto_causacion IN (41) AND -- 41 pagos terceros pre-exequiales montes de los olivos y recordar
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -266,18 +360,13 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS des_autorizado
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_clasificacion_concepto_causacion IN (38) AND -- 38 deuda en el momento incluye conceptos: desc autorizados facs credito
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -292,87 +381,40 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS otros_desc
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_movimiento_nomina in (6) AND -- deducido por valor
-	c.id_clasificacion_concepto_causacion IN (32,34,35,42) AND -- 32 afc 34 embargo fiscal 35 plan complementarios 42 anticipos
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	c.id_clasificacion_concepto_causacion IN (32,34,35) AND -- 32 afc 34 embargo fiscal 35 plan complementarios
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
 	
-DROP TABLE IF EXISTS nominas_del_periodo;
-CREATE TEMP TABLE nominas_del_periodo AS
-select distinct 
+DROP TABLE IF EXISTS novedades_planilla;
+CREATE TEMP TABLE novedades_planilla AS
+SELECT
 	d.ndocumento,
-	d.fecha,
-	cn.id_tercero
-FROM
-	documentos d,
-	args_nomina an,
-	causacion_nomina cn
-WHERE
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' and
-	d.ndocumento = cn.ndocumento AND
-	d.estado;
-
-
-DROP TABLE IF EXISTS novedades_del_periodo;
-CREATE TEMP TABLE novedades_del_periodo AS
-select
-	cnn.fecha,
 	cnn.id_tercero,
-	nn.sigla as novedad
+	STRING_AGG(DISTINCT nn.sigla::TEXT,',') AS novedad
 FROM
-	(select distinct id_tercero from nominas_del_periodo) np,
+	aux_ultimo_temporal d,
 	documentos dn,
-	args_nomina an,
+	info_documento i,
 	novedades_nomina nn,
 	causacion_novedades_nomina cnn
 WHERE
 	dn.ndocumento=cnn.ndocumento AND
-	dn.estado and
-	nn.id_novedad_nomina=cnn.id_novedad_nomina AND
-	dn.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	np.id_tercero = cnn.id_tercero;
-
-DROP TABLE IF EXISTS novedades_planilla;
-CREATE TEMP TABLE novedades_planilla as
-select -- 3 agrupamos por documento y tercero las novedades ya filtradas y asignadas
-	foo.ndocumento,
-	foo.id_tercero,
-	STRING_AGG(DISTINCT foo.novedad::TEXT,',') AS novedad
-from
-	(select -- 2 tomamos la primera nomina que haya afectado la novedad
-		min(foo.ndocumento) as ndocumento,
-		foo.id_tercero,
-		foo.novedad
-	from	
-		(select -- 1 buscamos las novedades menores o iguales a una causacion nomina
-			nm.ndocumento,
-			nn.id_tercero,
-			nn.novedad
-		from 
-			nominas_del_periodo nm,
-			novedades_del_periodo nn
-		where 
-			nm.id_tercero = nn.id_tercero and
-			nn.fecha <= nm.fecha::date) as foo
-	group by 
-		foo.id_tercero,
-		foo.novedad) as foo
-group by
-	foo.ndocumento,
-	foo.id_tercero;
+	dn.estado AND
+	nn.id_novedad_nomina=cnn.id_novedad_nomina AND	
+	--CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END AND
+	d.ndocumento = i.rf_documento AND
+	i.ndocumento = cnn.ndocumento
+GROUP BY 
+	d.ndocumento,
+	id_tercero;
 
 -- CESANTIAS PAGADAS
 DROP TABLE IF EXISTS cesantias_pagadas;
@@ -382,19 +424,14 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS cesantias_pagadas
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_movimiento_nomina in (7) AND -- devengado por valor: 
 	c.id_clasificacion_concepto_causacion IN (18) AND -- cesantias en el momento incluye unicamente cesantias pagadas feb 9
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -407,19 +444,14 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS intereses_cesantias_pagadas
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_movimiento_nomina in (7) AND -- devengado por valor: 
 	c.id_clasificacion_concepto_causacion IN (19) AND -- intereses cesantias en el momento incluye unicamente intereses sobre cesantias pagadas feb 9
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -432,19 +464,14 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS prima_servicios_pagada
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	c.id_movimiento_nomina in (7) AND -- devengado por valor: 
 	c.id_clasificacion_concepto_causacion IN (20) AND -- prima en el momento incluye unicamente prima de servicios pagada feb 9
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
@@ -457,33 +484,24 @@ SELECT
 	cn.id_tercero,
 	SUM(cn.valor) AS vacaciones_pagadas_disfrutadas
 FROM
-	documentos d,
-	causacion_nomina cn,
-	concepto_causacion c,
-	args_nomina an
+	aux_ultimo_temporal d,
+	causacion_nomina_borrador cn,
+	concepto_causacion c
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	--c.id_movimiento_nomina in (7) AND -- devengado por valor Preguntar si son las 7 o las 9 o las dos
 	c.id_clasificacion_concepto_causacion IN (26,51) AND -- 26 vacaciones disfrutadas 51 vacaciones pagadas
-	d.ndocumento=cn.ndocumento AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END
+	d.ndocumento=cn.ndocumento
 GROUP BY
 	d.ndocumento,
 	cn.id_tercero;
 
 -- BASICO Y DATOS GENERALES
--- Octubre 30 2024: agrego esta tabla para poder capturar los días trabajados por aprendices sena en el caso en el que su practica
--- termina a mitad de mes y luego son contratados, los días trabajados se guardan como apoyo de sostenimiento, esta tabla se usa en la siguiente
--- con left join, en las nóminas de apoyo de sostenimiento también se guarda por defecto el salario basico con dias = 30 lo cual confundia el reporte
--- poniendo 30 en vez del número de días efectivamente trabajados
-DROP TABLE IF EXISTS basico_nomina_apoyos_sostenimiento;
-CREATE TEMP TABLE basico_nomina_apoyos_sostenimiento AS
+DROP TABLE IF EXISTS basico_nomina;
+CREATE TEMP TABLE basico_nomina AS
 SELECT DISTINCT
 	d.ndocumento,
-	d.codigo_tipo||'-'||d.numero::BIGINT AS numero_nomina,
+	d.codigo_tipo||'-'||d.numero::BIGINT||' | '||d.fecha AS numero_nomina,
 	d.numero::BIGINT AS numero_orden,
 	dn.descripcion AS division,
 	DATE_PART('month', d.fecha) AS id_mes,
@@ -504,88 +522,24 @@ SELECT DISTINCT
 	cn.id_tercero,
 	COALESCE(g.apellido1,' ')||' '||COALESCE(g.apellido2||' ',' ')||COALESCE(g.nombre1||' ',' ')||COALESCE(g.nombre2,' ') AS nombre,
 	g.id_char,
-	--c.valor AS basico, Feb 19 2024: cambio esta linea por la siguiente para dejar los datos consistentes con la nomina, el 
-	-- concepto cambia cada año
 	cn.salario_basico as basico,
 	cn.dias,
 	cn.valor AS salario
 FROM
 	general g,
 	documentos d,
-	causacion_nomina cn,
+	causacion_nomina_borrador cn,
 	concepto_causacion c,
 	division_nomina dn,
-	args_nomina an
-WHERE
-	cn.id_concepto_causacion=c.id_concepto_causacion AND
-	cn.id_division_nomina = dn.id_division_nomina AND
-	c.id_movimiento_nomina=1 AND
-	c.id_clasificacion_concepto_causacion=45 and -- apoyo sostenimiento
-	d.ndocumento=cn.ndocumento AND
-	g.id=cn.id_tercero AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END;
-
-
-
-DROP TABLE IF EXISTS basico_nomina;
-CREATE TEMP TABLE basico_nomina AS
-SELECT DISTINCT
-	d.ndocumento,
-	d.codigo_tipo||'-'||d.numero::BIGINT AS numero_nomina,
-	d.numero::BIGINT AS numero_orden,
-	dn.descripcion AS division,
-	DATE_PART('month', d.fecha) AS id_mes,
-	CASE WHEN DATE_PART('month', d.fecha) = 1 THEN 'ENERO' 
-	     WHEN DATE_PART('month', d.fecha) = 2 THEN 'FEBRERO' 
-	     WHEN DATE_PART('month', d.fecha) = 3 THEN 'MARZO' 
-	     WHEN DATE_PART('month', d.fecha) = 4 THEN 'ABRIL' 
-	     WHEN DATE_PART('month', d.fecha) = 5 THEN 'MAYO' 
-	     WHEN DATE_PART('month', d.fecha) = 6 THEN 'JUNIO' 
-	     WHEN DATE_PART('month', d.fecha) = 7 THEN 'JULIO' 
-	     WHEN DATE_PART('month', d.fecha) = 8 THEN 'AGOSTO' 
-	     WHEN DATE_PART('month', d.fecha) = 9 THEN 'SEPTIEMBRE' 
-	     WHEN DATE_PART('month', d.fecha) = 10 THEN 'OCTUBRE' 
-	     WHEN DATE_PART('month', d.fecha) = 11 THEN 'NOVIEMBRE'
-	     WHEN DATE_PART('month', d.fecha) = 12 THEN 'DICIEMBRE'   
-	     END AS mes,
-	DATE_PART('year', d.fecha) AS anio,
-	cn.id_tercero,
-	COALESCE(g.apellido1,' ')||' '||COALESCE(g.apellido2||' ',' ')||COALESCE(g.nombre1||' ',' ')||COALESCE(g.nombre2,' ') AS nombre,
-	g.id_char,
-	--c.valor AS basico, Feb 19 2024: cambio esta linea por la siguiente para dejar los datos consistentes con la nomina, el 
-	-- concepto cambia cada año
-	cn.salario_basico as basico,
-	coalesce(bs.dias,cn.dias) as dias,
-	coalesce(bs.salario,cn.valor) AS salario
-FROM
-	general g,
-	documentos d,	
-	concepto_causacion c,
-	division_nomina dn,
-	args_nomina an,
-	causacion_nomina cn
-left join
-	basico_nomina_apoyos_sostenimiento bs
-on
-	cn.ndocumento = bs.ndocumento and
-	cn.id_tercero = bs.id_tercero
+	aux_ultimo_temporal a
 WHERE
 	cn.id_concepto_causacion=c.id_concepto_causacion AND
 	cn.id_division_nomina = dn.id_division_nomina AND
 	c.id_movimiento_nomina=1 AND
 	c.id_clasificacion_concepto_causacion=1 AND
 	d.ndocumento=cn.ndocumento AND
-	g.id=cn.id_tercero AND
-	d.fecha::DATE BETWEEN an.fechai AND an.fechaf AND
-	d.codigo_tipo = 'NM' AND
-	d.estado AND
-	CASE WHEN an.id_division IS NOT NULL AND an.id_division != '' THEN an.id_division = cn.id_division_nomina::VARCHAR ELSE TRUE END;
-
-
-
+	a.ndocumento = d.ndocumento AND
+	g.id=cn.id_tercero;
 
 SELECT
     foo.numero_nomina,    
@@ -599,7 +553,22 @@ SELECT
     foo.salario,
     foo.incapacidades,
     foo.aux_transporte,
-    foo.extras,
+    foo.thrn,
+	foo.vhrn,
+	foo.thrddf,
+	foo.vhrddf,
+	foo.thrndf,
+	foo.vhrndf,   
+	foo.thed,
+	foo.vhed,
+	foo.then,
+	foo.vhen,
+	foo.theddf,
+	foo.vheddf,
+	foo.thendf,
+	foo.vhendf,
+	foo.total_extras, --total calculado del detallado
+    foo.extras, --total calculado de tabla original plancha
     foo.comisiones,
     foo.bonificaciones,
     foo.otr_devengados,
@@ -650,7 +619,29 @@ FROM
 		n.vacaciones_pagadas_disfrutadas,
 		(n.total_devengado-n.total_deducido) + n.cesantias_pagadas+
 		n.intereses_cesantias_pagadas + n.prima_servicios_pagada+
-		n.vacaciones_pagadas_disfrutadas AS total_pago_mes
+		n.vacaciones_pagadas_disfrutadas AS total_pago_mes,
+
+		n.thrn,
+		n.vhrn,
+		n.thrddf,
+		n.vhrddf,
+		n.thrndf,
+		n.vhrndf,   
+		n.thed,
+		n.vhed,
+		n.then,
+		n.vhen,
+		n.theddf,
+		n.vheddf,
+		n.thendf,
+		n.vhendf,
+		n.vhed+
+		n.vhen+
+		n.vheddf+
+		n.vhendf+
+		n.vhrn+
+		n.vhrndf+
+		n.vhrddf AS total_extras
 	FROM
 		(SELECT
 			bn.numero_nomina,
@@ -691,14 +682,29 @@ FROM
 			COALESCE(cp.cesantias_pagadas,0) AS cesantias_pagadas,
 			COALESCE(icp.intereses_cesantias_pagadas,0) AS intereses_cesantias_pagadas,
 			COALESCE(psp.prima_servicios_pagada,0) AS prima_servicios_pagada,
-			COALESCE(vpd.vacaciones_pagadas_disfrutadas,0) AS vacaciones_pagadas_disfrutadas
+			COALESCE(vpd.vacaciones_pagadas_disfrutadas,0) AS vacaciones_pagadas_disfrutadas,
+
+			COALESCE(hed.thed,'-') AS thed,
+			COALESCE(hed.vhed,0.0) AS vhed,
+			COALESCE(hen.then,'-') AS then,
+			COALESCE(hen.vhen,0.0) AS vhen,
+			COALESCE(heddf.theddf,'-') AS theddf,
+			COALESCE(heddf.vheddf,0.0) AS vheddf,
+			COALESCE(hendf.thendf,'-') AS thendf,
+			COALESCE(hendf.vhendf,0.0) AS vhendf,
+			COALESCE(hrn.thrn,'-') AS thrn,
+			COALESCE(hrn.vhrn,0.0) AS vhrn,
+			COALESCE(hrndf.thrndf,'-') AS thrndf,
+			COALESCE(hrndf.vhrndf,0.0) AS vhrndf,
+			COALESCE(hrddf.thrddf,'-') AS thrddf,
+			COALESCE(hrddf.vhrddf,0.0) AS vhrddf
 		FROM
 			basico_nomina bn
 		LEFT OUTER JOIN
 			novedades_planilla nn
 		ON
-			bn.id_tercero=nn.id_tercero AND -- descomentado marzo 30 2023
-			bn.ndocumento=nn.ndocumento -- descomentado marzo 30 2023
+			bn.id_tercero=nn.id_tercero AND
+			bn.ndocumento=nn.ndocumento
 		LEFT OUTER JOIN
 			transporte_nomina atr
 		ON
@@ -773,7 +779,42 @@ FROM
 			pagos_terceros pt
 		ON
 			bn.id_tercero=pt.id_tercero AND
-			bn.ndocumento=pt.ndocumento) AS n) AS foo
+			bn.ndocumento=pt.ndocumento
+		LEFT OUTER JOIN -- Inicia detalle de extras
+			hed
+		    ON
+			bn.id_tercero=hed.id_tercero AND
+			bn.ndocumento=hed.ndocumento
+		    LEFT OUTER JOIN
+			hen
+		    ON
+			bn.id_tercero=hen.id_tercero AND
+			bn.ndocumento=hen.ndocumento
+		    LEFT OUTER JOIN
+			heddf
+		    ON
+			bn.id_tercero=heddf.id_tercero AND
+			bn.ndocumento=heddf.ndocumento
+		    LEFT OUTER JOIN
+			hendf
+		    ON
+			bn.id_tercero=hendf.id_tercero AND
+			bn.ndocumento=hendf.ndocumento
+		    LEFT OUTER JOIN
+			hrn
+		    ON
+			bn.id_tercero=hrn.id_tercero AND
+			bn.ndocumento=hrn.ndocumento
+		    LEFT OUTER JOIN
+			hrndf
+		    ON
+			bn.id_tercero=hrndf.id_tercero AND
+			bn.ndocumento=hrndf.ndocumento
+		    LEFT OUTER JOIN
+			hrddf
+		    ON
+			bn.id_tercero=hrddf.id_tercero AND
+			bn.ndocumento=hrddf.ndocumento) AS n) AS foo
 ORDER BY
 	foo.anio,
 	foo.id_mes,
