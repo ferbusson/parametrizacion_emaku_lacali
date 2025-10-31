@@ -60,7 +60,8 @@
             </parameters>
           </component> -->
 
-          <panel locate="East" type="FlowLayout">
+        <panel locate="Center" type="BorderLayout">
+        <panel locate="North" type="FlowLayout">
           <component>
             <driver>common.gui.components.XMLLabel</driver>
             <parameters>
@@ -78,7 +79,30 @@
               <arg attribute="sqlCode">LESEL0020</arg>
             </parameters>
           </component>
-          <box width="10" />
+          </panel>
+          <panel locate="Center" type="FlowLayout">
+          <component>
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Submarca</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver id="submarca">client.gui.components.XMLComboBox</driver>
+            <parameters>
+              <arg attribute="sqlCombo">LCSEL0102</arg>
+              <arg attribute="name">submarca</arg>
+              <arg attribute="selectedIndex">0</arg>
+              <arg attribute="exportValue">submarca</arg>
+              <arg attribute="clean">false</arg>
+              <arg attribute="sqlCode">LCSEL1010</arg>
+            </parameters>
+          </component>
+          </panel>
+        </panel>
+          <panel locate="East" type="FlowLayout">
+          
+          <box width="5" />
           <component>
             <driver>common.gui.components.XMLLabel</driver>
             <parameters>
@@ -134,6 +158,8 @@
             <arg attribute="driverEvent" id="tnumero">common.gui.components.GenericData</arg>
             <arg attribute="keySQL">LESEL0020</arg>
             <arg attribute="driverEvent" id="marca">client.gui.components.XMLComboBox</arg>
+            <arg attribute="keySQL">LCSEL1010</arg>
+            <arg attribute="driverEvent" id="submarca">client.gui.components.XMLComboBox</arg>
             <arg attribute="rows">100</arg>
             <arg attribute="Query">MTSEL0051</arg>
             <arg attribute="colorBackground">220,251,187</arg>
@@ -370,7 +396,10 @@ P</arg>
           <driver id="marca">client.gui.components.XMLComboBox</driver>
           <method>clean</method>
         </component>
-
+        <component>
+          <driver id="submarca">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>
         <component>
           <driver id="tnumero">common.gui.components.GenericData</driver>
           <method>clean</method>
