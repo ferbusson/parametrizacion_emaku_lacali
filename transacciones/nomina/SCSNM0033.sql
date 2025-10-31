@@ -50,7 +50,7 @@ LEFT OUTER JOIN
 	WHERE
 		d.ndocumento = l.ndocumento AND
 		l.id_cta = c.id_cta AND
-		c.char_cta = '250505' AND
+		c.char_cta like '25%' and -- Oct 31 2025: cambio condicion de 250505 a ilike 25%
 		d.estado AND
 		d.codigo_tipo = 'NM'
 	GROUP BY
