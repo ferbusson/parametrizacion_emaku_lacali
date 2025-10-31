@@ -63,7 +63,7 @@ WHERE
     d.estado AND
     d.ndocumento = cn.ndocumento AND
     cc.id_clasificacion_concepto_causacion = ccc.id_clasificacion_concepto_causacion AND
-    ccc.id_clasificacion_concepto_causacion IN (58,55) AND -- Devengados no base salario Oct 31 2025: adiciono 55 Prima (No Base Salario) para cubrir esta novedad en este mes conversacion con Johana O
+    ccc.id_clasificacion_concepto_causacion IN (58) AND -- Devengados no base salario Oct 31 2025: la reviso pero al final no hizo falta cambiar nada
     cn.id_concepto_causacion = cc.id_concepto_causacion AND
     cn.id_tercero = g.id AND
     g.id_char = ab.tercero; -- nitcc tercero

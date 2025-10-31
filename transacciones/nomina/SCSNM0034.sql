@@ -6,7 +6,7 @@ SELECT
 	CASE WHEN ccc.id_clasificacion_concepto_causacion in (1,45) THEN SUM(cn.dias) ELSE NULL END AS dias_trabajados,
 	CASE WHEN ccc.id_clasificacion_concepto_causacion = 1 THEN SUM(cn.valor) ELSE NULL END AS salario_base,
 	CASE WHEN ccc.id_clasificacion_concepto_causacion = 5 THEN SUM(cn.valor) ELSE NULL END AS auxilio_transporte,
-	CASE WHEN ccc.id_clasificacion_concepto_causacion = 20 THEN SUM(cn.dias) ELSE NULL END AS dias_prima,
+	CASE WHEN ccc.id_clasificacion_concepto_causacion in (20,55) THEN SUM(cn.dias) ELSE NULL END AS dias_prima,
 	CASE WHEN ccc.id_clasificacion_concepto_causacion = 20 THEN SUM(cn.valor) ELSE NULL END AS valor_prima,
 	CASE WHEN ccc.id_clasificacion_concepto_causacion = 55 THEN SUM(cn.valor) ELSE NULL END AS valor_primaNS,
 	CASE WHEN ccc.id_clasificacion_concepto_causacion = 18 THEN SUM(cn.valor) ELSE NULL END AS pago_cesantias,
@@ -65,3 +65,4 @@ SELECT
 	SUM(viaticosManuntencion) AS viaticosManuntencion
 FROM
 	aux_temporal01;
+
