@@ -1146,7 +1146,7 @@
                   <panel locate="North" type="FlowLayout"/>
                   
                   <panel locate="West" type="FlowLayout"/>
-                  <panel locate="West" cols="1" rows="4" type="GridLayout">
+                  <panel locate="West" cols="1" rows="5" type="GridLayout">
                       <component locate="West">
                           <driver>common.gui.components.XMLLabel</driver>
                           <parameters>
@@ -1179,8 +1179,16 @@
                             <arg attribute="font">Dialog,1,14</arg>
                         </parameters>
                         </component>
+                        <component locate="West">
+                          <driver>common.gui.components.XMLLabel</driver>
+                          <parameters>
+                            <arg attribute="text">Tipo de Tarjeta:</arg>
+                            <arg attribute="alignment">0</arg>
+                            <arg attribute="font">Dialog,1,14</arg>
+                        </parameters>
+                        </component>
                   </panel>                
-                  <panel locate="Center" cols="1" rows="4" type="GridLayout">
+                  <panel locate="Center" cols="1" rows="5" type="GridLayout">
                   <component>
                       <driver id="tarjeta">common.gui.components.GenericData</driver>
                       <parameters>
@@ -1247,6 +1255,23 @@
                               <arg attribute="font">Dialog,1,14</arg>
                               <arg attribute="printable">true</arg>
                               <arg attribute="exportValue">nrauto</arg>                                
+                          </subarg>
+                      </parameters>
+                  </component>
+                  <component>
+                      <driver id="tipotarjeta">common.gui.components.GenericData</driver>
+                      <parameters>                     
+                      <arg attribute="keySQL">LCSEL1012</arg>
+                        <arg attribute="driverEvent" id="number">client.gui.components.TableDataFields</arg>   
+                          <subarg>
+                              <arg attribute="enabled">false</arg>
+                              <arg attribute="format">STRING</arg>
+                              <arg attribute="alignment">RIGHT</arg>
+                              <arg attribute="size">14</arg>
+                              <arg attribute="maxlength">50</arg>
+                              <arg attribute="font">Dialog,1,14</arg>
+                              <arg attribute="printable">true</arg>
+                              <arg attribute="exportValue">tipotarjeta</arg>                                
                           </subarg>
                       </parameters>
                   </component>
@@ -1326,6 +1351,7 @@
                          <arg attribute="sqlCode">LCSEL0141</arg>
                          <arg attribute="sqlCode">LCSEL0142</arg>
                          <arg attribute="sqlCode">LCSEL0143</arg>
+                         <arg attribute="sqlCode">LCSEL1012</arg> <!--tipo de tarjeta-->
                          <arg attribute="sqlCode">LCSEL0144</arg>                         
                          <arg attribute="sqlCode">DGSEL0013</arg>
                          <arg attribute="sqlCode">LCSEL0150</arg>
@@ -1425,88 +1451,74 @@
             <name>NEW</name>
             
             <component>
-              <driver id="tarjeta">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
-            <component>
-              <driver id="voucher1">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
-            <component>
-              <driver id="rrn">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
-            <component>
-              <driver id="nrauto">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
+                      <driver>this</driver>
+                      <method>cleanExternalValues</method>
+                    </component>
+                
+                <component>
+                  <driver id="tarjeta">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
+                12 voucher
+                <component>
+                  <driver id="voucher">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
+                13 RRN
+                <component>
+                  <driver id="rrn">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
+                14 Auth
+                <component>
+                  <driver id="nrauto">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
+                <component>
+                  <driver id="recarga">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
 
-            <component>
-              <driver id="recarga">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
+                <!-- <component><driver id="tcredito2">common.gui.components.EmakuTouchField</driver><method>clean</method></component>-->
 
-            <component>
-              <driver id="totalpus">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
-            
+                <!-- 21b -->
+                <component>
+                  <driver id="fefectivo">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
 
-            <component>
-              <driver id="fefectivo">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
-            
-            <component>
-             <driver id="totalcompra1">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>            
-            
-            <component>
-             <driver id="tsodexobigpass">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
-            <component>
-             <driver id="tarjetasc">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
+                <component>
+                  <driver id="efectivoneto">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
 
-            <component>
-             <driver id="voucher">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
+                <component>
+                  <driver id="tpagar">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
+                <component>
+                  <driver id="cambio">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
 
-            <component>          
-            <driver id="tpagar">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
+                <component>
+                  <driver id="sodexo">client.gui.components.TableFindData</driver>
+                  <method>clean</method>
+                </component>
+                <component>
+                  <driver id="bigpass">client.gui.components.TableFindData</driver>
+                  <method>clean</method>
+                </component>
 
-            <component>          
-            <driver id="cambio">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
+                <component>
+                  <driver id="tpagosmanuales">client.gui.components.TableFindData</driver>
+                  <method>clean</method>
+                </component>
 
-            <component>          
-            <driver id="cambious">common.gui.components.GenericData</driver>
-              <method>clean</method>
-            </component>
-
-            <component>
-                <driver id="sodexo">client.gui.components.TableFindData</driver>
-                <method>clean</method>
-            </component>
-            <component>
-                <driver id="bigpass">client.gui.components.TableFindData</driver>
-                <method>clean</method>
-            </component>
-            <component>
-                <driver id="tarjetasc">common.gui.components.GenericData</driver>
-                <method>clean</method>
-            </component>
-             <component>
-                <driver id="tpagosmanuales">client.gui.components.TableFindData</driver>
-                <method>clean</method>
-            </component>
+                <component>
+                  <driver id="tipotarjeta">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>  
 
 
             <component>
