@@ -1,0 +1,510 @@
+<FORM>
+   <preferences>
+      <size height="430" width="830"/>
+      <name>Verificación Envíos WS</name>
+      <icon>COMPROBANTE-EGRESO</icon>
+      <iconificable/>
+      <date/>
+      <resizable/>
+      <maximizable/>
+      <closable/>
+      <exportValue>botonuno,1</exportValue>
+      <!-- boton desbloquear -->
+      <exportValue>botondos,2</exportValue>
+      <!-- boton restarurar numeracion -->
+      <exportValue>botontres,3</exportValue>
+      <!-- boton arregla salto numeracion -->
+      <notCleanExportValue>botonuno</notCleanExportValue>
+      <notCleanExportValue>botondos</notCleanExportValue>
+      <notCleanExportValue>botontres</notCleanExportValue>
+   </preferences>
+   <panel locate="North" type="BorderLayout">
+      <panel locate="North" type="FlowLayout"/>
+      <panel locate="West" type="BorderLayout">
+         <box length="10" locate="North"/>
+         <box length="10" locate="South"/>
+         <box locate="East" width="10"/>
+         <panel cols="1" locate="West" rows="2" type="GridLayout">
+            <component locate="West">
+               <driver>common.gui.components.XMLLabel</driver>
+               <parameters>
+                  <arg attribute="text">Tipo Documento</arg>
+                  <arg attribute="alignment">0</arg>
+                  <arg attribute="font">Dialog,0,14</arg>
+               </parameters>
+            </component>
+            <component locate="West">
+               <driver>common.gui.components.XMLLabel</driver>
+               <parameters>
+                  <arg attribute="text">Número</arg>
+                  <arg attribute="alignment">0</arg>
+                  <arg attribute="font">Dialog,0,14</arg>
+               </parameters>
+            </component>
+         </panel>
+         <panel cols="1" locate="Center" rows="2" type="GridLayout">
+            <component>
+               <driver id="tipodocumento">client.gui.components.XMLComboBox</driver>
+               <parameters>
+                  <arg attribute="sqlCombo">GRSEL0035</arg>
+                  <arg attribute="selectedIndex">0</arg>
+                  <arg attribute="name">tipodocumento</arg>
+                  <arg attribute="getDocument">true</arg>
+                  <arg attribute="exportValue">tipodocumento</arg>
+               </parameters>
+            </component>
+            <component locate="Center">
+               <driver id="nfactura">common.gui.components.GenericData</driver>
+               <parameters>
+                  <subarg>
+                     <arg attribute="name">Numero</arg>
+                     <arg attribute="format">TEXT</arg>
+                     <arg attribute="size">12</arg>
+                     <arg attribute="maxlength">26</arg>
+                     <arg attribute="enabled">TRUE</arg>
+                     <arg attribute="idDocument">tipodocumento</arg>
+                     <arg attribute="importValue">tipodocumento</arg>
+                     <arg attribute="exportValue">numero</arg>
+                     <arg attribute="clean">true</arg>
+                     <arg attribute="font">Dialog,0,15</arg>
+                     <arg attribute="alignment">RIGHT</arg>
+                     <arg attribute="sqlCodeExportValue">GRSEL0036,_codigoretorno,_fecha,_respuestaws</arg>
+                     <arg attribute="sqlCode">GRSEL0037</arg>
+                     <arg attribute="sqlCode">LCSEL0576</arg>
+                  </subarg>
+               </parameters>
+            </component>
+         </panel>
+      </panel>
+      <panel locate="Center" type="BorderLayout">
+         <panel locate="East" type="BorderLayout">
+            <box length="10" locate="North"/>
+            <box length="10" locate="South"/>
+            <box locate="East" width="10"/>
+            <panel cols="1" locate="West" rows="2" type="GridLayout">
+               <component locate="West">
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">Código Retorno</arg>
+                     <arg attribute="alignment">0</arg>
+                     <arg attribute="font">Dialog,0,14</arg>
+                  </parameters>
+               </component>
+               <component locate="West">
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">Fecha Respuesta</arg>
+                     <arg attribute="alignment">0</arg>
+                     <arg attribute="font">Dialog,0,14</arg>
+                  </parameters>
+               </component>
+            </panel>
+            <panel cols="1" locate="Center" rows="2" type="GridLayout">
+               <component locate="Center">
+                  <driver id="codigoretorno">common.gui.components.GenericData</driver>
+                  <parameters>
+                     <subarg>
+                        <arg attribute="name">codigoretorno</arg>
+                        <arg attribute="format">TEXT</arg>
+                        <arg attribute="getValue">_codigoretorno</arg>
+                        <arg attribute="size">12</arg>
+                        <arg attribute="enabled">FALSE</arg>
+                        <arg attribute="maxlength">26</arg>
+                        <arg attribute="font">Dialog,0,15</arg>
+                        <arg attribute="alignment">CENTER</arg>
+                        <arg attribute="printable">true</arg>
+                     </subarg>
+                  </parameters>
+               </component>
+               <component locate="Center">
+                  <driver id="fecharespuesta">common.gui.components.GenericData</driver>
+                  <parameters>
+                     <subarg>
+                        <arg attribute="name">fecharespuesta</arg>
+                        <arg attribute="format">TEXT</arg>
+                        <arg attribute="getValue">_fecha</arg>
+                        <arg attribute="size">12</arg>
+                        <arg attribute="enabled">false</arg>
+                        <arg attribute="maxlength">50</arg>
+                        <arg attribute="font">Dialog,0,15</arg>
+                        <arg attribute="alignment">LEFT</arg>
+                        <arg attribute="printable">true</arg>
+                     </subarg>
+                  </parameters>
+               </component>
+            </panel>
+         </panel>
+      </panel>
+   </panel>
+   <tab>
+      <panel locate="Center" name="Respuesta DIAN" type="BorderLayout">
+         <panel locate="East" type="FlowLayout"/>
+         <panel locate="West" type="FlowLayout"/>
+         <component locate="North">
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+               <arg attribute="text">Respuesta WS:</arg>
+               <arg attribute="alignment">0</arg>
+               <arg attribute="font">Dialog,0,14</arg>
+            </parameters>
+         </component>
+         <component locate="Center">
+            <driver id="concepto">common.gui.components.XMLTextArea</driver>
+            <parameters>
+               <arg attribute="keySQL">GRSEL0037</arg>
+               <arg attribute="driverEvent" id="nfactura">common.gui.components.GenericData</arg>
+               <arg attribute="rows">3</arg>
+               <arg attribute="label">Respuesta WS</arg>
+               <arg attribute="enabled">FALSE</arg>
+               <arg attribute="getValue">_codigoretorno</arg>
+               <arg attribute="colorBackground">255,255,204</arg>
+               <arg attribute="empty">false</arg>
+            </parameters>
+         </component>
+         <panel locate="South" type="BorderLayout">
+            <component locate="North">
+               <driver id="ultimodocerror">client.gui.components.TableDataFields</driver>
+               <parameters>
+                  <arg attribute="reload">true</arg>
+                  <subarg>
+                     <arg attribute="name">fecharespuesta</arg>
+                     <arg attribute="format">TEXT</arg>
+                     <arg attribute="size">80</arg>
+                     <arg attribute="enabled">false</arg>
+                     <arg attribute="clean">false</arg>
+                     <arg attribute="enabled">false</arg>
+                     <arg attribute="maxlength">250</arg>
+                     <arg attribute="font">Dialog,0,10</arg>
+                     <arg attribute="alignment">LEFT</arg>
+                     <arg attribute="sqlInit">LCSEL0560</arg>
+                     <arg attribute="queryOnInit">true</arg>
+                     <arg attribute="reload">true</arg>
+                  </subarg>
+               </parameters>
+            </component>
+            <component locate="Center">
+               <driver id="restaurardoc01">client.gui.components.TableDataFields</driver>
+               <parameters>
+                  <!-- <arg attribute="reload">true</arg>-->
+                  <arg attribute="keySQL">LCSEL0576</arg>
+                  <arg attribute="driverEvent" id="nfactura">common.gui.components.GenericData</arg>
+                  <subarg>
+                     <arg attribute="name">restaurar</arg>
+                     <arg attribute="format">TEXT</arg>
+                     <arg attribute="size">80</arg>
+                     <arg attribute="enabled">false</arg>
+                     <arg attribute="clean">TRUE</arg>
+                     <arg attribute="enabled">false</arg>
+                     <arg attribute="maxlength">450</arg>
+                     <arg attribute="font">Dialog,0,10</arg>
+                     <arg attribute="alignment">LEFT</arg>
+                     <!-- <arg attribute="sqlInit">LCSEL0576</arg><arg attribute="queryOnInit">true</arg>-->
+                     <arg attribute="reload">true</arg>
+                  </subarg>
+               </parameters>
+            </component>
+            <panel locate="South" type="BorderLayout">
+               <panel locate="West" type="BorderLayout">
+                  <component locate="West">
+                     <driver>common.gui.components.XMLLabel</driver>
+                     <parameters>
+                        <arg attribute="text">Desbloquear:</arg>
+                        <arg attribute="alignment">0</arg>
+                        <arg attribute="font">Dialog,0,14</arg>
+                     </parameters>
+                  </component>
+                  <component locate="Center">
+                     <driver id="activarfe">common.gui.components.ButtonsPanel</driver>
+                     <parameters>
+                        <subarg>
+                           <arg attribute="label">SALVE</arg>
+                           <arg attribute="icon">/icons/ico_consignacion.png</arg>
+                        </subarg>
+                     </parameters>
+                     <events>
+                        <object>
+                           <!-- Actualiza envio_webservice del documento seleccionado a 'EE' permitiendo continuar con la facturacion e -->
+                           <name>SALVE</name>
+                           <component>
+                              <driver id="activarfe">common.gui.components.ButtonsPanel</driver>
+                              <method>setEnabled</method>
+                              <parameters>
+                                 <arg attribute="button">SALVE</arg>
+                                 <arg attribute="state">FALSE</arg>
+                              </parameters>
+                           </component>
+                           <component>
+                              <driver>this</driver>
+                              <method>getPackage</method>
+                              <parameters>
+                                 <subarg>
+                                    <arg attribute="importValue">botonuno</arg>
+                                    <arg attribute="importValue">tipodocumento</arg>
+                                    <arg attribute="importValue">numero</arg>
+                                 </subarg>
+                              </parameters>
+                           </component>
+                        </object>
+                     </events>
+                  </component>
+               </panel>
+            </panel>
+         </panel>
+      </panel>
+      <panel locate="Center" name="Re-establecer Documento" type="BorderLayout">
+         <panel locate="North" type="BorderLayout">
+            <panel locate="North" type="BorderLayout">
+               <component locate="North">
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">Usar el botón Re-establecer ED a Documento Original cuando:</arg>
+                     <arg attribute="alignment">0</arg>
+                     <arg attribute="font">Dialog,0,12</arg>
+                  </parameters>
+               </component>                
+               <component locate="Center">
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">1. El documento original esté correctamente registrado en el portal de la DIAN (Ej: factura, Doc Soporte en Compra, etc)</arg>
+                     <arg attribute="alignment">0</arg>
+                     <arg attribute="font">Dialog,0,12</arg>
+                  </parameters>
+               </component> 
+               <component locate="South">
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">2. El documento original No se encuentre en Emaku</arg>
+                     <arg attribute="alignment">0</arg>
+                     <arg attribute="font">Dialog,0,12</arg>
+                  </parameters>
+               </component> 
+            </panel>
+            <panel locate="East" type="BorderLayout">
+               <component locate="West">
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">Re-establacer ED a Documento Original:</arg>
+                     <arg attribute="alignment">0</arg>
+                     <arg attribute="font">Dialog,0,14</arg>
+                  </parameters>
+               </component>
+               <component locate="East">
+                  <driver id="casosespeciales">common.gui.components.ButtonsPanel</driver>
+                  <parameters>
+                     <subarg>
+                        <arg attribute="label">SALVE2</arg>
+                        <arg attribute="icon">/icons/ico_aporte_patronal_16x16.png</arg>
+                     </subarg>
+                  </parameters>
+                  <events>
+                     <object>
+                        <!-- Restaura numeracion y tipo documento de documento rechazado -->
+                        <name>SALVE2</name>
+                        <component>
+                           <driver id="casosespeciales">common.gui.components.ButtonsPanel</driver>
+                           <method>setEnabled</method>
+                           <parameters>
+                              <arg attribute="button">SALVE2</arg>
+                              <arg attribute="state">FALSE</arg>
+                           </parameters>
+                        </component>
+                        <component>
+                           <driver>this</driver>
+                           <method>getPackage</method>
+                           <parameters>
+                              <subarg>
+                                 <arg attribute="importValue">botondos</arg>
+                                 <arg attribute="importValue">tipodocumento</arg>
+                                 <arg attribute="importValue">numero</arg>
+                              </subarg>
+                           </parameters>
+                        </component>
+                     </object>
+                  </events>
+               </component>
+            </panel>
+         </panel>
+         <component locate="Center">
+            <driver id="restaurardoc02">client.gui.components.TableDataFields</driver>
+            <parameters>
+               <!-- <arg attribute="reload">true</arg>-->
+               <arg attribute="keySQL">LCSEL0576</arg>
+               <arg attribute="driverEvent" id="nfactura">common.gui.components.GenericData</arg>
+               <subarg>
+                  <arg attribute="name">restaurar</arg>
+                  <arg attribute="format">TEXT</arg>
+                  <arg attribute="size">80</arg>
+                  <arg attribute="enabled">false</arg>
+                  <arg attribute="clean">TRUE</arg>
+                  <arg attribute="enabled">false</arg>
+                  <arg attribute="maxlength">450</arg>
+                  <arg attribute="font">Dialog,0,10</arg>
+                  <arg attribute="alignment">LEFT</arg>
+                  <!-- <arg attribute="sqlInit">LCSEL0576</arg><arg attribute="queryOnInit">true</arg>-->
+                  <arg attribute="reload">true</arg>
+               </subarg>
+            </parameters>
+         </component>
+      </panel>
+  <panel locate="Center" name="Error por Salto de Consecutivo" type="BorderLayout">
+         <panel locate="North" type="BorderLayout">
+            <panel locate="North" type="BorderLayout">
+               <component locate="North">
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">Usar si se presenta error por salto de consecutivo</arg>
+                     <arg attribute="alignment">0</arg>
+                     <arg attribute="font">Dialog,0,12</arg>
+                  </parameters>
+               </component>                
+               <component locate="Center">
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">Notificar acerca de los documentos que se listen en esta pestaña para su revisión</arg>
+                     <arg attribute="alignment">0</arg>
+                     <arg attribute="font">Dialog,0,12</arg>
+                  </parameters>
+               </component>                
+            </panel>
+      </panel>
+      <panel locate="Center" type="BorderLayout">
+                <component locate="Center">
+                  <driver id="listadosaltos">common.gui.components.XMLTextArea</driver>
+                  <parameters>
+                     <arg attribute="rows">10</arg>
+                     <arg attribute="label">Facturas Sin Respuesta DIAN</arg>
+                     <arg attribute="enabled">FALSE</arg>
+                     <arg attribute="colorBackground">254,254,254</arg>
+                     <arg attribute="sqlInit">LCSEL0937</arg>
+                     <arg attribute="queryOnInit">true</arg>
+                     <arg attribute="reload">true</arg>
+                     <arg attribute="empty">false</arg>
+                  </parameters>
+               </component>
+            </panel>
+            <panel locate="South" type="BorderLayout">
+            <panel locate="East" type="BorderLayout">
+               <component locate="West">
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">Arreglar Problema Salto:</arg>
+                     <arg attribute="alignment">0</arg>
+                     <arg attribute="font">Dialog,0,14</arg>
+                  </parameters>
+               </component>
+               <component locate="East">
+                  <driver id="arreglarsalto">common.gui.components.ButtonsPanel</driver>
+                  <parameters>
+                     <subarg>
+                        <arg attribute="label">SALVE3</arg>
+                        <arg attribute="icon">/icons/ico_confirmaciones_16x16.png</arg>
+                     </subarg>
+                  </parameters>
+                  <events>
+                     <object>
+                        <!-- Soluciona error por salto de consecutivo -->
+                        <name>SALVE3</name>
+                        <component>
+                           <driver id="arreglarsalto">common.gui.components.ButtonsPanel</driver>
+                           <method>setEnabled</method>
+                           <parameters>
+                              <arg attribute="button">SALVE3</arg>
+                              <arg attribute="state">FALSE</arg>
+                           </parameters>
+                        </component>
+                        <component>
+                           <driver>this</driver>
+                           <method>getPackage</method>
+                           <parameters>
+                              <subarg>  <!-- la logica la tiene la query -->
+                                 <arg attribute="importValue">botontres</arg> <!-- bandera, solo me importa la bandera -->
+                                 <arg attribute="importValue">botontres</arg> <!-- relleno codigo_tipo -->
+                                 <arg attribute="importValue">botontres</arg> <!-- relleno numero -->
+                              </subarg>
+                           </parameters>
+                        </component>
+                     </object>
+                  </events>
+               </component>
+            </panel>
+          </panel>
+         </panel>  
+   </tab>
+   <panel locate="South" type="BorderLayout">
+      <panel locate="East" type="BorderLayout">
+         <component locate="East">
+            <driver>common.gui.components.ButtonsPanel</driver>
+            <parameters>
+               <arg>NEW</arg>
+               <arg>EXIT</arg>
+            </parameters>
+            <events>
+               <object>
+                  <name>NEW</name>
+                  <!--  limpiando llaves externas -->
+                  <component>
+                     <driver>this</driver>
+                     <method>cleanExternalValues</method>
+                  </component>
+                  <component>
+                     <driver id="concepto">common.gui.components.XMLTextArea</driver>
+                     <method>clean</method>
+                  </component>
+                  <component>
+                     <driver id="nfactura">common.gui.components.GenericData</driver>
+                     <method>clean</method>
+                  </component>
+                  <component>
+                     <driver id="tipodocumento">client.gui.components.XMLComboBox</driver>
+                     <method>clean</method>
+                  </component>
+                  <component>
+                     <driver id="restaurardoc01">client.gui.components.TableDataFields</driver>
+                     <method>clean</method>
+                  </component>
+                  <component>
+                     <driver id="restaurardoc02">client.gui.components.TableDataFields</driver>
+                     <method>clean</method>
+                  </component>
+                  <component>
+                     <driver id="codigoretorno">common.gui.components.GenericData</driver>
+                     <method>clean</method>
+                  </component>
+                  <component>
+                     <driver id="fecharespuesta">common.gui.components.GenericData</driver>
+                     <method>clean</method>
+                  </component>
+                  <component>
+                     <driver id="ultimodocerror">client.gui.components.TableDataFields</driver>
+                     <method>clean</method>
+                  </component>
+                  <component>
+                     <driver id="activarfe">common.gui.components.ButtonsPanel</driver>
+                     <method>setEnabled</method>
+                     <parameters>
+                        <arg attribute="button">SALVE</arg>
+                        <arg attribute="state">TRUE</arg>
+                     </parameters>
+                  </component>
+                  <component>
+                     <driver id="casosespeciales">common.gui.components.ButtonsPanel</driver>
+                     <method>setEnabled</method>
+                     <parameters>
+                        <arg attribute="button">SALVE2</arg>
+                        <arg attribute="state">TRUE</arg>
+                     </parameters>
+                  </component>
+                  <component>
+                     <driver id="arreglarsalto">common.gui.components.ButtonsPanel</driver>
+                     <method>setEnabled</method>
+                     <parameters>
+                        <arg attribute="button">SALVE3</arg>
+                        <arg attribute="state">TRUE</arg>
+                     </parameters>
+                  </component>
+               </object>
+            </events>
+         </component>
+      </panel>
+   </panel>
+</FORM>
