@@ -50,7 +50,13 @@ LEFT OUTER JOIN
 	WHERE
 		d.ndocumento = l.ndocumento AND
 		l.id_cta = c.id_cta AND
-		c.char_cta like '25%' and -- Oct 31 2025: cambio condicion de 250505 a ilike 25%
+		--c.char_cta like '25%' and -- Oct 31 2025: cambio condicion de 250505 a ilike 25%
+		
+		--Nov 4 2025: el cambio que hice el 31 de Oct funciono para resolver el problema con la PRIMA EXTRALEGAL ADM 
+		--id_concepto_causacion 249 pero dañe el de aprendices sena y posiblemente otros
+		--hoy pongo la condicion como queda a continuacion:
+		(c.char_cta = '250505' or 
+		c.char_cta = '253030') and
 		d.estado AND
 		d.codigo_tipo = 'NM'
 	GROUP BY
