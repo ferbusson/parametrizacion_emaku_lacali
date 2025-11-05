@@ -4433,6 +4433,27 @@ limpiar las llaves externas -->
                   <arg attribute="errorMessage">Error, debe cancelar facturas crédito vencidas antes de poder acceder a un nuevo crédito</arg>
                 </parameters>
               </component>
+
+              <!-- debemos validar que las combinaciones de los medios de pago habilitados cubran el valor de la factura -->
+                <!-- medios de pago habilitados:
+                    efectivo <=> total factura variable: efectivot
+                    tarjeta de crédito <= total factura variable: tcreditcard es la que viene del datafono -> totaltodastarjetas es la suma de todas
+                    sodexo <= total factura variable: tsodexobigpass tiene la suma de sodexo, bigpass y tcheck
+                    bigpass <= total factura variable: tsodexobigpass
+                    consignacion <= total factura variable: tconsignation
+                    cheque <= total factura variable: tsodexobigpass
+                    credito <= total factura variable: pagooacredito
+                    valor total de factura -> variable: totalmenosreteglobal
+                    -->
+
+            <component>
+                <driver id="efectivoneto">common.gui.components.GenericData</driver>
+                <method>validPackage</method>
+                <parameters>
+                  <arg attribute="conditional">(efectivot + tcreditcard + tsodexobigpass + tconsignation + totalcredibancoparcial + totalpagosmanuales + pagooacredito + tcheck + totaltodastarjetas) &gt;= totalmenosreteglobal &amp;&amp; (tcreditcard + tsodexobigpass + tconsignation + totalcredibancoparcial + totalpagosmanuales + pagooacredito + tcheck + totaltodastarjetas) &lt;= totalmenosreteglobal</arg>
+                  <arg attribute="errorMessage">Error, Asegurese de que los medios de pago cubran el total de la factura</arg>
+                </parameters>
+              </component>
             
               <!-- <component>
                 <driver id="efectivoneto">common.gui.components.GenericData</driver>
@@ -5795,6 +5816,28 @@ limpiar las llaves externas -->
                   <arg attribute="errorMessage">Error, debe cancelar facturas crédito vencidas antes de poder acceder a un nuevo crédito</arg>
                 </parameters>
               </component>
+
+                <!-- debemos validar que las combinaciones de los medios de pago habilitados cubran el valor de la factura -->
+                <!-- medios de pago habilitados:
+                    efectivo <=> total factura variable: efectivot
+                    tarjeta de crédito <= total factura variable: tcreditcard es la que viene del datafono -> totaltodastarjetas es la suma de todas
+                    sodexo <= total factura variable: tsodexobigpass tiene la suma de sodexo, bigpass y tcheck
+                    bigpass <= total factura variable: tsodexobigpass
+                    consignacion <= total factura variable: tconsignation
+                    cheque <= total factura variable: tsodexobigpass
+                    credito <= total factura variable: pagooacredito
+                    valor total de factura -> variable: totalmenosreteglobal
+                    -->
+
+            <component>
+                <driver id="efectivoneto">common.gui.components.GenericData</driver>
+                <method>validPackage</method>
+                <parameters>
+                  <arg attribute="conditional">(efectivot + tcreditcard + tsodexobigpass + tconsignation + totalcredibancoparcial + totalpagosmanuales + pagooacredito + tcheck + totaltodastarjetas) &gt;= totalmenosreteglobal &amp;&amp; (tcreditcard + tsodexobigpass + tconsignation + totalcredibancoparcial + totalpagosmanuales + pagooacredito + tcheck + totaltodastarjetas) &lt;= totalmenosreteglobal</arg>
+                  <arg attribute="errorMessage">Error, Asegurese de que los medios de pago cubran el total de la factura</arg>
+                </parameters>
+              </component>
+
               <!-- NA -->
               <component>
                 <driver>this</driver>
