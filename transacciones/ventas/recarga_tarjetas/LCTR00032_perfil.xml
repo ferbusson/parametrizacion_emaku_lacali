@@ -1560,124 +1560,52 @@
                   <driver id="nrauto">common.gui.components.GenericData</driver>
                   <method>clean</method>
                 </component>
-                  15 Auth
-                <component>
-                  <driver id="nrauto">common.gui.components.GenericData</driver>
-                  <method>clean</method>
-                </component>
                 <component>
                   <driver id="recarga">common.gui.components.GenericData</driver>
                   <method>clean</method>
                 </component>
 
-                    <!-- <component><driver id="tcredito2">common.gui.components.EmakuTouchField</driver><method>clean</method></component>-->
-                    
-             
-                    
-                   
-                    <!-- 21b -->
-                    <component>
-                    <driver id="fefectivo">common.gui.components.GenericData</driver>
-                      <method>clean</method>
-                    </component>
-                    
-                    <component>
-                      <driver id="efectivoneto">common.gui.components.GenericData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="fefectivot">common.gui.components.GenericData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="banco">common.gui.components.GenericData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="neto">common.gui.components.GenericData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="totalp">client.gui.components.TableDataFields</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="fefectivo">common.gui.components.GenericData</driver>
-                      <method>clean</method>
-                    </component>
-                    
-                    <component>
-                      <driver id="tpagar">common.gui.components.GenericData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="cambio">common.gui.components.GenericData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="credittable">client.gui.components.TableFindData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="consignationtable">client.gui.components.TableFindData</driver>
-                      <method>clean</method>
-                    </component>
-                    <!-- <component><driver id="tcreditcard">client.gui.components.TableDataFields</driver><method>clean</method></component>-->
-                   
-                    <component>
-                      <driver id="tconsignation">client.gui.components.TableDataFields</driver>
-                      <method>clean</method>
-                    </component>
-                    
-                    <component>
-                      <driver id="credibancoparcial">common.gui.components.EmakuCredibancoButton</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="credibanco">common.gui.components.EmakuCredibancoButton</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="sodexo">client.gui.components.TableFindData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="bigpass">client.gui.components.TableFindData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="totalfactura">client.gui.components.TableDataFields</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="tcredibanco">client.gui.components.TableFindData</driver>                    
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="cartera">client.gui.components.TableFindData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="tpagosmanuales">client.gui.components.TableFindData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="basep">common.gui.components.GenericData</driver>                  
-                      <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="ivap">common.gui.components.GenericData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
-                        <driver id="valorp">common.gui.components.GenericData</driver>
-                        <method>clean</method>
-                    </component>
-                    <component>
-                      <driver id="tipotarjeta">common.gui.components.GenericData</driver>
-                      <method>clean</method>
-                    </component>
-                    <component>
+                <!-- <component><driver id="tcredito2">common.gui.components.EmakuTouchField</driver><method>clean</method></component>-->
+
+                <!-- 21b -->
+                <component>
+                  <driver id="fefectivo">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
+
+                <component>
+                  <driver id="efectivoneto">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
+
+                <component>
+                  <driver id="tpagar">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
+                <component>
+                  <driver id="cambio">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>
+
+                <component>
+                  <driver id="sodexo">client.gui.components.TableFindData</driver>
+                  <method>clean</method>
+                </component>
+                <component>
+                  <driver id="bigpass">client.gui.components.TableFindData</driver>
+                  <method>clean</method>
+                </component>
+
+                <component>
+                  <driver id="tpagosmanuales">client.gui.components.TableFindData</driver>
+                  <method>clean</method>
+                </component>
+
+                <component>
+                  <driver id="tipotarjeta">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+                </component>  
+                <component>
                       <driver id="pago">common.gui.components.ButtonsPanel</driver>
                       <method>setEnabled</method>
                       <parameters>
