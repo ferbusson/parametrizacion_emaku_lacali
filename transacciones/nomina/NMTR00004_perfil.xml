@@ -3430,7 +3430,11 @@
                           ((ac-ab)+1)-(u+v+w+x+y+z+aa+ad+ae):<!--Sep 23 2025: Pongo el +1 para que el calculo de los dias sea correcto -->
                         ab!=0? <!--IN != 0-->
                           (zz-(ab-1))-(u+v+w+x+y+z+aa+ad+ae):
-                        zz-(ab+v+w+x+y+z+aa+ad)</arg>
+                        <!-- zz-(ab+v+w+x+y+z+aa+ad) asi estaba antes, hago el cambio Nov 7 2025 para corregir caso NM-753 William Vargas donde para el 
+                        id_concepto_causacion = 74 Sanitas admin 8.8 % clasificacion 8 le resto los dias de vacaciones 14 liquidando sobre 16 dias cuando
+                        lo correcto debio ser 30 dias -->
+                        zz
+                        </arg>
                     
                     <!-- <arg attribute="formula">aq=m+n+o+p+ah+ap</arg> --> <!-- Marzo 2 de 2023 se cambia para cumplir condiciones reglamentadas junto con la adicion de las dos ultimas cols as y at -->
                     <arg attribute="beanshell">aq=m+n+o+p+ah+at+as</arg> <!-- Cambia de formula a beanshell Ago 30 de 2023 -->
