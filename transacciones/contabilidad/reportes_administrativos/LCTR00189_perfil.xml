@@ -1,0 +1,752 @@
+<FORM>
+    <preferences>
+        <size height="510" width="1050"/>
+        <name>Reporte Ventas Gerencia</name>
+        <icon>/icons/ico_ncatpres.png</icon>
+        <iconificable/>
+        <resizable/>
+        <closable/>
+    </preferences>
+    <panel locate="South" type="FlowLayout"/>
+    <panel locate="East" type="FlowLayout"/>
+    <panel locate="West" type="FlowLayout"/>
+    <panel locate="North" type="BorderLayout">
+        <panel locate="North" type="FlowLayout"/>
+        <panel cols="2" locate="West" rows="2" type="GridLayout">
+            <panel type="FlowLayout">
+                <component>
+                    <driver>common.gui.components.XMLLabel</driver>
+                    <parameters>
+                        <arg attribute="text">Sucursal</arg>
+                        <arg attribute="alignment">LEFT</arg>
+                    </parameters>
+                </component>
+                <component>
+                    <driver id="sucursal">client.gui.components.XMLComboBox</driver>
+                    <parameters>
+                        <arg attribute="preferredLength">250</arg>
+                        <arg attribute="sqlCombo">LCSEL0713</arg>
+                        <arg attribute="selectedIndex">1</arg>
+                        <arg attribute="name">sucursal</arg>
+                        <arg attribute="exportValue">sucursal</arg>
+                    </parameters>
+                </component>
+            </panel>
+            <panel type="FlowLayout"/>
+            <panel type="FlowLayout">
+                <component>
+                    <driver>common.gui.components.XMLLabel</driver>
+                    <parameters>
+                        <arg attribute="text">Fecha Inicial:</arg>
+                        <arg attribute="alignment">LEFT</arg>
+                    </parameters>
+                </component>
+                <component>
+                    <driver id="fechai">common.gui.components.XMLDateField</driver>
+                    <parameters>
+                        <arg attribute="dateFormatString">yyyy-MM-dd</arg>
+                        <arg attribute="exportValue">fechai</arg>
+                    </parameters>
+                </component>
+            </panel>
+            <panel type="FlowLayout">
+                <component>
+                    <driver>common.gui.components.XMLLabel</driver>
+                    <parameters>
+                        <arg attribute="text">Fecha Final:</arg>
+                        <arg attribute="alignment">LEFT</arg>
+                    </parameters>
+                </component>
+                <component>
+                    <driver id="fechaf">common.gui.components.XMLDateField</driver>
+                    <parameters>
+                        <arg attribute="dateFormatString">yyyy-MM-dd</arg>
+                        <arg attribute="exportValue">fechaf</arg>
+                        <arg attribute="importValue">sucursal</arg>
+                        <arg attribute="importValue">fechai</arg>
+                        <arg attribute="sqlCode">LCSEL0712</arg>
+                        <arg attribute="sqlCode">LCSEL0714</arg>
+                        <arg attribute="sqlCode">LCSEL0715</arg>
+                        <arg attribute="sqlCode">LCSEL0716</arg>
+                        <arg attribute="sqlCode">LCSEL0901</arg>
+                        <arg attribute="sqlCode">LCSEL0926</arg>                        
+                    </parameters>
+                </component>
+            </panel>
+        </panel>
+    </panel>
+    <tab>
+        <panel icon="/icons/ico_cartera.png" locate="Center" name="Resumen" type="BorderLayout">
+            <component locate="Center">
+                <driver id="resumen">client.gui.components.TableFindData</driver>
+                <parameters>
+                    <arg attribute="keySQL">LCSEL0712</arg>
+                    <arg attribute="driverEvent" id="fechaf">common.gui.components.XMLDateField</arg>
+                    <arg attribute="rows">25</arg>
+                    <arg attribute="protectSelected">true</arg>
+                    <arg attribute="colorBackground">181,230,248</arg>
+                    <arg attribute="colorSelected">74,224,242</arg>
+                    <arg attribute="font">Dialog,0,12</arg>
+                    <arg attribute="formula">g=(c-f)/c*100</arg>
+                    <arg attribute="totales">b,c,d,e,f,g</arg>
+                    <arg attribute="conditionalColor">229,255,204:h==-1</arg>
+                    <arg attribute="repaint">true</arg>
+                    <arg attribute="exportTotalCol">b,totalfacturado</arg>
+                    <arg attribute="exportTotalCol">c,totalventassiniva</arg>
+                    <arg attribute="exportTotalCol">d,totalcantfacs</arg>
+                    <arg attribute="exportTotalCol">e,totalunivendidas</arg>
+                    <arg attribute="exportTotalCol">f,totalcosto</arg>
+                    <arg attribute="exportTotalCol">g,totalutilidad</arg>
+                    <subarg>
+                        <!-- a1 -->
+                        <arg attribute="name">Fecha</arg>
+                        <arg attribute="length">190</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- b -->
+                        <arg attribute="name">Total Facturado</arg>
+                        <arg attribute="length">155</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- c -->
+                        <arg attribute="name">Ventas Sin IVA</arg>
+                        <arg attribute="length">140</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d -->
+                        <arg attribute="name">Cant Facturas</arg>
+                        <arg attribute="length">120</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- e -->
+                        <arg attribute="name">Uni Vendidas</arg>
+                        <arg attribute="length">120</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- f -->
+                        <arg attribute="name">Costo</arg>
+                        <arg attribute="length">140</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- g -->
+                        <arg attribute="name">Utilidad %</arg>
+                        <arg attribute="length">120</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- h -->
+                        <arg attribute="name">color</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                </parameters>
+            </component>           
+        </panel>
+        <panel icon="/icons/ico_cartera.png" name="Total Facturado" type="BorderLayout">
+            <component locate="Center">
+                <driver id="totalfacturado">client.gui.components.TableFindData</driver>
+                <parameters>
+                    <arg attribute="keySQL">LCSEL0714</arg>
+                    <arg attribute="driverEvent" id="fechaf">common.gui.components.XMLDateField</arg>
+                    <arg attribute="rows">25</arg>
+                    <arg attribute="protectSelected">true</arg>
+                    <arg attribute="colorBackground">181,230,248</arg>
+                    <arg attribute="colorSelected">74,224,242</arg>
+                    <arg attribute="font">Dialog,0,12</arg>
+                    <arg attribute="conditionalColor">229,255,204:k==-1</arg>
+                    <arg attribute="repaint">true</arg>
+                    <subarg>
+                        <!-- a1 -->
+                        <arg attribute="name">Fecha</arg>
+                        <arg attribute="length">90</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Total Facturado</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Efectivo</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Tarjetas</arg>
+                        <arg attribute="length">120</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Consignaciones</arg>
+                        <arg attribute="length">120</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Bono Regalo</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Ch. Sodexo</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Ch. Big Pass</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Anticipos Separado</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Facturas Crédito</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- h -->
+                        <arg attribute="name">color</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                </parameters>
+            </component>
+        </panel>
+        <panel icon="/icons/ico_cartera.png" name="Facturas Crédito" type="BorderLayout">
+            <component locate="Center">
+                <driver id="facturascredito">client.gui.components.TableFindData</driver>
+                <parameters>
+                    <arg attribute="keySQL">LCSEL0715</arg>
+                    <arg attribute="driverEvent" id="fechaf">common.gui.components.XMLDateField</arg>
+                    <arg attribute="rows">25</arg>
+                    <arg attribute="protectSelected">true</arg>
+                    <arg attribute="colorBackground">181,230,248</arg>
+                    <arg attribute="colorSelected">74,224,242</arg>
+                    <arg attribute="font">Dialog,0,12</arg>
+                    <arg attribute="totales">b,c,d,e,f,g,h,i,j,k,l</arg>
+                    <arg attribute="exportTotalCol">b,totalrecaudos</arg>
+                    <arg attribute="exportTotalCol">c,totalcreditos</arg>
+                    <arg attribute="exportTotalCol">d,totalcarterapropia</arg>
+                    <arg attribute="exportTotalCol">e,totalsistecredito</arg>
+                    <arg attribute="exportTotalCol">f,totaladdi</arg>
+                    <arg attribute="exportTotalCol">g,totallacaliweb</arg>
+                    <arg attribute="exportTotalCol">h,totalml</arg>
+                    <arg attribute="exportTotalCol">i,totallinio</arg>
+                    <arg attribute="exportTotalCol">j,totalfalabella</arg>
+                    <arg attribute="exportTotalCol">k,totalelenas</arg>
+                    <arg attribute="exportTotalCol">l,totalrappi</arg>
+                    <arg attribute="conditionalColor">229,255,204:m==-1</arg>
+                    <arg attribute="repaint">true</arg>
+                    <subarg>
+                        <!-- a1 -->
+                        <arg attribute="name">Fecha</arg>
+                        <arg attribute="length">90</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Recaudos</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Total Créditos</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Cartera Propia</arg>
+                        <arg attribute="length">120</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Sistecrédito</arg>
+                        <arg attribute="length">120</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Addi</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">La Cali Web</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Mercado Libre</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Linio</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Falabella</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Elenas</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d4 -->
+                        <arg attribute="name">Rappi</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- h -->
+                        <arg attribute="name">color</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                </parameters>
+            </component>
+        </panel>
+        <panel icon="/icons/ico_cartera.png" name="Ventas por Línea" type="BorderLayout">
+            <component locate="Center">
+                <driver id="ventaslinea">client.gui.components.TableFindData</driver>
+                <parameters>
+                    <arg attribute="keySQL">LCSEL0716</arg>
+                    <arg attribute="driverEvent" id="fechaf">common.gui.components.XMLDateField</arg>
+                    <arg attribute="rows">25</arg>
+                    <arg attribute="protectSelected">true</arg>
+                    <arg attribute="colorBackground">181,230,248</arg>
+                    <arg attribute="colorSelected">74,224,242</arg>
+                    <arg attribute="font">Dialog,0,12</arg>
+                    <arg attribute="totales">b,c,d,e,f</arg>
+                    <arg attribute="repaint">true</arg>
+                    <arg attribute="conditionalColor">209,228,245:d!=0&amp;&amp;g</arg>
+                    <arg attribute="exportTotalCol">b,totalparticipacionl</arg>
+                    <arg attribute="exportTotalCol">c,totalventasl</arg>
+                    <arg attribute="exportTotalCol">d,totaluvendidasl</arg>
+                    <arg attribute="exportTotalCol">e,totalcostol</arg>
+                    <arg attribute="exportTotalCol">f,totalutilidadl</arg>
+                    <arg attribute="sqlMultiCode">LCSEL0717,6,7,8</arg>
+                    <arg attribute="conditionalColor">229,255,204:j==-1</arg>
+                    <subarg>
+                        <!-- a0 -->
+                        <arg attribute="name">Línea</arg>
+                        <arg attribute="length">270</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- b1 -->
+                        <arg attribute="name">%Participación</arg>
+                        <arg attribute="length">105</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- c2 -->
+                        <arg attribute="name">Total Ventas Sin IVA</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d3 -->
+                        <arg attribute="name">U. Vendidas</arg>
+                        <arg attribute="length">100</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- e4 -->
+                        <arg attribute="name">Total Costo</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- f5 -->
+                        <arg attribute="name">%Utilidad</arg>
+                        <arg attribute="length">100</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg> <!-- g6 -->
+                        <arg attribute="name">Ver Detalle</arg>
+                        <arg attribute="length">120</arg>
+                        <arg attribute="type">BOOLEAN</arg>
+                        <arg attribute="enabled">TRUE</arg></subarg>
+                    <subarg>
+                        <!-- h7 -->
+                        <arg attribute="name">id_linea</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- i8 -->
+                        <arg attribute="name">id_bodega</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- j9 -->
+                        <arg attribute="name">color</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                </parameters>
+            </component>           
+        </panel>
+        <panel icon="/icons/ico_cartera.png" name="Detalle por Linea Seleccionada" type="BorderLayout">
+            <component locate="Center">
+                <driver id="ventasdetallelinea">client.gui.components.TableFindData</driver>
+                <parameters>
+                    <arg attribute="keySQL">LCSEL0717</arg>
+                    <arg attribute="driverEvent" id="ventaslinea">client.gui.components.TableFindData</arg>
+                    <arg attribute="keySQL">LCSEL0901</arg>
+                    <arg attribute="driverEvent" id="fechaf">common.gui.components.XMLDateField</arg>
+                    <arg attribute="rows">25</arg>
+                    <arg attribute="protectSelected">true</arg>
+                    <arg attribute="colorBackground">181,230,248</arg>
+                    <arg attribute="colorSelected">74,224,242</arg>
+                    <!-- <arg attribute="conditionalColor">209,228,245:e!=0 &amp;&amp; h==0</arg> -->
+                    <arg attribute="repaint">true</arg>
+                    <arg attribute="font">Dialog,0,12</arg>
+                    <arg attribute="totales">c,d,e,f,g</arg>
+                    <arg attribute="exportTotalCol">c,totalparticipacionld</arg>
+                    <arg attribute="exportTotalCol">d,totalventasld</arg>
+                    <arg attribute="exportTotalCol">e,totaluvendidasld</arg>
+                    <arg attribute="exportTotalCol">f,totalcostold</arg>
+                    <arg attribute="exportTotalCol">g,totalutilidadld</arg>
+                    <arg attribute="conditionalColor">229,255,224:e!=0 &amp;&amp; l==-1</arg>
+                    <arg attribute="sqlMultiCode">LCSEL0927,7,8,9,10</arg>
+                    <subarg>
+                        <!-- 0a -->
+                        <arg attribute="name">Línea</arg>
+                        <arg attribute="length">130</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 1b -->
+                        <arg attribute="name">Marca</arg>
+                        <arg attribute="length">180</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 2c -->
+                        <arg attribute="name">%Participación</arg>
+                        <arg attribute="length">105</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 3d -->
+                        <arg attribute="name">Total Ventas</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 4e -->
+                        <arg attribute="name">U. Vendidas</arg>
+                        <arg attribute="length">100</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 5f -->
+                        <arg attribute="name">Total Costo</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 6g -->
+                        <arg attribute="name">% Utilidad</arg>
+                        <arg attribute="length">100</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg> <!-- 7h -->
+                        <arg attribute="name">Ver Detalle</arg>
+                        <arg attribute="length">82</arg>
+                        <arg attribute="type">BOOLEAN</arg>
+                        <arg attribute="enabled">TRUE</arg></subarg>
+                    <subarg>
+                        <!-- 8i -->
+                        <arg attribute="name">id_linea</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 9j -->
+                        <arg attribute="name">id_marca</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 10k -->
+                        <arg attribute="name">id_bodega</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 11l -->
+                        <arg attribute="name">color</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                </parameters>
+            </component>
+        </panel>
+
+        <panel icon="/icons/ico_cartera.png" name="Detalle por Marca Seleccionada" type="BorderLayout">
+            <component locate="Center">
+                <driver id="ventasdetallelineamarca">client.gui.components.TableFindData</driver>
+                <parameters>
+                    <arg attribute="driverEvent" id="ventasdetallelinea">client.gui.components.TableFindData</arg>
+                    <arg attribute="keySQL">LCSEL0927</arg>
+                    <arg attribute="driverEvent" id="fechaf">common.gui.components.XMLDateField</arg>
+                    <arg attribute="keySQL">LCSEL0926</arg>                    
+                    <arg attribute="rows">25</arg>
+                    <arg attribute="protectSelected">true</arg>
+                    <arg attribute="colorBackground">181,230,248</arg>
+                    <arg attribute="colorSelected">74,224,242</arg>
+                    <arg attribute="repaint">true</arg>
+                    <arg attribute="font">Dialog,0,12</arg>
+                    <arg attribute="totales">c,d,e,f,g</arg>
+                    <arg attribute="exportTotalCol">d,totalparticipacionld</arg>
+                    <arg attribute="exportTotalCol">e,totalventasld</arg>
+                    <arg attribute="exportTotalCol">f,totaluvendidasld</arg>
+                    <arg attribute="exportTotalCol">g,totalcostold</arg>
+                    <arg attribute="exportTotalCol">h,totalutilidadld</arg>
+                    <arg attribute="conditionalColor">229,255,224:e!=0 &amp;&amp; i==-1</arg>
+                    <subarg>
+                        <!-- 0a -->
+                        <arg attribute="name">Línea</arg>
+                        <arg attribute="length">180</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 1b -->
+                        <arg attribute="name">Marca</arg>
+                        <arg attribute="length">180</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 2c -->
+                        <arg attribute="name">Submarca</arg>
+                        <arg attribute="length">180</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 3d -->
+                        <arg attribute="name">%Participación</arg>
+                        <arg attribute="length">105</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 4e -->
+                        <arg attribute="name">Total Ventas</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 5f -->
+                        <arg attribute="name">U. Vendidas</arg>
+                        <arg attribute="length">100</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 6g -->
+                        <arg attribute="name">Total Costo</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 7h -->
+                        <arg attribute="name">% Utilidad</arg>
+                        <arg attribute="length">100</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- 8i -->
+                        <arg attribute="name">color</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                </parameters>
+            </component>
+         
+        </panel>
+
+    </tab>
+    <panel align="CENTER" locate="South" type="BorderLayout">
+        <component locate="East">
+            <driver>common.gui.components.ButtonsPanel</driver>
+            <parameters>
+                <arg>NEW</arg>
+                <arg>EXIT</arg>
+            </parameters>
+            <events>
+                <object>
+                    <name>NEW</name>                   
+                    <component>
+                        <driver id="sucursal">client.gui.components.XMLComboBox</driver>
+                        <method>clean</method>
+                    </component>
+                    <component>
+                        <driver id="fechai">common.gui.components.XMLDateField</driver>
+                        <method>clean</method>
+                    </component>
+                    <component>
+                        <driver id="fechaf">common.gui.components.XMLDateField</driver>
+                        <method>clean</method>
+                    </component>
+                    <component>
+                        <driver id="resumen">client.gui.components.TableFindData</driver>
+                        <method>clean</method>
+                    </component>
+                    <component>
+                        <driver id="totalfacturado">client.gui.components.TableFindData</driver>
+                        <method>clean</method>
+                    </component>
+                    <component>
+                        <driver id="facturascredito">client.gui.components.TableFindData</driver>
+                        <method>clean</method>
+                    </component>
+                    <component>
+                        <driver id="ventaslinea">client.gui.components.TableFindData</driver>
+                        <method>clean</method>
+                    </component>
+                    <component>
+                        <driver id="ventasdetallelinea">client.gui.components.TableFindData</driver>
+                        <method>clean</method>
+                    </component>
+                    <component>
+                        <driver id="ventasdetallelineamarca">client.gui.components.TableFindData</driver>
+                        <method>clean</method>
+                    </component>                    
+                    
+                </object>
+            </events>
+        </component>
+    </panel>
+</FORM>

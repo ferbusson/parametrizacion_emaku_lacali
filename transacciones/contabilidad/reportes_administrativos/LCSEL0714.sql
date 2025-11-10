@@ -201,6 +201,11 @@ GROUP BY
     d.fecha;
 
 -- Uso la UNION para tener en cuenta devoluciones que se hagan en efectivo, estas no registran en cartera y es necesario tenerlas en cuenta
+/*
+Nov 10 2025: comento esta parte porque estaba borrando documentos que si debian estar en aux_docs, por ejemplo cuando se hace una devolucion con factura de otro dia.
+Dejo estas dos Devs como ejemplo de lo que se estava omitiendo
+M1	0000005704	2681086	2025-11-08 12:34:07.000	true
+M1	0000005706	2681136	2025-11-08 12:57:25.000	true
 DELETE FROM 
     aux_docs AS a
 USING 
@@ -222,7 +227,7 @@ USING
     ) AS foo
 WHERE
     a.ndocumento = foo.ndocumento;
-
+*/
 
 DROP TABLE IF EXISTS aux_abonos_ci_tarjeta;
 CREATE TEMP TABLE aux_abonos_ci_tarjeta AS
