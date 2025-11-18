@@ -156,8 +156,8 @@ SELECT
     --SUM(CASE WHEN i.id_linea NOT IN (16) THEN inv.pinventario * inv.salida ELSE 0 END) AS costo --servicios, servicios decoracion, impuestos bolsas
     --SUM(CASE WHEN i.id_linea NOT IN (16) THEN inv.valor_sal * inv.salida ELSE 0 END) AS costo --servicios, servicios decoracion, impuestos bolsas
 	-- Marzo 12 2024: Se comenta linea anterior porque no tiene en cuenta el movimiento de costo de devoluciones si solo se tiene en cuenta salidas
-	SUM(CASE WHEN i.id_linea NOT IN (16) THEN inv.valor_sal * inv.salida ELSE 0 END) AS costo --servicios, servicios decoracion, impuestos bolsas agregada
-	--SUM(CASE WHEN i.id_linea NOT IN (16) THEN (coalesce(inv.valor_sal,0) * coalesce(inv.salida,0)) - (coalesce(inv.valor_ent,0) * coalesce(inv.entrada,0) )ELSE 0 END) AS costo --servicios, servicios decoracion, impuestos bolsas
+	--SUM(CASE WHEN i.id_linea NOT IN (16) THEN inv.valor_sal * inv.salida ELSE 0 END) AS costo --servicios, servicios decoracion, impuestos bolsas agregada
+	SUM(CASE WHEN i.id_linea NOT IN (16) THEN (coalesce(inv.valor_sal,0) * coalesce(inv.salida,0)) - (coalesce(inv.valor_ent,0) * coalesce(inv.entrada,0) )ELSE 0 END) AS costo --servicios, servicios decoracion, impuestos bolsas
 FROM
     inventarios inv,
     aux_docs a,

@@ -224,7 +224,8 @@ DROP TABLE IF EXISTS total_costo_ventas;
 CREATE TEMP TABLE total_costo_ventas AS
 SELECT
 	d.fecha::DATE AS fecha,
-	SUM(CASE WHEN i.id_linea NOT IN (16) THEN inv.valor_sal * inv.salida ELSE 0 END) AS costo --servicios, servicios decoracion, impuestos bolsas
+	--SUM(CASE WHEN i.id_linea NOT IN (16) THEN inv.valor_sal * inv.salida ELSE 0 END) AS costo --servicios, servicios decoracion, impuestos bolsas
+	SUM(CASE WHEN i.id_linea NOT IN (16) THEN (coalesce(inv.valor_sal,0) * coalesce(inv.salida,0)) - (coalesce(inv.valor_ent,0) * coalesce(inv.entrada,0) )ELSE 0 END) AS costo --servicios, servicios decoracion, impuestos bolsas
 FROM
 	(SELECT DISTINCT id_administracion_sucursales FROM tipo_docs) td,
 	documentos_standar dst,
@@ -237,11 +238,11 @@ FROM
 WHERE	
 	ds.id_administracion_sucursales=td.id_administracion_sucursales AND
 	ds.id_documento=dst.id_documento AND
-	dst.nombre IN (''FACTURACION'',''CAMBIOS'',''FCREDITO'',''FCONTINGENCIA'',''FMANUAL'',''FELECTRONICAPOS'',''FCONTINGENCIAE'') AND -- solo se cuentan facs no devs Maria E 29 Oct 2020
+	dst.nombre IN (''FACTURACION'',''CAMBIOS'',''FCREDITO'',''FCONTINGENCIA'',''FMANUAL'',''FELECTRONICAPOS'',''FCONTINGENCIAE'',''DEVOLUCION VENTA'',''DVENTA ELECTRONICA'') AND -- solo se cuentan facs no devs Maria E 29 Oct 2020 - Nov 10 2025: adiciono las devs
 	d.codigo_tipo = ds.codigo_tipo AND
 	a.ndocumento = d.ndocumento AND
 	a.ndocumento = inv.ndocumento AND
-	inv.salida IS NOT NULL AND inv.salida != 0 AND
+	--inv.salida IS NOT NULL AND inv.salida != 0 AND comentado Nov 10 2025
 	ps.id_prod_serv = inv.id_prod_serv AND
 	ps.id_item = i.id_item
 GROUP BY
