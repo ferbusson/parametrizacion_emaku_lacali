@@ -1,0 +1,279 @@
+<FORM>
+  <preferences>
+    <size width="1355" height="520" />
+    <name>Consulta Arqueos</name>
+    <icon>/icons/ico_cambio_luminaria.png</icon>
+    <iconificable />
+    <resizable />
+    <closable />
+  </preferences>
+  <panel locate="North" type="BorderLayout" align="CENTER">
+    <panel locate="West" type="FlowLayout" />
+    <panel locate="East" type="FlowLayout" />
+    <panel locate="North" type="FlowLayout" />
+
+    
+    <panel locate="West" type="BorderLayout" align="CENTER">
+      <panel locate="West" type="GridLayout" rows="1" cols="2">
+        <panel locate="Center" type="BorderLayout" align="LEFT">
+        <component locate="West">
+          <driver>common.gui.components.XMLLabel</driver>
+          <parameters>
+            <arg attribute="text">Fecha Desde:</arg>
+            <arg attribute="alignment">LEFT</arg>
+          </parameters>
+        </component>
+        <component locate="Center">
+            <driver id="fechad">common.gui.components.XMLDateField</driver>
+            <parameters>
+              <arg attribute="label">Fecha Desde</arg>
+
+              <arg attribute="dateFormatString">yyyy-MM-dd HH:mm:ss</arg>
+              <arg attribute="exportValue">fechad</arg>
+            </parameters>
+          </component>
+      </panel>
+      <panel locate="Center" type="BorderLayout" align="LEFT">
+        <component locate="West">
+          <driver>common.gui.components.XMLLabel</driver>
+          <parameters>
+            <arg attribute="text">Fecha Hasta:</arg>
+            <arg attribute="alignment">LEFT</arg>
+          </parameters>
+        </component>
+        <component locate="Center">
+            <driver id="fechah">common.gui.components.XMLDateField</driver>
+            <parameters>
+              <arg attribute="label">Fecha Hasta</arg>
+              <arg attribute="dateFormatString">yyyy-MM-dd HH:mm:ss</arg>
+              <arg attribute="exportValue">fechah</arg>
+              <arg attribute="importValue">fechad</arg>
+              <arg attribute="sqlCode">MTSEL0712</arg>
+            </parameters>
+          </component>
+        </panel>
+      </panel>      
+    </panel>
+  </panel>
+  <panel locate="Center" type="BorderLayout" align="CENTER">
+    <panel locate="West" type="FlowLayout" />
+    <panel locate="East" type="FlowLayout" />
+    <panel locate="South" type="FlowLayout" />
+    <panel locate="Center" type="BorderLayout" align="LEFT">
+    <component locate="North">
+      <driver>common.gui.components.XMLLabel</driver>
+      <parameters>
+        <arg attribute="text">Informacion de Arqueos</arg>
+        <arg attribute="alignment">LEFT</arg>
+      </parameters>
+    </component>
+    <component locate="Center">
+          <driver id="documentos">client.gui.components.TableFindData</driver>
+          <parameters>
+            <arg attribute="rows">25</arg>
+            <arg attribute="protectSelected">true</arg>            
+            <arg attribute="colorBackground">220,251,187</arg>
+            <arg attribute="colorSelected">66,160,255</arg>
+            <arg attribute="font">Dialog,0,12</arg>
+            <arg attribute="loadColForm">k</arg>
+            <arg attribute="exportField">11,idform</arg>
+            <arg attribute="totales">g,m,e</arg>
+            <arg attribute="conditionalColor">139,233,164:h&lt;0</arg>
+            <arg attribute="conditionalColor">240,184,184:h&gt;0</arg>
+            <arg attribute="conditionalColor">180,178,250:h==0</arg>
+            <arg attribute="keySQL">MTSEL0712</arg>
+            <arg attribute="driverEvent" id="fechah">common.gui.components.XMLDateField</arg>
+            <subarg><!-- A0 -->
+              <arg attribute="name">Sucursal</arg>
+              <arg attribute="length">180</arg>
+              <arg attribute="type">STRING</arg>
+              <arg attribute="enabled">false</arg>
+              <arg attribute="clean">true</arg>
+            </subarg>                        
+            <subarg><!-- B1 -->
+              <arg attribute="name">Fecha</arg>
+              <arg attribute="length">95</arg>
+              <arg attribute="type">STRING</arg>
+              <arg attribute="enabled">false</arg>
+              <arg attribute="clean">true</arg>
+            </subarg>                        
+            <subarg><!-- C2 -->
+              <arg attribute="name">Número</arg>
+              <arg attribute="length">120</arg>
+              <arg attribute="type">STRING</arg>
+              <arg attribute="enabled">false</arg>
+            </subarg>
+
+            <subarg><!-- D3 -->
+              <arg attribute="name">Cajero</arg>
+              <arg attribute="length">180</arg>
+              <arg attribute="type">STRING</arg>
+              <arg attribute="enabled">false</arg>
+            </subarg>
+
+            <subarg><!-- E4 -->
+              <arg attribute="name">Total Tarjetas</arg>
+              <arg attribute="length">120</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="enabled">false</arg>
+            </subarg>
+            <subarg><!-- F5 -->
+              <arg attribute="name">Total Efectivo</arg>
+              <arg attribute="length">120</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="enabled">false</arg>
+            </subarg>
+            <subarg><!-- G6 -->
+              <arg attribute="name">Recaudo Entregado</arg>
+              <arg attribute="length">120</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="enabled">false</arg>
+            </subarg>
+            <subarg><!-- H7 -->
+              <arg attribute="name">Diferencia</arg>
+              <arg attribute="length">120</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="enabled">false</arg>
+            </subarg>
+            <subarg><!-- I8 -->
+              <arg attribute="name">Estado</arg>
+              <arg attribute="length">120</arg>
+              <arg attribute="type">STRING</arg>
+              <arg attribute="enabled">false</arg>
+            </subarg>
+            <subarg><!-- J9 -->
+              <arg attribute="name">Total x Día</arg>
+              <arg attribute="length">0</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="enabled">false</arg>
+            </subarg>
+            <subarg><!-- K10 -->
+              <arg attribute="name">Perfil</arg>
+              <arg attribute="length">0</arg>
+              <arg attribute="type">STRING</arg>
+              <arg attribute="enabled">false</arg>
+            </subarg>
+            <subarg><!-- L11 -->
+              <arg attribute="name">ndocumento</arg>
+              <arg attribute="length">0</arg>
+              <arg attribute="type">STRING</arg>
+              <arg attribute="enabled">false</arg>
+            </subarg>
+            <subarg><!-- M12 -->
+              <arg attribute="name">Total Ingresos</arg>
+              <arg attribute="length">120</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="enabled">false</arg>
+            </subarg>
+          </parameters>
+        </component>
+      </panel>
+  </panel>
+  <panel locate="South" type="BorderLayout" align="CENTER">
+    <panel locate="East" type="BorderLayout" align="CENTER">
+    <!-- <box locate="West" width="620" /> -->
+    <panel localte="West" type="FlowLayout">
+      <component locate="East">
+      <driver id="trecaudo">client.gui.components.TableDataFields</driver>
+      <parameters>        
+        <arg attribute="linkTable">documentos</arg>
+        <subarg>
+          <arg attribute="label">Total Tarjetas</arg>
+          <arg attribute="format">NUMERIC</arg>
+          <arg attribute="size">10</arg>
+          <arg attribute="alignment">RIGHT</arg>
+          <arg attribute="maxlength">20</arg>
+          <arg attribute="totalCol">e</arg>
+          <arg attribute="printable">true</arg>
+          <arg attribute="background">180,178,250</arg>
+          <arg attribute="foreground">0,0,0</arg>
+        </subarg>
+      </parameters>
+    </component>
+    <component locate="West">
+      <driver id="trecaudo">client.gui.components.TableDataFields</driver>
+      <parameters>        
+        <arg attribute="linkTable">documentos</arg>
+        <subarg>
+          <arg attribute="label">Total Efectivo Recaudado</arg>
+          <arg attribute="format">NUMERIC</arg>
+          <arg attribute="size">10</arg>
+          <arg attribute="alignment">RIGHT</arg>
+          <arg attribute="maxlength">20</arg>
+          <arg attribute="totalCol">g</arg>
+          <arg attribute="printable">true</arg>
+          <arg attribute="background">180,178,250</arg>
+          <arg attribute="foreground">0,0,0</arg>
+        </subarg>
+      </parameters>
+    </component>
+    <component locate="Center">
+      <driver id="grantotal">client.gui.components.TableDataFields</driver>
+      <parameters>        
+        <arg attribute="linkTable">documentos</arg>
+        <subarg>
+          <arg attribute="label">Total Ingreso</arg>
+          <arg attribute="format">NUMERIC</arg>
+          <arg attribute="size">10</arg>
+          <arg attribute="alignment">RIGHT</arg>
+          <arg attribute="maxlength">20</arg>
+          <arg attribute="totalCol">m</arg>
+          <arg attribute="printable">true</arg>
+          <arg attribute="background">180,178,250</arg>
+          <arg attribute="foreground">0,0,0</arg>
+        </subarg>
+      </parameters>
+    </component>
+  <component locate="East">
+    <driver>common.gui.components.ButtonsPanel</driver>
+    <parameters>
+      <subarg>
+      <arg attribute="label">EXCEL</arg>
+      <arg attribute="icon">/icons/ico_excel.png</arg>
+      <arg attribute="keyStroke">F9</arg>
+      <arg attribute="typePackage">XLSREPORTREQUEST</arg>
+      <arg attribute="idReport">XLS0026</arg>
+    </subarg>
+      <arg>NEW</arg>
+      <arg>EXIT</arg>
+    </parameters>
+    <events> 
+     <object>
+    <name>EXCEL</name>
+      <component>
+      <driver>this</driver>
+      <method>getPackage</method>
+        <parameters>
+        <arg attribute="blankPackage">true</arg>
+          <subarg>
+            <arg attribute="importValue">fechad</arg>
+            <arg attribute="importValue">fechah</arg>
+          </subarg>
+        </parameters>
+      </component>
+    </object>     
+      <object>
+        <name>NEW</name>
+        <component>
+          <driver id="documentos">client.gui.components.TableFindData</driver>
+          <method>clean</method>
+        </component>  
+        <component>
+          <driver id="fechad">common.gui.components.XMLDateField</driver>
+          <method>clean</method>
+        </component>  
+        <component>
+          <driver id="fechah">common.gui.components.XMLDateField</driver>
+          <method>clean</method>
+        </component>          
+        <component>
+          <driver id="grantotal">client.gui.components.TableDataFields</driver>
+          <method>clean</method>
+        </component>                  
+      </object>
+    </events>
+  </component>
+</panel>
+</panel>
+</panel>
+</FORM>

@@ -1,0 +1,15 @@
+<container>
+    <subarg>
+        <arg attribute="consecutive" />
+        <arg attribute="date" />
+        <arg attribute="actionDocument">createDocument</arg>
+    </subarg>
+
+    <!-- 0 Inserta observaciones -->
+    <arg>INS0037</arg>
+    <!-- 1 Inserta efectivo -->
+    <arg>MTINS0015</arg>
+    <!-- 2 Inserta datos_arqueo y contabilizacion en libro_auxiliar -->
+    <arg>MTINS0028</arg>
+
+</container>
