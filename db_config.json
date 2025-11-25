@@ -1,0 +1,12 @@
+{
+  "database": {
+    "host": "192.168.254.94",
+    "port": 5432,
+    "database": "lacali",
+    "user": "emaku",
+    "password": "control"
+  },
+  "table": "transacciones",
+  "backup_enabled": true,
+  "backup_directory": "./backups"
+}
