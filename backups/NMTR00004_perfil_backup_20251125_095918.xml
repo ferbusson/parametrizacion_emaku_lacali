@@ -3416,7 +3416,7 @@
                           ad!=0? <!--VC !=0-->
                             zz-(ad+u+v+w+x+y+z+aa):
                           ac-ab>0? <!--RE - IN > 0 -->
-                            ((ac-ab))-(u+v+w+x+y+z+aa):<!--Sep 23 2025: Pongo el +1 Oct 20 lo quito para que el calculo de los dias sea correcto -->
+                            ((ac-ab)+1)-(u+v+w+x+y+z+aa):<!--Sep 23 2025: Pongo el +1 Oct 20 lo quito para que el calculo de los dias sea correcto -->
                           ab!=0? <!--IN != 0-->
                             zz-(u+v+w+x+y+z)-(ab-1):                          
                           zz-(u+v+w+x+y+z+aa):

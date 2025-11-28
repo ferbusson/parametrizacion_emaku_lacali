@@ -1,0 +1,654 @@
+<FORM>
+  <preferences>
+    <size width="630" height="440" />
+    <name>NTERCERO</name>
+    <icon>NTERCERO</icon>
+    <exportValue>idtransaccion,519</exportValue>
+    <notCleanExportValue>idtransaccion</notCleanExportValue>
+    <iconificable />
+    <resizable />
+    <closable />
+  </preferences>
+
+
+  <component>
+                <driver id="tpuntos">common.gui.components.GenericData</driver>
+                <parameters>
+                  <arg attribute="returnNullValue">true</arg>                 
+                  <subarg>
+                    <arg attribute="getValue">_tpuntos</arg>
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="size">15</arg>
+                    <arg attribute="maxlength">130</arg>
+                    <arg attribute="nullValue">true</arg>         
+                    <arg attribute="name">Tarjeta de Puntos</arg>        
+                    <arg attribute="return">true</arg>                  
+                    <arg attribute="exportValue">puntos</arg>
+                    <arg attribute="enabled">false</arg>
+                  </subarg>
+                </parameters>
+              </component>
+  <!-- Este componente al estar vacio permite validar que se haya seleccionado un valor del combo municipio o departamento, si se pone el comboBox no tiene soportado el metodo de validacion, si se pone el campo de la direccion, en el momento que esta tenga datos se salta la validacion Nov 19 2021 -->
+  <component> 
+    <driver id="validaciondepmunicipio">common.gui.components.GenericData</driver>
+    <parameters>
+      <subarg>
+        <arg attribute="format">TEXT</arg>
+        <arg attribute="size">0</arg>
+        <arg attribute="maxlength">0</arg>
+      </subarg>
+    </parameters>
+  </component>
+
+  <component>
+    <driver id="hide">common.gui.components.GenericData</driver>
+    <parameters>
+      <arg attribute="keySQL">LCSEL0990</arg>
+      <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg>
+      <arg attribute="mode">NEW</arg>
+      <subarg>
+        <arg attribute="format">TEXT</arg>
+        <arg attribute="size">0</arg>
+        <arg attribute="maxlength">0</arg>
+      </subarg>
+    </parameters>
+  </component>
+
+  <!-- Fin ocultos -->
+
+  <panel type="BorderLayout" locate="Center">
+
+    <panel locate="North" type="FlowLayout" />
+    <panel locate="East" type="FlowLayout" />
+    <panel locate="West" type="FlowLayout" />
+
+    <panel locate="Center" type="BorderLayout">
+
+        <panel locate="North" type="GridLayout" rows="2" cols="1">
+          <panel type="BorderLayout">
+            <panel type="BorderLayout" locate="North">
+              <panel type="FlowLayout" align="left" locate="North">
+                <panel locate="North" type="GridLayout" rows="2" cols="1">
+                    <panel type="FlowLayout">    
+               <component>
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">Tipo: *</arg>
+                     <arg attribute="alignment">0</arg>
+                  </parameters>
+               </component>
+           </panel>
+           <panel type="FlowLayout">    
+                 <component>
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">Nit/CC: *</arg>
+                     <arg attribute="alignment">0</arg>
+                  </parameters>
+               </component>             
+            </panel>     
+                </panel>
+            <panel locate="North" type="GridLayout" rows="2" cols="1">
+            <panel type="FlowLayout" align="left">    
+            <component>
+                    <driver id="tidentificacion">client.gui.components.XMLComboBox</driver>
+                    <parameters>
+                       <arg attribute="selectedIndex">0</arg>
+                       <arg attribute="sqlCombo">TESEL0344</arg>
+                       <arg attribute="exportValue">tidentificacion</arg>
+                       <arg attribute="clean">false</arg>
+                       <arg attribute="addAttribute">key</arg>
+                       <arg attribute="printable">true</arg>
+                       <arg attribute="preferredLength">300</arg>
+                       <arg attribute="getValue">_clase_tercero</arg>
+                       <arg attribute="noDataBeep">true</arg>
+                       <arg attribute="noDataMessage">No se encontro registros</arg>
+                       <arg attribute="enabled">true</arg>
+                       <!-- <arg attribute="keySQL">LCSEL0244</arg>
+                       <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg> -->
+                    </parameters>
+                 </component>     
+            </panel>      
+            <panel type="FlowLayout" align="left">    
+            <component>
+              <driver id="nitcc">client.gui.components.EmakuSearchField</driver>
+              <parameters>
+                <!-- <arg attribute="label">Nit/CC *</arg> -->
+                <arg attribute="size">15</arg>
+                <arg attribute="maxlength">26</arg>
+                <arg attribute="nullValue">true</arg>
+                <arg attribute="exportValue">nitcc</arg>
+                <arg attribute="format">TEXT</arg>
+                <arg attribute="name">NitCC</arg>
+                <arg attribute="sqlCombo">LCSEL0249</arg>
+                <arg attribute="pattern">[0-9]{6,10}</arg>                
+                <arg attribute="blankArgs">false</arg>
+                <arg attribute="keyDataSearch">searchProd</arg>
+                <arg attribute="repeatData">2</arg>
+                <arg attribute="noDataBeep">true</arg>
+                <arg attribute="noDataMessage">No se encontro registros</arg>
+                <arg attribute="selectedIndex">1</arg>
+                <arg attribute="enabled">true</arg>
+                <arg attribute="importValue">tidentificacion</arg>
+                <arg attribute="clean">true</arg>
+                <arg attribute="sqlCodeExportValue">LCSEL0995,_direccion,_telefono</arg>
+                <!--<arg attribute="sqlCode">LCSEL0247</arg>
+                <arg attribute="sqlCode">LCSEL0248</arg>
+                <arg attribute="sqlCode">LCSEL0250</arg>-->
+                <arg attribute="sqlCode">LCSEL0237</arg>
+                  <arg attribute="sqlCode">LCSEL0233</arg>
+                  <arg attribute="sqlCode">LCSEL0234</arg>
+                  <arg attribute="sqlCode">LCSEL0235</arg>
+                  <arg attribute="sqlCode">LCSEL0236</arg>
+                <arg attribute="sqlCode">LCSEL0243</arg>
+                <arg attribute="sqlCode">LCSEL0430</arg>
+                <arg attribute="sqlCode">LCSEL0990</arg>
+                <arg attribute="sqlCode">LCSEL0991</arg>
+                <arg attribute="sqlCode">LCSEL0993</arg>
+                <arg attribute="sqlCode">LCSEL0994</arg>
+              </parameters>
+            </component>
+            <component>
+                <driver id="dv">common.gui.components.GenericData</driver>
+                <parameters>
+                  <arg attribute="keySQL">LCSEL0243</arg>
+                  <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg>
+                  <arg attribute="returnValue">002</arg>
+                  <subarg>
+                    <arg attribute="label">dv</arg>
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="size">2</arg>
+                    <arg attribute="enabled">FALSE</arg>
+                    <arg attribute="maxlength">2</arg>
+                    <arg attribute="exportValue">dv</arg>
+                    <arg attribute="exportField">2</arg>
+                  </subarg>
+                </parameters>
+              </component>
+              <component>
+                  <driver id="pais">client.gui.components.XMLComboBox</driver>
+                  <parameters>
+                     <arg attribute="label">Procedencia:</arg>
+                     <arg attribute="selectedIndex">0</arg>
+                     <arg attribute="sqlCombo">LCSEL0331</arg>
+                     <arg attribute="exportValue">id_pais_procedencia</arg>
+                     <arg attribute="clean">false</arg>
+                     <arg attribute="enableField">tidentificacion,42</arg>
+                     <arg attribute="printable">true</arg>
+                     <arg attribute="preferredLength">150</arg>
+                     <arg attribute="getValue">_pais</arg>
+                     <arg attribute="noDataBeep">true</arg>
+                     <arg attribute="noDataMessage">No se encontro registros</arg>
+                     <arg attribute="enabled">true</arg>
+                     <arg attribute="keySQL">LCSEL0430</arg>
+                     <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg>
+                  </parameters>
+               </component>                              
+          </panel>
+          </panel>
+              </panel>
+              <panel type="FlowLayout" align="left" locate="Center">
+              <component>
+                <driver id="nombre1">common.gui.components.GenericData</driver>
+                <parameters>
+                    <!-- <arg attribute="disableArriveRecord">true</arg> -->
+                    <arg attribute="keySQL">LCSEL0233</arg>
+                  <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg>
+                  <subarg>
+                    <!-- <arg attribute="getValue">_nombre1</arg>
+                    <arg attribute="importValue">nombre1</arg> -->                  
+                    <arg attribute="label">Primer Nombre: *  </arg>
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="size">12</arg>
+                    <arg attribute="upperCase">true</arg>
+                    <arg attribute="maxlength">60</arg>
+                    <arg attribute="enableField">tidentificacion,13,42,11,12,21,22,41,42,91,47,48</arg>
+                    <arg attribute="name">Primer Nombre</arg>
+                    <arg attribute="pattern">[A-Za-z ]*</arg>
+                    <arg attribute="exportValue">nombre1</arg>
+                    <arg attribute="exportField">3</arg>
+                  </subarg>
+                </parameters>
+              </component>
+              <component>
+                <driver id="nombre2">common.gui.components.GenericData</driver>
+                <parameters>
+                    <!-- <arg attribute="disableArriveRecord">true</arg> -->
+                    <arg attribute="returnNullValue">TRUE</arg>    
+                    <arg attribute="keySQL">LCSEL0234</arg>
+                  <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg> 
+                  <subarg>
+                    <!-- <arg attribute="getValue">_nombre2</arg>
+                    <arg attribute="importValue">nombre2</arg> -->                  
+                    <arg attribute="label">Segundo Nombre:</arg>
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="enableField">tidentificacion,13,42,11,12,21,22,41,42,91,47,48</arg>
+                    <arg attribute="name">Segundo Nombre</arg>
+                    <arg attribute="pattern">[A-Za-z ]*</arg>
+                    <arg attribute="size">10</arg>
+                    <arg attribute="upperCase">true</arg>
+                    <arg attribute="nullValue">true</arg>                 
+                    <arg attribute="maxlength">30</arg>
+                    <arg attribute="exportValue">nombre2</arg>
+                    <arg attribute="exportField">4</arg>
+                  </subarg>
+                </parameters>
+              </component>
+            </panel>
+          </panel>
+            <panel type="BorderLayout" locate="Center">
+            <panel type="FlowLayout" align="left" locate="Center">
+              <component>
+                <driver id="apellido1">common.gui.components.GenericData</driver>
+                <parameters>
+                    <!-- <arg attribute="disableArriveRecord">true</arg> -->
+                    <arg attribute="keySQL">LCSEL0235</arg>
+                  <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg>
+                  <subarg>
+                    <!-- <arg attribute="getValue">_apellido1</arg>
+                    <arg attribute="importValue">apellido1</arg> -->                  
+                    <arg attribute="label">Primer Apellido: *  </arg>
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="name">Primer Apellido</arg>
+                    <arg attribute="enableField">tidentificacion,13,42,11,12,21,22,41,42,91,47,48</arg>
+                    <arg attribute="pattern">[A-Za-z ]{3,}</arg>
+                    <arg attribute="size">12</arg>
+                    <arg attribute="upperCase">true</arg>
+                    <arg attribute="maxlength">30</arg>
+                    <arg attribute="exportValue">apellido1</arg>
+                    <arg attribute="exportField">5</arg>
+                  </subarg>
+                </parameters>
+              </component>
+              <component>
+                <driver id="apellido2">common.gui.components.GenericData</driver>
+                <parameters>
+                    <!-- <arg attribute="disableArriveRecord">true</arg> -->
+                    <arg attribute="keySQL">LCSEL0236</arg>
+                  <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg> 
+
+                    <arg attribute="returnNullValue">TRUE</arg>     
+                  <subarg>
+                    <!-- <arg attribute="getValue">_apellido2</arg>
+                    <arg attribute="importValue">apellido2</arg> -->
+                    <arg attribute="label">Segundo Apellido:</arg>
+                    <arg attribute="name">Segundo Apellido</arg>             
+                    <arg attribute="pattern">[A-Za-z ]*</arg>                    
+                    <arg attribute="enableField">tidentificacion,13,42,11,12,21,22,41,42,91,47,48</arg>
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="nullValue">true</arg>                 
+                    <arg attribute="size">10</arg>
+                    <arg attribute="upperCase">true</arg>
+                    <arg attribute="maxlength">30</arg>
+                    <arg attribute="exportValue">apellido2</arg>
+                    <arg attribute="exportField">6</arg>
+                  </subarg>
+                </parameters>
+              </component>
+              </panel>
+              <component locate="South">
+                <driver id="razon_social">common.gui.components.GenericData</driver>
+                <parameters>
+                  <!-- <arg attribute="disableArriveRecord">true</arg> -->
+                  <arg attribute="keySQL">LCSEL0237</arg>
+                  <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg>
+                  <subarg>
+                    <arg attribute="label"> Razón Social:    </arg>
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="enableField">tidentificacion,31,50</arg>
+                    <arg attribute="size">36</arg>
+                    <arg attribute="name">razonsocial</arg>
+                    <arg attribute="upperCase">true</arg>
+                    <arg attribute="maxlength">150</arg>
+                    <arg attribute="exportValue">razonsocial</arg>
+                    <arg attribute="exportField">7</arg>
+                  </subarg>
+                </parameters>
+              </component>
+              </panel>
+
+              <panel type="BorderLayout" locate="South">
+              <panel type="FlowLayout" align="left" locate="North">
+                <component>
+                    <driver id="departamento">client.gui.components.XMLComboBox</driver>
+                    <parameters>
+                      <!-- Regimen -->
+                      <arg attribute="keySQL">LCSEL0993</arg>
+                      <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg>
+                      <arg attribute="label">Departamento *</arg>
+                      <arg attribute="sqlCombo">SEL0105</arg>
+                      <arg attribute="selectedIndex">0</arg>
+                      <arg attribute="exportValue">depto</arg>
+                      <arg attribute="exportValueCombo">depto</arg>
+                      <arg attribute="clean">false</arg>
+                      <arg attribute="addAttribute">key</arg>
+                      <arg attribute="preferredLength">155</arg>      
+                    </parameters>
+                  </component>            
+                  <component>
+                    <driver id="municipio">client.gui.components.XMLComboBox</driver>
+                    <parameters>
+                      <!-- Regimen -->
+                      <arg attribute="keySQL">LCSEL0994</arg>
+                      <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg>
+                      <arg attribute="label"> Municipio *</arg>
+                      <arg attribute="sqlCombo">SEL0106</arg>
+                      <arg attribute="selectedIndex">0</arg>
+                      <arg attribute="exportValue">municipio</arg>
+                      <arg attribute="clean">false</arg>
+                      <arg attribute="addAttribute">key</arg>
+                      <arg attribute="preferredLength">155</arg>      
+                      <arg attribute="importValue">depto</arg>
+                      <arg attribute="importValueCombo">depto</arg>
+                    </parameters>
+                  </component>  
+              </panel>
+              <panel type="FlowLayout" align="left" locate="Center">
+          <panel type="BorderLayout">
+             <!-- <panel locate="West" type="GridLayout" rows="3" cols="1">
+               <component>
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">Dirección *</arg>
+                     <arg attribute="alignment">0</arg>
+                  </parameters>
+               </component>
+               <component>
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">Teléfono *</arg>
+                     <arg attribute="alignment">0</arg>
+                  </parameters>
+               </component>            
+               <component>
+                  <driver>common.gui.components.XMLLabel</driver>
+                  <parameters>
+                     <arg attribute="text">E-mail</arg>
+                     <arg attribute="alignment">0</arg>
+                  </parameters>
+               </component>                           
+            </panel> -->
+
+          <panel locate="Center" type="GridLayout" rows="3" cols="1">
+
+          <component locate="East">
+              <driver id="direccion">common.gui.components.GenericData</driver>
+              <parameters>
+                  <!-- <arg attribute="disableArriveRecord">true</arg> -->
+                <subarg>
+                  <arg attribute="label">Dirección: *  </arg>
+                  <arg attribute="getValue">_direccion</arg>
+                  <arg attribute="name">Direccion</arg>      
+                  <arg attribute="format">TEXT</arg>
+                  <arg attribute="size">38</arg>
+                  <arg attribute="upperCase">true</arg>
+                  <arg attribute="maxlength">70</arg>
+                  <arg attribute="return">true</arg>                  
+                  <arg attribute="exportValue">direccion</arg>
+                  <arg attribute="exportField">7</arg>
+                </subarg>
+              </parameters>
+            </component>      
+
+            <component>
+              <driver id="telefono">common.gui.components.GenericData</driver>
+              <parameters>
+                <!-- <arg attribute="disableArriveRecord">true</arg> -->
+                <subarg>
+                  <arg attribute="label">Teléfono: *   </arg>
+                  <arg attribute="getValue">_telefono</arg>
+                  <arg attribute="format">TEXT</arg>
+                  <arg attribute="size">18</arg>
+                  <arg attribute="name">Telefono</arg>
+                  <arg attribute="maxlength">20</arg>
+                  <arg attribute="pattern">^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$</arg>
+                  <arg attribute="return">true</arg>                  
+                  <arg attribute="exportValue">telefono</arg>
+                </subarg>
+              </parameters>
+            </component>
+
+              <component locate="West">
+                <driver id="email">common.gui.components.GenericData</driver>
+                <parameters>
+                  <arg attribute="keySQL">LCSEL0991</arg>
+                  <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg>
+                    <!-- <arg attribute="disableArriveRecord">true</arg> -->
+                  <subarg>
+                    <arg attribute="label">E-mail:          </arg>
+                    <!-- <arg attribute="getValue">_email</arg> -->
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="size">38</arg>
+                    <arg attribute="name">Correo Electrónico</arg>
+                    <arg attribute="pattern">^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{1,3})$</arg>
+                    <arg attribute="maxlength">70</arg>
+                    <arg attribute="nullValue">true</arg>
+                    <arg attribute="return">true</arg>
+                    <arg attribute="exportValue">correoe</arg>
+                    <arg attribute="exportField">7</arg>
+                  </subarg>
+                </parameters>
+              </component>
+
+          </panel>
+
+          </panel>
+              </panel>
+            </panel>
+            </panel>
+
+
+
+
+        </panel>
+
+    </panel>
+  </panel>
+  <component locate="South">
+    <driver>common.gui.components.ButtonsPanel</driver>
+    <parameters>
+      <arg>SAVE</arg>
+      <arg>NEW</arg>
+      <arg>EXIT</arg>
+    </parameters>
+    <events>
+      <object>
+        <name>NEW</name>
+        <component>
+          <driver>common.gui.components.ButtonsPanel</driver>
+          <method>setEnabled</method>
+          <parameters>
+            <arg attribute="button">SAVE</arg>
+            <arg attribute="state">true</arg>
+          </parameters>
+        </component>
+        <component>
+          <driver id="razon_social">common.gui.components.GenericData</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="pais">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="dv">common.gui.components.GenericData</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="tidentificacion">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="nitcc">client.gui.components.EmakuSearchField</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="nombre1">common.gui.components.GenericData</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="nombre2">common.gui.components.GenericData</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="apellido1">common.gui.components.GenericData</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="apellido2">common.gui.components.GenericData</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="email">common.gui.components.GenericData</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="departamento">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>        
+        <component>
+          <driver id="municipio">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>        
+        <component>
+          <driver id="direccion">common.gui.components.GenericData</driver>
+          <method>clean</method>
+        </component>        
+        <component>
+          <driver id="telefono">common.gui.components.GenericData</driver>
+          <method>clean</method>
+        </component>        
+        <component>
+          <driver id="tpuntos">common.gui.components.GenericData</driver>
+          <method>clean</method>
+        </component>
+      </object>
+      <object>
+        <name>SAVE</name> <!-- En este documento se crean o se editan los datos del tercero -->
+        <component>
+          <driver>common.gui.components.ButtonsPanel</driver>
+          <method>setEnabled</method>
+          <parameters>
+            <arg attribute="button">SAVE</arg>
+            <arg attribute="state">false</arg>
+          </parameters>
+        </component>        
+        <component>
+          <driver id="nitcc">client.gui.components.EmakuSearchField</driver>
+          <method>validPackage</method>
+        </component>
+        <component>
+          <driver id="nombre1">common.gui.components.GenericData</driver>
+          <method>validPackage</method>
+        </component>
+        <component>
+          <driver id="nombre2">common.gui.components.GenericData</driver>
+          <method>validPackage</method>
+        </component>
+        <component>
+          <driver id="apellido1">common.gui.components.GenericData</driver>
+          <method>validPackage</method>
+        </component>
+        <component>
+          <driver id="apellido2">common.gui.components.GenericData</driver>
+          <method>validPackage</method>
+        </component>
+        <component>
+          <driver id="email">common.gui.components.GenericData</driver>
+          <method>validPackage</method>
+        </component>
+        <component>
+            <driver id="validaciondepmunicipio">common.gui.components.GenericData</driver>
+            <method>validPackage</method>
+            <parameters>
+                <arg attribute="conditional">!"".equals(depto)</arg>
+                <arg attribute="errorMessage">Error, Falta seleccionar el Departamento</arg>
+            </parameters>
+        </component>
+        <component>
+            <driver id="validaciondepmunicipio">common.gui.components.GenericData</driver>
+            <method>validPackage</method>
+            <parameters>
+                <arg attribute="conditional">!"".equals(municipio)</arg>
+                <arg attribute="errorMessage">Error, Falta seleccionar el Municipio</arg>
+            </parameters>
+        </component>
+        <component>
+          <driver id="direccion">common.gui.components.GenericData</driver>
+          <method>validPackage</method>
+        </component>
+        <component>
+          <driver id="telefono">common.gui.components.GenericData</driver>
+          <method>validPackage</method>
+        </component>
+
+        <!-- Insercion en general -->
+        <component>
+          <driver>this</driver>
+          <method>getPackage</method>
+          <parameters>
+            <arg attribute="blankPackage">true</arg>
+            <subarg>
+              <arg attribute="importValue" setAttributeName="attribute" setAttributeValue="key">nitcc</arg>
+              <arg attribute="importValue">dv</arg>
+              <arg attribute="importValue">nombre1</arg>
+              <arg attribute="importValue">nombre2</arg>
+              <arg attribute="importValue">apellido1</arg>
+              <arg attribute="importValue">apellido2</arg>
+              <arg attribute="importValue">razonsocial</arg>
+              <arg attribute="importValue">tidentificacion</arg>
+              <arg attribute="importValue">id_pais_procedencia</arg>
+              <arg attribute="importValue">userLogin</arg>
+              <arg attribute="importValue">idtransaccion</arg>
+            </subarg>
+          </parameters>
+        </component>
+        <!-- Insercion en tarjeta de puntos -->
+        <component>
+          <driver id="tpuntos">common.gui.components.GenericData</driver>
+          <method>getPackage</method>
+        </component>
+
+        <!-- Inserta en direcciones y telefonos -->
+        <component>
+          <driver>this</driver>
+          <method>getPackage</method>
+          <parameters>
+            <arg attribute="blankPackage">true</arg>
+            <subarg>
+              <arg attribute="importValue">depto</arg>
+              <arg attribute="importValue">municipio</arg>
+              <arg attribute="importValue">direccion</arg>
+              <arg attribute="importValue">telefono</arg>
+            </subarg>
+          </parameters>
+        </component>
+
+        <!-- Insercion en emails -->
+        <!-- <component>
+          <driver id="email">common.gui.components.GenericData</driver>
+          <method>getPackage</method>
+        </component> -->
+
+        <component>
+          <driver>this</driver>
+          <method>getPackage</method>
+          <parameters>
+            <arg attribute="nullField">true</arg>
+            <arg attribute="blankPackage">true</arg>
+            <subarg>
+              <arg attribute="importValue">correoe</arg>
+            </subarg>
+          </parameters>
+        </component>
+
+        <component>
+          <driver id="email">common.gui.components.GenericData</driver>
+          <method>getBlankPackage</method>
+        </component>
+        
+
+      </object>
+    </events>
+  </component>
+</FORM>

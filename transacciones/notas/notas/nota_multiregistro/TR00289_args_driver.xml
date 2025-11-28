@@ -1,0 +1,144 @@
+<container>
+    
+    <subarg>
+        <arg attribute="consecutive" />
+        <arg attribute="actionDocument">editDocument</arg>
+        <arg attribute="cash" />
+    </subarg>
+    
+    <!-- 0 -->
+    <subarg> 
+        <!--  elimina observaciones -->
+        <arg>GRDEL0001</arg>
+        <!--  elimina auxilires niifs-->
+        <arg>GRDEL0007</arg>
+        <!--  elimina auxilires -->
+        <arg>GRDEL0002</arg>
+        <!--  elimina cartera por nfactura -->
+        <arg>GRDEL0003</arg>
+        <!--  elimina cartera por ncomprobante -->
+        <arg>GRDEL0004</arg>
+    </subarg>
+    
+    <!-- 1 Se inserta el concepto del documento -->
+    <arg>INS0037</arg>
+    <!-- 2 -->
+    <arg>HCUPD0001</arg>
+   <!-- 3 dcredito -->
+   <arg attribute="addKey"/>    
+   <!-- 4 -->
+    <subarg>
+        <!-- Agregando Informacion contable -->    
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>rowDataAccountSC</method>
+        </LNData>
+
+        <!-- Inserta valor base retenciones -->
+      <LNData>
+          <driver>LNSelectedField</driver>
+          <method>getSubpackage</method>
+          <parameters>
+              <arg attribute="sql">LCINS0198</arg>
+              <arg attribute="fields">11,14,13,5,8,9</arg>
+              <arg attribute="conditional">"n".equals("true")  &amp;&amp; o&gt;0</arg>
+          </parameters>
+      </LNData>
+        <!--  M O V I M I E N T O S  C U E N T A S  1 3  ( C A R T E R A  )-->
+        
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">DGINS0022</arg>
+                <arg attribute="fields">5,8,8,11</arg>
+                <arg attribute="conditional">"k".equals("true") &amp;&amp; "m".equals("true")  &amp;&amp; "e".startsWith("1")   &amp;&amp; "h".equals("NULL") &amp;&amp; i&gt;0 &amp;&amp; j==0</arg>
+            </parameters>
+        </LNData>
+        <!--  Inserta Cartera negativa -->
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">LCSEL0868</arg>
+                <arg attribute="fields">5,9,9,11</arg>
+                <arg attribute="conditional">"k".equals("true") &amp;&amp; "m".equals("true")  &amp;&amp; "e".startsWith("1")   &amp;&amp; "h".equals("NULL") &amp;&amp; j&gt;0 &amp;&amp; i==0</arg>
+            </parameters>
+        </LNData>
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">HCINS0019</arg>
+                <arg attribute="fields">5,7,8,11</arg>
+                <arg attribute="conditional">"k".equals("true") &amp;&amp; "m".equals("true")  &amp;&amp; "e".startsWith("1") &amp;&amp; !"h".equals("NULL") &amp;&amp; i&gt;0 &amp;&amp; j==0</arg>
+            </parameters>
+        </LNData>
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">HCINS0018</arg>
+                <arg attribute="fields">5,7,9,11</arg>
+                <arg attribute="conditional">"k".equals("true") &amp;&amp; "m".equals("true") &amp;&amp; "e".startsWith("1") &amp;&amp; j&gt;0 &amp;&amp; i==0</arg>
+            </parameters>
+        </LNData>
+        
+        <!--  M O V I M I E N T O S  C U E N T A S  2  ( C U E N T A S  X  P A G A R ) -->
+                 
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">DGINS0022</arg>
+                <arg attribute="fields">5,9,9,11</arg>
+                <arg attribute="conditional">"k".equals("true") &amp;&amp; "m".equals("true")  &amp;&amp; "e".startsWith("2") &amp;&amp; "h".equals("NULL") &amp;&amp; i==0 &amp;&amp; j&gt;0</arg>
+            </parameters>
+        </LNData>
+        
+        <!--  Inserta Cartera negativa -->
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">LCSEL0868</arg>
+                <arg attribute="fields">5,8,8,11</arg>
+                <arg attribute="conditional">"k".equals("true") &amp;&amp; "m".equals("true")  &amp;&amp; "e".startsWith("2")   &amp;&amp; "h".equals("NULL") &amp;&amp; i&gt;0 &amp;&amp; j==0</arg>
+            </parameters>
+        </LNData>
+         
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">HCINS0019</arg>
+                <arg attribute="fields">5,7,9,11</arg>
+                <arg attribute="conditional">"k".equals("true") &amp;&amp; "m".equals("true") &amp;&amp; "e".startsWith("2") &amp;&amp; !"h".equals("NULL") &amp;&amp; i==0 &amp;&amp; j&gt;0</arg>
+            </parameters>
+        </LNData>
+        
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">HCINS0018</arg>
+                <arg attribute="fields">5,7,8,11</arg>
+                <arg attribute="conditional">"k".equals("true") &amp;&amp; "m".equals("true") &amp;&amp; "e".startsWith("2") &amp;&amp; i&gt;0 &amp;&amp; j==0</arg>
+            </parameters>
+        </LNData>
+
+         <!--  M O V I M I E N T O  C U E N T A S  D E  I N V E N T A R I O S -->
+         <!-- 
+            El siguiente paquete valida si la cuenta es de la 14 entocnes se 
+            genera un movimiento de inventarios
+         -->
+    </subarg>
+    <!-- 5 -->
+    <subarg>
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>recoverDocument</method>
+        </LNData>
+    </subarg>
+
+</container>

@@ -1,0 +1,12 @@
+<container>
+     <!-- Inserta en general -->    
+     <arg>LCINS0217</arg>
+     <!-- Tarjeta de Puntos -->
+     <arg>MTINS0026</arg>
+     <!-- Direccion y Telefono -->
+     <arg>FFINS0001</arg>
+     <!-- Emails -->
+     <arg>MTINS0128</arg>
+     <!-- 3 Inserta en args_traslado_tercero -->
+     <arg>LCINS0073</arg>
+</container>
