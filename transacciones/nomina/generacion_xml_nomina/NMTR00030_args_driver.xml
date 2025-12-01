@@ -1,0 +1,19 @@
+<container>
+  <subarg>
+    <arg attribute="idDocument">NE</arg>
+    <arg attribute="consecutive" />
+    <arg attribute="actionDocument">createDocument</arg>
+    <arg attribute="cash" />
+    <arg attribute="date"/>
+  </subarg>
+
+  <!-- division -->
+  <arg attribute="addKey"/>
+
+  <!-- mes -->
+  <arg attribute="addKey"/>
+
+  <!-- 1 -->
+  <arg>NMINS0024</arg>
+
+</container>

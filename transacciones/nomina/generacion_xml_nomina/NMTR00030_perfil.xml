@@ -1,0 +1,309 @@
+<FORM>
+  <preferences>
+    <size height="420" width="650"/>
+    <name>Generación de XML nómina electrónica</name>
+    <icon>/icons/ico_salida_material.png</icon>
+    <iconificable/>
+    <resizable/>
+    <maximizable/>
+    <closable/>
+    <date />
+    <consecutive>NE</consecutive>
+  </preferences>
+  <panel locate="North" type="BorderLayout">
+    <panel locate="North" type="FlowLayout"/>
+    <panel locate="South" type="FlowLayout"/>
+    <panel locate="West" type="FlowLayout"/>
+    <!-- <panel locate="East" type="FlowLayout"/> -->
+    <panel locate="East" type="BorderLayout">
+      <panel locate="East" type="BorderLayout">
+        <panel cols="1" locate="West" rows="4" type="GridLayout">
+          <component locate="West">
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">DATE</arg>
+              <arg attribute="alignment">0</arg>              
+            </parameters>
+          </component>
+          <component locate="West">
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Número</arg>
+              <arg attribute="alignment">0</arg>              
+            </parameters>
+          </component>
+          <component locate="West">
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">División</arg>
+              <arg attribute="alignment">0</arg>              
+            </parameters>
+          </component>
+          <component locate="West">
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Mes</arg>
+              <arg attribute="alignment">0</arg>              
+            </parameters>
+          </component>
+
+        </panel>
+        <panel cols="1" locate="Center" rows="4" type="GridLayout">
+          <component locate="Center">
+              <driver id="date">common.gui.components.GenericData</driver>
+              <parameters>
+                <arg attribute="returnBlankPackage">true</arg>
+                <subarg>
+                  <arg attribute="name">DATE</arg>
+                  <arg attribute="format">TEXT</arg>
+                  <arg attribute="size">13</arg>
+                  <arg attribute="font">Dialog,1,14</arg>
+                  <arg attribute="maxlength">50</arg>
+                  <arg attribute="enabled">false</arg>
+                  <arg attribute="alignment">RIGHT</arg>
+                  <arg attribute="clean">false</arg>
+                  <arg attribute="systemDate">yyyy-MM-dd</arg>
+                  <arg attribute="printable">true</arg>
+                </subarg>
+              </parameters>
+            </component>
+          <component locate="Center">
+            <driver id="nro_doc">client.gui.components.TableDataFields</driver>
+            <parameters>
+              <subarg>
+                <arg attribute="format">TEXT</arg>
+                <arg attribute="size">13</arg>
+                <arg attribute="maxlength">26</arg>
+                <arg attribute="clean">false</arg>
+                <arg attribute="enabled">false</arg>
+                <arg attribute="font">Dialog,1,14</arg>
+                <!-- <arg attribute="foreground">249,87,87</arg>
+                <arg attribute="background">0,0,0</arg> -->
+                <arg attribute="alignment">RIGHT</arg>
+                <arg attribute="idDocument">NE</arg>
+              </subarg>
+            </parameters>
+          </component>
+          <component locate="Center">
+            <driver id="division">client.gui.components.XMLComboBox</driver>
+            <parameters>
+              <arg attribute="sqlCombo">NMSEL0052</arg>
+              <arg attribute="selectedIndex">0</arg>
+              <arg attribute="exportValue">division</arg>
+              <arg attribute="clean">false</arg>
+              <arg attribute="preferredLength">240</arg>                            
+              <arg attribute="addAttribute">key</arg>
+              <arg attribute="nameField">division</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver id="meses">client.gui.components.XMLComboBox</driver>
+            <parameters>
+              <arg attribute="sqlCombo">NMSEL0091</arg>
+              <arg attribute="selectedIndex">0</arg>
+              <arg attribute="importValueCode">division</arg>
+              <arg attribute="exportValue">mes</arg>
+              <arg attribute="preferredLength">180</arg>
+              <arg attribute="clean">false</arg>
+              <arg attribute="addAttribute">key</arg>
+              <arg attribute="nameField">mes</arg>
+              <arg attribute="sqlCode">NMSEL0095</arg>
+              <arg attribute="sqlCode">NMSEL0092</arg>
+            </parameters>
+          </component>
+        </panel>
+      </panel>
+    </panel>
+  </panel>
+
+    <panel icon="/icons/ico_fcredito.png" name="Consolidado" type="BorderLayout">
+      <component locate="Center">
+        <driver id="consolidado">client.gui.components.TableFindData</driver>
+        <parameters>
+          <arg attribute="tagData">3</arg>
+          <arg attribute="rows">100</arg>
+           <arg attribute="keySQL">NMSEL0092</arg>
+           <arg attribute="driverEvent" id="meses">client.gui.components.XMLComboBox</arg>
+          <arg attribute="colorBackground">204,255,230</arg>
+          <arg attribute="colorSelected">102,255,153</arg>
+          <arg attribute="protectSelected">true</arg>
+          <arg attribute="Query">NMSEL0083</arg>
+          <subarg><!-- a 0 -->
+            <arg attribute="name">relleno</arg>
+            <arg attribute="length">0</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>                        
+         </subarg>
+          <subarg><!-- b 1 -->
+            <arg attribute="name">Selección</arg>
+            <arg attribute="length">100</arg>
+            <arg attribute="type">BOOLEAN</arg>
+            <arg attribute="enabled">true</arg>
+            <arg attribute="returnCol">0</arg>
+         </subarg>
+          <subarg>
+              <arg attribute="name">Documento</arg>
+              <arg attribute="length">120</arg>
+              <arg attribute="type">DATASEARCH</arg>
+              <arg attribute="sqlCombo">NMSEL0082</arg>
+              <arg attribute="keyDataSearch">searchTercero</arg>
+              <arg attribute="repeatData">2</arg>
+              <arg attribute="noDataBeep">true</arg>
+              <arg attribute="noDataMessage">No se encontro registros</arg>
+              <arg attribute="selectedIndex">1</arg>
+              <arg attribute="enabled">true</arg>
+           </subarg>
+          <subarg>
+            <!-- b -->
+            <arg attribute="name">Nombre</arg>
+            <arg attribute="length">400</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+            <arg attribute="queryCol">0</arg>
+            <arg attribute="printable">true</arg>
+          </subarg>
+          <subarg><!-- o -->
+            <arg attribute="name">id_tercero</arg>
+            <arg attribute="length">0</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+            <arg attribute="returnCol">1</arg>
+            <arg attribute="queryCol">1</arg>
+            <arg attribute="nameField">idTercero</arg>
+          </subarg>
+        </parameters>
+      </component>
+    </panel>    
+
+  <panel locate="South" type="BorderLayout">
+    <panel locate="West" type="FlowLayout"/>
+    <panel locate="Center" type="BorderLayout">
+      <panel locate="North" type="FlowLayout"/>
+      <component locate="West">
+          <driver id="aviso">common.gui.components.XMLLabel</driver>
+          <parameters>
+              <arg attribute="keySQL">NMSEL0095</arg>
+           <arg attribute="driverEvent" id="meses">client.gui.components.XMLComboBox</arg>
+              <arg attribute="text">:</arg>
+              <arg attribute="alignment">LEFT</arg>
+              <arg attribute="font">Dialog,1,11</arg>
+          </parameters>
+      </component>
+      <component locate="East">
+        <driver>common.gui.components.ButtonsPanel</driver>
+        <parameters>
+          <subarg>
+            <arg attribute="label">SALVE</arg>
+            <arg attribute="icon">SAVE</arg>
+            <!-- <arg attribute="typePackage">TRANSACTION</arg> -->
+          </subarg>
+          <arg>NEW</arg>
+          <arg>EXIT</arg>
+        </parameters>
+        <events>
+          <object>
+            <name>SALVE</name>
+            <action>
+              <type>transaction</type>
+
+              <component>
+                  <driver>common.gui.components.ButtonsPanel</driver>
+                  <method>setEnabled</method>
+                  <parameters>
+                    <arg attribute="button">SALVE</arg>
+                    <arg attribute="state">false</arg>
+                  </parameters>
+              </component>
+
+              <!-- 0 -->
+              <component>
+                <driver id="division">client.gui.components.XMLComboBox</driver>
+                <method>getPackage</method>
+              </component>
+              <!-- 1 -->
+              <component>
+                <driver id="meses">client.gui.components.XMLComboBox</driver>
+                <method>getPackage</method>
+              </component>
+              <!-- 2 -->
+               <component>
+                <driver id="consolidado">client.gui.components.TableFindData</driver>
+                <method>getPackage</method>
+              </component>
+
+              <!-- Comienza seccion limpiar -->
+              <component>
+              <driver id="consolidado">client.gui.components.TableFindData</driver>
+              <method>clean</method>
+            </component>
+
+            <component>
+              <driver id="meses">client.gui.components.XMLComboBox</driver>
+              <method>clean</method>
+            </component>
+
+            <component>
+              <driver id="division">client.gui.components.XMLComboBox</driver>
+              <method>clean</method>
+            </component>            
+
+            <component>
+              <driver id="aviso">common.gui.components.XMLLabel</driver>
+              <method>clean</method>
+            </component>                        
+
+           <!--  limpiando llaves externas -->
+            <component>
+              <driver>this</driver>
+              <method>cleanExternalValues</method>
+            </component>
+
+            <component>
+              <driver>common.gui.components.ButtonsPanel</driver>
+              <method>setEnabled</method>
+              <parameters>
+                <arg attribute="button">SALVE</arg>
+                <arg attribute="state">true</arg>
+              </parameters>
+            </component>
+
+            </action>
+          </object>
+          <object>
+            <name>NEW</name>
+            <component>
+              <driver id="consolidado">client.gui.components.TableFindData</driver>
+              <method>clean</method>
+            </component>
+            <component>
+              <driver id="meses">client.gui.components.XMLComboBox</driver>
+              <method>clean</method>
+            </component>
+            <component>
+              <driver id="division">client.gui.components.XMLComboBox</driver>
+              <method>clean</method>
+            </component>            
+            <component>
+              <driver id="aviso">common.gui.components.XMLLabel</driver>
+              <method>clean</method>
+            </component>                        
+           <!--  limpiando llaves externas -->
+            <component>
+              <driver>this</driver>
+              <method>cleanExternalValues</method>
+            </component>
+
+            <component>
+              <driver>common.gui.components.ButtonsPanel</driver>
+              <method>setEnabled</method>
+              <parameters>
+                <arg attribute="button">SALVE</arg>
+                <arg attribute="state">true</arg>
+              </parameters>
+            </component>
+          </object>
+        </events>
+      </component>
+    </panel>
+  </panel>
+</FORM> 
