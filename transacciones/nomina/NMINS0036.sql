@@ -19,7 +19,7 @@ INSERT INTO
 		salario_basico,
 		id_division_nomina
 	)
-SELECT
+select distinct
 	a.ndocumento,
 	foo.id_tercero,
 	106 AS id_concepto_causacion, --SALARIO ESCALA 01 VTAS solo se pone para que los reportes se puedan generar
@@ -30,7 +30,7 @@ SELECT
 	0 AS valor,
 	30 AS dias,
 	sm.salario_minimo,
-	sm.salario_minimo,
+	sb.salario_basico,
 	di.id_division_nomina
 FROM
 	(SELECT DISTINCT
@@ -46,6 +46,25 @@ FROM
 		concepto_causacion cc
 	WHERE
 		id_concepto_causacion = 1) AS sm,
+		
+	(select distinct
+		acc.id as id_tercero,
+		cc.valor AS salario_basico
+	from
+		aux_parametros_update a
+	inner join
+		causacion_nomina cn
+	on
+		a.ndocumento = cn.ndocumento
+	inner join
+		asignacion_concepto_causacion acc
+	on
+		cn.id_tercero = acc.id
+	inner join
+		concepto_causacion cc
+	on		
+		acc.id_concepto_causacion = cc.id_concepto_causacion 
+	and	cc.id_clasificacion_concepto_causacion = 1) AS sb,		
 	(SELECT DISTINCT
 		cn.id_tercero
 	FROM
@@ -66,5 +85,6 @@ FROM
 		cn.id_concepto_causacion = cc.id_concepto_causacion AND
 		cc.id_movimiento_nomina = 1 AND
 		cc.id_clasificacion_concepto_causacion = 1 AND
-		cn.ndocumento = a.ndocumento) AS foo,
+		cn.ndocumento = a.ndocumento
+		) AS foo,
 	aux_parametros_update a;
