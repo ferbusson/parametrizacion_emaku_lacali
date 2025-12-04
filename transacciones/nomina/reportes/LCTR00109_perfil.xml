@@ -1,0 +1,150 @@
+<FORM>
+   <preferences>
+      <size width="510" height="240" />
+      <name>Reportes Administrativos Nómina</name>
+      <icon>REPORT</icon>
+      <iconificable />
+      <resizable />
+      <closable />
+   </preferences>
+  <component>
+    <driver id="rf_documento">common.gui.components.GenericData</driver>
+    <parameters>
+      <arg attribute="keySQL">HCSEL0035</arg>
+      <arg attribute="driverEvent" id="formulario">client.gui.components.XMLComboBox</arg>
+      <subarg>
+              <arg attribute="label">CODE</arg>
+              <arg attribute="format">TEXT</arg>
+              <arg attribute="size">10</arg>
+              <arg attribute="maxlength">10</arg>
+              <arg attribute="clean">true</arg>
+              <arg attribute="exportValue">codexls</arg>
+      </subarg>
+    </parameters>
+  </component>
+<panel locate="North" type="FlowLayout" />
+   <panel locate="West" type="FlowLayout" />
+   <panel locate="East" type="FlowLayout" />
+   <panel locate="Center" type="BorderLayout">
+      <panel locate="West" type="GridLayout" rows="4" cols="1">
+         <component>
+        <driver>common.gui.components.XMLLabel</driver>
+        <parameters>
+          <arg attribute="text">Fecha Inicial</arg>
+        </parameters>
+      </component>
+      <component>
+        <driver>common.gui.components.XMLLabel</driver>
+        <parameters>
+          <arg attribute="text">Fecha Final</arg>
+        </parameters>
+      </component>
+      <component>
+        <driver>common.gui.components.XMLLabel</driver>
+        <parameters>
+          <arg attribute="text">División Empleados</arg>
+        </parameters>
+      </component>
+         <component>
+            <driver id="fechaf">common.gui.components.XMLLabel</driver>
+            <parameters>
+               <arg attribute="text">Tipo Reporte</arg>
+            </parameters>
+         </component>
+         
+      </panel>
+      <panel locate="Center" type="GridLayout" rows="4" cols="1">
+        <component>
+        <driver id="fechai">common.gui.components.XMLDateField</driver>
+        <parameters>
+          <arg attribute="exportValue">fechai</arg>
+        </parameters>
+      </component>
+      <component>
+        <driver id="fechaf">common.gui.components.XMLDateField</driver>
+        <parameters>
+          <arg attribute="exportValue">fechaf</arg>
+        </parameters>
+      </component>
+          <component locate="Center">
+            <driver id="division">client.gui.components.XMLComboBox</driver>
+            <parameters>
+                <arg attribute="sqlCombo">NMSEL0052</arg>
+                <arg attribute="selectedIndex">0</arg>
+                <arg attribute="exportValue">division</arg>
+                <arg attribute="clean">false</arg>
+                <arg attribute="preferredLength">180</arg>
+            </parameters>
+        </component>
+
+         <component locate="Center">
+            <driver id="formulario">client.gui.components.XMLComboBox</driver>
+            <parameters>
+               <arg attribute="sqlCombo">LCSEL0525</arg>
+               <arg attribute="preferredLength">330</arg>
+               <arg attribute="selectedIndex">0</arg>
+               <arg attribute="name">FORMULARIO</arg>
+               <arg attribute="exportValue">code</arg>
+               <arg attribute="sqlCode">HCSEL0035</arg>
+            </parameters>
+         </component>
+         
+      </panel>
+   </panel>
+   <component locate="South">
+      <driver id="buttons">common.gui.components.ButtonsPanel</driver>
+      <parameters>        
+         <subarg>
+            <arg attribute="label">EXCEL</arg>
+            <arg attribute="icon">/icons/ico_excel.png</arg>
+            <arg attribute="keyStroke">F9</arg>
+            <arg attribute="typePackage">XLSREPORTREQUEST</arg>
+            <arg attribute="importReportCode">codexls</arg>
+            <!--<arg attribute="idReport">XLS0006</arg>-->
+         </subarg>
+         <arg>NEW</arg>
+         <arg>EXIT</arg>
+      </parameters>
+      <events>
+         <object>
+            <name>NEW</name>
+            <component>
+               <driver>this</driver>
+               <method>cleanExternalValues</method>
+            </component>
+            <component>
+               <driver id="fechai">common.gui.components.XMLDateField</driver>
+               <method>clean</method>
+            </component>
+            <component>
+               <driver id="fechaf">common.gui.components.XMLDateField</driver>
+               <method>clean</method>
+            </component>
+            <component>
+               <driver id="division">client.gui.components.XMLComboBox</driver>
+               <method>clean</method>
+            </component>            
+            <component>
+               <driver id="formulario">client.gui.components.XMLComboBox</driver>
+               <method>clean</method>
+            </component>
+         </object>
+         
+         <object>
+            <name>EXCEL</name>
+            <component>
+               <driver>this</driver>
+               <method>getPackage</method>
+               <parameters>
+                  <arg attribute="blankPackage">true</arg>
+                  <subarg>
+                     <arg attribute="importValue">fechai</arg>
+                     <arg attribute="importValue">fechaf</arg>
+                     <arg attribute="importValue">division</arg>                     
+                  </subarg>
+               </parameters>
+            </component>
+         </object>
+      </events>
+   </component>
+</FORM>
