@@ -1,0 +1,118 @@
+<FORM>
+  <preferences>
+    <size width="390" height="700" />
+    <name>Importar Empleados y Valores</name>
+    <icon>/icons/ico_nota_contable.png</icon>
+    <closable />
+    <maximizable />
+    <iconificable />
+    <resizable />
+  </preferences>
+  <panel locate="Center" type="BorderLayout">
+    <component locate="Center">
+      <driver id="importacion">client.gui.components.TableFindData</driver>
+      <parameters>
+        <arg attribute="rows">100</arg>
+        <arg attribute="colorBackground">192,248,155</arg>
+        <arg attribute="colorSelected">159,218,112</arg>
+        <arg attribute="protectSelected">true</arg>
+        <arg attribute="Query">PRSEL0041</arg>
+        <arg attribute="enabled">true</arg>
+        <arg attribute="totales">b</arg>
+        <arg attribute="driverEventRecord">common.gui.components.EmakuImportExcelFile</arg>
+            <subarg> <!-- a 0 -->
+              <arg attribute="name">NIT/CC</arg>
+              <arg attribute="length">220</arg>
+              <arg attribute="type">STRING</arg>
+              <arg attribute="returnCol">0</arg>
+            </subarg>
+            <subarg> <!-- b 1 -->
+                <arg attribute="name">Valor</arg>
+                <arg attribute="length">150</arg>
+                <arg attribute="type">DECIMAL</arg>
+                <arg attribute="enabled">true</arg>
+                <arg attribute="returnCol">1</arg>
+            </subarg>
+            <subarg> <!-- b 1 -->
+                <arg attribute="name">contador</arg>
+                <arg attribute="length">0</arg>
+                <arg attribute="type">INTEGER</arg>
+                <arg attribute="enabled">true</arg>
+                <arg attribute="defaultValue">1</arg>
+            </subarg>
+      </parameters>
+    </component>
+  <!-- <panel locate="South" type="FlowLayout" align="left">
+      <component locate="North">
+        <driver>common.gui.components.XMLLabel</driver>
+        <parameters>
+          <arg attribute="text">Cantidad Referencias</arg>
+          <arg attribute="alignment">0</arg>
+        </parameters>
+      </component>
+      <component locate="East">
+        <driver id="cantidad">client.gui.components.TableDataFields</driver>
+        <parameters>
+          <arg attribute="Panel">false</arg>
+          <arg attribute="linkTable">importacion</arg>
+          <subarg>
+            <arg attribute="name">BALANCE</arg>
+            <arg attribute="format">NUMERIC</arg>
+            <arg attribute="size">12</arg>
+            <arg attribute="maxlength">26</arg>
+            <arg attribute="clean">true</arg>
+            <arg attribute="enabled">false</arg>
+            <arg attribute="totalCol">b</arg>
+            <arg attribute="alignment">RIGHT</arg>
+            <arg attribute="exportValue">cantidad</arg>
+            <arg attribute="printable">true</arg>
+          </subarg>
+        </parameters>
+      </component>
+      
+      <box locate="west" width="10" />
+    </panel> -->
+  </panel>
+  <panel locate="South" type="BorderLayout">
+    <component locate="West">
+      <driver>common.gui.components.EmakuImportExcelFile</driver>
+      <parameters></parameters>
+    </component>
+    <component locate="Center">
+          <driver>common.gui.components.ButtonsPanel</driver>
+          <parameters>
+              <arg>SAVE</arg>
+              <arg>NEW</arg>
+              <arg>EXIT</arg>
+          </parameters>
+          <events>
+              <object>
+                  <name>NEW</name>
+                  <component>
+                      <driver id="cantidad">client.gui.components.TableDataFields</driver>
+                      <method>clean</method>
+                  </component>
+                  <component>
+            <driver id="importacion">client.gui.components.TableFindData</driver>
+                      <method>clean</method>
+                  </component>
+              </object>
+              <object>
+                  <name>SAVE</name>
+                  <component>
+            <driver>common.gui.components.ButtonsPanel</driver>
+            <method>setEnabled</method>
+            <parameters>
+              <arg attribute="button">SAVE</arg>
+              <arg attribute="state">false</arg>
+            </parameters>
+          </component>
+                  <component>
+            <driver id="importacion">client.gui.components.TableFindData</driver>
+                      <method>getPackage</method>
+                  </component> 
+              </object>
+          </events>
+      </component>
+  </panel>
+</FORM>

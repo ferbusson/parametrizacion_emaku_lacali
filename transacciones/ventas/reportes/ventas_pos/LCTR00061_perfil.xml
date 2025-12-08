@@ -1,0 +1,250 @@
+<FORM>
+    <preferences>
+        <size width="500" height="310" />
+        <name>Informe Ventas POS por Proveedor y Marca</name>
+        <icon>REPORT</icon>
+        <iconificable />
+        <resizable />
+        <closable />
+    </preferences>
+    <panel locate="North" type="FlowLayout" />
+    <panel locate="West" type="FlowLayout" />
+    <panel locate="East" type="FlowLayout" />
+    <panel locate="Center" type="BorderLayout">
+        <panel locate="West" type="GridLayout" rows="8" cols="1">
+            <component>
+                <driver>common.gui.components.XMLLabel</driver>
+                <parameters>
+                    <arg attribute="text">Bodega</arg>
+                </parameters>
+            </component>
+            <component>
+                <driver>common.gui.components.XMLLabel</driver>
+                <parameters>
+                    <arg attribute="text">FECHAI</arg>
+                </parameters>
+            </component>
+            <component>
+                <driver>common.gui.components.XMLLabel</driver>
+                <parameters>
+                    <arg attribute="text">FECHAF</arg>
+                </parameters>
+            </component>
+            <component>
+                <driver>common.gui.components.XMLLabel</driver>
+                <parameters>
+                    <arg attribute="text">Tercero (F2 Buscar)</arg>
+                </parameters>
+            </component>
+            <panel locate="North" type="FlowLayout" />
+            <component>
+                <driver>common.gui.components.XMLLabel</driver>
+                <parameters>
+                    <arg attribute="text">Marca (F2 Buscar)</arg>
+                </parameters>
+            </component>
+            <panel locate="North" type="FlowLayout" />
+            <component>
+                <driver>common.gui.components.XMLLabel</driver>
+                <parameters>
+                    <arg attribute="text">Línea</arg>
+                </parameters>
+            </component>
+        </panel>
+        <panel locate="Center" type="GridLayout" rows="8" cols="1">
+            <component locate="Center">
+              <driver id="Bodegas">client.gui.components.XMLComboBox</driver>
+              <parameters>
+                <arg attribute="sqlCombo">LCSEL0911</arg>
+                <arg attribute="selectedIndex">1</arg>
+                <arg attribute="name">BODEGA</arg>
+                <arg attribute="enabled">true</arg>
+                <arg attribute="preferredLength">220</arg>
+                <arg attribute="exportValue">bodega</arg>
+                <arg attribute="printable">true</arg>
+              </parameters>
+            </component>
+            <component>
+                <driver id="fechai">common.gui.components.XMLDateField</driver>
+                <parameters>
+                    <arg attribute="exportValue">fechai</arg>
+                </parameters>
+            </component>
+            <component>
+                <driver id="fechaf">common.gui.components.XMLDateField</driver>
+                <parameters>
+                    <arg attribute="exportValue">fechaf</arg>
+                </parameters>
+            </component>
+            <component locate="Center">
+                <driver id="idt">client.gui.components.EmakuSearchField</driver>
+                <parameters>
+                    <arg attribute="size">15</arg>
+                    <arg attribute="maxlength">26</arg>
+                    <arg attribute="nullValue">true</arg>
+                    <arg attribute="exportValue">nittercero</arg>
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="sqlCombo">LCSEL0380</arg>
+                    <arg attribute="blankArgs">false</arg>
+                    <arg attribute="keyDataSearch">searchProd</arg>
+                    <arg attribute="repeatData">2</arg>
+                    <arg attribute="noDataBeep">true</arg>
+                    <arg attribute="noDataMessage">No se encontro registros</arg>
+                    <arg attribute="selectedIndex">1</arg>
+                    <arg attribute="enabled">true</arg>
+                    <arg attribute="clean">true</arg>
+                    <arg attribute="sqlCode">LCSEL0379</arg>
+                </parameters>
+            </component>
+            <component>
+                <driver id="desctercero">common.gui.components.GenericData</driver>
+                <parameters>
+                        <arg attribute="keySQL">LCSEL0379</arg>
+                        <arg attribute="driverEvent" id="idt">client.gui.components.EmakuSearchField</arg>
+                    <subarg>
+                        <arg attribute="format">TEXT</arg>
+                        <arg attribute="name">desctercero</arg>
+                        <arg attribute="enabled">false</arg>
+                        <arg attribute="size">25</arg>
+                        <arg attribute="maxlength">200</arg>
+                        <arg attribute="exportValue">desctercero</arg>
+                        <arg attribute="printable">true</arg>
+                    </subarg>
+                </parameters>
+            </component>
+            <component locate="Center">
+                <driver id="idm">client.gui.components.EmakuSearchField</driver>
+                <parameters>
+                    <arg attribute="size">15</arg>
+                    <arg attribute="maxlength">26</arg>
+                    <arg attribute="nullValue">true</arg>
+                    <arg attribute="exportValue">idm</arg>
+                    <arg attribute="importValueCombo">nittercero</arg>
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="sqlCombo">MTSEL0264</arg>
+                    <arg attribute="blankArgs">false</arg>
+                    <arg attribute="keyDataSearch">searchProd</arg>
+                    <arg attribute="repeatData">1</arg>
+                    <arg attribute="noDataBeep">true</arg>
+                    <arg attribute="noDataMessage">No se encontro registros</arg>
+                    <arg attribute="selectedIndex">1</arg>
+                    <arg attribute="enabled">true</arg>
+                    <arg attribute="clean">true</arg>
+                    <arg attribute="sqlCode">LCSEL0378</arg>
+                </parameters>
+            </component>
+            <component>
+                <driver id="descmarca">common.gui.components.GenericData</driver>
+                <parameters>
+                    <arg attribute="keySQL">LCSEL0378</arg>
+                    <arg attribute="driverEvent" id="idm">client.gui.components.EmakuSearchField</arg>
+                    <subarg>
+                        <arg attribute="format">TEXT</arg>
+                        <arg attribute="name">descmarca</arg>
+                        <arg attribute="enabled">false</arg>
+                        <arg attribute="size">25</arg>
+                        <arg attribute="maxlength">200</arg>
+                        <arg attribute="exportValue">descmarca</arg>
+                        <arg attribute="printable">true</arg>
+                    </subarg>
+                </parameters>
+            </component>
+            <component>
+              <driver id="seccion">client.gui.components.XMLComboBox</driver>
+              <parameters>
+                <arg attribute="sqlCombo">SEL0368</arg>
+                <arg attribute="selectedIndex">0</arg>
+                <arg attribute="exportValue">seccion</arg>
+                <arg attribute="clean">false</arg>
+                <arg attribute="preferredLength">230</arg>
+              </parameters>
+            </component>
+        </panel>
+    </panel>
+    <component locate="South">
+        <driver>common.gui.components.ButtonsPanel</driver>
+        <parameters>
+            <subarg>
+                <arg attribute="label">EXCEL</arg>
+                <arg attribute="icon">/icons/ico_excel.png</arg>
+                <arg attribute="keyStroke">F9</arg>
+                <arg attribute="typePackage">XLSREPORTREQUEST</arg>
+                <arg attribute="idReport">XLS0031</arg>
+            </subarg>
+            <arg>NEW</arg>
+            <arg>EXIT</arg>
+        </parameters>
+        <events>
+            <object>
+                <name>NEW</name>
+            <component>
+              <driver>common.gui.components.ButtonsPanel</driver>
+              <method>setEnabled</method>
+              <parameters>
+                <arg attribute="button">EXCEL</arg>
+                <arg attribute="state">true</arg>
+              </parameters>
+            </component>                      
+        <component>
+            <driver>this</driver>
+            <method>cleanExternalValues</method>
+        </component>
+                <component>
+            <driver id="fechai">common.gui.components.XMLDateField</driver>
+                    <method>clean</method>
+                </component>
+                <component>
+            <driver id="fechaf">common.gui.components.XMLDateField</driver>
+                    <method>clean</method>
+                </component>
+                <component>
+                    <driver id="idt">client.gui.components.EmakuSearchField</driver>
+                    <method>clean</method>
+                </component>
+                <component>
+                    <driver id="idm">client.gui.components.EmakuSearchField</driver>
+                    <method>clean</method>
+                </component>
+                <component>
+                    <driver id="descmarca">common.gui.components.GenericData</driver>
+                    <method>clean</method>
+                </component>
+                <component>
+                    <driver id="desctercero">common.gui.components.GenericData</driver>
+                    <method>clean</method>
+                </component>
+               <component>
+                  <driver id="seccion">client.gui.components.XMLComboBox</driver>
+                    <method>clean</method>
+                </component>                
+       
+            </object>
+            <object>
+                <name>EXCEL</name>
+                <component>
+                    <driver>this</driver>
+                    <method>getPackage</method>
+                    <parameters>
+                    <arg attribute="blankPackage">true</arg>
+                        <subarg>
+                            <arg attribute="importValue">bodega</arg>
+                            <arg attribute="importValue">fechai</arg>
+                            <arg attribute="importValue">fechaf</arg>
+                            <arg attribute="importValue">nittercero</arg>
+                            <arg attribute="importValue">idm</arg>
+                            <arg attribute="importValue">seccion</arg>
+                        </subarg>
+                    </parameters>
+                </component>
+            <component>
+              <driver>common.gui.components.ButtonsPanel</driver>
+              <method>setEnabled</method>
+              <parameters>
+                <arg attribute="button">EXCEL</arg>
+                <arg attribute="state">true</arg>
+              </parameters>
+            </component>                                      
+            </object>
+        </events>
+    </component>
+</FORM>

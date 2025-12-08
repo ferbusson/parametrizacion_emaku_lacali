@@ -1,0 +1,14 @@
+<container>
+
+  <subarg>
+        <arg attribute="idDocument">83</arg>
+      <arg attribute="consecutive" />
+      <arg attribute="date" />
+      <arg attribute="actionDocument">createDocument</arg>
+      <arg attribute="cash" />
+      <!-- <arg attribute="reloadProdServ" /> lo comento porque no se crean productos -->
+  </subarg>
+    
+  <arg>LCINS0219</arg>
+  
+</container>

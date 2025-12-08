@@ -1,0 +1,40 @@
+<container>
+  <subarg>
+    <arg attribute="idDocument">RV</arg>
+    <arg attribute="consecutive" />
+    <arg attribute="actionDocument">createDocument</arg>
+    <arg attribute="cash" />
+  </subarg>
+
+
+        1 act info_documento
+    <arg>LCUPD0057</arg> <!-- si el doc se hacer por tercero se pone procesado = true -->
+<!-- 1 por tercero-->
+
+  <LNData>
+    <driver>LNSelectedField</driver>
+    <method>getSubpackage</method>
+    <parameters>
+      <arg attribute="sql">NMINS0022</arg>
+      <arg attribute="fields">0,1,2</arg>
+      <arg attribute="conditional">c&gt;0</arg>
+    </parameters>
+  </LNData>
+
+  <!-- 0 id concepto causacion -->
+  <!--<arg attribute="addKey"/>-->
+
+  <!-- 1 por concepto-->
+
+  <LNData>
+    <driver>LNSelectedField</driver>
+    <method>getSubpackage</method>
+    <parameters>
+      <arg attribute="sql">NMINS0022</arg>
+      <arg attribute="fields">0,1,2</arg>
+      <arg attribute="discartKey">idTercero</arg>
+      <arg attribute="conditional">c&gt;0</arg>
+    </parameters>
+  </LNData>
+
+</container>
