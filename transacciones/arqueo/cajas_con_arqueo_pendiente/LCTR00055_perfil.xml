@@ -1,0 +1,137 @@
+<FORM>
+  <preferences>
+    <size width="880" height="400" />
+    <name>Cajas con Arqueo Pendiente</name>
+    <icon>/icons/ico_buscar.png</icon>
+    <iconificable />
+    <resizable />
+    <closable />
+    <maximizable />
+  </preferences>
+  <panel locate="North" type="FlowLayout" />
+  <panel locate="West" type="FlowLayout" />
+  <panel locate="East" type="FlowLayout" />
+  <panel locate="Center" type="BorderLayout">
+    <panel locate="North" type="BorderLayout">
+      <panel locate="West" type="FlowLayout" />
+      <panel locate="East" type="FlowLayout" />
+      <box locate="South" length="8" />
+      <panel locate="Center" type="BorderLayout">
+        <panel locate="West" type="GridLayout" rows="1" cols="1">
+          <component>
+            <driver id="linea">common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Fecha de Corte</arg>
+            </parameters>
+          </component>
+        </panel>
+        <panel locate="Center" type="GridLayout" rows="1" cols="1">
+              <component>
+                <driver id="fechacorte">common.gui.components.XMLDateField</driver>
+                <parameters>
+                  <arg attribute="getValue">_fechalimite</arg>
+                  <arg attribute="dateFormatString">yyyy-MM-dd HH:mm:ss</arg>
+                  <arg attribute="exportValue">fechacorte</arg>
+                  <arg attribute="sqlCode">LCSEL0293</arg>
+                </parameters>
+              </component>
+        </panel>
+      </panel>
+    </panel>
+    <component locate="Center">
+      <driver id="cajaspendientes">client.gui.components.TableFindData</driver>
+      <parameters>
+        <arg attribute="rows">40</arg>
+        <arg attribute="colorBackground">230,255,251</arg>
+        <arg attribute="colorSelected">204,255,247</arg>
+        <arg attribute="keySQL">LCSEL0293</arg>
+        <arg attribute="driverEvent" id="fechacorte">common.gui.components.XMLDateField</arg>
+          a
+          <subarg>
+            <arg attribute="name">Usuario</arg>
+            <arg attribute="length">110</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+            <arg attribute="returnCol">0</arg>
+          </subarg>          
+          d
+          <subarg>
+            <arg attribute="name">Último Arqueo</arg>
+            <arg attribute="length">105</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+            <arg attribute="returnCol">3</arg>
+          </subarg>
+          e
+          <subarg>
+            <arg attribute="name">Fecha Últ. Arqueo</arg>
+            <arg attribute="length">120</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+            <arg attribute="returnCol">4</arg>
+          </subarg>          
+          b
+          <subarg>
+            <arg attribute="name">Cant. Documentos</arg>
+            <arg attribute="length">120</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+            <arg attribute="returnCol">1</arg>
+          </subarg>
+          c
+          <subarg>
+            <arg attribute="name">Caja</arg>
+            <arg attribute="length">250</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+            <arg attribute="returnCol">2</arg>
+          </subarg>
+          <subarg>
+            <arg attribute="name">Valor Ventas $</arg>
+            <arg attribute="length">125</arg>
+            <arg attribute="type">DECIMAL</arg>
+            <arg attribute="printable">true</arg>
+            <arg attribute="enabled">false</arg>
+            <arg attribute="decimals">0</arg>
+          </subarg>          
+      </parameters>
+    </component>
+  </panel>
+  <component locate="South">
+    <driver>common.gui.components.ButtonsPanel</driver>
+    <parameters>
+      <!-- <arg>SAVE</arg> -->
+      <arg>NEW</arg>
+      <arg>EXIT</arg>
+    </parameters>
+    <events>
+      <!-- <object>
+        <name>SAVE</name>
+        <component>
+          <driver id="linea">client.gui.components.XMLComboBox</driver>
+          <method>getPackage</method>
+        </component>
+        <component>
+          <driver>client.gui.components.TableFindData</driver>
+          <method>getPackage</method>
+        </component>
+      </object> -->
+      <object>
+        <name>NEW</name>
+        <component>
+          <driver id="cajaspendientes">client.gui.components.TableFindData</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="fechacorte">common.gui.components.XMLDateField</driver>
+          <method>clean</method>
+        </component>
+        <!--  limpiando llaves externas -->
+        <component>
+          <driver>this</driver>
+          <method>cleanExternalValues</method>
+        </component>
+      </object>
+    </events>
+  </component>
+</FORM>

@@ -1,0 +1,1 @@
+<container>    <subarg>        <arg attribute="consecutive" />        <arg attribute="date" />        <arg attribute="actionDocument">createDocument</arg>    </subarg>    <!-- 0 Inserta Arqueo del Día -->    <arg>LCINS0036</arg></container>

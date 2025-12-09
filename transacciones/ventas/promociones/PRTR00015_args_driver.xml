@@ -1,0 +1,62 @@
+<container>
+    <subarg>
+        <arg attribute="idDocument">XY</arg>
+        <arg attribute="consecutive" />
+        <arg attribute="date" />
+        <arg attribute="actionDocument">editDocument</arg>
+        <arg attribute="cash" />
+    </subarg>
+
+    <!--  0 registro promocion  -->
+    <arg>LCUPD0013</arg>
+    <!-- 7 items promocion -->
+    <arg>LCDEL0005</arg>        
+    <!--  2 key marca   -->
+    <arg attribute="addKey"/>
+    <!--  3 key submarca   -->
+    <arg attribute="addKey"/>
+    <!--  4 key linea   -->
+    <arg attribute="addKey"/>
+    <!--  5 key grupo   -->
+    <arg attribute="addKey"/>
+    <!--  6 key sgrupo   -->
+    <arg attribute="addKey"/>
+    <!-- 7 items promocion -->
+    <arg>PRINS0002</arg>
+
+    <!-- 8 items promocion -->
+    <subarg>
+        <arg attribute="removeKey">idmarca</arg>
+        <arg attribute="removeKey">submarca</arg>
+        <arg attribute="removeKey">linea</arg>
+        <arg attribute="removeKey">grupo</arg>
+        <arg attribute="removeKey">sgrupo</arg>
+    </subarg>
+
+    <!-- 7 items promocion -->
+    <arg>LCDEL0006</arg>        
+    
+    <!--  crea tabla auxiliar excepciones promociones -->
+    <arg>LCINS0059</arg>
+<!--  Inserta sucursales en aux excepciones promociones  -->
+    <arg>LCINS0060</arg>
+<!-- Inserta lineas en aux excepciones promociones -->
+    <arg>LCINS0061</arg>
+<!-- Inserta grupos en aux excepciones promociones -->
+    <arg>LCINS0062</arg>
+<!-- Inserta subgrupos en aux excepciones promociones -->
+    <arg>LCINS0063</arg>
+<!-- Inserta marcas en aux excepciones promociones -->
+    <arg>LCINS0064</arg>
+<!-- Inserta submarcas en aux excepciones promociones -->
+    <arg>LCINS0065</arg>
+<!-- Inserta referencias en aux excepciones promociones -->
+    <arg>LCINS0027</arg>
+
+<!-- Inserta registo_promociones_excepciones -->
+    <arg>LCINS0066</arg>
+
+<!--  1 xy promocion  -->
+<arg>LCUPD0014</arg>
+
+</container>
