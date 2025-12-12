@@ -1,0 +1,6 @@
+<container>
+  <arg>MTINS0130</arg>
+  <arg>MTINS0131</arg>
+  <arg>MTINS0137</arg>
+  <arg attribute="saveImage">MTUPD0049</arg>
+</container>
