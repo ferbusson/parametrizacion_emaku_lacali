@@ -1,0 +1,130 @@
+<FORM>
+  <preferences>
+    <size width="400" height="200" />
+    <name>Reporte Ventas Decoracion por Vendedor y Fecha</name>
+    <icon>REPORT</icon>
+    <iconificable />
+    <resizable />
+    <closable />
+    <closable />
+  </preferences>
+  <panel locate="North" type="FlowLayout" />
+  <panel locate="West" type="FlowLayout" />
+  <panel locate="East" type="FlowLayout" />
+  <panel locate="Center" type="BorderLayout">
+    <panel locate="West" type="GridLayout" rows="3" cols="1">
+      <component>
+        <driver>common.gui.components.XMLLabel</driver>
+        <parameters>
+          <arg attribute="text">Sucursal</arg>
+        </parameters>
+      </component>
+      <component>
+        <driver>common.gui.components.XMLLabel</driver>
+        <parameters>
+          <arg attribute="text">Fecha Inicial</arg>
+        </parameters>
+      </component>
+      <component>
+        <driver>common.gui.components.XMLLabel</driver>
+        <parameters>
+          <arg attribute="text">Fecha Final</arg>
+        </parameters>
+      </component>
+    </panel>
+    <panel locate="Center" type="GridLayout" rows="3" cols="1">
+      <component>
+        <driver id="sucursal">client.gui.components.XMLComboBox</driver>
+        <parameters>
+          <arg attribute="preferredLength">250</arg>
+          <arg attribute="sqlCombo">LCSEL0434</arg>
+          <arg attribute="selectedIndex">1</arg>
+          <arg attribute="name">plataforma</arg>
+          <arg attribute="exportValue">sucursal</arg>
+        </parameters>
+      </component>
+      <component>
+        <driver id="fechai">common.gui.components.XMLDateField</driver>
+        <parameters>
+          <arg attribute="exportValue">fechai</arg>
+        </parameters>
+      </component>
+      <component>
+        <driver id="fechaf">common.gui.components.XMLDateField</driver>
+        <parameters>
+          <arg attribute="exportValue">fechaf</arg>
+        </parameters>
+      </component>
+    </panel>
+  </panel>
+  <component locate="South">
+    <driver>common.gui.components.ButtonsPanel</driver>
+    <parameters>
+      <subarg>
+        <arg attribute="label">EXCEL</arg>
+        <arg attribute="icon">/icons/ico_excel.png</arg>
+        <arg attribute="keyStroke">F9</arg>
+        <arg attribute="typePackage">XLSREPORTREQUEST</arg>
+        <arg attribute="idReport">XLS0058</arg>
+      </subarg>      
+      <arg>NEW</arg>
+      <arg>EXIT</arg>
+    </parameters>
+    <events>
+      <object>
+        <name>NEW</name>
+        
+        <component>
+          <driver>common.gui.components.ButtonsPanel</driver>
+          <method>setEnabled</method>
+          <parameters>
+            <arg attribute="button">EXCEL</arg>
+            <arg attribute="state">TRUE</arg>
+          </parameters>
+        </component>            
+
+        <component>
+          <driver>this</driver>
+          <method>cleanExternalValues</method>
+        </component>        
+        <component>
+          <driver id="sucursal">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="fechai">common.gui.components.XMLDateField</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="fechaf">common.gui.components.XMLDateField</driver>
+          <method>clean</method>
+        </component>
+      </object>
+      <object>
+        <name>EXCEL</name>
+        <component>
+          <driver>this</driver>
+          <method>getPackage</method>
+          <parameters>
+            <arg attribute="nullField">true</arg>
+            <arg attribute="blankPackage">true</arg>
+            <subarg>
+              <arg attribute="importValue">sucursal</arg>
+              <arg attribute="importValue">fechai</arg>
+              <arg attribute="importValue">fechaf</arg>
+            </subarg>
+          </parameters>
+        </component>
+        <component>
+          <driver>common.gui.components.ButtonsPanel</driver>
+          <method>setEnabled</method>
+          <parameters>
+            <arg attribute="button">EXCEL</arg>
+            <arg attribute="state">TRUE</arg>
+          </parameters>
+        </component>            
+
+      </object>
+    </events>
+  </component>
+</FORM>

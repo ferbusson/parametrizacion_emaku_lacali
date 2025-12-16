@@ -615,7 +615,6 @@
                 <arg attribute="label">Vendedor:</arg>
                 <arg attribute="sqlCombo">MTSEL0735</arg>
                 <arg attribute="selectedIndex">1</arg>
-                <arg attribute="clean">false</arg>
                 <arg attribute="addAttribute">finalKey</arg>
                 <arg attribute="exportValue">vendedor</arg>
               </parameters>
