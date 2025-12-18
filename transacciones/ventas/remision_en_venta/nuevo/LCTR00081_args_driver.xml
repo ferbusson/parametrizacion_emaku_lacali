@@ -1,0 +1,63 @@
+<container>
+  <subarg>
+    <arg attribute="consecutive" />
+    <arg attribute="date" />
+    <arg attribute="actionDocument">createDocument</arg>
+    <arg attribute="cash" />
+  </subarg>
+
+  <!-- 0 res fac -->
+  <!-- <arg>RFINS002</arg> -->
+  <!-- 0 actualiza vendedor en info doc-->
+  <arg>DLUPD0020</arg>
+  <!-- 1 observaciones-->
+  <arg>INS0037</arg>
+  <!-- 2 -->
+  <arg>DGINS0060</arg>
+  <!-- 3 tercero -->
+  <arg>INS0048</arg>
+
+  <!-- 9 -->
+  <!-- <arg>INS0049</arg> -->
+
+  <!-- 10 -->
+  <arg attribute="addKey" />
+
+  <!-- 11 -->
+  <subarg>
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">LCINS0211</arg>
+        <arg attribute="fields">0,1,2,3,4,10,11</arg>
+        <arg attribute="discartKey">idTercero</arg>
+        <arg attribute="discartKey">centrocosto</arg>
+      </parameters>
+    </LNData>
+
+    <LNData>
+      <driver>LNInventarios</driver>
+      <method>movimientos</method>
+      <parameters>
+        <arg attribute="tipoMovimiento">salida</arg>
+      </parameters>
+    </LNData>
+  </subarg>
+
+  <!-- 12 -->
+  <arg attribute="removeKey">bodegaSaliente</arg>
+
+  <!-- 13 -->
+  <arg attribute="addKey" />
+
+  <!-- 14 -->
+  <LNData>
+      <driver>LNInventarios</driver>
+      <method>movimientos</method>
+      <parameters>
+        <arg attribute="tipoMovimiento">entrada</arg>
+      </parameters>
+  </LNData>
+
+</container>

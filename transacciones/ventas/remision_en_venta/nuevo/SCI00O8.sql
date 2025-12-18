@@ -1,0 +1,1 @@
+INSERT INTO inventarios(fecha,ndocumento,id_bodega,id_prod_serv,entrada,valor_ent,pinventario,saldo,valor_saldo) VALUES('?','?','?','?','?','?','?','?','?')
