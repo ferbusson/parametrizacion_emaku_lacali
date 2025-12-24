@@ -1,0 +1,7 @@
+<container>
+     <arg attribute="reload"/>
+      <subarg>
+           <!-- 0 crea prods localmente-->
+           <arg>LCINS0079</arg>
+      </subarg>
+</container>

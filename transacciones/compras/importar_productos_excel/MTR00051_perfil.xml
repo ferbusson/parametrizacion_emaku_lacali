@@ -1,0 +1,815 @@
+<FORM>
+    <preferences>
+        <size height="600" width="1150"/>
+        <name>Creación Masiva de Productos desde Plantilla Excel</name>
+        <icon>NTERCERO</icon>
+        <closable/>
+        <maximizable/>
+        <iconificable/>
+        <resizable/>
+    </preferences>
+    <panel locate="North" type="BorderLayout">
+        <component locate="North">
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+                <arg attribute="text">1 Importar plantilla Excel.</arg>
+                <arg attribute="alignment">0</arg>
+                <arg attribute="font">Dialog,0,12</arg>
+            </parameters>
+        </component>
+        <component locate="Center">
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+                <arg attribute="text">2 Crear en Emaku o Corregir en Excel las líneas, grupos, subgrupos, marcas y submarcas que se listen en la pestaña Revisión de Agrupacion y Marcas.</arg>
+                <arg attribute="alignment">0</arg>
+                <arg attribute="font">Dialog,0,12</arg>
+            </parameters>
+        </component>
+        <component locate="South">
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+                <arg attribute="text">3 Corregir las referencias repetidas por marca y códigos repetidos en la pestaña Revisión de Productos Repetidos.</arg>
+                <arg attribute="alignment">0</arg>
+                <arg attribute="font">Dialog,0,12</arg>
+            </parameters>
+        </component>
+    </panel>
+    <tab locate="Center">
+        <panel icon="/icons/ico_excel.png" locate="Center" name="1 Importar Excel" type="BorderLayout">
+            <component locate="Center">
+                <driver id="productos">client.gui.components.TableFindData</driver>
+                <parameters>
+                    <arg attribute="driverEventRecord">common.gui.components.EmakuImportExcelFile</arg>
+                    <arg attribute="rows">100</arg>
+                    <arg attribute="colorBackground">192,248,155</arg>
+                    <arg attribute="colorSelected">159,218,112</arg>
+                    <arg attribute="protectSelected">true</arg>
+                    <arg attribute="enabled">true</arg>
+                    <arg attribute="exportTotalCol">o,totalcontador</arg>
+                    <arg attribute="totales">o</arg>
+                    <arg attribute="formula">o=1</arg>
+                    <subarg>
+                        <!-- a -->
+                        <arg attribute="name">Código</arg>
+                        <arg attribute="length">110</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="returnCol">0</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- b -->
+                        <arg attribute="name">Ref. Proveedor</arg>
+                        <arg attribute="length">100</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="returnCol">1</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- c -->
+                        <arg attribute="name">Descripcion</arg>
+                        <arg attribute="length">200</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="returnCol">2</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- d -->
+                        <arg attribute="name">Marca</arg>
+                        <arg attribute="length">100</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="returnCol">3</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- e -->
+                        <arg attribute="name">Submarca</arg>
+                        <arg attribute="length">100</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="returnCol">4</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- f -->
+                        <arg attribute="name">Línea</arg>
+                        <arg attribute="length">70</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="returnCol">5</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- g -->
+                        <arg attribute="name">Grupo</arg>
+                        <arg attribute="length">70</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="returnCol">6</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- h -->
+                        <arg attribute="name">Subgrupo</arg>
+                        <arg attribute="length">140</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="returnCol">7</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- i -->
+                        <arg attribute="name">%IVA</arg>
+                        <arg attribute="length">60</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="returnCol">8</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- j -->
+                        <arg attribute="name">Tipo Asiento</arg>
+                        <arg attribute="length">100</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="returnCol">9</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- k -->
+                        <arg attribute="name">Costo</arg>
+                        <arg attribute="length">105</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="returnCol">10</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- l -->
+                        <arg attribute="name">PVenta1</arg>
+                        <arg attribute="length">70</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">0</arg>
+                        <arg attribute="returnCol">11</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- m -->
+                        <arg attribute="name">PVenta2</arg>
+                        <arg attribute="length">70</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">0</arg>
+                        <arg attribute="returnCol">12</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- n -->
+                        <arg attribute="name">PVenta3</arg>
+                        <arg attribute="length">70</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">0</arg>
+                        <arg attribute="returnCol">13</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- o -->
+                        <arg attribute="name">contador</arg>
+                        <arg attribute="length">0</arg>
+                        <arg attribute="type">INTEGER</arg>
+                    </subarg>
+                </parameters>
+            </component>
+            <panel locate="South" type="BorderLayout">
+                <panel locate="West" type="FlowLayout">
+                    <component>
+                        <driver>common.gui.components.EmakuImportExcelFile</driver>
+                        <parameters/>
+                    </component>
+                    <component>
+                        <driver id="guardaexcel">common.gui.components.ButtonsPanel</driver>
+                        <parameters>
+                            <arg>SAVE</arg>
+                            <arg>NEW</arg>
+                        </parameters>
+                        <events>
+                            <object>
+                                <name>NEW</name>
+                                <component>
+                                    <driver id="totalCant">client.gui.components.TableDataFields</driver>
+                                    <method>clean</method>
+                                </component>
+                                <component>
+                                    <driver id="productos">client.gui.components.TableFindData</driver>
+                                    <method>clean</method>
+                                </component>
+                                <component>
+                                    <driver id="guardaexcel">common.gui.components.ButtonsPanel</driver>
+                                    <method>setEnabled</method>
+                                    <parameters>
+                                        <arg attribute="button">SAVE</arg>
+                                        <arg attribute="state">true</arg>
+                                    </parameters>
+                                </component>                                
+                            </object>
+                            <object>
+                                <name>SAVE</name>
+                                <component>
+                                    <driver id="guardaexcel">common.gui.components.ButtonsPanel</driver>
+                                    <method>setEnabled</method>
+                                    <parameters>
+                                        <arg attribute="button">SAVE</arg>
+                                        <arg attribute="state">false</arg>
+                                    </parameters>
+                                </component>
+                                <!-- 0 -->
+                                <component>
+                                    <driver id="productos">client.gui.components.TableFindData</driver>
+                                    <method>getBlankPackage</method>
+                                </component>
+                                <!-- 1 -->
+                                <component>
+                                    <driver id="productos">client.gui.components.TableFindData</driver>
+                                    <method>getPackage</method>
+                                </component>
+                            </object>
+                        </events>
+                    </component>
+                </panel>
+                <panel locate="East" type="FlowLayout">
+                    <component locate="Center">
+                        <driver id="totalCant">client.gui.components.TableDataFields</driver>
+                        <parameters>
+                            <subarg>
+                                <arg attribute="label">Total Productos:</arg>
+                                <arg attribute="format">NUMERIC</arg>
+                                <arg attribute="size">10</arg>
+                                <arg attribute="maxlength">26</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="alignment">RIGHT</arg>
+                                <arg attribute="calculateExportValue">totalcontador</arg>
+                                <arg attribute="font">Dialog,1,16</arg>
+                                <arg attribute="background">153,190,205</arg>
+                                <arg attribute="foreground">0,0,0</arg>
+                                <arg attribute="return">false</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                </panel>
+            </panel>
+        </panel>
+        <panel icon="/icons/ico_materias.png" locate="Center" name="2 Revisión de Agrupacion y Marcas" type="BorderLayout">
+            <panel cols="3" locate="Center" rows="2" type="GridLayout">
+                <panel type="BorderLayout">
+                    <component locate="North">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Líneas Nuevas</arg>
+                            <arg attribute="alignment">0</arg>
+                            <arg attribute="font">Dialog,0,13</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="lineas">client.gui.components.TableFindData</driver>
+                        <parameters>
+                            <arg attribute="rows">100</arg>
+                            <arg attribute="colorBackground">222,229,245</arg>
+                            <arg attribute="colorSelected">200,215,250</arg>
+                            <arg attribute="protectSelected">true</arg>
+                            <arg attribute="enabled">true</arg>
+                            <arg attribute="sqlInit">LCSEL0420</arg>
+                            <arg attribute="queryOnInit">true</arg>
+                            <arg attribute="clean">true</arg>
+                            <arg attribute="reload">true</arg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Línea</arg>
+                                <arg attribute="length">360</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="returnCol">0</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                </panel>
+                <panel type="BorderLayout">
+                    <component locate="North">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Grupos Nuevos</arg>
+                            <arg attribute="alignment">0</arg>
+                            <arg attribute="font">Dialog,0,13</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="grupos">client.gui.components.TableFindData</driver>
+                        <parameters>
+                            <arg attribute="rows">100</arg>
+                            <arg attribute="colorBackground">222,229,245</arg>
+                            <arg attribute="colorSelected">200,215,250</arg>
+                            <arg attribute="protectSelected">true</arg>
+                            <arg attribute="enabled">true</arg>
+                            <arg attribute="sqlInit">LCSEL0421</arg>
+                            <arg attribute="queryOnInit">true</arg>
+                            <arg attribute="clean">true</arg>
+                            <arg attribute="reload">true</arg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Línea</arg>
+                                <arg attribute="length">170</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="returnCol">0</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Grupo</arg>
+                                <arg attribute="length">190</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="returnCol">0</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                </panel>
+                <panel type="BorderLayout">
+                    <component locate="North">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Subgrupos Nuevos</arg>
+                            <arg attribute="alignment">0</arg>
+                            <arg attribute="font">Dialog,0,13</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="subgrupos">client.gui.components.TableFindData</driver>
+                        <parameters>
+                            <arg attribute="rows">100</arg>
+                            <arg attribute="colorBackground">222,229,245</arg>
+                            <arg attribute="colorSelected">200,215,250</arg>
+                            <arg attribute="protectSelected">true</arg>
+                            <arg attribute="enabled">true</arg>
+                            <arg attribute="sqlInit">LCSEL0422</arg>
+                            <arg attribute="queryOnInit">true</arg>
+                            <arg attribute="clean">true</arg>
+                            <arg attribute="reload">true</arg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Línea</arg>
+                                <arg attribute="length">110</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="returnCol">0</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Grupo</arg>
+                                <arg attribute="length">110</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="returnCol">0</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Subgrupo</arg>
+                                <arg attribute="length">140</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="returnCol">0</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                </panel>
+                <panel type="BorderLayout">
+                    <component locate="North">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Marcas Nuevas</arg>
+                            <arg attribute="alignment">0</arg>
+                            <arg attribute="font">Dialog,0,13</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="marcas">client.gui.components.TableFindData</driver>
+                        <parameters>
+                            <arg attribute="rows">100</arg>
+                            <arg attribute="colorBackground">222,229,245</arg>
+                            <arg attribute="colorSelected">200,215,250</arg>
+                            <arg attribute="protectSelected">true</arg>
+                            <arg attribute="enabled">true</arg>
+                            <arg attribute="sqlInit">LCSEL0423</arg>
+                            <arg attribute="queryOnInit">true</arg>
+                            <arg attribute="clean">true</arg>
+                            <arg attribute="reload">true</arg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Marca</arg>
+                                <arg attribute="length">360</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="returnCol">0</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                </panel>
+                <panel type="BorderLayout">
+                    <component locate="North">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Submarcas Nuevas</arg>
+                            <arg attribute="alignment">0</arg>
+                            <arg attribute="font">Dialog,0,13</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="submarcas">client.gui.components.TableFindData</driver>
+                        <parameters>
+                            <arg attribute="rows">100</arg>
+                            <arg attribute="colorBackground">222,229,245</arg>
+                            <arg attribute="colorSelected">200,215,250</arg>
+                            <arg attribute="protectSelected">true</arg>
+                            <arg attribute="enabled">true</arg>
+                            <arg attribute="sqlInit">LCSEL0424</arg>
+                            <arg attribute="queryOnInit">true</arg>
+                            <arg attribute="clean">true</arg>
+                            <arg attribute="reload">true</arg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Submarca</arg>
+                                <arg attribute="length">360</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="returnCol">0</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                </panel>
+                <panel type="FlowLayout"/>
+            </panel>
+            <component locate="South">
+                <driver id="revision1">common.gui.components.ButtonsPanel</driver>
+                <parameters>
+                    <subarg>
+                        <arg attribute="label">NEW</arg>
+                        <arg attribute="icon">/icons/ico_reintegro_material.png</arg>
+                        <arg attribute="keyStroke">F4</arg>
+                    </subarg>                    
+                </parameters>
+                <events>
+                    <object>
+                        <name>NEW</name>
+                        <component>
+                            <driver id="lineas">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="grupos">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="subgrupos">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="marcas">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="submarcas">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="prodsactualizar">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="refrepetidas">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="codigosrepetidos">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="prodsactualizar">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>                        
+                    </object>                    
+                </events>
+            </component>
+        </panel>
+        <panel icon="/icons/ico_materias.png" locate="Center" name="3 Revisión de Productos Repetidos" type="BorderLayout">
+            <panel cols="1" rows="2" type="GridLayout">
+                <panel cols="2" rows="1" type="GridLayout">
+                    <panel type="BorderLayout">
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Referencias Repetidas x Marca (Revisar Excel y cargar nuvamente)</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,0,12</arg>
+                            </parameters>
+                        </component>
+                        <component locate="Center">
+                            <driver id="refrepetidas">client.gui.components.TableFindData</driver>
+                            <parameters>
+                                <arg attribute="rows">10</arg>
+                                <arg attribute="colorBackground">222,229,245</arg>
+                                <arg attribute="colorSelected">200,215,250</arg>
+                                <arg attribute="protectSelected">true</arg>
+                                <arg attribute="enabled">true</arg>
+                                <arg attribute="sqlInit">LCSEL0426</arg>
+                                <arg attribute="queryOnInit">true</arg>
+                                <arg attribute="clean">true</arg>
+                                <arg attribute="reload">true</arg>
+                                <subarg>
+                                    <!-- a -->
+                                    <arg attribute="name">Código</arg>
+                                    <arg attribute="length">90</arg>
+                                    <arg attribute="type">STRING</arg>
+                                    <arg attribute="returnCol">0</arg>
+                                </subarg>
+                                <subarg>
+                                    <!-- a -->
+                                    <arg attribute="name">Referencia</arg>
+                                    <arg attribute="length">100</arg>
+                                    <arg attribute="type">STRING</arg>
+                                    <arg attribute="returnCol">0</arg>
+                                </subarg>
+                                <subarg>
+                                    <!-- a -->
+                                    <arg attribute="name">Descripción</arg>
+                                    <arg attribute="length">160</arg>
+                                    <arg attribute="type">STRING</arg>
+                                    <arg attribute="returnCol">0</arg>
+                                </subarg>
+                                <subarg>
+                                    <!-- a -->
+                                    <arg attribute="name">Marca</arg>
+                                    <arg attribute="length">160</arg>
+                                    <arg attribute="type">STRING</arg>
+                                    <arg attribute="returnCol">0</arg>
+                                </subarg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel type="BorderLayout">
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Códigos Repetidos (Revisar Excel y cargar nuvamente)</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,0,12</arg>
+                            </parameters>
+                        </component>
+                        <component locate="Center">
+                            <driver id="codigosrepetidos">client.gui.components.TableFindData</driver>
+                            <parameters>
+                                <arg attribute="rows">10</arg>
+                                <arg attribute="colorBackground">222,229,245</arg>
+                                <arg attribute="colorSelected">200,215,250</arg>
+                                <arg attribute="protectSelected">true</arg>
+                                <arg attribute="enabled">true</arg>
+                                <arg attribute="sqlInit">LCSEL0427</arg>
+                                <arg attribute="queryOnInit">true</arg>
+                                <arg attribute="clean">true</arg>
+                                <arg attribute="reload">true</arg>
+                                <subarg>
+                                    <!-- a -->
+                                    <arg attribute="name">Código</arg>
+                                    <arg attribute="length">90</arg>
+                                    <arg attribute="type">STRING</arg>
+                                    <arg attribute="returnCol">0</arg>
+                                </subarg>
+                                <subarg>
+                                    <!-- a -->
+                                    <arg attribute="name">Referencia</arg>
+                                    <arg attribute="length">100</arg>
+                                    <arg attribute="type">STRING</arg>
+                                    <arg attribute="returnCol">0</arg>
+                                </subarg>
+                                <subarg>
+                                    <!-- a -->
+                                    <arg attribute="name">Descripción</arg>
+                                    <arg attribute="length">160</arg>
+                                    <arg attribute="type">STRING</arg>
+                                    <arg attribute="returnCol">0</arg>
+                                </subarg>
+                                <subarg>
+                                    <!-- a -->
+                                    <arg attribute="name">Marca</arg>
+                                    <arg attribute="length">160</arg>
+                                    <arg attribute="type">STRING</arg>
+                                    <arg attribute="returnCol">0</arg>
+                                </subarg>
+                            </parameters>
+                        </component>
+                    </panel>
+                </panel>
+                <panel type="BorderLayout">
+                    <component locate="North">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Productos que se actualizarán en Emaku</arg>
+                            <arg attribute="alignment">0</arg>
+                            <arg attribute="font">Dialog,0,12</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="prodsactualizar">client.gui.components.TableFindData</driver>
+                        <parameters>
+                            <arg attribute="rows">100</arg>
+                            <arg attribute="colorBackground">222,229,245</arg>
+                            <arg attribute="colorSelected">200,215,250</arg>
+                            <arg attribute="protectSelected">true</arg>
+                            <arg attribute="enabled">true</arg>
+                            <arg attribute="sqlInit">LCSEL0425</arg>
+                            <arg attribute="queryOnInit">true</arg>
+                            <arg attribute="clean">true</arg>
+                            <arg attribute="reload">true</arg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Línea</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Grupo</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Subgrupo</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Marca</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Submarca</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Código</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Referencia</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Descripción</arg>
+                                <arg attribute="length">190</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">IVA</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">INTEGER</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Tipo Asiento</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">STRING</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">Costo</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">DECIMAL</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">PVenta1</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">DECIMAL</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">PVenta2</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">DECIMAL</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                            <subarg>
+                                <!-- a -->
+                                <arg attribute="name">PVenta3</arg>
+                                <arg attribute="length">100</arg>
+                                <arg attribute="type">DECIMAL</arg>
+                                <arg attribute="enabled">false</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                </panel>
+            </panel>
+            <component locate="South">
+                <driver id="revision2">common.gui.components.ButtonsPanel</driver>
+                <parameters>
+                    <subarg>
+                        <arg attribute="label">NEW</arg>
+                        <arg attribute="icon">/icons/ico_reintegro_material.png</arg>
+                        <arg attribute="keyStroke">F4</arg>
+                    </subarg>
+                    <!-- <subarg>
+                        <arg attribute="label">NEW2</arg>
+                        <arg attribute="icon">/icons/ico_nuevo.png</arg>
+                        <arg attribute="keyStroke">F4</arg>
+                    </subarg> -->
+                    <subarg>
+                        <arg attribute="label">SALVE</arg>
+                        <arg attribute="icon">/icons/ico_guardarcomo.png</arg>
+                        <arg attribute="keyStroke">F4</arg>
+                    </subarg>
+                </parameters>
+                <events>
+                    <!-- <object>
+                        <name>NEW2</name>
+                        <component>
+                            <driver id="revision2">common.gui.components.ButtonsPanel</driver>
+                            <method>setEnabled</method>
+                            <parameters>
+                                <arg attribute="button">SALVE</arg>
+                                <arg attribute="state">true</arg>
+                            </parameters>
+                        </component>                                
+                    </object> -->
+                    <object>
+                        <name>NEW</name>
+                        <component>
+                            <driver id="lineas">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="grupos">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="subgrupos">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="marcas">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="submarcas">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="prodsactualizar">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="refrepetidas">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="codigosrepetidos">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="prodsactualizar">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                                <driver id="revision2">common.gui.components.ButtonsPanel</driver>
+                                <method>setEnabled</method>
+                                <parameters>
+                                    <arg attribute="button">SALVE</arg>
+                                    <arg attribute="state">TRUE</arg>
+                                </parameters>
+                            </component>
+                    </object>
+                    <objet>
+                        <name>SALVE</name>
+                        <action>
+                            <idManualTransaction>LCTR00077</idManualTransaction>
+                            <type>manualTransaction</type>
+                            <component>
+                                <driver id="revision2">common.gui.components.ButtonsPanel</driver>
+                                <method>setEnabled</method>
+                                <parameters>
+                                    <arg attribute="button">SALVE</arg>
+                                    <arg attribute="state">false</arg>
+                                </parameters>
+                            </component>
+                            <component>
+                                <driver id="productos">client.gui.components.TableFindData</driver>
+                                <method>getBlankPackage</method>
+                            </component>
+                            <component>
+                                <driver id="productos">client.gui.components.TableFindData</driver>
+                                <method>getBlankPackage</method>
+                            </component>
+                        </action>
+                    </objet>
+                </events>
+            </component>            
+        </panel>
+    </tab>
+    <panel locate="South" type="BorderLayout">
+        <component locate="Center">
+            <driver>common.gui.components.ButtonsPanel</driver>
+            <parameters>
+                <arg>EXIT</arg>
+            </parameters>
+        </component>
+    </panel>
+</FORM>
