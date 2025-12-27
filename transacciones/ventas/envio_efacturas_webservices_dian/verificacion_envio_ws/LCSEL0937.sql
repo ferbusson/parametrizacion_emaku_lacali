@@ -1,4 +1,3 @@
--- LCSEL0937 unico
 SELECT
 	codigo_tipo||'-'||numero||' - Fecha: '||fecha||' '||CASE WHEN estado then ' - Habilitada' else ' - Anulada' end||' Usuario: '||u.login||CHR(10)
 FROM
@@ -15,7 +14,7 @@ WHERE
 FROM
 	documentos 
 WHERE
-	codigo_tipo in ('G4','Z4') 
+	codigo_tipo in ('G1','Z1','FW') 
 EXCEPT
 SELECT
 	ndocumento

@@ -1,10 +1,15 @@
--- LCUPD0030 Unico
 DROP TABLE IF EXISTS aux_params_act;
-CREATE TEMP TABLE aux_params_act AS
-SELECT
+CREATE TEMP TABLE aux_params_act as
+select
 	'?'::FLOAT8::INTEGER AS bandera,
-	'?'::CHARACTER(2) AS codigo_tipo,
-	LPAD('?',10,'0') AS numero;
+	d.ndocumento,
+	d.codigo_tipo,
+	d.numero
+from
+	documentos d
+where
+	d.codigo_tipo = '?'
+	and d.numero = LPAD('?',10,'0');
 
 
 -- bandera = 1: desbloquear facturacion electronica actualizando documentos a EE
@@ -33,13 +38,13 @@ FROM
 		(SELECT
 			count(1) AS c
 		FROM
-			(SELECT 
+			(SELECT
 				r.codigo_tipo,
 				r.numero 
 			FROM 
 				registro_documentos_rechazados r
 			EXCEPT
-			SELECT
+			select			
 				d.codigo_tipo,
 				d.numero
 			FROM
@@ -50,19 +55,20 @@ FROM
 		a.bandera = 2) AS foo;
 		
 --
-
 UPDATE
 	envio_webservice
 SET
 	id_codigo_retorno_dian = 'EE'
 FROM
-	aux_params_act a,
-	documentos d
+	aux_params_act a
 WHERE
-	d.codigo_tipo = a.codigo_tipo AND
-	d.numero = a.numero AND
 	a.bandera = 2 AND -- bandera: numero de boton: debe ser 2 para re-establecer el documento rechazado a su estado inicial
-	envio_webservice.ndocumento = d.ndocumento;
+	envio_webservice.ndocumento = a.ndocumento;
+
+-- pone el documento en la lista para ser reenviado, con esto tratamos de solucionar el envio de documentos re establecidos
+-- desde el formulario amarillo cuando se generan errores de consecutivo de documentos por errores que no son de la DIAN
+-- por ejemplo error de partida doble Ago 11 2025 
+
 
 UPDATE
 	libro_auxiliar
@@ -71,13 +77,10 @@ SET
 	haber = la.haber
 FROM
 	libro_auxiliar_documentos_rechazados la,
-	aux_params_act a,
-	documentos d
+	aux_params_act a
 WHERE
-	d.codigo_tipo = a.codigo_tipo AND
-	d.numero = a.numero AND
 	a.bandera = 2 AND -- bandera: numero de boton: debe ser 2 para re-establecer el documento rechazado a su estado inicial
-	d.ndocumento = la.ndocumento AND
+	a.ndocumento = la.ndocumento AND
 	libro_auxiliar.ndocumento = la.ndocumento AND
 	libro_auxiliar.orden = la.orden;
 
@@ -88,13 +91,10 @@ SET
 	haber = la.haber
 FROM
 	libro_auxiliar_documentos_rechazados la,
-	aux_params_act a,
-	documentos d
+	aux_params_act a
 WHERE
-	d.codigo_tipo = a.codigo_tipo AND
-	d.numero = a.numero AND
 	a.bandera = 2 AND -- bandera: numero de boton: debe ser 2 para re-establecer el documento rechazado a su estado inicial
-	d.ndocumento = la.ndocumento AND
+	a.ndocumento = la.ndocumento AND
 	libro_auxiliar_niifs.ndocumento = la.ndocumento AND
 	libro_auxiliar_niifs.orden = la.orden;
 
@@ -105,13 +105,10 @@ SET
 	salida = ia.salida
 FROM
 	inventarios_documentos_rechazados ia,
-	aux_params_act a,
-	documentos d
+	aux_params_act a
 WHERE
-	d.codigo_tipo = a.codigo_tipo AND
-	d.numero = a.numero AND
 	a.bandera = 2 AND -- bandera: numero de boton: debe ser 2 para re-establecer el documento rechazado a su estado inicial
-	d.ndocumento = ia.ndocumento AND
+	a.ndocumento = ia.ndocumento AND
 	inventarios.ndocumento = ia.ndocumento AND
 	inventarios.orden = ia.orden;
 
@@ -121,13 +118,10 @@ SELECT
 	c_aux.*
 FROM
 	cartera_documentos_rechazados c_aux,
-	aux_params_act a,
-	documentos d
+	aux_params_act a
 WHERE
-	d.codigo_tipo = a.codigo_tipo AND
-	d.numero = a.numero AND
 	a.bandera = 2 AND -- bandera: numero de boton: debe ser 2 para re-establecer el documento rechazado a su estado inicia
-	d.ndocumento = c_aux.nfactura;
+	a.ndocumento = c_aux.nfactura;
 
 INSERT INTO
 	cartera
@@ -135,13 +129,10 @@ SELECT
 	c_aux.*
 FROM
 	cartera_documentos_rechazados c_aux,
-	aux_params_act a,
-	documentos d
+	aux_params_act a
 WHERE
-	d.codigo_tipo = a.codigo_tipo AND
-	d.numero = a.numero AND
 	a.bandera = 2 AND -- bandera: numero de boton: debe ser 2 para re-establecer el documento rechazado a su estado inicia
-	d.ndocumento = c_aux.ncomprobante;
+	a.ndocumento = c_aux.ncomprobante;
 
 UPDATE
 	documentos
@@ -153,10 +144,8 @@ FROM
 	aux_params_act a,
 	registro_documentos_rechazados r
 WHERE
-	documentos.codigo_tipo = a.codigo_tipo AND
-	documentos.numero = a.numero AND
 	a.bandera = 2 AND -- bandera: numero de boton: debe ser 2 para re-establecer el documento rechazado a su estado inicial
-	documentos.ndocumento = r.ndocumento;
+	documentos.ndocumento = a.ndocumento;
 	
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -181,7 +170,7 @@ WHERE
 		FROM
 			documentos 
 		WHERE
-			codigo_tipo in ('G4','Z4') -- esta query funciona en Unico
+			codigo_tipo in ('G1','Z1','FW','U1','P1') 
 		EXCEPT
 		SELECT
 			ndocumento
