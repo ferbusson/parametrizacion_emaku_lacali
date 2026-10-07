@@ -1,0 +1,218 @@
+<container>
+	<subarg>
+		<arg attribute="idDocument">DI</arg>
+		<arg attribute="consecutive" />
+		<arg attribute="actionDocument">createDocument</arg>
+		<arg attribute="cash" />
+	</subarg>
+	<arg>INS0037</arg>
+	<!--  IMPUESTOS -->
+	<arg attribute="addKey" />
+	<subarg>
+		<LNData>
+			<driver>LNContabilidad</driver>
+			<method>rowDataAccount</method>
+			<parameters>
+				<arg attribute="Concepto">Cierre Impuestos</arg>
+			</parameters>
+		</LNData>
+		<LNData>
+			<driver>LNContabilidad</driver>
+			<method>columnDataAccount</method>
+			<parameters>
+				<arg attribute="Concepto">Cierre Impuestos</arg>
+				<arg attribute="naturaleza">C</arg>
+				<arg attribute="debuging">true</arg>
+				<arg attribute="tercero">getName</arg>
+				<subarg>
+					<arg attribute="accountKey">1</arg>
+					<arg attribute="accountData">4</arg>
+				</subarg>
+			</parameters>
+		</LNData>
+		<LNData>
+			<driver>LNContabilidad</driver>
+			<method>columnDataAccount</method>
+			<parameters>
+				<arg attribute="Concepto">Cierre Impuestos</arg>
+				<arg attribute="naturaleza">D</arg>
+				<arg attribute="debuging">true</arg>
+				<arg attribute="tercero">getName</arg>
+				<subarg>
+					<arg attribute="accountKey">1</arg>
+					<arg attribute="accountData">5</arg>
+				</subarg>
+			</parameters>
+		</LNData>
+	</subarg>
+	<!--  INGRESOS -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>rowDataAccount</method>
+		<parameters>
+			<arg attribute="Concepto">Cierre Contable Ingresos</arg>
+		</parameters>
+	</LNData>
+	<!--  GASTOS -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>rowDataAccount</method>
+		<parameters>
+			<arg attribute="Concepto">Cierre Contable Gastos</arg>
+		</parameters>
+	</LNData>
+	<!--  COSTO DE VENTA -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>rowDataAccount</method>
+		<parameters>
+			<arg attribute="Concepto">Cierre Contable Costo de Venta</arg>
+		</parameters>
+	</LNData>
+	<!--  COSTO DE PRODUCCION -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>rowDataAccount</method>
+		<parameters>
+			<arg attribute="Concepto">Cierre Contable Costo de Produccion</arg>
+		</parameters>
+	</LNData>
+	<!--  CTAS DE ORDEN DEUDORAS -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>rowDataAccount</method>
+		<parameters>
+			<arg attribute="Concepto">Cierre Contable Ctas Orden Deudoras</arg>
+		</parameters>
+	</LNData>
+	<!--  CTAS DE ORDEN ACREEDORAS -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>rowDataAccount</method>
+		<parameters>
+			<arg attribute="Concepto">Cierre Contable Ctas Orden Acreedoras</arg>
+		</parameters>
+	</LNData>
+	<!--  CTA GASTOS GANANCIAS Y PERIDAS -->
+	<arg attribute="addKey" />
+	<!--  INGRESOS -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>fieldData</method>
+		<parameters>
+			<arg attribute="debuging">true</arg>
+			<arg attribute="Concepto">Cierre Contable Ingresos</arg>
+			<subarg>
+				<arg attribute="accountField">key,C</arg>
+			</subarg>
+		</parameters>
+	</LNData>
+	<!--  GASTOS -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>fieldData</method>
+		<parameters>
+			<arg attribute="debuging">true</arg>
+			<arg attribute="Concepto">Cierre Contable Gastos</arg>
+			<subarg>
+				<arg attribute="accountField">key,D</arg>
+			</subarg>
+		</parameters>
+	</LNData>
+	<!--  COSTO DE VENTA -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>fieldData</method>
+		<parameters>
+			<arg attribute="debuging">true</arg>
+			<arg attribute="Concepto">Cierre Contable Costo de Venta</arg>
+			<subarg>
+				<arg attribute="accountField">key,D</arg>
+			</subarg>
+		</parameters>
+	</LNData>
+	<!--  COSTO DE PRODUCCION -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>fieldData</method>
+		<parameters>
+			<arg attribute="debuging">true</arg>
+			<arg attribute="Concepto">Cierre Contable Costo de Produccion</arg>
+			<subarg>
+				<arg attribute="accountField">key,D</arg>
+			</subarg>
+		</parameters>
+	</LNData>
+	<!--  CTAS ORDEN DEUDORAS -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>fieldData</method>
+		<parameters>
+			<arg attribute="debuging">true</arg>
+			<arg attribute="Concepto">Cierre Contable Ctas Orden Deudoras</arg>
+			<subarg>
+				<arg attribute="accountField">key,C</arg>
+			</subarg>
+		</parameters>
+	</LNData>
+	<!--  CTAS ORDEN ACREEDORAS -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>fieldData</method>
+		<parameters>
+			<arg attribute="debuging">true</arg>
+			<arg attribute="Concepto">Cierre Contable Ctas Orden Acreedoras</arg>
+			<subarg>
+				<arg attribute="accountField">key,D</arg>
+			</subarg>
+		</parameters>
+	</LNData>
+	<!--  CTA GASTOS UTILIDAD -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>fieldData</method>
+		<parameters>
+			<arg attribute="debuging">true</arg>
+			<arg attribute="Concepto">Cierre Contable Patrimonio</arg>
+			<subarg>
+				<arg attribute="accountField">key,D</arg>
+			</subarg>
+		</parameters>
+	</LNData>
+	<arg attribute="addKey" />
+	<!--  INGRESOS -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>fieldData</method>
+		<parameters>
+			<arg attribute="debuging">true</arg>
+			<arg attribute="Concepto">Cierre Contable Patrimonio</arg>
+			<subarg>
+				<arg attribute="accountField">key,C</arg>
+			</subarg>
+		</parameters>
+	</LNData>
+	<!--  CTA GASTOS PERDIDA -->
+	<arg attribute="addKey" />
+	<!--  INGRESOS -->
+	<LNData>
+		<driver>LNContabilidad</driver>
+		<method>fieldData</method>
+		<parameters>
+			<arg attribute="debuging">true</arg>
+			<arg attribute="Concepto">Cierre Contable Patrimonio</arg>
+			<subarg>
+				<arg attribute="accountField">key,D</arg>
+			</subarg>
+		</parameters>
+	</LNData>
+	<!--  RECOVER -->
+	<LNData>
+		<driver>LNInventarios</driver>
+		<method>movimientos</method>
+		<parameters>
+			<arg attribute="tipoMovimiento">recoverDocument</arg>
+		</parameters>
+	</LNData>
+
+</container>

@@ -1,0 +1,169 @@
+<FORM>
+    <preferences>
+        <size width="880" height="200" />
+        <name>Consulta de informacion clientes - Get Acquirer Request</name>
+        <icon>AGRUPARPRODSERV</icon>
+        <iconificable />
+        <resizable />
+        <closable />
+        <maximizable />
+    </preferences>
+    <panel locate="North" type="FlowLayout" align="left">
+
+         <component>
+            <driver id="tidentificacion">client.gui.components.XMLComboBox</driver>
+            <parameters>
+               <arg attribute="selectedIndex">0</arg>
+               <arg attribute="sqlCombo">TESEL0344</arg>
+               <arg attribute="exportValue">tidentificacion</arg>
+               <arg attribute="clean">false</arg>
+               <arg attribute="addAttribute">key</arg>
+               <arg attribute="printable">true</arg>
+               <arg attribute="preferredLength">300</arg>
+               <arg attribute="getValue">_clase_tercero</arg>
+               <arg attribute="noDataBeep">true</arg>
+               <arg attribute="noDataMessage">No se encontro registros</arg>
+               <arg attribute="enabled">true</arg>
+            </parameters>
+         </component>               
+              <component>
+                <driver id="nitcc">client.gui.components.EmakuSearchField</driver>
+                <parameters>
+                  <arg attribute="label">Nit/CC *</arg>
+                  <arg attribute="size">15</arg>
+                  <arg attribute="maxlength">26</arg>
+                  <arg attribute="nullValue">true</arg>
+                  <arg attribute="exportValue">nitcc</arg>
+                  <arg attribute="format">TEXT</arg>
+                  <arg attribute="importValue">tidentificacion</arg>
+                  <arg attribute="sqlCombo">SEL0324</arg>
+                  <arg attribute="blankArgs">false</arg>
+                  <arg attribute="keyDataSearch">searchProd</arg>
+                  <arg attribute="repeatData">2</arg>
+                  <arg attribute="noDataBeep">true</arg>
+                  <arg attribute="noDataMessage">No se encontro registros</arg>
+                  <arg attribute="selectedIndex">1</arg>
+                  <arg attribute="enabled">true</arg>
+                  <arg attribute="clean">true</arg>
+                </parameters>
+              </component>
+         <component locate="West">
+              <driver id="consultaws">common.gui.components.ButtonsPanel</driver>
+              <parameters>
+                  <subarg>
+                      <arg attribute="label">BUSCAR</arg>
+                      <arg attribute="icon">/icons/ico_buscar_24x24.png</arg>
+                      <arg attribute="keyStroke">F7</arg>
+                  </subarg>                    
+              </parameters>
+              <events>
+                <object>
+                    <name>BUSCAR</name>
+                    <action>
+                     <type>getacquirer</type>    
+                        <arg attribute="importValue">tidentificacion</arg>
+                        <arg attribute="importValue">nitcc</arg>
+                        <arg attribute="exportValue">emailfromwsdian</arg>
+                        <arg attribute="exportValue">nombrefromwsdian</arg>
+
+                        <component>
+			                <driver id="consultaws">common.gui.components.ButtonsPanel</driver>
+			                <method>setEnabled</method>
+			                <parameters>
+			                  <arg attribute="button">BUSCAR</arg>
+			                  <arg attribute="state">true</arg>
+			                </parameters>
+			            </component>
+                   </action>
+                </object>          
+              </events>
+          </component>
+   </panel>
+    <panel locate="East" type="FlowLayout" />
+    <panel locate="Center" type="BorderLayout">
+        <panel locate="North" type="FlowLayout" />
+        <panel locate="West" type="FlowLayout" />
+
+        <panel type="FlowLayout" align="left" locate="Center">
+            <component>
+                <driver id="nombre">common.gui.components.GenericData</driver>
+                <parameters>
+                    <arg attribute="disableArriveRecord">true</arg>
+                    <arg attribute="returnNullValue">TRUE</arg>     
+                  <subarg>
+                    <arg attribute="getValue">nombrefromwsdian</arg>
+                    <arg attribute="label">Nombre:</arg>
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="name">Segundo</arg>
+                    <arg attribute="size">35</arg>
+                    <arg attribute="upperCase">true</arg>
+                    <arg attribute="nullValue">true</arg>                 
+                    <arg attribute="maxlength">300</arg>
+                  </subarg>
+                </parameters>
+              </component>
+              <component>
+                <driver id="email">common.gui.components.GenericData</driver>
+                <parameters>
+                    <arg attribute="disableArriveRecord">true</arg>
+                  <subarg>
+                    <arg attribute="getValue">emailfromwsdian</arg>
+                    <arg attribute="label">Email: *  </arg>
+                    <arg attribute="format">TEXT</arg>
+                    <arg attribute="size">25</arg>
+                    <arg attribute="upperCase">true</arg>
+                    <arg attribute="maxlength">300</arg>
+                    <arg attribute="name">email</arg>
+                  </subarg>
+                </parameters>
+              </component>              
+            </panel>
+
+
+    </panel>
+    
+    <component locate="South">
+        <driver>common.gui.components.ButtonsPanel</driver>
+        <parameters>
+            <!-- <arg>SAVE</arg> -->
+            <arg>NEW</arg>
+            <arg>EXIT</arg>
+        </parameters>
+        <events>
+          <!-- <object>
+              <name>SAVE</name>
+                <component>
+                    <driver id="resoluciones">client.gui.components.TableFindData</driver>
+                    <method>getPackage</method>
+                </component>
+          </object> -->
+          <object>
+            <name>NEW</name>
+            <component>
+              <driver id="tidentificacion">client.gui.components.XMLComboBox</driver>
+              <method>clean</method>
+            </component>
+            <component>
+              <driver id="nitcc">client.gui.components.EmakuSearchField</driver>
+              <method>clean</method>
+            </component>
+            <component>
+              <driver id="email">common.gui.components.GenericData</driver>
+              <method>clean</method>
+            </component>
+            <component>
+              <driver id="nombre">common.gui.components.GenericData</driver>
+              <method>clean</method>
+            </component>
+            <component>
+                <driver id="consultaws">common.gui.components.ButtonsPanel</driver>
+                <method>setEnabled</method>
+                <parameters>
+                  <arg attribute="button">BUSCAR</arg>
+                  <arg attribute="state">true</arg>
+                </parameters>
+              </component>
+          </object>
+        </events>
+    </component>
+</FORM>

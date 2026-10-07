@@ -1,0 +1,99 @@
+<!-- LCTR00258 - administracion campanas bonos regalo -->
+<FORM>
+  <preferences>
+    <size height="330" width="550"/>
+    <name>Administrar Campañas Bonos Regalo</name>
+    <icon>/icons/ico_pago_contado.png</icon>
+    <iconificable/>
+    <closable/>
+  </preferences>
+  <!-- *1 Componentes Ocultos -->
+  <!-- *1 -->
+  <panel align="CENTER" locate="Center" type="BorderLayout">
+    <panel align="LEFT" locate="Center" type="BorderLayout">
+      <component locate="North">
+        <driver>common.gui.components.XMLLabel</driver>
+        <parameters>
+          <arg attribute="text">Listado Campañas Creadas</arg>
+          <arg attribute="alignment">LEFT</arg>
+        </parameters>
+      </component>
+      <component locate="Center">
+        <driver id="tipossalario">client.gui.components.TableFindData</driver>
+        <parameters>
+          <arg attribute="rows">300</arg>
+          <arg attribute="colorBackground">232,232,232</arg>
+          <arg attribute="colorSelected">248,248,248</arg>
+          <arg attribute="sqlInit">LCSEL0817</arg>
+          <arg attribute="queryOnInit">true</arg>
+          <arg attribute="protectSelected">true</arg>
+          <arg attribute="returnNullValue">true</arg>
+          <arg attribute="blankPackage">true</arg>
+          <arg attribute="clean">true</arg>
+          <arg attribute="reload">true</arg>
+          <subarg>
+            <arg attribute="name">Descripción</arg>
+            <arg attribute="length">270</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">true</arg>
+            <arg attribute="returnCol">1</arg>
+          </subarg>
+          <subarg>
+            <arg attribute="name">Código</arg>
+            <arg attribute="length">170</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">true</arg>
+            <arg attribute="returnCol">1</arg>
+          </subarg>
+          <subarg>
+            <arg attribute="name">Visible</arg>
+            <arg attribute="length">100</arg>
+            <arg attribute="type">BOOLEAN</arg>
+            <arg attribute="enabled">true</arg>
+            <arg attribute="returnCol">1</arg>
+          </subarg>
+          <subarg>
+            <arg attribute="name">id</arg>
+            <arg attribute="length">0</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="defaultValue">0</arg>
+            <arg attribute="enabled">TRUE</arg>
+            <arg attribute="returnCol">0</arg>
+          </subarg>
+        </parameters>
+      </component>
+    </panel>
+  </panel>
+  <component locate="South">
+    <driver>common.gui.components.ButtonsPanel</driver>
+    <parameters>
+      <arg>SAVEAS</arg>
+      <arg>NEW</arg>
+      <arg>EXIT</arg>
+    </parameters>
+    <events>
+      <object>
+        <name>SAVEAS</name>
+        <component>
+          <driver id="tipossalario">client.gui.components.TableFindData</driver>
+          <method>getBlankPackage</method>
+        </component>
+        <component>
+          <driver id="tipossalario">client.gui.components.TableFindData</driver>
+          <method>getPackage</method>
+        </component>
+        <component>
+          <driver id="tipossalario">client.gui.components.TableFindData</driver>
+          <method>getBlankPackage</method>
+        </component>
+      </object>
+      <object>
+        <name>NEW</name>
+        <component>
+          <driver id="tipossalario">client.gui.components.TableFindData</driver>
+          <method>clean</method>
+        </component>
+      </object>
+    </events>
+  </component>
+</FORM>

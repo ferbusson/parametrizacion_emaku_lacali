@@ -1,13 +1,15 @@
 DROP TABLE IF EXISTS aux_params_act;
 CREATE TEMP TABLE aux_params_act as
 select
-	'?'::FLOAT8::INTEGER AS bandera,
+	foo.bandera,
 	d.ndocumento,
 	d.codigo_tipo,
 	d.numero
 from
+	(select '?'::FLOAT8::INTEGER as bandera) AS foo
+left join
 	documentos d
-where
+on
 	d.codigo_tipo = '?'
 	and d.numero = LPAD('?',10,'0');
 
@@ -134,18 +136,20 @@ WHERE
 	a.bandera = 2 AND -- bandera: numero de boton: debe ser 2 para re-establecer el documento rechazado a su estado inicia
 	a.ndocumento = c_aux.ncomprobante;
 
+
 UPDATE
 	documentos
 SET
 	codigo_tipo = r.codigo_tipo,
 	numero = r.numero,
-	estado = TRUE
+	estado = true
 FROM
 	aux_params_act a,
 	registro_documentos_rechazados r
 WHERE
 	a.bandera = 2 AND -- bandera: numero de boton: debe ser 2 para re-establecer el documento rechazado a su estado inicial
-	documentos.ndocumento = a.ndocumento;
+	documentos.ndocumento = a.ndocumento and
+	r.ndocumento = a.ndocumento;
 	
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -164,13 +168,15 @@ FROM
 WHERE
 	a.bandera = 3 AND
 	d.numero NOT IN ('0000000000') and
-	d.ndocumento IN 
-		(select
+	d.ndocumento IN (select
 			ndocumento 
 		FROM
 			documentos 
 		WHERE
-			codigo_tipo in ('G1','Z1','FW','U1','P1') 
+			(codigo_tipo like 'Z%' or
+			codigo_tipo like 'G%' or
+			codigo_tipo like 'M%' or
+			codigo_tipo like 'L%') 
 		EXCEPT
 		SELECT
 			ndocumento

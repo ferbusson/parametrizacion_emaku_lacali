@@ -1,0 +1,526 @@
+<container>
+  <!--  
+    Este modelo es para logica de negocios de un documento.
+  -->
+  <!--
+    El primer paquete de subargumentos contiene informacion
+    especifica para crear un documento. 
+  -->
+  <subarg>
+      <arg attribute="consecutive"/>
+      <arg attribute="date"/>
+      <arg attribute="actionDocument">createDocument</arg>
+      <arg attribute="cash"/>
+  </subarg>
+  <!--
+    La logica para el almacenamiento de documentos una vez creado el
+    primer paquete de subargumentos es la siguiente:
+    
+    Para procesar un paquete proveniente de una transaccion en el
+    lado de argumentos debe existir un argumento con una consulta sql, o un
+    paquete LNData, con us respectiva parametrizacion, si un paquete va a
+    ser procesado varias veces por diferentes sentencias o diferentes componentes
+    de logica de negocios, estos deben estar agrupados por una etiquete de
+    subargumentos.
+  -->
+  0
+   <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+          <arg attribute="sql">LCINS0034</arg>
+          <arg attribute="fields">0,1,2,3,4</arg>
+          <arg attribute="discartKey">idTercero</arg>
+          <arg attribute="discartKey">centrocosto</arg></parameters>
+  </LNData>
+
+ 
+  1 datos_doc
+  <arg>MTINS0136</arg>  
+  2 sodexo
+  <arg>LCINS0022</arg>
+  3 bigpass
+  <arg>LCINS0022</arg>
+  4 tabla: tarjetas - pago total una tarjeta
+  <arg>MTINS0020</arg>
+ 
+
+  5 tabla: tarjetas - pagos parciales multiples tarjetas   
+  <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+          <arg attribute="sql">MTINS0020</arg>
+          <arg attribute="fields">0,1,2,3,4,5,6,7,8,9,13,14</arg>
+          <arg attribute="discartKey">idTercero</arg>
+          <arg attribute="discartKey">centrocosto</arg></parameters>
+  </LNData>
+
+  6 tabla: tarjetas - pagos parciales manuales multiples tarjetas
+  <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+          <arg attribute="sql">LCINS0018</arg>
+          <arg attribute="fields">0,1,2,3,4,5,7,8,9,13,14</arg>
+          <arg attribute="discartKey">idTercero</arg>
+          <arg attribute="discartKey">centrocosto</arg></parameters>
+  </LNData>
+   7 centrocosto    
+  <arg attribute="addKey"/>
+   7a      
+  <arg attribute="addKey"/>
+   8 pago con efectivo    
+  <LNData>
+      <driver>LNContabilidad</driver>
+      <method>fieldData</method>
+      <parameters>
+          <arg attribute="debuging">true</arg>
+          <arg attribute="CodeAPS">9</arg>
+          <arg attribute="Concepto">Venta segun factura de contado</arg>
+          <arg attribute="centrocosto">getName</arg>
+          <arg attribute="tercero">getName</arg>
+          <subarg>
+              <arg attribute="accountField">11053501,D</arg></subarg>
+      </parameters>
+  </LNData>
+
+   9 pago con cheque sodexo
+  <LNData>
+      <driver>LNContabilidad</driver>
+      <method>fieldData</method>
+      <parameters>
+          <arg attribute="debuging">true</arg>
+          <arg attribute="CodeAPS">9</arg>
+          <arg attribute="Concepto">Venta segun factura de contado</arg>
+          <arg attribute="centrocosto">getName</arg>
+          <arg attribute="tercero">getName</arg>
+          <subarg>
+              <arg attribute="accountField">11052001,D</arg></subarg>
+      </parameters>
+  </LNData>
+
+   10 pago con cheque bigpass
+  <LNData>
+      <driver>LNContabilidad</driver>
+      <method>fieldData</method>
+      <parameters>
+          <arg attribute="debuging">true</arg>
+          <arg attribute="CodeAPS">9</arg>
+          <arg attribute="Concepto">Venta segun factura de contado</arg>
+          <arg attribute="centrocosto">getName</arg>
+          <arg attribute="tercero">getName</arg>
+          <subarg>
+              <arg attribute="accountField">11052501,D</arg></subarg>
+      </parameters>
+  </LNData>
+  
+  11 idctabanco    
+  <arg attribute="addKey"/>
+
+  12 pago con tarjeta    
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>fieldData</method>
+            <parameters>
+                <arg attribute="debuging">true</arg>
+                <arg attribute="CodeAPS">9</arg>
+                <arg attribute="Concepto">Venta segun factura de tcredito (DB)</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <arg attribute="tercero">getName</arg>
+                <subarg>
+                    <arg attribute="accountField">key,D</arg></subarg>
+            </parameters>
+        </LNData>
+<!-- 8c remove tercero factura *** -->
+    <arg attribute="removeKey">idTercero</arg>
+    <!-- 8d add tercero banco *** -->
+    <arg attribute="addKey"/>        
+
+        13 Valor comision    
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>fieldData</method>
+            <parameters>
+                <arg attribute="debuging">true</arg>
+                <arg attribute="CodeAPS">9</arg>
+                <arg attribute="Concepto">Venta segun factura comision tarjeta (CR)</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <arg attribute="tercero">getName</arg>
+                <subarg>
+                    <arg attribute="accountField">key,C</arg></subarg>
+            </parameters>
+        </LNData>
+
+        14 retefuente   
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>fieldData</method>
+            <parameters>
+                <arg attribute="debuging">true</arg>
+                <arg attribute="CodeAPS">9</arg>
+                <arg attribute="Concepto">Venta segun factura retefuente tarjeta (CR)</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <arg attribute="tercero">getName</arg>
+                <subarg>
+                    <arg attribute="accountField">key,C</arg></subarg>
+            </parameters>
+        </LNData>
+
+        15 reteiva
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>fieldData</method>
+            <parameters>
+                <arg attribute="debuging">true</arg>
+                <arg attribute="CodeAPS">9</arg>
+                <arg attribute="Concepto">Venta segun factura reteiva tarjeta (CR)</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <arg attribute="tercero">getName</arg>
+                <subarg>
+                    <arg attribute="accountField">key,C</arg></subarg>
+            </parameters>
+        </LNData>
+
+        16
+        <arg attribute="removeKey">cuenta</arg>
+
+        17 idctagasto
+        <arg attribute="addKey"/>
+
+        18 
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>fieldData</method>
+            <parameters>
+                <arg attribute="debuging">true</arg>
+                <arg attribute="CodeAPS">9</arg>
+                <arg attribute="Concepto">Venta segun factura comision tarjeta (DB)</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <arg attribute="tercero">getName</arg>
+                <arg attribute="discartKey">cuenta</arg>                
+                <subarg>
+                    <arg attribute="accountField">key,D</arg>
+                </subarg>
+            </parameters>
+        </LNData>
+
+        19
+        <arg attribute="removeKey">cuenta</arg>
+
+        20 idctaretefuente
+        <arg attribute="addKey"/>
+        
+        21 retefuente
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>fieldData</method>
+            <parameters>
+                <arg attribute="debuging">true</arg>
+                <arg attribute="CodeAPS">9</arg>
+                <arg attribute="Concepto">Venta segun factura retefuente tarjeta (DB)</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <arg attribute="tercero">getName</arg>
+                <arg attribute="discartKey">cuenta</arg>
+                <subarg>
+                    <arg attribute="accountField">key,D</arg></subarg>
+            </parameters>
+        </LNData>
+
+        22
+        <arg attribute="removeKey">cuenta</arg>
+
+        23 idctareteiva
+        <arg attribute="addKey"/>
+        
+        24
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>fieldData</method>
+            <parameters>
+                <arg attribute="debuging">true</arg>
+                <arg attribute="CodeAPS">9</arg>
+                <arg attribute="Concepto">Venta segun factura reteiva tarjeta (DB)</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <arg attribute="tercero">getName</arg>                
+                <arg attribute="discartKey">cuenta</arg>
+                <subarg>
+                    <arg attribute="accountField">key,D</arg></subarg>
+            </parameters>
+        </LNData>
+    <!-- 20a remove tercero factura *** -->
+    <arg attribute="removeKey">idTercero</arg>
+    <!-- 20b add tercero banco *** -->
+    <arg attribute="addKey"/>
+
+            valor parcial 
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura valor parcial (DB)</arg>
+                    <arg attribute="naturaleza">D</arg>
+                    <arg attribute="debuging">true</arg>
+                    <arg attribute="tercero">getName</arg>
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountKey">0</arg>
+                        <arg attribute="accountData">1</arg></subarg>
+                </parameters>
+            </LNData>
+
+        25 Pagos parciales
+        <subarg>
+            credito comision
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura comision parcial (CR)</arg>
+                    <arg attribute="naturaleza">C</arg>
+                    <arg attribute="debuging">true</arg>
+                    <!-- <arg attribute="tercero">getName</arg> -->
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountKey">0</arg>
+                        <arg attribute="accountData">3</arg></subarg>
+                </parameters>
+            </LNData>
+            debito comision
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura comision parcial (DB)</arg>
+                    <arg attribute="naturaleza">D</arg>
+                    <arg attribute="debuging">true</arg>
+                    <arg attribute="tercero">getName</arg>
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountTh">15</arg> <!-- *** -->
+                        <arg attribute="accountKey">10</arg>
+                        <arg attribute="accountData">3</arg></subarg>
+                </parameters>
+            </LNData>
+            credito retefuente
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura retefuente parcial (CR)</arg>
+                    <arg attribute="naturaleza">C</arg>
+                    <arg attribute="debuging">true</arg>
+                    <!-- <arg attribute="tercero">getName</arg> -->
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountTh">15</arg> <!-- *** -->
+                        <arg attribute="accountKey">0</arg>
+                        <arg attribute="accountData">8</arg></subarg>
+                </parameters>
+            </LNData>
+            debito retefuente
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura retefuente parcial (DB)</arg>
+                    <arg attribute="naturaleza">D</arg>
+                    <arg attribute="debuging">true</arg>
+                    <!-- <arg attribute="tercero">getName</arg> -->
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountTh">15</arg> <!-- *** -->
+                        <arg attribute="accountKey">11</arg>
+                        <arg attribute="accountData">8</arg></subarg>
+                </parameters>
+            </LNData>
+            credito reteiva
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura reteiva parcial (CR)</arg>
+                    <arg attribute="naturaleza">C</arg>
+                    <arg attribute="debuging">true</arg>
+                    <!-- <arg attribute="tercero">getName</arg> -->
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountTh">15</arg> <!-- *** -->
+                        <arg attribute="accountKey">0</arg>
+                        <arg attribute="accountData">9</arg></subarg>
+                </parameters>
+            </LNData>
+            debito reteiva
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura reteiva parcial (DB)</arg>
+                    <arg attribute="naturaleza">D</arg>
+                    <arg attribute="debuging">true</arg>
+                    <!-- <arg attribute="tercero">getName</arg> -->
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountTh">15</arg> <!-- *** -->
+                        <arg attribute="accountKey">12</arg>
+                        <arg attribute="accountData">9</arg></subarg>
+                </parameters>
+            </LNData>
+        </subarg>
+
+            valor parcial 
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura valor parcial (DB)</arg>
+                    <arg attribute="naturaleza">D</arg>
+                    <arg attribute="debuging">true</arg>
+                    <arg attribute="tercero">getName</arg>
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountKey">0</arg>
+                        <arg attribute="accountData">1</arg></subarg>
+                </parameters>
+            </LNData>
+        
+        26 Pagos parciales manuales
+        <subarg>
+            credito comision
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura comision parcial (CR)</arg>
+                    <arg attribute="naturaleza">C</arg>
+                    <arg attribute="debuging">true</arg>
+                    <!-- <arg attribute="tercero">getName</arg> -->
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountTh">15</arg> <!-- *** -->
+                        <arg attribute="accountKey">0</arg>
+                        <arg attribute="accountData">3</arg></subarg>
+                </parameters>
+            </LNData>
+            debito comision
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura comision parcial (DB)</arg>
+                    <arg attribute="naturaleza">D</arg>
+                    <arg attribute="debuging">true</arg>
+                    <!-- <arg attribute="tercero">getName</arg> -->
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountTh">15</arg> <!-- *** -->
+                        <arg attribute="accountKey">10</arg>
+                        <arg attribute="accountData">3</arg></subarg>
+                </parameters>
+            </LNData>
+            credito retefuente
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura retefuente parcial (CR)</arg>
+                    <arg attribute="naturaleza">C</arg>
+                    <arg attribute="debuging">true</arg>
+                    <!-- <arg attribute="tercero">getName</arg> -->
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountTh">15</arg> <!-- *** -->
+                        <arg attribute="accountKey">0</arg>
+                        <arg attribute="accountData">8</arg></subarg>
+                </parameters>
+            </LNData>
+            debito retefuente
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura retefuente parcial (DB)</arg>
+                    <arg attribute="naturaleza">D</arg>
+                    <arg attribute="debuging">true</arg>
+                    <!-- <arg attribute="tercero">getName</arg> -->
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountTh">15</arg> <!-- *** -->
+                        <arg attribute="accountKey">11</arg>
+                        <arg attribute="accountData">8</arg></subarg>
+                </parameters>
+            </LNData>
+            credito reteiva
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura reteiva parcial (CR)</arg>
+                    <arg attribute="naturaleza">C</arg>
+                    <arg attribute="debuging">true</arg>
+                    <!-- <arg attribute="tercero">getName</arg> -->
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountTh">15</arg> <!-- *** -->
+                        <arg attribute="accountKey">0</arg>
+                        <arg attribute="accountData">9</arg></subarg>
+                </parameters>
+            </LNData>
+            debito reteiva
+            <LNData>
+                <driver>LNContabilidad</driver>
+                <method>columnDataAccount</method>
+                <parameters>
+                    <arg attribute="Concepto">Venta segun factura reteiva parcial (DB)</arg>
+                    <arg attribute="naturaleza">D</arg>
+                    <arg attribute="debuging">true</arg>
+                    <!-- <arg attribute="tercero">getName</arg> -->
+                    <arg attribute="centrocosto">getName</arg>
+                    <subarg>
+                        <arg attribute="accountTh">15</arg> <!-- *** -->
+                        <arg attribute="accountKey">12</arg>
+                        <arg attribute="accountData">9</arg></subarg>
+                </parameters>
+            </LNData>
+        </subarg>
+
+        27
+        <arg attribute="removeKey">cuenta</arg>
+
+        <!-- 28 char_cta depende del tipo de tarjeta seleccionada -->
+        <arg attribute="addKey"/>       
+
+      29
+       Recarga de targeta regalo
+        <!-- <LNData>
+          <driver>LNContabilidad</driver>
+          <method>fieldData</method>
+          <parameters>
+            <arg attribute="debuging">true</arg>
+            <arg attribute="CodeAPS">9</arg>
+            <arg attribute="Concepto">Tarjeta Regalo</arg>
+            <arg attribute="centrocosto">getName</arg>
+            <arg attribute="tercero">getName</arg>              
+            <subarg>
+              <arg attribute="accountField">28050504,C</arg>
+            </subarg>
+          </parameters>
+        </LNData> -->
+
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>fieldData</method>
+            <parameters>
+                <arg attribute="debuging">true</arg>
+                <arg attribute="CodeAPS">9</arg>
+                <arg attribute="Concepto">Tarjeta Regalo</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <arg attribute="tercero">getName</arg>                
+                <!-- <arg attribute="discartKey">cuenta</arg> -->
+                <subarg>
+                    <arg attribute="accountField">key,C</arg></subarg>
+            </parameters>
+        </LNData>
+      
+
+</container>

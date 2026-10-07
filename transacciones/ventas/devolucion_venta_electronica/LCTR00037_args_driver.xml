@@ -1,0 +1,297 @@
+<container>
+    <!--
+    Este modelo es para logica de negocios de un documento.
+  -->
+    <subarg>
+        <arg attribute="consecutive" />
+        <arg attribute="date" />
+        <arg attribute="actionDocument">createDocument</arg>
+        <arg attribute="cash" />
+    </subarg>
+
+    <!-- 0 Obervaciones -->
+    <arg>INS0037</arg>
+
+   <!-- 0 res fac -->
+    <!-- <arg>RFINS002</arg> -->
+
+    <!-- 1 info documento -->
+    <arg>LCUPD0005</arg>
+
+    <!-- 2 datos documento -->
+    <arg>LCINS0021</arg>
+
+    <!-- 3 tercero_def -->
+    <arg>LCINS0025</arg>
+
+    <!-- 4 centrocosto -->
+    <arg attribute="addKey"/>
+
+
+
+    <!-- 4a Ret. Fuente -->
+    <subarg>
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">INS0072</arg>
+                <arg attribute="fields">2,3,4,5,1,6</arg>
+                <arg attribute="conditional">B&gt;0</arg>
+                <arg attribute="discartKey">idTercero</arg>
+                <arg attribute="discartKey">centrocosto</arg>
+            </parameters>
+        </LNData>
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>columnDataAccount</method>
+            <parameters>
+                <arg attribute="Concepto">Devolucion en Venta Electronica</arg>
+                <arg attribute="naturaleza">C</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <arg attribute="tercero">getName</arg>
+                <subarg>
+                    <arg attribute="accountKey">0</arg>
+                    <arg attribute="accountData">1</arg>
+                </subarg>
+            </parameters>
+        </LNData>
+    </subarg>
+
+    <!-- 4b Ret. I.V.A. -->
+    <subarg>
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">INS0072</arg>
+                <arg attribute="fields">2,3,4,5,1,6</arg>
+                <arg attribute="conditional">B&gt;0</arg>
+                <arg attribute="discartKey">idTercero</arg>
+                <arg attribute="discartKey">centrocosto</arg>
+            </parameters>
+        </LNData>
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>columnDataAccount</method>
+            <parameters>
+                <arg attribute="Concepto">Devolucion en Venta Electronica</arg>
+                <arg attribute="naturaleza">C</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <arg attribute="tercero">getName</arg>
+                <subarg>
+                    <arg attribute="accountKey">0</arg>
+                    <arg attribute="accountData">1</arg>
+                </subarg>
+            </parameters>
+        </LNData>
+    </subarg>
+
+    <!-- 4c Ret. I.C.A. -->
+    <subarg>
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">INS0072</arg>
+                <arg attribute="fields">2,3,4,5,1,6</arg>
+                <arg attribute="conditional">B&gt;0</arg>
+                <arg attribute="discartKey">idTercero</arg>
+                <arg attribute="discartKey">centrocosto</arg>
+            </parameters>
+        </LNData>
+        <LNData>
+            <driver>LNContabilidad</driver>
+            <method>columnDataAccount</method>
+            <parameters>
+                <arg attribute="Concepto">Devolucion en Venta Electronica</arg>
+                <arg attribute="naturaleza">C</arg>
+                <arg attribute="tercero">getName</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <subarg>
+                    <arg attribute="accountKey">0</arg>
+                    <arg attribute="accountData">1</arg>
+                </subarg>
+            </parameters>
+        </LNData>
+    </subarg>
+
+    <!-- 4d -->
+    <!-- <LNData>
+        <driver>LNContabilidad</driver>
+        <method>fieldData</method>
+        <parameters>
+            <arg attribute="CodeAPS">14</arg>
+            <arg attribute="Concepto">Devolucion en Venta Electronica</arg>
+            <arg attribute="centrocosto">getName</arg>
+            <subarg>
+                5%
+                <arg attribute="accountField">130505,C</arg>
+                19%
+                <arg attribute="accountField">130520,C</arg>
+                excluida
+                <arg attribute="accountField">130510,C</arg>
+                exenta
+                <arg attribute="accountField">130515,C</arg>
+                no gravada
+                <arg attribute="accountField">130525,C</arg>
+            </subarg>
+        </parameters>
+    </LNData> -->
+    <!-- 4e -->
+
+
+    <!-- 5 idtercero -->
+    <arg attribute="addKey"/>
+
+    <!-- 7 adicionando cuenta 13 -->
+  <arg attribute="addKey"/>  
+
+    <!-- 4d -->
+
+    <!-- <LNData>
+        <driver>LNContabilidad</driver>
+        <method>fieldData</method>
+        <parameters>
+            <arg attribute="debuging">true</arg>
+            <arg attribute="CodeAPS">9</arg>
+            <arg attribute="Concepto">Dev venta electronica</arg>
+            <arg attribute="centrocosto">getName</arg>
+            <arg attribute="tercero">getName</arg>
+            <subarg>
+                <arg attribute="accountField">130505,C</arg>
+            </subarg>
+        </parameters>
+    </LNData> -->
+
+  <LNData>
+    <driver>LNContabilidad</driver>
+    <method>fieldData</method>
+    <parameters>
+      <arg attribute="CodeAPS">6</arg>
+      <arg attribute="Concepto">Dev venta electronica</arg>
+      <arg attribute="debuging">true</arg>
+      <arg attribute="centrocosto">getName</arg>
+      <subarg>
+        <arg attribute="accountField">key,C</arg> 
+      </subarg>
+    </parameters>
+  </LNData>
+
+   <!-- 9 remueve llave cuenta -->
+  <arg attribute="removeKey">cuenta</arg>
+
+    <!-- 4e -->
+    <LNData>
+        <driver>LNSelectedField</driver>
+        <method>getFields</method>
+        <parameters>
+            <arg attribute="sql">LCINS0192</arg>
+            <arg attribute="conditional">b>0</arg>
+            <arg attribute="fields">0,1,2</arg>
+            <arg attribute="discartKey">centrocosto</arg>
+        </parameters>
+    </LNData>    
+
+    <!-- 7 -->
+    <LNData>
+        <driver>LNContabilidad</driver>
+        <method>fieldData</method>
+        <parameters>
+            <arg attribute="debuging">true</arg>
+            <arg attribute="CodeAPS">9</arg>
+            <arg attribute="Concepto">Dev venta electronica</arg>
+            <arg attribute="centrocosto">getName</arg>
+            <arg attribute="tercero">getName</arg>
+            <subarg>
+                <arg attribute="accountField">11053501,C</arg>
+            </subarg>
+        </parameters>
+    </LNData>
+
+
+    <!-- 34 id bodega -->
+    <arg attribute="addKey"/>
+
+    <!-- 35 -->
+    <subarg>
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">LCINS0214</arg>                <!--datos prod-->
+                <arg attribute="fields">0,1,2,3,4,10,11</arg>
+                <arg attribute="discartKey">idTercero</arg>
+                <arg attribute="discartKey">centrocosto</arg>
+            </parameters>
+        </LNData>
+        <LNData>
+            <driver>LNInventarios</driver>
+            <method>movimientos</method>
+            <parameters>
+                <arg attribute="tipoMovimiento">entrada</arg>
+            </parameters>
+        </LNData>
+        <LNData>            <!-- D E V O L U C I O N -->
+            <driver>LNContabilidad</driver>
+            <method>columnData</method>
+            <parameters>
+                <arg attribute="debuging">true</arg>
+                <arg attribute="Base">0</arg>
+                <arg attribute="CodeAPS">13</arg>
+                <arg attribute="tercero">9</arg>
+                <arg attribute="Concepto">Dev venta electronica</arg>
+                <arg attribute="centrocosto">getName</arg>
+                <arg attribute="tercero">getName</arg>
+                <subarg>
+                    <arg attribute="accountCol">IdProdServ,0</arg>
+                    <!-- 5% -->
+                    <arg attribute="accountCol">4175560501,6</arg>
+                    <!-- 19% -->
+                    <arg attribute="accountCol">4175560502,6</arg>
+                    <!-- Excluidas -->
+                    <arg attribute="accountCol">41755610,6</arg>
+                    <!-- Exentas -->
+                    <arg attribute="accountCol">41755615,6</arg>
+
+                    <!-- Impuesto Bolsas -->
+                    <arg attribute="accountCol">240905,9</arg>
+
+                    <!-- iva 5% -->
+                    <arg attribute="accountCol">24081005,5</arg>
+                    <!-- iva 19 servicios% -->
+                    <arg attribute="accountCol">24081006,5</arg>
+
+
+                    <!-- asientos de costos -->
+                    <!-- 5% -->
+                    <!--<arg attribute="accountCostCol">6135560502,1</arg>-->
+                    <arg attribute="accountCostCol">6135560501,1</arg>
+                    <!-- 19% -->
+                    <!--<arg attribute="accountCostCol">6135560504,1</arg>-->
+                    <arg attribute="accountCostCol">6135560502,1</arg>
+                    <!-- Excluidas -->
+                    <!--<arg attribute="accountCostCol">6135561002,1</arg>-->
+                    <arg attribute="accountCostCol">61355610,1</arg>
+                    <!-- Exentas -->
+                    <!--<arg attribute="accountCostCol">6135561502,1</arg>-->
+                    <arg attribute="accountCostCol">61355615,1</arg>
+
+                    <!-- 5% -->
+                    <!--<arg attribute="accountCostCol">14350502,1</arg>-->
+                    <arg attribute="accountCostCol">1435560501,1</arg>
+                    <!-- 19% -->
+                    <!--<arg attribute="accountCostCol">14350504,1</arg>-->
+                    <arg attribute="accountCostCol">1435560502,1</arg>
+                    <!-- Excluidas -->
+                    <!--<arg attribute="accountCostCol">14351002,1</arg>-->
+                    <arg attribute="accountCostCol">14355610,1</arg>
+                    <!-- Exentas -->
+                    <!--<arg attribute="accountCostCol">14351502,1</arg>-->
+                    <arg attribute="accountCostCol">14355615,1</arg>
+
+                </subarg>
+            </parameters>
+        </LNData>
+    </subarg>
+</container>

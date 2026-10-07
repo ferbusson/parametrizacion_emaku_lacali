@@ -273,7 +273,7 @@
                     <arg attribute="colorBackground">181,230,248</arg>
                     <arg attribute="colorSelected">74,224,242</arg>
                     <arg attribute="font">Dialog,0,12</arg>
-                    <arg attribute="totales">b,c,d,e,f,g,h,i,j,k,l</arg>
+                    <arg attribute="totales">b,c,d,e,f,g,h,i,j,k,l,m</arg>
                     <arg attribute="exportTotalCol">b,totalrecaudos</arg>
                     <arg attribute="exportTotalCol">c,totalcreditos</arg>
                     <arg attribute="exportTotalCol">d,totalcarterapropia</arg>
@@ -285,7 +285,8 @@
                     <arg attribute="exportTotalCol">j,totalfalabella</arg>
                     <arg attribute="exportTotalCol">k,totalelenas</arg>
                     <arg attribute="exportTotalCol">l,totalrappi</arg>
-                    <arg attribute="conditionalColor">229,255,204:m==-1</arg>
+                    <arg attribute="exportTotalCol">m,totalwompi</arg>
+                    <arg attribute="conditionalColor">229,255,204:n==-1</arg>
                     <arg attribute="repaint">true</arg>
                     <subarg>
                         <!-- a1 -->
@@ -377,6 +378,14 @@
                     <subarg>
                         <!-- d4 -->
                         <arg attribute="name">Rappi</arg>
+                        <arg attribute="length">150</arg>
+                        <arg attribute="type">DECIMAL</arg>
+                        <arg attribute="roundDecimal">2</arg>
+                        <arg attribute="enabled">false</arg>
+                    </subarg>
+                    <subarg>
+                        <!-- e5 -->
+                        <arg attribute="name">Wompi</arg>
                         <arg attribute="length">150</arg>
                         <arg attribute="type">DECIMAL</arg>
                         <arg attribute="roundDecimal">2</arg>

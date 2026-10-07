@@ -109,9 +109,9 @@ WHERE
                   ''4135562001'' -- servicios 19%
                   )
 GROUP BY
-    i.id_linea
-HAVING
-    SUM(l.haber)!=0;
+    i.id_linea;
+--HAVING Comentado Mayo 9 2026 para incluir dev en venta sin factura M1-7443 sorteo plablo de arma, si no comento esto no lista la linea del producto que se uso en esa M1
+  --  SUM(l.haber)!=0;
 
 --
 --

@@ -168,7 +168,7 @@
                      <arg attribute="sqlCombo">LCSEL0331</arg>
                      <arg attribute="exportValue">id_pais_procedencia</arg>
                      <arg attribute="clean">true</arg>
-                     <arg attribute="enableField">tidentificacion,42</arg>
+                     <arg attribute="enableField">tidentificacion,42,50</arg> <!--10 Oct 2025 definidos por Maria E -->
                      <arg attribute="printable">true</arg>
                      <arg attribute="preferredLength">150</arg>
                      <arg attribute="getValue">_pais</arg>
@@ -194,7 +194,7 @@
                   <subarg>
                     <arg attribute="label">Primer Nombre:</arg>
                     <arg attribute="format">TEXT</arg>
-                    <arg attribute="enableField">tidentificacion,13,42,11,12,21,22,41,91</arg>
+                    <arg attribute="enableField">tidentificacion,11,12,13,21,22,41,42,47,48,91</arg>
                     <arg attribute="size">10</arg>
                     <arg attribute="upperCase">true</arg>
                     <arg attribute="maxlength">60</arg>
@@ -211,7 +211,7 @@
                   <subarg>
                     <arg attribute="label">Segundo Nombre:</arg>
                     <arg attribute="format">TEXT</arg>
-                    <arg attribute="enableField">tidentificacion,13,42,11,12,21,22,41,91</arg>
+                    <arg attribute="enableField">tidentificacion,11,12,13,21,22,41,42,47,48,91</arg>
                     <arg attribute="size">10</arg>
                     <arg attribute="upperCase">true</arg>
                     <arg attribute="maxlength">40</arg>
@@ -230,7 +230,7 @@
                   <subarg>
                     <arg attribute="label">Primer Apellido:</arg>
                     <arg attribute="format">TEXT</arg>
-                    <arg attribute="enableField">tidentificacion,13,42,11,12,21,22,41,91</arg>
+                    <arg attribute="enableField">tidentificacion,11,12,13,21,22,41,42,47,48,91</arg>
                     <arg attribute="size">10</arg>
                     <arg attribute="upperCase">true</arg>
                     <arg attribute="maxlength">40</arg>
@@ -247,7 +247,7 @@
                   <subarg>
                     <arg attribute="label">Segundo Apellido:</arg>
                     <arg attribute="format">TEXT</arg>
-                    <arg attribute="enableField">tidentificacion,13,42,11,12,21,22,41,91</arg>
+                    <arg attribute="enableField">tidentificacion,11,12,13,21,22,41,42,47,48,91</arg>
                     <arg attribute="size">10</arg>
                     <arg attribute="upperCase">true</arg>
                     <arg attribute="maxlength">40</arg>
@@ -307,7 +307,7 @@
                   <subarg>
                     <arg attribute="format">TEXT</arg>
                     <arg attribute="size">25</arg>
-                    <arg attribute="enableField">tidentificacion,31,42</arg>
+                    <arg attribute="enableField">tidentificacion,31,50</arg>
                     <arg attribute="maxlength">150</arg>
                     <arg attribute="upperCase">true</arg>
                     <arg attribute="exportValue">razonsocial</arg>
@@ -421,10 +421,10 @@
                   <arg attribute="driverEvent" id="nitcc">client.gui.components.EmakuSearchField</arg>
                   <subarg>
                     <arg attribute="label">Días Crédito:</arg>
-                    <!-- <arg attribute="format">INTEGER</arg> -->
                     <arg attribute="defaultText">0</arg>
                     <arg attribute="format">TEXT</arg>
                     <arg attribute="size">7</arg>                    
+                    <arg attribute="enableField">editarcatalogo,1</arg>
                     <arg attribute="maxlength">3</arg>
                     <arg attribute="exportValue">diascredito</arg>
                   </subarg>
@@ -440,6 +440,7 @@
                     <arg attribute="defaultText">0</arg>
                     <arg attribute="format">TEXT</arg>
                     <arg attribute="size">10</arg>
+                    <arg attribute="enableField">editarcatalogo,1</arg>
                     <arg attribute="maxlength">9</arg>
                     <arg attribute="exportValue">cupomax</arg>
                     <arg attribute="alignment">RIGHT</arg>

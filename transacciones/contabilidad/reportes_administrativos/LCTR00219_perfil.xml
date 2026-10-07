@@ -1,0 +1,251 @@
+<FORM>
+  <preferences>
+    <size height="510" width="750"/>
+    <name>Ventas del Día - Gerencia</name>
+    <icon>/icons/ico_cambio_luminaria.png</icon>
+    <iconificable/>
+    <resizable/>
+    <closable/>
+  </preferences>
+  <panel locate="North" type="FlowLayout"/>
+  <panel locate="South" type="FlowLayout"/>
+  <panel locate="East" type="FlowLayout"/>
+  <panel locate="West" type="FlowLayout"/>
+  <panel cols="1" locate="Center" rows="2" type="GridLayout">
+    <panel icon="/icons/ico_carro_compras_16x16.png" locate="Center" name="Recaudo por Usuario" type="BorderLayout">
+      <panel locate="North" type="BorderLayout">
+        <panel locate="South" type="BorderLayout">
+          <component locate="West">
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Movimientos por Usuario</arg>
+              <arg attribute="alignment">LEFT</arg>
+            </parameters>
+          </component>
+        </panel>        
+        <panel locate="West" type="FlowLayout">
+          <component>
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Fecha:</arg>
+              <arg attribute="alignment">LEFT</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver id="fecha">common.gui.components.XMLDateField</driver>
+            <parameters>
+              <arg attribute="dateFormatString">yyyy-MM-dd</arg>
+              <arg attribute="exportValue">fecha</arg>              
+            </parameters>
+          </component>
+        </panel>
+        <component locate="Center">
+          <driver id="sucursal">client.gui.components.XMLComboBox</driver>
+          <parameters>
+            <arg attribute="label">Sucursal</arg>
+            <arg attribute="preferredLength">250</arg>
+            <arg attribute="sqlCombo">LCSEL0900</arg>
+            <arg attribute="selectedIndex">1</arg>
+            <arg attribute="preferredLength">230</arg>
+            <arg attribute="name">sucursal</arg>
+            <arg attribute="clean">false</arg>
+            <arg attribute="exportValue">sucursal</arg>
+            <arg attribute="importValueCode">fecha</arg>
+            <arg attribute="sqlCode">MTSEL0730</arg>
+            <arg attribute="sqlCode">MTSEL0731</arg>
+          </parameters>
+        </component>
+      </panel>
+      <component locate="Center">
+        <driver id="usuarios">client.gui.components.TableFindData</driver>
+        <parameters>
+          <arg attribute="keySQL">MTSEL0730</arg>
+          <arg attribute="driverEvent" id="sucursal">client.gui.components.XMLComboBox</arg>
+          <arg attribute="rows">25</arg>
+          <arg attribute="protectSelected">true</arg>
+          <arg attribute="colorBackground">102,204,204</arg>
+          <arg attribute="colorSelected">153,204,102</arg>
+          <arg attribute="font">Dialog,0,12</arg>
+          <arg attribute="totales">d</arg>
+          <arg attribute="exportTotalCol">d,totalmovimientos</arg>
+          <arg attribute="conditionalColor">102,153,204:d&gt;-1</arg>
+          <!-- <arg attribute="initSQL">MTSEL0730</arg>-->
+          <subarg>
+            <!-- a1 -->
+            <arg attribute="name">Nit/CC</arg>
+            <arg attribute="length">0</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+          </subarg>
+          <subarg>
+            <!-- b2 -->
+            <arg attribute="name">Sucursal</arg>
+            <arg attribute="length">300</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+          </subarg>
+          <subarg>
+            <!-- c3 -->
+            <arg attribute="name">Cajero</arg>
+            <arg attribute="length">200</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+          </subarg>
+          <subarg>
+            <!-- d4 -->
+            <arg attribute="name">Total x Día</arg>
+            <arg attribute="length">200</arg>
+            <arg attribute="type">DECIMAL</arg>
+            <arg attribute="enabled">false</arg>
+          </subarg>
+          <subarg>
+            <!-- e5 -->
+            <arg attribute="name">id_sucursal</arg>
+            <arg attribute="length">0</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+          </subarg>
+        </parameters>
+      </component>
+      <panel locate="South" type="BorderLayout">
+        <component locate="East">
+          <driver id="totalu">client.gui.components.TableDataFields</driver>
+          <parameters>
+            <arg attribute="linkTable">usuarios</arg>
+            <subarg>
+              <arg attribute="label">Total Movimientos</arg>
+              <arg attribute="format">NUMERIC</arg>
+              <arg attribute="size">10</arg>
+              <arg attribute="enabled">false</arg>
+              <arg attribute="alignment">RIGHT</arg>
+              <arg attribute="maxlength">20</arg>
+              <arg attribute="background">102,153,204</arg>
+              <arg attribute="foreground">0,0,0</arg>
+              <arg attribute="calculateExportValue">totalmovimientos</arg>
+              <arg attribute="printable">true</arg>
+            </subarg>
+          </parameters>
+        </component>
+      </panel>
+    </panel>
+    <panel icon="/icons/ico_carro_compras_16x16.png" name="Informacion de Recaudo" type="BorderLayout">
+      <component locate="North">
+        <driver>common.gui.components.XMLLabel</driver>
+        <parameters>
+          <arg attribute="text">Informacion de Recaudo</arg>
+          <arg attribute="alignment">LEFT</arg>
+        </parameters>
+      </component>
+      <component locate="Center">
+        <driver id="recaudo">client.gui.components.TableFindData</driver>
+        <parameters>
+          <arg attribute="keySQL">MTSEL0731</arg>
+          <arg attribute="driverEvent" id="sucursal">client.gui.components.XMLComboBox</arg>
+          <arg attribute="rows">25</arg>
+          <arg attribute="protectSelected">true</arg>
+          <arg attribute="colorBackground">159,202,25</arg>
+          <arg attribute="colorSelected">153,204,102</arg>
+          <arg attribute="font">Dialog,0,12</arg>
+          <arg attribute="totales">d</arg>
+          <arg attribute="exportTotalCol">d,totalrecaudo</arg>
+          <arg attribute="conditionalColor">102,153,204:d&gt;-1</arg>
+          <!-- <arg attribute="initSQL">MTSEL0731</arg>-->
+          <subarg>
+            <!-- a1 -->
+            <arg attribute="name">idcredito</arg>
+            <arg attribute="length">0</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+          </subarg>
+          <subarg>
+            <!-- b2 -->
+            <arg attribute="name">Sucursal</arg>
+            <arg attribute="length">300</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+          </subarg>
+          <subarg>
+            <!-- c3 -->
+            <arg attribute="name">Tipo</arg>
+            <arg attribute="length">200</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+          </subarg>
+          <subarg>
+            <!-- d4 -->
+            <arg attribute="name">Valor</arg>
+            <arg attribute="length">200</arg>
+            <arg attribute="type">DECIMAL</arg>
+            <arg attribute="enabled">false</arg>
+          </subarg>
+          <subarg>
+            <!-- e5 -->
+            <arg attribute="name">id_sucursal</arg>
+            <arg attribute="length">0</arg>
+            <arg attribute="type">STRING</arg>
+            <arg attribute="enabled">false</arg>
+          </subarg>
+        </parameters>
+      </component>
+      <panel locate="South" type="BorderLayout">
+        <component locate="East">
+          <driver id="totalr">client.gui.components.TableDataFields</driver>
+          <parameters>
+            <arg attribute="linkTable">recaudo</arg>
+            <subarg>
+              <arg attribute="label">Total Recaudo</arg>
+              <arg attribute="format">NUMERIC</arg>
+              <arg attribute="size">10</arg>
+              <arg attribute="enabled">false</arg>
+              <arg attribute="alignment">RIGHT</arg>
+              <arg attribute="background">102,153,204</arg>
+              <arg attribute="foreground">0,0,0</arg>
+              <arg attribute="maxlength">20</arg>
+              <arg attribute="calculateExportValue">totalrecaudo</arg>
+              <arg attribute="printable">true</arg>
+            </subarg>
+          </parameters>
+        </component>
+      </panel>
+    </panel>
+  </panel>
+  <panel align="CENTER" locate="South" type="BorderLayout">
+    <component locate="East">
+      <driver>common.gui.components.ButtonsPanel</driver>
+      <parameters>
+        <arg>NEW</arg>
+        <arg>EXIT</arg>
+      </parameters>
+      <events>
+                        <object>
+                            <name>NEW</name>
+                            <!--  Limpiando tablas de retenciones  -->
+                            <component>
+                                <driver id="totalr">client.gui.components.TableDataFields</driver>
+                                <method>clean</method>
+                            </component>
+                            <component>
+                                <driver id="recaudo">client.gui.components.TableFindData</driver>
+                                <method>clean</method>
+                            </component>
+                            <component>
+                                <driver id="totalu">client.gui.components.TableDataFields</driver>
+                                <method>clean</method>
+                            </component>
+                            <component>
+                                <driver id="usuarios">client.gui.components.TableFindData</driver>
+                                <method>clean</method>
+                            </component>
+                            <component>
+                                <driver id="sucursal">client.gui.components.XMLComboBox</driver>
+                                <method>clean</method>
+                            </component>
+                            <component>
+                                <driver id="fecha">common.gui.components.XMLDateField</driver>
+                                <method>clean</method>
+                            </component>                            
+                        </object>
+                    </events>
+    </component>
+  </panel>
+</FORM>

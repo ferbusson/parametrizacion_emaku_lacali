@@ -191,12 +191,12 @@
                                             <arg attribute="sqlCode">NMSEL0017</arg>
                                             <arg attribute="sqlCode">NMSEL0018</arg>
                                             <arg attribute="sqlCode">NMSEL0019</arg>
-                                            <arg attribute="sqlCode">NM0000011</arg>
+                                            <arg attribute="sqlCode">NM0000011</arg> <!--Ext Ordinarias-->
                                             <arg attribute="sqlCode">NMSEL0029</arg>
                                             <arg attribute="sqlCode">NMSEL0026</arg>
-                                            <arg attribute="sqlCode">NMSEL0027</arg>
-                                            <arg attribute="sqlCode">NMSEL0028</arg>
-                                            <arg attribute="sqlCode">NM0000012</arg>
+                                            <arg attribute="sqlCode">NMSEL0027</arg> <!--Ext Dom-->
+                                            <arg attribute="sqlCode">NMSEL0028</arg> <!--Recargos-->
+                                            <arg attribute="sqlCode">NM0000012</arg> <!--Dom y Festivos-->
                                             <arg attribute="sqlCode">NMSEL0020</arg>
                                             <arg attribute="sqlCode">NMSEL0098</arg>
                                         </parameters>
@@ -2264,23 +2264,29 @@
                             <arg attribute="driverEventRecord" id="devprovisionados">client.gui.components.TableFindData</arg>
 
                             <arg attribute="externalValue">dias,client.gui.components.TableDataFields,zz</arg>
-                            <arg attribute="beanshell">d=
-                                ab!=0&amp;&amp;ac!=0?
-                                  (ac+1)-ab:
+                            <arg attribute="beanshell">d=                                
+                                <!-- ab!=0&amp;&amp;ac!=0?
+                                  (ac+1)-ab: -->
                                 "8".equals(t)?
-                                  ac-ab>0?
-                                    ac-ab-z-aa:
+                                  ab!=0&amp;&amp;ac!=0?
+                                    (ac+1)-ab-z-aa:
                                   ab!=0?
                                     zz-(ab-1)-z-aa:
+                                  ac!=0?
+                                    ac-z-aa:
                                   zz-z-aa:
                                 ("9".equals(t)||"15".equals(t))?
-                                  ac-ab>0?
-                                    ac-ab:
+                                  ab!=0&amp;&amp;ac!=0?
+                                    (ac+1)-ab:
                                   ab!=0?
                                     zz-(ab-1):
-                                  zz:
+                                  ac!=0?
+                                    ac-z-aa:
+                                  zz:       
+                                ab!=0&amp;&amp;ac!=0?
+                                  (ac+1)-ab:                         
                                 ac-ab>0?
-                                  (ac-ab)-(u+v+w+x+y+z+aa+ad+ae):
+                                  ((ac+1)-ab)-(u+v+w+x+y+z+aa+ad+ae):
                                 ab!=0?
                                   ab-(u+v+w+x+y+z+aa+ad+ae):
                                 zz-(ab+u+v+w+x+y+z+aa+ad+ae)</arg>
@@ -3403,31 +3409,38 @@
 
                     <arg attribute="beanshell">d=
                     <!--Sep 23 2025: Quito la condicion anterior en la que evaluaba directamente si habia ingreso y retiro -->
-                      "9".equals(t)?
-                          ac-ab>0?
-                            <!-- ac-ab-z-aa: -->
-                            (ac-ab): <!--Sep 23 2025: Pongo el +1 Oct 20 lo quito para que el calculo de los dias sea correcto -->
-                          ab!=0?
+                      "9".equals(t)?                          
+                          ac!=0&amp;&amp;ab!=0? <!-- Enero 27 2026 cambio aqui -->
+                            (ac-ab)+1: <!-- Enero 27 2026 cambio aqui --> <!--Sep 23 2025: Pongo el +1 Oct 20 lo quito para que el calculo de los dias sea correcto aquiiii Ene 26 2026 caso de retiros principal al tener in y egreso en Enero el calculo debe agregar 1 dia-->
+                          ab!=0? <!--IN != 0-->
                             zz-(ab-1):
+                          ac!=0? <!--si hay retiro--> <!-- Enero 27 2026 cambio aqui -->
+                            (ac-ab):
                           zz:
                         "10".equals(t)?
-                            ad!=0 &amp;&amp; ac!=0? <!--VC y RE != 0-->
+                            ad!=0 &amp;&amp; ac!=0? <!--VC y RE != 0--> 
                             ac-(ad+u+v+w+x+y+z+aa):
                           ad!=0? <!--VC !=0-->
                             zz-(ad+u+v+w+x+y+z+aa):
-                          ac-ab>0? <!--RE - IN > 0 -->
-                            ((ac-ab))-(u+v+w+x+y+z+aa):<!--Sep 23 2025: Pongo el +1 Oct 20 lo quito para que el calculo de los dias sea correcto -->
+                          ac!=0&amp;&amp;ab!=0? <!--RE - IN > 0 --> <!-- Enero 27 2026 cambio aqui -->
+                            ((ac-ab)+1)-(u+v+w+x+y+z+aa):<!--Sep 23 2025: Pongo el +1 Oct 20 lo quito para que el calculo de los dias sea correcto aquiiiii Ene 26 2026 caso de retiros principal al tener in y egreso en Enero el calculo debe agregar 1 dia--> 
                           ab!=0? <!--IN != 0-->
                             zz-(u+v+w+x+y+z)-(ab-1):                          
+                          ac!=0? <!--RE > 0 --> <!-- Enero 27 2026 cambio aqui -->
+                            ((ac-ab))-(u+v+w+x+y+z+aa):<!----> 
                           zz-(u+v+w+x+y+z+aa):
                         "11".equals(t)||"12".equals(t)||"13".equals(t)? <!-- Agosto 31 se agregan 12 y 13 (salud y pension) en revision caso salario superior a 25 ssmm -->
-                          ac-ab>0? <!--RE - IN > 0 -->
-                            ((ac-ab))-(u+v+w+x+z+aa):<!--Sep 23 2025: Pongo el +1 Oct 20 lo quito para que el calculo de los dias sea correcto -->
+                          ac!=0&amp;&amp;ab!=0? <!--RE - IN > 0 --><!-- Enero 27 2026 cambio aqui -->
+                            ((ac-ab)+1)-(u+v+w+x+z+aa):<!--Sep 23 2025: Pongo el +1 Oct 20 lo quito para que el calculo de los dias sea correcto aquiiii Ene 26 2026 caso de retiros principal al tener in y egreso en Enero el calculo debe agregar 1 dia-->
                           ab!=0? <!--IN != 0-->
                             zz-(u+v+w+x+z)-(ab-1):
+                          ac!=0? <!--RE - IN > 0 --><!-- Enero 27 2026 cambio aqui -->
+                            ((ac-ab))-(u+v+w+x+z+aa):<!--Sep 23 2025: Pongo el +1 Oct 20 lo quito para que el calculo de los dias sea correcto aquiiii Ene 26 2026 caso de retiros principal al tener in y egreso en Enero el calculo debe agregar 1 dia-->
                           zz-(u+v+w+x+z+aa):
-                        ac-ab>0? <!--RE - IN > 0 -->
+                        ac!=0&amp;&amp;ab!=0? <!--RE  IN > 0 -->
                           ((ac-ab)+1)-(u+v+w+x+y+z+aa+ad+ae):<!--Sep 23 2025: Pongo el +1 para que el calculo de los dias sea correcto -->
+                        ac!=0? <!--RE != 0 -->
+                          ((ac-ab))-(u+v+w+x+y+z+aa+ad+ae):<!--Sep 23 2025: Pongo el +1 para que el calculo de los dias sea correcto -->                          
                         ab!=0? <!--IN != 0-->
                           (zz-(ab-1))-(u+v+w+x+y+z+aa+ad+ae):
                         <!-- zz-(ab+v+w+x+y+z+aa+ad) asi estaba antes, hago el cambio Nov 7 2025 para corregir caso NM-753 William Vargas donde para el 
@@ -3888,16 +3901,27 @@
                     <arg attribute="protectSelected">true</arg>
                     <arg attribute="protectSelected">true</arg>  
                     <arg attribute="beanshell">d=
-                        ab!=0&amp;&amp;ac!=0?
+                    ab!=0&amp;&amp;ac!=0&amp;&amp;(am==18||am==21)?
+                          ((ac+1)-ab-(z+aa)):
+
+                        ab!=0&amp;&amp;ac!=0&amp;&amp;(am!=18||am!=21)?
                           ((ac+1)-ab):
+
+                        ((z!=0||aa!=0)&amp;&amp;ab!=0&amp;&amp;(am==19||am==20))? <!--Agregada 21 Ene 2026 -->
+                            (zz-(ab-1)): <!--Agregada 21 Ene 2026 -->
+
                         ((z!=0||aa!=0)&amp;&amp;ab!=0)?
                           (zz-(z+(ab-1))):
+
+                        (ac-ab)>0&amp;&amp;(am==19||am==20)? <!--Agregada 21 Ene 2206 -->
+                          (ac-ab): <!--Agregada 21 Ene 2026 -->
+
                         (ac-ab)>0?
                           (ac-ab-z-aa):
-                        <!-- (am==19||am==20)? comentado revision 27 Oct 2025 con Maria E problema liquidacion de Septiembre
-                            zz: -->
-                        (z!=0||aa!=0)?
-                          zz-(z+aa):                        
+
+                        <!-- (z!=0||aa!=0)? Agregada 21 Ene 2026 estaba esta antes -->
+                        (z!=0||aa!=0) &amp;&amp;(am!=19&amp;&amp;am!=20)? <!--Agregada 21 Ene 2026 -->
+                          zz-(z+aa):
                         (ab!=0)?
                           (zz-(ab-1)):
                         zz</arg>
@@ -4300,7 +4324,8 @@
                     
                     <!--<arg attribute="beanshell">e=s!=0&amp;&amp;t!=0?(t+1)-s-p-q-l-m-n-o-r-u:s-s>0?s-t-p-q-l-m-n-o-q-r-u:t!=0?t-p-q-l-m-n-o-q-r-u:s!=0?zz-(s-1)-p-q-l-m-n-o-q-r-u:zz-p-q-l-m-n-o-q-r-u</arg>-->
                     
-                    <arg attribute="formula">e=(k/30.0)*d</arg>
+                    <!-- <arg attribute="formula">e=(k/30.0)*(d-(ac+ad))</arg> asi estaba antes Feb 27 2026 -->
+                    <arg attribute="formula">e=(k/30.0)*(d)</arg>
                     <arg attribute="beanshell">c=e+m+n+o+p+ai+r+w</arg> <!--se hace cambio de formula a beanshell porque no soporta numeros grandes 17133400 lo pasa a 1.71334E con formula Marzo 5 2022 -->
                     <!--c = devengado = ValorSB+eordinario+edominicales+recargos+dominical+Devxvalor2+Dev porcentual+DevProvPrima-->
                     <arg attribute="beanshell">f=h+i+j</arg> <!-- Junio 01 se pone beanshell por la misma razon de Marzo 5 2022 citada arriba -->

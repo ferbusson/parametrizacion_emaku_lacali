@@ -14,7 +14,10 @@ WHERE
 FROM
 	documentos 
 WHERE
-	codigo_tipo in ('G1','Z1','FW') 
+	(codigo_tipo like 'Z%' or
+	codigo_tipo like 'G%' or
+	codigo_tipo like 'M%' or
+	codigo_tipo like 'L%')
 EXCEPT
 SELECT
 	ndocumento

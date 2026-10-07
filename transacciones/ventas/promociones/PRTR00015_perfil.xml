@@ -561,8 +561,8 @@
                         <arg attribute="returnNullValue">true</arg>
                         <arg attribute="keySQL">LCSEL0219</arg>
                         <arg attribute="driverEvent" id="nro_promocion">common.gui.components.GenericData</arg>
-                        <!-- <arg attribute="sqlInit">LCSEL0307</arg>
-                        <arg attribute="queryOnInit">true</arg> -->
+                        <arg attribute="sqlInit">LCSEL0307</arg>
+                        <arg attribute="queryOnInit">true</arg>
                         <subarg>
                           <arg attribute="name">SELECTION</arg>
                           <arg attribute="length">85</arg>

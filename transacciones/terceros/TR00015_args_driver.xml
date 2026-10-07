@@ -1,0 +1,63 @@
+ <container>
+      <!-- 0 Actualiza general -->
+      <arg>DGUPD0003</arg>
+      <!-- 1 Actualiza info_credito -->
+      <arg>MTUPD0007</arg>
+      <!-- 2 Borra tpuntos -->
+      <arg>MTDEL0019</arg>
+      <!-- 3 Inserta en tpuntos -->
+      <arg>MTINS0026</arg>
+      <!-- 4 Borra de perfil_tercero -->
+      <arg>DEL0018</arg>
+      <!-- 5 Inserta en perfil_tercero -->
+      <arg>LCINS0204</arg>
+      <!-- 5b Inserta en auditoria terceros -->
+      <arg>LCINS0197</arg>
+
+      <!-- 6 Borra de propiedad_tercero -->
+      <arg>DEL0017</arg>
+      <!-- Inserta en propiedad_tercero -->
+      <arg>INS0019</arg>
+
+      <!-- 7 Borra contactos_clientes -->
+      <arg>DGDEL0006</arg>
+      <!-- Inserta en contactos_clientes -->
+      <arg>INS0092</arg>
+
+      <!-- 8 Borra de cuentas_bancarias -->
+      <arg>DEL0020</arg>
+      <!-- Inserta en cuentas_bancarias -->
+      <arg>INS0016</arg>
+
+      <!-- 9 Crea tabla tmp_direcciones -->
+      <arg>LCINS0042</arg>
+      <!-- Inserta en tmp_direcciones -->
+      <arg>LCINS0044</arg>
+      <!-- Inserta en direcciones a partir de tmp_direcciones -->
+      <arg>LCINS0045</arg>
+
+      <!-- 10 Crea tabla tmp_telefonos -->
+      <arg>LCINS0043</arg>
+      <!-- Inserta en tmp_telefonos -->
+      <arg>LCINS0046</arg>
+      <!-- Inserta en telefonos a partir de tmp_telefonos -->      
+      <arg>LCINS0047</arg>
+
+      <!-- 11 Borra de emails -->
+      <arg>DEL0023</arg>
+      <!-- Inserta en emails -->
+      <arg>INS0015</arg>
+      
+      <!-- 12 Borra proveedor_marca -->
+      <arg>MTDEL0018</arg>
+      <!-- 13 Inserta en proveedor_marca -->
+      <arg>MTINS0035</arg>
+
+      <!-- 14 Borra linea_tercero -->
+      <arg>LCDEL0002</arg>
+      <!-- 15 Inserta en linea_tercero -->
+      <arg>LCINS0049</arg>
+     <!-- 16 Actualiza args_traslado_tercero -->
+     <arg>LCUPD0021</arg>
+
+ </container>

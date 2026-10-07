@@ -1,0 +1,31 @@
+<container>
+  <subarg>
+    
+    <arg attribute="actionDocument">annulDocument</arg>
+    <arg attribute="date" />
+
+  </subarg>
+
+  <subarg>
+    <LNData>
+      <driver>LNInventarios</driver>
+      <method>movimientos</method>
+      <parameters>
+        <arg attribute="tipoMovimiento">anular</arg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>anular</method>
+      <parameters>
+        <arg attribute="Concepto">
+          Factura de Anulada
+        </arg>
+      </parameters>
+    </LNData>
+  </subarg>
+
+  3 tabla: tarjetas - pago total una tarjeta
+  <arg>MTINS0020</arg>  
+  
+</container>
