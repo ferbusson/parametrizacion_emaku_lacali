@@ -1987,7 +1987,7 @@
             <!--Inicia Impresion Grafica-->
             <action>
               <type>printer</type>
-              <printerTemplate>/graphics/TNRecarga_tarjeta_regalo.xml</printerTemplate>
+              <printerTemplate>/graphics/TNActivar_bono_regalo.xml</printerTemplate>
               <component>
                 <driver>gfforma</driver>
                 <method>setVisible</method>
