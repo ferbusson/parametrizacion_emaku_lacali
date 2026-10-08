@@ -383,7 +383,7 @@
             <component locate="North">
               <driver>common.gui.components.XMLLabel</driver>
               <parameters>
-                <arg attribute="text">Sodexo/BigPass</arg>
+                <arg attribute="text">Pluxee/BigPass</arg>
                 <arg attribute="alignment">0</arg>
                 <arg attribute="font">Dialog,1,20</arg>
               </parameters>
@@ -1248,7 +1248,7 @@
         </panel>
         <!-- Termina gridLayout -->
       </panel>
-      <panel font="Dialog,1,12" icon="/icons/ico_sodexo_32x32.png" name="Sodexo/BigPass" type="BorderLayout">
+      <panel font="Dialog,1,12" icon="/icons/ico_sodexo_32x32.png" name="Pluxee/BigPass" type="BorderLayout">
         <panel locate="North"  type="FlowLayout" />
 
         <panel cols="1" locate="Center" rows="2" type="GridLayout">
@@ -1256,7 +1256,7 @@
                 <component locate="North">
                     <driver>common.gui.components.XMLLabel</driver>
                     <parameters>
-                        <arg attribute="text">Sodexo</arg>
+                        <arg attribute="text">Pluxee</arg>
                         <arg attribute="alignment">0</arg>
                         <arg attribute="font">Dialog,1,15</arg>
                     </parameters>

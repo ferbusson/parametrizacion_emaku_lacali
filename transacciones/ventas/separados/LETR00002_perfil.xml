@@ -2642,6 +2642,11 @@
                                 <driver id="tcredibanco">client.gui.components.TableFindData</driver>
                                 <method>clean</method>
                             </component>
+                            <!-- bonos regalo ** -->
+                            <component>
+                                <driver id="listapagosconbonoregalo">client.gui.components.TableFindData</driver>
+                                <method>clean</method>
+                            </component>
                             <component>
                                 <driver id="tpagosmanuales">client.gui.components.TableFindData</driver>
                                 <method>clean</method>
@@ -3944,6 +3949,11 @@
 
                         <component>
                             <driver id="tcredibanco">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <!-- bonos regalo ** -->
+                        <component>
+                            <driver id="listapagosconbonoregalo">client.gui.components.TableFindData</driver>
                             <method>clean</method>
                         </component>
                         <component>
