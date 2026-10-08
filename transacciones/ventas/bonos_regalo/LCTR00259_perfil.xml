@@ -385,7 +385,7 @@
                   <driver id="tpagosmanuales">client.gui.components.TableFindData</driver>
                   <parameters>
                     <arg attribute="driverEvent" id="number">client.gui.components.TableDataFields</arg>
-                    <arg attribute="keySQL">LCSEL0150</arg>
+                    <arg attribute="keySQL">LCSEL1024</arg>
                     <arg attribute="enabled">false</arg>
                     <arg attribute="rows">40</arg>
                     <arg attribute="colorBackground">191,255,179</arg>
@@ -1311,6 +1311,7 @@
                         <subarg>
                             <arg attribute="format">STRING</arg>
                             <arg attribute="alignment">RIGHT</arg>
+                            <arg attribute="getValue">_codigocampania</arg>
                             <arg attribute="size">14</arg>
                             <arg attribute="maxlength">13</arg>
                             <arg attribute="font">Dialog,1,14</arg>
@@ -1327,6 +1328,7 @@
                             <arg attribute="format">STRING</arg>
                             <arg attribute="alignment">RIGHT</arg>
                             <arg attribute="size">14</arg>
+                            <arg attribute="getValue">_codigobonoregalo</arg>
                             <arg attribute="maxlength">13</arg>
                             <arg attribute="font">Dialog,1,14</arg>
                             <arg attribute="printable">true</arg>
@@ -1342,6 +1344,7 @@
                             <arg attribute="format">STRING</arg>
                             <arg attribute="alignment">RIGHT</arg>
                             <arg attribute="size">14</arg>
+                            <arg attribute="getValue">_telefonobono</arg>
                             <arg attribute="maxlength">13</arg>
                             <arg attribute="font">Dialog,1,14</arg>
                             <arg attribute="printable">true</arg>
@@ -1357,6 +1360,7 @@
                             <arg attribute="format">STRING</arg>
                             <arg attribute="alignment">RIGHT</arg>
                             <arg attribute="size">20</arg>
+                            <arg attribute="getValue">_correoelectronico</arg>
                             <arg attribute="maxlength">80</arg>
                             <arg attribute="font">Dialog,1,14</arg>
                             <arg attribute="printable">true</arg>
@@ -1518,9 +1522,11 @@
                          
                          <arg attribute="sqlCode">DGSEL0013</arg> efectivo
                          <!-- <arg attribute="sqlCode">LESEL0016</arg> tarjetas no se esta usando-->
-                         <arg attribute="sqlCode">LCSEL0150</arg> tabla pagos manuales
+                         <arg attribute="sqlCode">LCSEL1024</arg> tabla pagos manuales
                          <arg attribute="sqlCode">LCSEL0072</arg> tabla sodexo
                          <arg attribute="sqlCode">LCSEL0073</arg> tabla bigpass
+                         <arg attribute="sqlCodeExportValue">LCSEL1022,_franquicia,_codigocampania,_codigobonoregalo,_telefonobono,_correoelectronico</arg>                  
+                         <arg attribute="sqlCode">LCSEL1023</arg> <!--tabla respuesta activacion-->
                           
                       </subarg>
                   </parameters>
@@ -1554,6 +1560,8 @@
                             <component locate="Center">
                                 <driver id="listabonosregaloactivados">client.gui.components.TableFindData</driver>
                                 <parameters>
+                                    <arg attribute="keySQL">LCSEL1023</arg>
+                                    <arg attribute="driverEvent" id="number">client.gui.components.TableDataFields</arg>  
                                     <arg attribute="rows">10</arg>
                                     <arg attribute="tagData">2</arg>
                                     <arg attribute="totales">b</arg>
