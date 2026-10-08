@@ -11,7 +11,7 @@
     
     <!-- 00 activacion_bonos_regalo -->
   <arg>LCINS0224</arg>  
-  0
+  <!-- 0
    <LNData>
       <driver>LNSelectedField</driver>
       <method>getSubpackage</method>
@@ -20,7 +20,7 @@
           <arg attribute="fields">0,1,2,3,4</arg>
           <arg attribute="discartKey">idTercero</arg>
           <arg attribute="discartKey">centrocosto</arg></parameters>
-  </LNData>
+  </LNData> -->
 
  
   1 datos_doc

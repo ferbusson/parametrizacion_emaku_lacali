@@ -951,7 +951,7 @@
 
       <preferences>
           <size width="800" height="450" />
-          <name> Consulta Acticación de Bono Regalo</name>
+          <name> Consulta Activación de Bono Regalo</name>
           <icon>NART</icon>
           <iconificable />
           <closable />
@@ -1313,7 +1313,7 @@
                             <arg attribute="alignment">RIGHT</arg>
                             <arg attribute="getValue">_codigocampania</arg>
                             <arg attribute="size">14</arg>
-                            <arg attribute="maxlength">13</arg>
+                            <arg attribute="maxlength">50</arg>
                             <arg attribute="font">Dialog,1,14</arg>
                             <arg attribute="printable">true</arg>
                             <arg attribute="enabled">false</arg>
@@ -1329,7 +1329,7 @@
                             <arg attribute="alignment">RIGHT</arg>
                             <arg attribute="size">14</arg>
                             <arg attribute="getValue">_codigobonoregalo</arg>
-                            <arg attribute="maxlength">13</arg>
+                            <arg attribute="maxlength">50</arg>
                             <arg attribute="font">Dialog,1,14</arg>
                             <arg attribute="printable">true</arg>
                             <arg attribute="enabled">false</arg>
@@ -1345,7 +1345,7 @@
                             <arg attribute="alignment">RIGHT</arg>
                             <arg attribute="size">14</arg>
                             <arg attribute="getValue">_telefonobono</arg>
-                            <arg attribute="maxlength">13</arg>
+                            <arg attribute="maxlength">50</arg>
                             <arg attribute="font">Dialog,1,14</arg>
                             <arg attribute="printable">true</arg>
                             <arg attribute="enabled">false</arg>
@@ -1361,7 +1361,7 @@
                             <arg attribute="alignment">RIGHT</arg>
                             <arg attribute="size">20</arg>
                             <arg attribute="getValue">_correoelectronico</arg>
-                            <arg attribute="maxlength">80</arg>
+                            <arg attribute="maxlength">180</arg>
                             <arg attribute="font">Dialog,1,14</arg>
                             <arg attribute="printable">true</arg>
                             <arg attribute="enabled">false</arg>
@@ -1782,26 +1782,26 @@
                     </component>
                 
                 <component>
-                  <driver id="tarjeta">common.gui.components.GenericData</driver>
+                  <driver id="codigobonoregalo">common.gui.components.GenericData</driver>
                   <method>clean</method>
                 </component>
                 12 voucher
                 <component>
-                  <driver id="voucher">common.gui.components.GenericData</driver>
+                  <driver id="telefono">common.gui.components.GenericData</driver>
                   <method>clean</method>
                 </component>
                 13 RRN
                 <component>
-                  <driver id="rrn">common.gui.components.GenericData</driver>
+                  <driver id="listabonosregaloactivados">client.gui.components.TableFindData</driver>
                   <method>clean</method>
                 </component>
                 14 Auth
                 <component>
-                  <driver id="nrauto">common.gui.components.GenericData</driver>
+                  <driver id="campania">common.gui.components.GenericData</driver>
                   <method>clean</method>
                 </component>
                 <component>
-                  <driver id="recarga">common.gui.components.GenericData</driver>
+                  <driver id="correoelectronico">common.gui.components.GenericData</driver>
                   <method>clean</method>
                 </component>
 

@@ -1656,7 +1656,7 @@
               
               
               0
-              <component>
+              <!-- <component>
                 <driver>this</driver>
                 <method>getPackage</method>
                 <parameters>
@@ -1669,7 +1669,7 @@
                     <arg attribute="importValue">tarjeta</arg>
                   </subarg>
                 </parameters>
-              </component>
+              </component> -->
               1
               <component>
                 <driver>this</driver>
