@@ -700,11 +700,27 @@
           <driver id="tcredibanco">client.gui.components.TableFindData</driver>
           <method>clean</method>
         </component>
-        <!-- 4 bonos regalo - multiples pagos parciales pendiente **-->
-        <component>
-            <driver id="listapagosconbonoregalo">client.gui.components.TableFindData</driver>
-            <method>clean</method>
-        </component>
+          <component>
+              <driver id="codigobono">client.gui.components.TableDataFields</driver>
+              <method>clean</method>
+          </component>
+          <component>
+              <driver id="telefonoparabono">client.gui.components.TableDataFields</driver>
+              <method>clean</method>
+          </component>
+          <component>
+              <driver id="valorbonoregalo">client.gui.components.TableDataFields</driver>
+              <method>clean</method>
+          </component>
+          <!-- bonos regalo ** -->
+          <component>
+              <driver id="listapagosconbonoregalo">client.gui.components.TableFindData</driver>
+              <method>clean</method>
+          </component>
+          <component>
+                  <driver id="tbonosregalo">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+          </component>
         <component>
           <driver id="tpagosmanuales">client.gui.components.TableFindData</driver>
           <method>clean</method>
@@ -944,7 +960,7 @@
         <panel locate="North" type="FlowLayout" />
         <panel locate="South" type="FlowLayout" />
         <panel locate="Center" type="BorderLayout">
-          <panel locate="West" type="GridLayout" rows="13" cols="1">
+          <panel locate="West" type="GridLayout" rows="14" cols="1">
             <component>
               <driver>common.gui.components.XMLLabel</driver>
               <parameters>
@@ -997,6 +1013,14 @@
             <component locate="North">
               <driver>common.gui.components.XMLLabel</driver>
               <parameters>
+                <arg attribute="text">Bonos Regalo</arg>
+                <arg attribute="alignment">0</arg>
+                <arg attribute="font">Dialog,1,20</arg>
+              </parameters>
+            </component>
+            <component locate="North">
+              <driver>common.gui.components.XMLLabel</driver>
+              <parameters>
                 <arg attribute="text">Cheques</arg>
                 <arg attribute="alignment">0</arg>
                 <arg attribute="font">Dialog,1,20</arg>
@@ -1036,7 +1060,7 @@
               </parameters>
             </component>
           </panel>
-          <panel locate="Center" type="GridLayout" rows="13" cols="1">
+          <panel locate="Center" type="GridLayout" rows="14" cols="1">
             <component>
               <driver id="neto">common.gui.components.GenericData</driver>
               <parameters>
@@ -1170,11 +1194,23 @@
               </component>
             </panel>
 
-
-
-
-
-
+            <component locate="Center">
+              <driver id="tbonosregalo">common.gui.components.GenericData</driver>
+              <parameters>
+                  <arg attribute="Panel">false</arg>
+                  <subarg>
+                  <arg attribute="name">tbonosregalo</arg>
+                  <arg attribute="format">NUMERIC</arg>
+                  <arg attribute="size">11</arg>
+                  <arg attribute="maxlength">26</arg>
+                  <arg attribute="font">Dialog,1,20</arg>
+                  <arg attribute="alignment">RIGHT</arg>
+                  <arg attribute="enabled">false</arg>
+                  <arg attribute="calculateExportValue">valorpagobonosregalo</arg>
+                  <arg attribute="printable">true</arg>
+                  </subarg>
+              </parameters>
+              </component>
 
             <component locate="Center">
               <driver id="tcheque">client.gui.components.TableDataFields</driver>
@@ -1882,7 +1918,7 @@
                                         <arg attribute="cleanComponent" id="basebonoregalo">common.gui.components.GenericData</arg>
                                         <arg attribute="cleanComponent" id="ivabonoregalo">common.gui.components.GenericData</arg>
 
-                                        <externalValidations>
+                                        <!-- <externalValidations>
 
                                         <component>
                                             <driver id="principal">client.gui.components.TableFindData</driver>
@@ -1893,7 +1929,7 @@
                                             <method>getPackage</method>
                                         </component>
 
-                                        </externalValidations>
+                                        </externalValidations> -->
 
                                     </parameters>
                                 </component>
@@ -3653,11 +3689,27 @@
           <driver id="tcredibanco">client.gui.components.TableFindData</driver>
           <method>clean</method>
         </component>
-        <!-- 4 bonos regalo - multiples pagos parciales pendiente **-->
-        <component>
-            <driver id="listapagosconbonoregalo">client.gui.components.TableFindData</driver>
-            <method>clean</method>
-        </component>
+          <component>
+              <driver id="codigobono">client.gui.components.TableDataFields</driver>
+              <method>clean</method>
+          </component>
+          <component>
+              <driver id="telefonoparabono">client.gui.components.TableDataFields</driver>
+              <method>clean</method>
+          </component>
+          <component>
+              <driver id="valorbonoregalo">client.gui.components.TableDataFields</driver>
+              <method>clean</method>
+          </component>
+          <!-- bonos regalo ** -->
+          <component>
+              <driver id="listapagosconbonoregalo">client.gui.components.TableFindData</driver>
+              <method>clean</method>
+          </component>
+          <component>
+                  <driver id="tbonosregalo">common.gui.components.GenericData</driver>
+                  <method>clean</method>
+          </component>
         <component>
           <driver id="tpagosmanuales">client.gui.components.TableFindData</driver>
           <method>clean</method>

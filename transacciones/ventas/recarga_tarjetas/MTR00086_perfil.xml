@@ -343,7 +343,7 @@
         <panel locate="North" type="FlowLayout"/>
         <panel locate="South" type="FlowLayout"/>
         <panel locate="Center" type="BorderLayout">
-          <panel cols="1" locate="West" rows="9" type="GridLayout">
+          <panel cols="1" locate="West" rows="10" type="GridLayout">
             <component locate="North">
               <driver>common.gui.components.XMLLabel</driver>
               <parameters>
@@ -376,6 +376,14 @@
               <driver>common.gui.components.XMLLabel</driver>
               <parameters>
                 <arg attribute="text">Efectivo Pesos</arg>
+                <arg attribute="alignment">0</arg>
+                <arg attribute="font">Dialog,1,20</arg>
+              </parameters>
+            </component>
+            <component locate="North">
+              <driver>common.gui.components.XMLLabel</driver>
+              <parameters>
+                <arg attribute="text">Bonos Regalo</arg>
                 <arg attribute="alignment">0</arg>
                 <arg attribute="font">Dialog,1,20</arg>
               </parameters>
@@ -422,7 +430,7 @@
               </parameters>
             </component>
           </panel>
-          <panel cols="1" locate="Center" rows="9" type="GridLayout">
+          <panel cols="1" locate="Center" rows="10" type="GridLayout">
             <component locate="East">
               <driver id="totalfactura">client.gui.components.TableDataFields</driver>
               <parameters>
@@ -527,6 +535,23 @@
             </panel>
 
             <component locate="Center">
+              <driver id="tbonosregalo">common.gui.components.GenericData</driver>
+              <parameters>
+                <arg attribute="Panel">false</arg>
+                <subarg>
+                  <arg attribute="name">tbonosregalo</arg>
+                  <arg attribute="format">NUMERIC</arg>
+                  <arg attribute="size">11</arg>
+                  <arg attribute="maxlength">26</arg>
+                  <arg attribute="font">Dialog,1,20</arg>
+                  <arg attribute="alignment">RIGHT</arg>
+                  <arg attribute="enabled">false</arg>
+                  <arg attribute="calculateExportValue">valorpagobonosregalo</arg>
+                  <arg attribute="printable">true</arg>
+                </subarg>
+              </parameters>
+            </component>
+            <component locate="Center">
               <driver id="tsodexobigpass">common.gui.components.GenericData</driver>
               <parameters>
                 <arg attribute="Panel">false</arg>
@@ -583,7 +608,7 @@
                     <arg attribute="enabled">false</arg>
                     <arg attribute="printable">true</arg>
                     <!-- <arg attribute="calculateExportValue">(totaltarjeta)-((totaltarjeta)/1.19)</arg> -->
-                    <arg attribute="calculateExportValue">(totaltarjeta*tiva/totalfact)</arg>
+                    <arg attribute="calculateBSExportValue">totalfact&gt;0?(totaltarjeta*tiva/totalfact):0</arg>
                   </subarg>
                 </parameters>
               </component>
@@ -1489,10 +1514,10 @@
                                         <arg attribute="cleanComponent" id="valorbonoregalo">client.gui.components.TableDataFields</arg>
                                         <arg attribute="cleanComponent" id="basebonoregalo">common.gui.components.GenericData</arg>
                                         <arg attribute="cleanComponent" id="ivabonoregalo">common.gui.components.GenericData</arg>
-
+                                        <!--
                                         <externalValidations>
 
-                                        <component>
+                                         <component>
                                             <driver>client.gui.components.TableFindData</driver>
                                             <method>validPackage</method>
                                         </component>
@@ -1500,10 +1525,10 @@
                                         <component>
                                                 <driver>client.gui.components.FindThird</driver>
                                                 <method>getPackage</method>
-                                            </component>
+                                            </component> 
 
                                         </externalValidations>
-
+                                      -->
                                     </parameters>
                                 </component>
                                 
@@ -2655,6 +2680,28 @@
                     <driver id="valorp">common.gui.components.GenericData</driver>
                     <method>clean</method>
                   </component>
+
+                  <component>
+                <driver id="codigobono">client.gui.components.TableDataFields</driver>
+                <method>clean</method>
+            </component>
+            <component>
+                <driver id="telefonoparabono">client.gui.components.TableDataFields</driver>
+                <method>clean</method>
+            </component>
+            <component>
+                <driver id="valorbonoregalo">client.gui.components.TableDataFields</driver>
+                <method>clean</method>
+            </component>
+            <component>
+                    <driver id="listapagosconbonoregalo">client.gui.components.TableFindData</driver>
+                    <method>clean</method>
+                </component>
+                <component>
+                    <driver id="tbonosregalo">common.gui.components.GenericData</driver>
+                    <method>clean</method>
+                </component>
+
               <!-- fin limpia despues de guardar -->
 
                 <component>
@@ -3329,6 +3376,27 @@
                     <driver id="valorp">common.gui.components.GenericData</driver>
                     <method>clean</method>
                   </component>
+
+                  <component>
+                <driver id="codigobono">client.gui.components.TableDataFields</driver>
+                <method>clean</method>
+            </component>
+            <component>
+                <driver id="telefonoparabono">client.gui.components.TableDataFields</driver>
+                <method>clean</method>
+            </component>
+            <component>
+                <driver id="valorbonoregalo">client.gui.components.TableDataFields</driver>
+                <method>clean</method>
+            </component>
+            <component>
+                    <driver id="listapagosconbonoregalo">client.gui.components.TableFindData</driver>
+                    <method>clean</method>
+                </component>
+                <component>
+                    <driver id="tbonosregalo">common.gui.components.GenericData</driver>
+                    <method>clean</method>
+                </component>
 
                 <component>
                     <driver>this</driver>

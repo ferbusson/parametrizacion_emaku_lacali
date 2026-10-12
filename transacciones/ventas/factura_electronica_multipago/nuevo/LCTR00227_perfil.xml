@@ -2217,7 +2217,7 @@ limpiar las llaves externas -->
   <!--  Panel Oculto de Retenciones -->
   <FORM>
     <preferences>
-      <size height="700" width="920"/>
+      <size height="750" width="920"/>
       <name>PAYMENTFORM</name>
       <icon>PAGO</icon>
       <iconificable/>
