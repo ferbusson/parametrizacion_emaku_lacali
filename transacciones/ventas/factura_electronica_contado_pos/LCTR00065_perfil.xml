@@ -1,7 +1,7 @@
 <FORM>
     <FORM>
         <preferences>
-            <size height="660" width="920"/>
+            <size height="690" width="920"/>
             <name>PAYMENTFORM</name>
             <icon>PAGO</icon>
             <iconificable/>
@@ -86,25 +86,7 @@
       </component>
 
 
-        <!-- Base IVA total  coon verder-->
-        <!--<component>
-            <driver id="totalbaseiva">client.gui.components.TableDataFields</driver>
-            <parameters>
-                <arg attribute="Panel">false</arg>
-                <subarg>
-                    <arg attribute="name">TOTALBASEIVA</arg>
-                    <arg attribute="format">NUMERIC</arg>
-                    <arg attribute="size">10</arg>
-                    <arg attribute="maxlength">26</arg>
-                    <arg attribute="enabled">false</arg>
-                    <arg attribute="alignment">RIGHT</arg>
-                    <arg attribute="exportValue">baseivaglobal</arg>
-                    <arg attribute="calculateExportValue">totalneto</arg>
-                    <arg attribute="printable">true</arg>
-                </subarg>
-            </parameters>
-        </component>-->
-
+        
         <!-- Base IVA total sin verde-->
         <component>
             <driver id="totalbaseiva">client.gui.components.TableDataFields</driver>
@@ -287,192 +269,232 @@
         <panel locate="West" type="FlowLayout"/>
         <panel locate="East" type="FlowLayout"/>
         <tab id="fpago" locate="Center">
-            <panel font="Dialog,1,12" icon="/icons/ico_touch_screen_32x32.png" name="GENERAL" type="BorderLayout">
-
+           <panel font="Dialog,1,12" icon="/icons/ico_touch_screen_32x32.png" name="GENERAL" type="BorderLayout">
                 <panel locate="North" type="FlowLayout"/>
                 <panel locate="South" type="FlowLayout"/>
                 <panel locate="Center" type="BorderLayout">
-                  <panel locate="North" type="BorderLayout">
-                    <panel locate="North" type="BorderLayout">
-                    <panel locate="Center" rows="2" cols="2" type="GridLayout" border="-" font="Dialog,Bold,10">
-                      <panel type="BorderLayout" background="255,255,255">
+                    <panel cols="1" locate="West" rows="12" type="GridLayout">
                         <component locate="North">
                             <driver>common.gui.components.XMLLabel</driver>
                             <parameters>
                                 <arg attribute="text">Total Factura</arg>
                                 <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,12</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
                             </parameters>
                         </component>
-                        <component locate="Center" background="255,255,255">
+                        <!--<panel locate="South" type="FlowLayout" />-->
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Total Anticipos</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
+                            </parameters>
+                        </component>
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Saldo Separado</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
+                            </parameters>
+                        </component>
+
+
+
+
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">TOT_PAGAR</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
+                            </parameters>
+                        </component>
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Total Pagar US$</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
+                            </parameters>
+                        </component>
+
+
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Efectivo Pesos</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
+                            </parameters>
+                        </component>
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Pluxee/BigPass</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
+                            </parameters>
+                        </component>
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Bono Regalo</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
+                            </parameters>
+                        </component>
+
+
+
+
+
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Pago en Tarjeta</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
+                            </parameters>
+                        </component>
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">TOTAL</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
+                            </parameters>
+                        </component>
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">CAMBIO</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
+                            </parameters>
+                        </component>
+                        <component locate="North">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Cambio US$</arg>
+                                <arg attribute="alignment">0</arg>
+                                <arg attribute="font">Dialog,1,20</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel cols="1" locate="Center" rows="12" type="GridLayout">                        
+                        <component locate="East">
                             <driver id="totalfactura">client.gui.components.TableDataFields</driver>
                             <parameters>
-                                <!-- <arg attribute="Panel">false</arg> -->
+                                <arg attribute="Panel">false</arg>
                                 <subarg>
                                     <arg attribute="name">TOTAL</arg>
                                     <arg attribute="format">NUMERIC</arg>
                                     <arg attribute="exportValue">totalfactura</arg>
-                                    <arg attribute="size">13</arg>
-                                    <arg attribute="maxlength">26</arg>                                    
-                                    <arg attribute="font">Dialog,1,16</arg>
-                                    <arg attribute="alignment">LEFT</arg>
+                                    <arg attribute="size">11</arg>
+                                    <arg attribute="maxlength">26</arg>
+                                    <arg attribute="font">Dialog,1,20</arg>
+                                    <arg attribute="alignment">RIGHT</arg>
                                     <arg attribute="enabled">false</arg>
                                     <arg attribute="printable">true</arg>
                                     <arg attribute="calculateExportValue">totalfact</arg>
                                 </subarg>
                             </parameters>
                         </component>
-                      </panel>
-                      <panel type="BorderLayout">
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">Total Anticipos</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,12</arg>
-                            </parameters>
-                        </component>
-                        <component locate="Center">
+                        <!--<panel locate="South" type="FlowLayout" />-->
+                        <component locate="East">
                             <driver id="anticipos">client.gui.components.TableDataFields</driver>
                             <parameters>
-                                <!-- <arg attribute="Panel">false</arg> -->
+                                <arg attribute="Panel">false</arg>
                                 <arg attribute="linkTable">cartera</arg>
                                 <subarg>
                                     <arg attribute="name">TOTAL</arg>
                                     <arg attribute="format">NUMERIC</arg>
                                     <arg attribute="exportValue">anticipos</arg>
-                                    <arg attribute="size">13</arg>
+                                    <arg attribute="size">11</arg>
                                     <arg attribute="maxlength">26</arg>
-                                    <arg attribute="font">Dialog,1,16</arg>
-                                    <!-- <arg attribute="foreground">0,0,0</arg>
-                                    <arg attribute="background">255,255,255</arg> -->
-                                    <arg attribute="alignment">LEFT</arg>
+                                    <arg attribute="font">Dialog,1,20</arg>
+                                    <arg attribute="alignment">RIGHT</arg>
                                     <arg attribute="totalCol">r</arg>
                                     <arg attribute="enabled">false</arg>
                                     <arg attribute="printable">true</arg>
                                 </subarg>
                             </parameters>
                         </component>
-                      </panel>
-                      <panel type="BorderLayout">
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">Saldo Separado</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,12</arg>
-                            </parameters>
-                        </component>
                         <component locate="Center">
                             <driver id="saldosep">client.gui.components.TableDataFields</driver>
                             <parameters>
-                                <!-- <arg attribute="Panel">false</arg> -->
+                                <arg attribute="Panel">false</arg>
                                 <subarg>
                                     <arg attribute="name">saldosep</arg>
                                     <arg attribute="format">NUMERIC</arg>
-                                    <arg attribute="size">13</arg>
+                                    <arg attribute="size">11</arg>
                                     <arg attribute="foreground">0,0,0</arg>
                                     <arg attribute="background">193,194,196</arg>
                                     <arg attribute="maxlength">26</arg>
                                     <arg attribute="enabled">false</arg>
-                                    <arg attribute="font">Dialog,1,16</arg>
-                                    <!-- <arg attribute="foreground">0,0,0</arg>
-                                    <arg attribute="background">255,255,255</arg> -->
-                                    <arg attribute="alignment">LEFT</arg>
+                                    <arg attribute="font">Dialog,1,20</arg>
+                                    <arg attribute="alignment">RIGHT</arg>
                                     <arg attribute="calculateBSExportValue">anticipos!=0?(vrpag):0.0</arg>
                                     <arg attribute="printable">true</arg>
                                 </subarg>
                             </parameters>
                         </component>
-                      </panel>
-                      <panel type="BorderLayout">
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">Equivalente ≈USD</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,12</arg>
-                            </parameters>
-                        </component>
-                        <component locate="Center">
-                            <driver id="totalpus">client.gui.components.TableDataFields</driver>
-                            <parameters>
-                                <!-- <arg attribute="Panel">false</arg> -->
-                                <subarg>
-                                    <arg attribute="name">totalus</arg>
-                                    <arg attribute="format">NUMERIC</arg>
-                                    <arg attribute="size">13</arg>
-                                    <arg attribute="maxlength">26</arg>
-                                    <arg attribute="enabled">false</arg>
-                                    <arg attribute="font">Dialog,1,16</arg>
-                                    <!-- <arg attribute="foreground">0,0,0</arg>
-                                    <arg attribute="background">255,255,255</arg> -->
-                                    <arg attribute="alignment">LEFT</arg>
-                                    <arg attribute="calculateBSExportValue">trm!=0?totalfact/trm:0</arg>
-                                    <arg attribute="printable">true</arg>
-                                </subarg>
-                            </parameters>
-                        </component>
-                      </panel>
-                      </panel>
 
-                      <panel locate="East" type="BorderLayout" border="-" font="Dialog,Bold,10" background="255,255,255">
-                      <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">TOTAL A PAGAR</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,1,20</arg>
-                            </parameters>
-                        </component>
-                        <component locate="Center" background="255,255,255">
+
+
+                        <component locate="Center">
                             <driver id="totalp">client.gui.components.TableDataFields</driver>
                             <parameters>
-                                <!-- <arg attribute="Panel">false</arg> -->
+                                <arg attribute="Panel">false</arg>
                                 <subarg>
                                     <arg attribute="name">TOTAL</arg>
                                     <arg attribute="format">NUMERIC</arg>
-                                    <arg attribute="size">8</arg>
-                                    <arg attribute="foreground">0,0,0</arg>
-                                    <arg attribute="background">215,242,239</arg>
+                                    <arg attribute="size">11</arg>
                                     <arg attribute="maxlength">26</arg>
                                     <arg attribute="enabled">false</arg>
-                                    <arg attribute="font">Dialog,1,40</arg>
-                                    <arg attribute="alignment">LEFT</arg>
+                                    <arg attribute="font">Dialog,1,20</arg>
+                                    <arg attribute="alignment">RIGHT</arg>
                                     <arg attribute="calculateBSExportValue">anticipos!=0?(totalfact-anticipos):totalfact</arg>
                                     <arg attribute="exportValue">vrpag</arg>
                                     <arg attribute="printable">true</arg>
                                 </subarg>
                             </parameters>
-                        </component>                        
-                      </panel>
-
-                      </panel>
-                    
-                </panel>
-
-                <!-- Segmento medio -->
-                <panel locate="Center" rows="4" cols="2" hgap="10" vgap="10" type="GridLayout">
-                  <panel type="BorderLayout"> <!-- 0-0 -->
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
+                        </component>
+                        <component locate="Center">
+                            <driver id="totalpus">client.gui.components.TableDataFields</driver>
                             <parameters>
-                                <arg attribute="text">Efectivo (Pesos)</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,12</arg>
+                                <arg attribute="Panel">false</arg>
+                                <subarg>
+                                    <arg attribute="name">totalus</arg>
+                                    <arg attribute="format">NUMERIC</arg>
+                                    <arg attribute="size">11</arg>
+                                    <arg attribute="maxlength">26</arg>
+                                    <arg attribute="enabled">false</arg>
+                                    <arg attribute="font">Dialog,1,20</arg>
+                                    <arg attribute="alignment">RIGHT</arg>
+                                    <arg attribute="calculateBSExportValue">trm!=0?totalfact/trm:0</arg>
+                                    <arg attribute="printable">true</arg>
+                                </subarg>
                             </parameters>
                         </component>
-                        <component>
+
+
+
+
+                        <panel align="Left" locate="North" type="FlowLayout">
+                            <component>
                                 <driver id="fefectivo">common.gui.components.GenericData</driver>
                                 <parameters>
-                                    <!-- <arg attribute="Panel">false</arg> -->
+                                    <arg attribute="Panel">false</arg>
                                     <subarg>
                                         <arg attribute="name">EFECTIVO</arg>
                                         <arg attribute="format">NUMERIC</arg>
-                                        <arg attribute="size">22</arg>
+                                        <arg attribute="size">10</arg>
                                         <arg attribute="maxlength">5</arg>
-                                        <arg attribute="font">Dialog,1,16</arg>
-                                        <arg attribute="alignment">LEFT</arg>
+                                        <arg attribute="font">Dialog,1,20</arg>
+                                        <arg attribute="alignment">RIGHT</arg>
                                         <arg attribute="exportValue">efectivo</arg>
                                         <arg attribute="printable">true</arg>
                                         <arg attribute="returnNullValue">true</arg>
@@ -480,195 +502,34 @@
                                     </subarg>
                                 </parameters>
                             </component>
-                      </panel>
-                      <panel type="BorderLayout"> <!-- 0-1 -->
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">Efectivo (USD)</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,12</arg>
-                            </parameters>
-                        </component>
-                        <component>
+                            <component locate="Center">
+                                <driver>common.gui.components.XMLLabel</driver>
+                                <parameters>
+                                    <arg attribute="text">Efectivo $ USD</arg>
+                                    <arg attribute="alignment">0</arg>
+                                    <arg attribute="font">Dialog,1,20</arg>
+                                </parameters>
+                            </component>
+                            <component>
                                 <driver id="fefectivous">common.gui.components.GenericData</driver>
                                 <parameters>
-                                    <!-- <arg attribute="Panel">false</arg> -->
+                                    <arg attribute="Panel">false</arg>
                                     <subarg>
                                         <arg attribute="name">EFECTIVOUS</arg>
                                         <arg attribute="format">NUMERIC</arg>
-                                        <arg attribute="size">22</arg>
+                                        <arg attribute="size">8</arg>
+                                        <!-- <arg attribute="enableField">diasiniva,1</arg> -->
                                         <arg attribute="maxlength">5</arg>
-                                        <arg attribute="font">Dialog,1,16</arg>
-                                        <arg attribute="alignment">LEFT</arg>
+                                        <arg attribute="font">Dialog,1,20</arg>
+                                        <arg attribute="alignment">RIGHT</arg>
                                         <arg attribute="exportValue">efectivous</arg>
                                         <arg attribute="printable">true</arg>
                                         <arg attribute="returnNullValue">true</arg>
                                     </subarg>
                                 </parameters>
                             </component>
-                      </panel>
+                        </panel>
 
-                     <panel type="BorderLayout"> <!-- 1-0 -->
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">Pago con Tarjeta</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,12</arg>
-                            </parameters>
-                        </component>
-                          <component>
-                                <driver id="pagomixto">common.gui.components.GenericData</driver>
-                                <parameters>
-                                    <!-- <arg attribute="Panel">false</arg> -->
-                                    <subarg>
-                                        <arg attribute="name">pagomixto</arg>
-                                        <arg attribute="format">NUMERIC</arg>
-                                        <arg attribute="decimals">0</arg>
-                                        <arg attribute="exportValue">totaltarjeta</arg>
-                                        <arg attribute="size">22</arg>
-                                        <arg attribute="foreground">27,14,150</arg>
-                                        <arg attribute="background">240,244,252</arg>
-                                        <arg attribute="maxlength">26</arg>
-                                        <arg attribute="font">Dialog,1,16</arg>
-                                        <arg attribute="alignment">LEFT</arg>
-                                        <arg attribute="enabled">false</arg>
-                                        <arg attribute="printable">true</arg>
-                                        <arg attribute="calculateBSExportValue">(totalfact-efectivoneto-totalcredibancoparcial-totalpagosmanuales-anticipos-tsodexobigpass-valorpagobonosregalo)&lt;0?0:(totalfact-efectivoneto-totalcredibancoparcial-totalpagosmanuales-anticipos-tsodexobigpass-valorpagobonosregalo)</arg>
-                                    </subarg>
-                                </parameters>
-                            </component>
-                      </panel>
-                      <panel type="BorderLayout"> <!-- 1-1 -->
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">IVA Tarjeta</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,12</arg>
-                            </parameters>
-                        </component>
-                        <component>
-                                <driver id="ivatarjeta">common.gui.components.GenericData</driver>
-                                <parameters>
-                                    <!-- <arg attribute="Panel">false</arg> -->
-                                    <subarg>
-                                        <!-- <arg attribute="label">IVA: </arg> -->
-                                        <arg attribute="name">ivatarjeta</arg>
-                                        <arg attribute="format">NUMERIC</arg>
-                                        <arg attribute="decimals">0</arg>
-                                        <arg attribute="exportValue">ivatarjeta</arg>
-                                        <arg attribute="size">22</arg>
-                                        <arg attribute="maxlength">26</arg>
-                                        <arg attribute="font">Dialog,1,16</arg>
-                                        <arg attribute="alignment">LEFT</arg>
-                                        <arg attribute="enabled">false</arg>
-                                        <arg attribute="printable">true</arg>
-                                        <arg attribute="calculateBSExportValue">totalfact!=0?(totaltarjeta*tiva/totalfact):0</arg>
-                                    </subarg>
-                                </parameters>
-                            </component>
-                      </panel>
-                      <panel type="BorderLayout"> <!-- 2-0 -->
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">Pluxee/BigPass</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,11</arg>
-                            </parameters>
-                        </component>
-                        <component locate="Center">
-                            <driver id="tsodexobigpass">common.gui.components.GenericData</driver>
-                            <parameters>
-                                <!-- <arg attribute="Panel">false</arg> -->
-                                <subarg>
-                                    <arg attribute="name">Tsodexobigpass</arg>
-                                    <arg attribute="format">NUMERIC</arg>
-                                    <arg attribute="size">22</arg>
-                                    <arg attribute="maxlength">26</arg>
-                                    <arg attribute="font">Dialog,1,16</arg>
-                                    <arg attribute="alignment">LEFT</arg>
-                                    <arg attribute="enabled">false</arg>
-                                    <arg attribute="calculateExportValue">sodexo+bigpass</arg>
-                                    <arg attribute="exportValue">tsodexobigpass</arg>
-                                    <arg attribute="printable">true</arg>
-                                </subarg>
-                            </parameters>
-                        </component>
-                      </panel>
-                      <panel type="BorderLayout"> <!-- 2-1 -->
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">Multitarjeta</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,11</arg>
-                            </parameters>
-                        </component>
-                        <component locate="Center">
-                                <driver id="pagomixto">common.gui.components.GenericData</driver>
-                                <parameters>
-                                    <!-- <arg attribute="Panel">false</arg> -->
-                                    <subarg>
-                                        <arg attribute="name">pagomixto</arg>
-                                        <arg attribute="format">NUMERIC</arg>
-                                        <arg attribute="decimals">0</arg>
-                                        <arg attribute="exportValue">totaltarjeta</arg>
-                                        <arg attribute="size">22</arg>
-                                        <arg attribute="maxlength">26</arg>
-                                        <arg attribute="font">Dialog,1,16</arg>
-                                        <arg attribute="alignment">LEFT</arg>
-                                        <arg attribute="enabled">false</arg>
-                                        <arg attribute="printable">true</arg>
-                                        <arg attribute="calculateBSExportValue">(totalfact-efectivoneto-totalcredibancoparcial-totalpagosmanuales-anticipos-tsodexobigpass-valorpagobonosregalo)&lt;0?0:(totalfact-efectivoneto-totalcredibancoparcial-totalpagosmanuales-anticipos-tsodexobigpass-valorpagobonosregalo)</arg>
-                                    </subarg>
-                                </parameters>
-                            </component>
-                      </panel>
-
-                      <panel type="BorderLayout"> <!-- 3-0 -->
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">Anticipos</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,11</arg>
-                            </parameters>
-                        </component>                        
-                        <component locate="Center">
-                            <driver id="anticipos">client.gui.components.TableDataFields</driver>
-                            <parameters>
-                                <!-- <arg attribute="Panel">false</arg> -->
-                                <arg attribute="linkTable">cartera</arg>
-                                <subarg>
-                                    <arg attribute="name">TOTAL</arg>
-                                    <arg attribute="format">NUMERIC</arg>
-                                    <arg attribute="exportValue">anticipos</arg>
-                                    <arg attribute="size">22</arg>
-                                    <arg attribute="maxlength">26</arg>
-                                    <arg attribute="font">Dialog,1,16</arg>
-                                    <!-- <arg attribute="foreground">0,0,0</arg>
-                                    <arg attribute="background">255,255,255</arg> -->
-                                    <arg attribute="alignment">LEFT</arg>
-                                    <arg attribute="totalCol">r</arg>
-                                    <arg attribute="enabled">false</arg>
-                                    <arg attribute="printable">true</arg>
-                                </subarg>
-                            </parameters>
-                        </component>
-                      </panel>
-
-                      <panel type="BorderLayout"> <!-- 3-1 -->
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">Bono Regalo</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,11</arg>
-                            </parameters>
-                        </component>                                 
                         <component locate="Center">
                                 <driver id="totalvalorbonoregalo">common.gui.components.GenericData</driver>
                                 <parameters>
@@ -687,93 +548,116 @@
                                     </subarg>
                                 </parameters>
                             </component>
-                      </panel>
 
-                </panel> <!-- fin segmento medio -->
-
-                <!-- Segmento bajo -->
-                <panel locate="South" rows="1" cols="3" hgap="10" vgap="10" type="GridLayout" border="." font="Dialog,Bold,10">
-                        <panel type="BorderLayout"> <!-- 0-0 -->
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
+                        <component locate="Center">
+                            <driver id="tsodexobigpass">common.gui.components.GenericData</driver>
                             <parameters>
-                                <arg attribute="text">Total Recibido</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,11</arg>
+                                <arg attribute="Panel">false</arg>
+                                <subarg>
+                                    <arg attribute="name">Tsodexobigpass</arg>
+                                    <arg attribute="format">NUMERIC</arg>
+                                    <arg attribute="size">11</arg>
+                                    <arg attribute="maxlength">26</arg>
+                                    <arg attribute="font">Dialog,1,20</arg>
+                                    <arg attribute="alignment">RIGHT</arg>
+                                    <arg attribute="enabled">false</arg>
+                                    <arg attribute="calculateExportValue">sodexo+bigpass</arg>
+                                    <arg attribute="exportValue">tsodexobigpass</arg>
+                                    <arg attribute="printable">true</arg>
+                                </subarg>
                             </parameters>
-                        </component>                                 
+                        </component>
+
+
+                        <panel type="FlowLayout">
+                            <component>
+                                <driver id="pagomixto">common.gui.components.GenericData</driver>
+                                <parameters>
+                                    <arg attribute="Panel">false</arg>
+                                    <subarg>
+                                        <arg attribute="name">pagomixto</arg>
+                                        <arg attribute="format">NUMERIC</arg>
+                                        <arg attribute="decimals">0</arg>
+                                        <arg attribute="exportValue">totaltarjeta</arg>
+                                        <arg attribute="size">16</arg>
+                                        <arg attribute="maxlength">26</arg>
+                                        <arg attribute="font">Dialog,1,20</arg>
+                                        <arg attribute="alignment">RIGHT</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="printable">true</arg>
+                                        <arg attribute="calculateBSExportValue">(totalfact-efectivoneto-totalcredibancoparcial-totalpagosmanuales-valorpagobonosregalo-anticipos-tsodexobigpass)&lt;0?0:(totalfact-efectivoneto-totalcredibancoparcial-totalpagosmanuales-valorpagobonosregalo-anticipos-tsodexobigpass)</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <component>
+                                <driver id="ivatarjeta">common.gui.components.GenericData</driver>
+                                <parameters>
+                                    <arg attribute="Panel">false</arg>
+                                    <subarg>
+                                        <arg attribute="label">IVA: </arg>
+                                        <arg attribute="name">ivatarjeta</arg>
+                                        <arg attribute="format">NUMERIC</arg>
+                                        <arg attribute="decimals">0</arg>
+                                        <arg attribute="exportValue">ivatarjeta</arg>
+                                        <arg attribute="size">9</arg>
+                                        <arg attribute="maxlength">26</arg>
+                                        <arg attribute="font">Dialog,1,20</arg>
+                                        <arg attribute="alignment">RIGHT</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="printable">true</arg>
+                                        <arg attribute="calculateBSExportValue">totalfact!=0?(totaltarjeta*tiva/totalfact):0</arg>
+
+                                    </subarg>
+                                </parameters>
+                            </component>
+                        </panel>
                         <component locate="Center">
                             <driver id="tpagar">common.gui.components.GenericData</driver>
                             <parameters>
-                                <!-- <arg attribute="Panel">false</arg> -->
+                                <arg attribute="Panel">false</arg>
                                 <subarg>
                                     <arg attribute="name">TOT_PAGAR</arg>
                                     <arg attribute="format">NUMERIC</arg>
                                     <arg attribute="size">11</arg>
                                     <arg attribute="maxlength">26</arg>
-                                    <arg attribute="font">Dialog,1,21</arg>
-                                    <arg attribute="foreground">63,130,59</arg>
-                                    <arg attribute="alignment">LEFT</arg>
+                                    <arg attribute="font">Dialog,1,20</arg>
+                                    <arg attribute="alignment">RIGHT</arg>
                                     <arg attribute="enabled">false</arg>
                                     <arg attribute="calculateExportValue">efectivot+oingresos</arg>
                                     <arg attribute="printable">true</arg>
                                 </subarg>
                             </parameters>
                         </component>
-                      </panel>
-
-                      <panel type="BorderLayout"> <!-- 0-1 -->
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">CAMBIO</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,1,11</arg>
-                            </parameters>
-                        </component>                                 
                         <component locate="Center">
                             <driver id="cambio">common.gui.components.GenericData</driver>
                             <parameters>
-                                <!-- <arg attribute="Panel">false</arg> -->
+                                <arg attribute="Panel">false</arg>
                                 <subarg>
                                     <arg attribute="name">CAMBIO</arg>
                                     <arg attribute="format">NUMERIC</arg>
                                     <arg attribute="size">11</arg>
                                     <arg attribute="maxlength">26</arg>
                                     <arg attribute="font">Dialog,1,20</arg>
-                                    <!-- <arg attribute="foreground">59,128,58</arg>verde oscuro -->
-                                    <arg attribute="foreground">245,73,39</arg>
-                                    <!-- <arg attribute="background">255,255,255</arg> -->
-                                    <arg attribute="alignment">LEFT</arg>
+                                    <arg attribute="alignment">RIGHT</arg>
                                     <arg attribute="enabled">false</arg>
                                     <arg attribute="exportValue">cambio</arg>
-                                    <arg attribute="calculateBSExportValue">(tcreditcard+tsodexobigpass+totalcredibancoparcial+totalpagosmanuales+efectivot+anticipos+valtpre+valorpagobonosregalo)&gt;totalfact&amp;&amp;(tcreditcard+tsodexobigpass+totalcredibancoparcial+totalpagosmanuales+valtpre+valorpagobonosregalo)&lt;totalfact?(efectivot+tcreditcard+tsodexobigpass+totalcredibancoparcial+totalpagosmanuales+anticipos+valtpre+valorpagobonosregalo)-totalfact:0.0
+                                    <arg attribute="calculateBSExportValue">(tcreditcard+tsodexobigpass+totalcredibancoparcial+totalpagosmanuales+valorpagobonosregalo+efectivot+anticipos+valtpre)&gt;totalfact&amp;&amp;(tcreditcard+tsodexobigpass+totalcredibancoparcial+totalpagosmanuales+valorpagobonosregalo+valtpre)&lt;totalfact?(efectivot+tcreditcard+tsodexobigpass+totalcredibancoparcial+totalpagosmanuales+valorpagobonosregalo+anticipos+valtpre)-totalfact:0.0
                                     </arg>
                                     <arg attribute="printable">true</arg>
                                 </subarg>
                             </parameters>
                         </component>
-                      </panel>
-                        <panel type="BorderLayout"> <!-- 0-2 -->
-                        <component locate="North">
-                            <driver>common.gui.components.XMLLabel</driver>
-                            <parameters>
-                                <arg attribute="text">Cambio USD</arg>
-                                <arg attribute="alignment">0</arg>
-                                <arg attribute="font">Dialog,0,11</arg>
-                            </parameters>
-                        </component>                                 
                         <component locate="Center">
                             <driver id="cambious">common.gui.components.GenericData</driver>
                             <parameters>
-                                <!-- <arg attribute="Panel">false</arg> -->
+                                <arg attribute="Panel">false</arg>
                                 <subarg>
                                     <arg attribute="name">cambious</arg>
                                     <arg attribute="format">NUMERIC</arg>
                                     <arg attribute="size">11</arg>
                                     <arg attribute="maxlength">26</arg>
-                                    <arg attribute="font">Dialog,1,22</arg>
-                                    <arg attribute="alignment">LEFT</arg>
+                                    <arg attribute="font">Dialog,1,20</arg>
+                                    <arg attribute="alignment">RIGHT</arg>
                                     <arg attribute="enabled">false</arg>
                                     <arg attribute="exportValue">cambious</arg>
                                     <arg attribute="calculateBSExportValue">trm!=0?cambio/trm:0</arg>
@@ -781,12 +665,9 @@
                                 </subarg>
                             </parameters>
                         </component>
-                      </panel>
+                    </panel>
                 </panel>
-
             </panel>
-
-          </panel>
 
 
 
