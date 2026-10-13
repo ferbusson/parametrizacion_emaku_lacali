@@ -1,7 +1,7 @@
 <FORM>
   <FORM>
     <preferences>
-      <size width="730" height="550" />
+      <size width="730" height="590" />
       <name>PAYMENTFORM</name>
       <icon>PAGO</icon>
       <iconificable />
@@ -58,7 +58,7 @@
         <panel locate="North" type="FlowLayout" />
         <panel locate="South" type="FlowLayout" />
         <panel locate="Center" type="BorderLayout">
-          <panel locate="West" type="GridLayout" rows="14" cols="1">
+          <panel locate="West" type="GridLayout" rows="15" cols="1">
             <component locate="North">
               <driver>common.gui.components.XMLLabel</driver>
               <parameters>
@@ -120,6 +120,14 @@
              <component locate="North">
               <driver>common.gui.components.XMLLabel</driver>
               <parameters>
+                <arg attribute="text">Bonos Regalo</arg>
+                <arg attribute="alignment">0</arg>
+                <arg attribute="font">Dialog,1,20</arg>
+              </parameters>
+            </component>
+             <component locate="North">
+              <driver>common.gui.components.XMLLabel</driver>
+              <parameters>
                 <arg attribute="text">Pluxee/BigPass</arg>
                 <arg attribute="alignment">0</arg>
                 <arg attribute="font">Dialog,1,20</arg>
@@ -159,7 +167,7 @@
               </parameters>
             </component>
           </panel>
-          <panel locate="Center" type="GridLayout" rows="14" cols="1">
+          <panel locate="Center" type="GridLayout" rows="15" cols="1">
             <component locate="Center">
               <driver id="vendedor">common.gui.components.GenericData</driver>
               <parameters>
@@ -295,6 +303,23 @@
               </parameters>
             </component>
             <component locate="Center">
+              <driver id="tpagoconbonos">common.gui.components.GenericData</driver>
+              <parameters>
+                <arg attribute="Panel">false</arg>
+                <subarg>
+                  <arg attribute="name">tpagoconbonos</arg>
+                  <arg attribute="format">NUMERIC</arg>
+                  <arg attribute="size">15</arg>
+                  <arg attribute="maxlength">26</arg>
+                  <arg attribute="enabled">false</arg>
+                  <arg attribute="alignment">RIGHT</arg>
+                  <arg attribute="font">Dialog,1,20</arg>
+                  <arg attribute="calculateExportValue">valorpagobonosregalo</arg>
+                  <arg attribute="printable">true</arg>
+                </subarg>
+              </parameters>
+            </component>
+            <component locate="Center">
               <driver id="cheques">common.gui.components.GenericData</driver>
               <parameters>
                 <arg attribute="Panel">false</arg>
@@ -408,7 +433,56 @@
           </panel>
         </panel>
       </panel>
-      <panel font="Dialog,1,12" icon="/icons/ico_pago_contado_32x32.png" name="Anticipos" type="BorderLayout">
+      <panel font="Dialog,1,12" icon="/icons/ico_pago_contado_32x32.png" name="Anticipos/Bonos Regalo" type="BorderLayout">            
+                <component>
+                    <driver id="basebonoregalo">common.gui.components.GenericData</driver>
+                    <parameters>
+                        <!-- <arg attribute="Panel">false</arg> -->
+                        <subarg>
+                            <arg attribute="name">basebonoregalo</arg>
+                            <arg attribute="format">NUMERIC</arg>
+                            <arg attribute="decimals">0</arg>
+                            <arg attribute="size">9</arg>
+                            <arg attribute="maxlength">26</arg>
+                            <arg attribute="font">Dialog,1,15</arg>
+                            <arg attribute="alignment">RIGHT</arg>
+                            <arg attribute="enabled">false</arg>
+                            <arg attribute="calculateBSExportValue">"2".equals(diasiniva)?valorbonoregalo:(valorbonoregalo/1.19)</arg>
+                            <arg attribute="exportValue">basebonoregalo</arg>
+                            <arg attribute="printable">true</arg>
+                        </subarg>
+                    </parameters>
+                </component>
+                <component>
+                <driver id="ivabonoregalo">common.gui.components.GenericData</driver>
+                <parameters>
+                    <!-- <arg attribute="Panel">false</arg> -->
+                    <subarg>
+                        <arg attribute="name">ivabonoregalo</arg>
+                        <arg attribute="format">NUMERIC</arg>
+                        <arg attribute="decimals">0</arg>
+                        <arg attribute="size">9</arg>
+                        <arg attribute="maxlength">26</arg>
+                        <arg attribute="font">Dialog,1,15</arg>
+                        <arg attribute="alignment">RIGHT</arg>
+                        <arg attribute="enabled">false</arg>
+                        <arg attribute="exportValue">ivabonoregalo</arg>
+                        <arg attribute="calculateExportValue">valorbonoregalo-basebonoregalo</arg>
+                        <arg attribute="printable">true</arg>
+                    </subarg>
+                </parameters>
+            </component>
+
+              <panel type="GridLayout" rows="2" cols="1">
+                <panel type="BorderLayout" border="Anticipos" font="Dialog,1,15">
+                  <panel type="FlowLayout" locate="North" />
+                  <panel type="FlowLayout" locate="East" />
+                  <panel type="FlowLayout" locate="West" />
+
+
+
+
+
         <component locate="Center">
           <driver id="cartera">client.gui.components.TableFindData</driver>
           <parameters>
@@ -480,7 +554,193 @@
             </parameters>
           </component>
         </panel>
-      </panel>
+</panel> <!--TERMINA SECCION ANTICIPOS grid de 2 filas-->
+
+              <panel type="BorderLayout" border="Bonos Regalo" font="Dialog,1,15">
+              
+
+            <panel locate="Center" type="BorderLayout">     
+
+                <panel locate="Center" type="BorderLayout">
+                            <component locate="Center">
+                                <driver id="listapagosconbonoregalo">client.gui.components.TableFindData</driver>
+                                <parameters>
+                                    <arg attribute="driverEvent" id="nro_fact">client.gui.components.TableDataFields</arg>
+                                    <arg attribute="keySQL">LCSEL1025</arg>
+                                    <arg attribute="rows">10</arg>
+                                    <arg attribute="tagData">4</arg>
+                                    <arg attribute="totales">d</arg>
+                                    <arg attribute="Query">LCSEL0004</arg>
+                                    <arg attribute="colorBackground">204,153,255</arg>
+                                    <arg attribute="colorSelected">204,153,255</arg>
+                                    <arg attribute="font">Dialog,1,12</arg>
+                                    <arg attribute="returnNullValue">true</arg>
+                                    <subarg>
+                                        <arg attribute="name">Cód Bono Regalo</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">16</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">Teléfono</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">17</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">Tarjeta</arg>
+                                        <arg attribute="length">180</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">Valor</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">DECIMAL</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">1</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">Voucher</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">4</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">RRN</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">7</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">Comisión</arg>
+                                        <arg attribute="length">140</arg>
+                                        <arg attribute="type">DECIMAL</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">3</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">Rete Fuente</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">DECIMAL</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">8</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">Rete IVA</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">DECIMAL</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">9</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">id_franquicia</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">2</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">ctabanco</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">0</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">ctagasto</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">10</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">ctaretefuente</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">11</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">ctareteiva</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">12</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">operador</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">5</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">tcode</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">6</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">authorization</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">13</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">fournumbers</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">14</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">idtercerobanco</arg>
+                                        <arg attribute="nameField">idTercero</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">15</arg>
+                                    </subarg>                                    
+                                </parameters>
+                            </component>
+                            <panel locate="South" type="BorderLayout">
+                                <component locate="East">
+                                    <driver id="valorpagobonosregalo">client.gui.components.TableDataFields</driver>
+                                    <parameters>
+                                        <arg attribute="linkTable">listapagosconbonoregalo</arg>
+                                        <subarg>
+                                            <arg attribute="label">Total Bonos Regalo:</arg>
+                                            <arg attribute="name">TOTAL</arg>
+                                            <arg attribute="format">NUMERIC</arg>
+                                            <arg attribute="exportValue">valorpagobonosregalo</arg>
+                                            <arg attribute="size">9</arg>
+                                            <arg attribute="maxlength">26</arg>
+                                            <arg attribute="font">Dialog,1,15</arg>
+                                            <arg attribute="alignment">RIGHT</arg>
+                                            <arg attribute="totalCol">d</arg>
+                                            <arg attribute="enabled">false</arg>
+                                            <arg attribute="printable">true</arg>
+                                        </subarg>
+                                    </parameters>
+                                </component>
+                            </panel>
+                </panel>
+                
+          </panel>
+            TERMINA SUR
+
+            </panel>
+            </panel>
+            </panel>
+
+
       <panel font="Dialog,1,12" icon="/icons/ico_card_32x32.png" name="Tarjetas" type="BorderLayout">
           <panel locate="North" type="BorderLayout">
               
@@ -1121,9 +1381,10 @@
               <method>getPrintPackage</method>
             </component>
 
-            <!-- 23 Total tarjetas prepago -->
+            <!-- 23 Total tarjetas prepago lo uso para pago con bonos regalo-->
             <component>
-              <driver id="tprepago">common.gui.components.GenericData</driver>
+              <!-- <driver id="tprepago">common.gui.components.GenericData</driver> -->
+              <driver id="tpagoconbonos">common.gui.components.GenericData</driver>
               <method>getPrintPackage</method>
             </component>            
 
@@ -1984,6 +2245,14 @@
                 <method>clean</method>
               </component>
               <component>
+                    <driver id="listapagosconbonoregalo">client.gui.components.TableFindData</driver>
+                    <method>clean</method>
+                </component>
+                <component>
+                    <driver id="voucher">common.gui.components.GenericData</driver>
+                    <method>clean</method>
+                </component>
+              <component>
                 <driver>this</driver>
                 <method>cleanExternalValues</method>
               </component>
@@ -2013,7 +2282,7 @@
                  <component>
                     <driver id="tpagosmanuales">client.gui.components.TableFindData</driver>
                     <method>clean</method>
-                </component>
+                </component>                
 
                 <component>
                     <driver id="usuario">common.gui.components.GenericData</driver>
@@ -2182,6 +2451,7 @@
                   <arg attribute="sqlCode">LCSEL0187</arg>                  
                   <arg attribute="sqlCode">LCSEL0459</arg>                  
                   <arg attribute="sqlCode">SEL0120</arg>
+                  <arg attribute="sqlCode">LCSEL1025</arg> <!--tabla bonos regalo-->
                   <arg attribute="sqlCodeExportValue">DESEL0016,cufe,qr,prefix</arg>                  
                   <arg attribute="sqlCodeExportValue">LCSEL0051,operador,voucher,tcode</arg>                  
                   <arg attribute="sqlCodeExportValue">LCSEL0090,horarioatencion,piepaginauno,piepaginados,piepaginatres</arg>                  

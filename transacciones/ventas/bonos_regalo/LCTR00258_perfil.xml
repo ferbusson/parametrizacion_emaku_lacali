@@ -21,7 +21,7 @@
       <component locate="Center">
         <driver id="campaniasbonosregalo">client.gui.components.TableFindData</driver>
         <parameters>
-          <arg attribute="rows">300</arg>
+          <arg attribute="rows">100</arg>
           <arg attribute="colorBackground">232,232,232</arg>
           <arg attribute="colorSelected">248,248,248</arg>
           <arg attribute="sqlInit">LCSEL1020</arg>
@@ -31,6 +31,7 @@
           <arg attribute="blankPackage">true</arg>
           <arg attribute="clean">true</arg>
           <arg attribute="reload">true</arg>
+          <arg attribute="tagData">1</arg>
           <subarg>
             <arg attribute="name">Descripción</arg>
             <arg attribute="length">270</arg>
@@ -43,14 +44,14 @@
             <arg attribute="length">160</arg>
             <arg attribute="type">STRING</arg>
             <arg attribute="enabled">true</arg>
-            <arg attribute="returnCol">1</arg>
+            <arg attribute="returnCol">2</arg>
           </subarg>
           <subarg>
             <arg attribute="name">Visible</arg>
             <arg attribute="length">90</arg>
             <arg attribute="type">BOOLEAN</arg>
             <arg attribute="enabled">true</arg>
-            <arg attribute="returnCol">1</arg>
+            <arg attribute="returnCol">3</arg>
           </subarg>
           <subarg>
             <arg attribute="name">id</arg>

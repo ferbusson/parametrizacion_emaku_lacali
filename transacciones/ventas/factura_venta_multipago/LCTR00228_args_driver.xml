@@ -1,0 +1,31 @@
+<container>
+	<!--  
+		Este modelo es para logica de negocios de un documento.
+	-->
+
+	<!--
+		El primer paquete de subargumentos contiene informacion especifica
+		para crear un documento. 
+	-->
+	<subarg>
+		<arg attribute="date" />
+		<arg attribute="actionDocument">annulDocument</arg>
+	</subarg>
+
+	<subarg>
+		<LNData>
+			<driver>LNInventarios</driver>
+			<method>movimientos</method>
+			<parameters>
+				<arg attribute="tipoMovimiento">anular</arg>
+			</parameters>
+		</LNData>
+		<LNData>
+			<driver>LNContabilidad</driver>
+			<method>anular</method>
+			<parameters>
+				<arg attribute="Concepto">Factura de credito anulada</arg>
+			</parameters>
+		</LNData>
+	</subarg>
+</container>

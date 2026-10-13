@@ -5852,6 +5852,7 @@ limpiar las llaves externas -->
                           <arg attribute="beanshell">tcreditcard!=0.00?totaltodastarjetas+tcreditcard:tcreditcard</arg>
                           <arg attribute="importValue">tsodexobigpass</arg>
                           <arg attribute="importValue">tconsignation</arg>
+                          <arg attribute="importValue">valorpagobonosregalo</arg>
                       </subarg>
                   </parameters>
               </component>
@@ -6989,6 +6990,7 @@ limpiar las llaves externas -->
                           <arg attribute="beanshell">tcreditcard!=0.00?totaltodastarjetas+tcreditcard:tcreditcard</arg>
                           <arg attribute="importValue">tsodexobigpass</arg>
                           <arg attribute="importValue">tconsignation</arg>
+                          <arg attribute="importValue">valorpagobonosregalo</arg>
                       </subarg>
                   </parameters>
               </component>

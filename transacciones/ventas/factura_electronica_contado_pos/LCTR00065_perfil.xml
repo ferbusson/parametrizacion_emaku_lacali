@@ -1271,6 +1271,8 @@
                                     <arg attribute="colorSelected">204,153,255</arg>
                                     <arg attribute="font">Dialog,1,12</arg>
                                     <arg attribute="returnNullValue">true</arg>
+                                    <!-- las columnas en esta tabla estan definidas en las fuentes, cada columna esta programada para ser retornada
+                                    desde la respuesta del datafono -->
                                     <subarg>
                                         <arg attribute="name">Tarjeta</arg>
                                         <arg attribute="length">180</arg>
@@ -1389,6 +1391,20 @@
                                         <arg attribute="type">STRING</arg>
                                         <arg attribute="enabled">false</arg>
                                         <arg attribute="returnCol">15</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">idbonoregalo</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">16</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">telefonobonoregalo</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">17</arg>
                                     </subarg>
                                 </parameters>
                             </component>

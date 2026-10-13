@@ -2314,6 +2314,20 @@
                                         <arg attribute="enabled">false</arg>
                                         <arg attribute="returnCol">15</arg>
                                     </subarg>
+                                    <subarg>
+                                        <arg attribute="name">idbonoregalo</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">16</arg>
+                                    </subarg>
+                                    <subarg>
+                                        <arg attribute="name">telefonobonoregalo</arg>
+                                        <arg attribute="length">110</arg>
+                                        <arg attribute="type">STRING</arg>
+                                        <arg attribute="enabled">false</arg>
+                                        <arg attribute="returnCol">17</arg>
+                                    </subarg>
                                 </parameters>
                             </component>
                             <panel locate="South" type="BorderLayout">
@@ -3019,6 +3033,11 @@
               <method>getPrintPackage</method>
             </component>
 
+            <!-- 9 -->
+            <component>
+              <driver id="tbonosregalo">common.gui.components.GenericData</driver>
+              <method>getPrintPackage</method>
+            </component>
             <!-- 9 -->
             <component>
               <driver id="tsodexobigpass">common.gui.components.GenericData</driver>
