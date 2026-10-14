@@ -14,10 +14,10 @@ WHERE
 FROM
 	documentos 
 WHERE
-	(codigo_tipo like 'Z%' or
-	codigo_tipo like 'G%' or
-	codigo_tipo like 'M%' or
-	codigo_tipo like 'L%')
+	(codigo_tipo IN ('Z1','G1')
+	--no pongo M1 porque las devoluciones no tienen error por salto ya que la query actualmente verifica los documentos con 
+	--resolucion facturacion, los que no tienen resolucion tienen salto 0 por defecto
+	)
 EXCEPT
 SELECT
 	ndocumento

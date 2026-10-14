@@ -2594,7 +2594,7 @@
                             <arg attribute="format">STRING</arg>
                             <arg attribute="alignment">RIGHT</arg>
                             <arg attribute="size">14</arg>
-                            <arg attribute="maxlength">13</arg>
+                            <arg attribute="maxlength">20</arg>
                             <arg attribute="font">Dialog,1,14</arg>
                             <arg attribute="printable">true</arg>
                             <arg attribute="exportValue">codigobonoregalo</arg>                                
