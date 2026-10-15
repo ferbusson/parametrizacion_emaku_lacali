@@ -1,0 +1,13 @@
+<container>
+  <subarg>
+    <arg attribute="idDocument">CF</arg>
+    <arg attribute="consecutive" />
+    <arg attribute="date" />
+    <arg attribute="actionDocument">editDocument</arg>
+    <arg attribute="cash" />
+  </subarg>
+  
+     <!-- 0 prorrogas_contrato -->
+     <arg>LCUPD0042</arg>     
+
+</container>

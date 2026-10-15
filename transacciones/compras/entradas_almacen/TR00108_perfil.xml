@@ -570,7 +570,7 @@
                         <arg attribute="name">DESCUENTO</arg>
                         <arg attribute="length">80</arg>
                         <arg attribute="type">DECIMAL</arg>
-                        <arg attribute="roundDecimal">0</arg>
+                        <arg attribute="roundDecimal">2</arg>
                         <arg attribute="enabled">false</arg>
                         <arg attribute="returnCol">8</arg>
                         <arg attribute="nameField">descuentos</arg>
@@ -845,7 +845,7 @@
                         <arg attribute="name">DESCUENTO</arg>
                         <arg attribute="length">80</arg>
                         <arg attribute="type">DECIMAL</arg>
-                        <arg attribute="roundDecimal">0</arg>
+                        <arg attribute="roundDecimal">2</arg>
                         <arg attribute="enabled">false</arg>
                         <arg attribute="returnCol">4</arg>
                     </subarg>
@@ -1056,7 +1056,7 @@
                         <arg attribute="name">DESCUENTO</arg>
                         <arg attribute="length">80</arg>
                         <arg attribute="type">DECIMAL</arg>
-                        <arg attribute="roundDecimal">0</arg>
+                        <arg attribute="roundDecimal">2</arg>
                         <arg attribute="enabled">false</arg>
                         <arg attribute="returnCol">8</arg>
                         <arg attribute="nameField">descuentos</arg>
@@ -1271,7 +1271,7 @@
                         <arg attribute="name">DESCUENTO</arg>
                         <arg attribute="length">80</arg>
                         <arg attribute="type">DECIMAL</arg>
-                        <arg attribute="roundDecimal">0</arg>
+                        <arg attribute="roundDecimal">2</arg>
                         <arg attribute="enabled">false</arg>
                         <arg attribute="returnCol">8</arg>
                         <arg attribute="nameField">descuentos</arg>
@@ -1788,7 +1788,7 @@
                         <arg attribute="name">DESCUENTO</arg>
                         <arg attribute="length">80</arg>
                         <arg attribute="type">DECIMAL</arg>
-                        <arg attribute="roundDecimal">0</arg>
+                        <arg attribute="roundDecimal">2</arg>
                         <arg attribute="enabled">false</arg>
                         <arg attribute="nameField">descuentos</arg>
                     </subarg>
@@ -2038,7 +2038,7 @@
                         <arg attribute="name">DESCUENTO</arg>
                         <arg attribute="length">80</arg>
                         <arg attribute="type">DECIMAL</arg>
-                        <arg attribute="roundDecimal">0</arg>
+                        <arg attribute="roundDecimal">2</arg>
                         <arg attribute="enabled">false</arg>
                         <arg attribute="nameField">descuentos</arg>
                     </subarg>

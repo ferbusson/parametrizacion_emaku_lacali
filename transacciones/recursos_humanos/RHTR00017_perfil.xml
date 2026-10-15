@@ -1,0 +1,1173 @@
+<FORM>
+    <preferences>
+        <size height="550" width="1020"/>
+        <name>Consultar Contrato Empleado</name>
+        <icon>TRANSFERENCIA</icon>
+        <iconificable/>
+        <resizable/>
+        <maximizable/>
+        <closable/>
+        <date/>
+        <consecutive>CF</consecutive>
+    </preferences>
+    <!-- Componentes Ocultos -->
+    <component>
+        <driver id="cargo_empleado_imp">common.gui.components.GenericData</driver>
+        <parameters>
+            <arg attribute="keySQL">MTSEL0970</arg>
+            <arg attribute="driverEvent" id="cargo">client.gui.components.XMLComboBox</arg>
+            <subarg>
+                <arg attribute="format">TEXT</arg>
+                <arg attribute="size">15</arg>
+                <arg attribute="enabled">false</arg>
+                <arg attribute="maxlength">50</arg>
+                <arg attribute="printable">true</arg>
+                <arg attribute="exportValue">cargoempleadoimp</arg>
+            </subarg>
+        </parameters>
+    </component>
+    <component>
+        <driver id="lugarlabores_imp">common.gui.components.GenericData</driver>
+        <parameters>
+            <arg attribute="keySQL">LCSEL0794</arg>
+            <arg attribute="driverEvent" id="lugarlabores">client.gui.components.XMLComboBox</arg>
+            <subarg>
+                <arg attribute="format">TEXT</arg>
+                <arg attribute="size">15</arg>
+                <arg attribute="enabled">false</arg>
+                <arg attribute="maxlength">150</arg>
+                <arg attribute="printable">true</arg>
+                <arg attribute="exportValue">lugarlabores_imp</arg>
+            </subarg>
+        </parameters>
+    </component>
+    <component>
+        <driver id="plantillatextoprincipal">common.gui.components.GenericData</driver>
+        <parameters>
+            <arg attribute="keySQL">LCSEL0795</arg>
+            <arg attribute="driverEvent" id="mcontrato">client.gui.components.XMLComboBox</arg>
+            <subarg>
+                <arg attribute="format">TEXT</arg>
+                <arg attribute="size">15</arg>
+                <arg attribute="enabled">false</arg>
+                <arg attribute="maxlength">150</arg>
+                <arg attribute="printable">true</arg>
+                <arg attribute="exportValue">plantillatextoprincipal</arg>
+            </subarg>
+        </parameters>
+    </component>
+    <tab>
+        <panel icon="/icons/ico_cheque.png" locate="Center" name="Información General Contrato" type="BorderLayout">
+            <panel locate="West" type="BorderLayout">
+                <panel locate="North" type="FlowLayout"/>
+                <panel cols="1" locate="West" rows="9" type="GridLayout">
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">* Nit/Cédula:</arg>
+                                <arg attribute="alignment">0</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Primer Nombre:</arg>
+                                <arg attribute="alignment">0</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Primer Apellido</arg>
+                                <arg attribute="alignment">0</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Tipo Contrato</arg>
+                                <arg attribute="alignment">0</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Tipo Contrato NE</arg>
+                                <arg attribute="alignment">0</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Término Inicial</arg>
+                                <arg attribute="alignment">0</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Salario</arg>
+                                <arg attribute="alignment">0</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Aux de Transporte</arg>
+                                <arg attribute="alignment">0</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Fecha Inicio</arg>
+                                <arg attribute="alignment">0</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                </panel>
+                <panel cols="1" locate="Center" rows="9" type="GridLayout">
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver id="nitcc">client.gui.components.EmakuSearchField</driver>
+                            <parameters>
+                                <arg attribute="driverEvent" id="nro_documento">common.gui.components.GenericData</arg>
+                                <arg attribute="keySQL">MTSEL0829</arg>
+                                <arg attribute="size">15</arg>
+                                <arg attribute="addAttribute">key</arg>
+                                <arg attribute="nameField">idTercero</arg>
+                                <arg attribute="maxlength">26</arg>
+                                <arg attribute="nullValue">true</arg>
+                                <arg attribute="exportValue">nitcc</arg>
+                                <arg attribute="format">TEXT</arg>
+                                <arg attribute="sqlCombo">MTSEL0799</arg>
+                                <arg attribute="blankArgs">false</arg>
+                                <arg attribute="keyDataSearch">searchProd</arg>
+                                <arg attribute="repeatData">2</arg>
+                                <arg attribute="noDataBeep">true</arg>
+                                <arg attribute="noDataMessage">No se encontro registros</arg>
+                                <arg attribute="selectedIndex">1</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">true</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="sqlCodeExportValue">LCSEL0802,dv,nombre1,nombre2,apellido1,apellido2,departamento,ciudad,nombrecompleto,direccion,fechanacimiento,lugarnacimiento,nacionalidad</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver id="nombre1">common.gui.components.GenericData</driver>
+                            <parameters>
+                                <subarg>
+                                    <arg attribute="getValue">nombre1</arg>
+                                    <arg attribute="format">TEXT</arg>
+                                    <arg attribute="size">15</arg>
+                                    <arg attribute="maxlength">60</arg>
+                                    <arg attribute="exportValue">nombre1</arg>
+                                    <arg attribute="exportField">1</arg>
+                                    <arg attribute="printable">true</arg>
+                                    <arg attribute="enabled">false</arg>
+                                </subarg>
+                            </parameters>
+                        </component>
+                        <component>
+                            <driver id="nombre2">common.gui.components.GenericData</driver>
+                            <parameters>
+                                <subarg>
+                                    <arg attribute="getValue">nombre2</arg>
+                                    <arg attribute="label">Seg. Nombre:</arg>
+                                    <arg attribute="format">TEXT</arg>
+                                    <arg attribute="size">15</arg>
+                                    <arg attribute="maxlength">30</arg>
+                                    <arg attribute="exportValue">nombre2</arg>
+                                    <arg attribute="exportField">2</arg>
+                                    <arg attribute="printable">true</arg>
+                                    <arg attribute="enabled">false</arg>
+                                </subarg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver id="apellido1">common.gui.components.GenericData</driver>
+                            <parameters>
+                                <subarg>
+                                    <arg attribute="getValue">apellido1</arg>
+                                    <arg attribute="format">TEXT</arg>
+                                    <arg attribute="size">15</arg>
+                                    <arg attribute="maxlength">30</arg>
+                                    <arg attribute="exportValue">apellido1</arg>
+                                    <arg attribute="exportField">3</arg>
+                                    <arg attribute="printable">true</arg>
+                                    <arg attribute="enabled">false</arg>
+                                </subarg>
+                            </parameters>
+                        </component>
+                        <component>
+                            <driver id="apellido2">common.gui.components.GenericData</driver>
+                            <parameters>
+                                <subarg>
+                                    <arg attribute="getValue">apellido2</arg>
+                                    <arg attribute="label">Seg. Apellido:</arg>
+                                    <arg attribute="format">TEXT</arg>
+                                    <arg attribute="size">15</arg>
+                                    <arg attribute="maxlength">30</arg>
+                                    <arg attribute="exportValue">apellido2</arg>
+                                    <arg attribute="exportField">4</arg>
+                                    <arg attribute="printable">true</arg>
+                                    <arg attribute="enabled">false</arg>
+                                </subarg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component locate="Center">
+                            <driver id="tipocontrato">client.gui.components.XMLComboBox</driver>
+                            <parameters>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="getValue">tipo_contrato</arg>
+                                <arg attribute="sqlCombo">MTSEL0796</arg>
+                                <arg attribute="nullValue">true</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="exportValue">tipocontrato</arg>
+                                <arg attribute="getDocument">true</arg>
+                                <arg attribute="preferredLength">280</arg>
+                                <arg attribute="name">tipocontrato</arg>
+                                <arg attribute="nameField">tipocontrato</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component locate="Center">
+                            <driver id="tipocontratone">client.gui.components.XMLComboBox</driver>
+                            <parameters>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="sqlCombo">LCSEL0601</arg>
+                                <arg attribute="nullValue">true</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="getValue">tipocontratone</arg>
+                                <arg attribute="getDocument">true</arg>
+                                <arg attribute="preferredLength">280</arg>
+                                <arg attribute="name">tipocontratone</arg>
+                                <arg attribute="nameField">tipocontratone</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component>
+                            <driver id="valortiempo">common.gui.components.GenericData</driver>
+                            <parameters>
+                                <subarg>
+                                    <arg attribute="label">Cant </arg>
+                                    <arg attribute="format">TEXT</arg>
+                                    <arg attribute="size">3</arg>
+                                    <arg attribute="maxlength">2</arg>
+                                    <arg attribute="getValue">valortiempo</arg>
+                                    <arg attribute="printable">true</arg>
+                                    <arg attribute="enabled">false</arg>
+                                </subarg>
+                            </parameters>
+                        </component>
+                        <component locate="Center">
+                            <driver id="unidadtiempo">client.gui.components.XMLComboBox</driver>
+                            <parameters>
+                                <arg attribute="label">Unidad Tiempo </arg>
+                                <arg attribute="sqlCombo">MTSEL0774</arg>
+                                <arg attribute="nullValue">true</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="getValue">unidadtiempo</arg>
+                                <arg attribute="getDocument">true</arg>
+                                <arg attribute="preferredLength">110</arg>
+                                <arg attribute="name">unidadtiempo</arg>
+                                <arg attribute="nameField">unidadtiempo</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component locate="Center">
+                            <!-- salario -->
+                            <driver id="id_concepto_causacion">client.gui.components.XMLComboBox</driver>
+                            <parameters>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="getValue">id_concepto_causacion</arg>
+                                <arg attribute="sqlCombo">MTSEL0800</arg>
+                                <arg attribute="nullValue">true</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="getDocument">true</arg>
+                                <arg attribute="preferredLength">280</arg>
+                                <arg attribute="name">id_concepto_causacion</arg>
+                                <arg attribute="nameField">id_concepto_causacion</arg>
+                                <arg attribute="sqlCode">MTSEL0801</arg>
+                                <arg attribute="sqlCode">LCSEL0767</arg>
+                            </parameters>
+                        </component>
+                        <component locate="East">
+                            <driver id="valor_salario">client.gui.components.TableDataFields</driver>
+                            <parameters>
+                                <subarg>
+                                    <arg attribute="getValue">valor_salario</arg>
+                                    <arg attribute="label">$</arg>
+                                    <arg attribute="format">NUMERIC</arg>
+                                    <arg attribute="size">12</arg>
+                                    <arg attribute="maxlength">30</arg>
+                                    <arg attribute="enabled">false</arg>
+                                    <arg attribute="clean">true</arg>
+                                    <arg attribute="font">Dialog,0,12</arg>
+                                    <arg attribute="alignment">CENTER</arg>
+                                </subarg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component locate="East">
+                            <driver id="valor_aux_transporte">client.gui.components.TableDataFields</driver>
+                            <parameters>
+                                <subarg>
+                                    <arg attribute="getValue">valor_aux_transporte</arg>
+                                    <arg attribute="format">NUMERIC</arg>
+                                    <arg attribute="size">12</arg>
+                                    <arg attribute="maxlength">30</arg>
+                                    <arg attribute="enabled">false</arg>
+                                    <arg attribute="clean">true</arg>
+                                    <arg attribute="alignment">RIGHT</arg>
+                                </subarg>
+                            </parameters>
+                        </component>
+                    </panel>
+                    <panel align="left" type="FlowLayout">
+                        <component locate="Center">
+                            <driver id="finicio">common.gui.components.XMLDateField</driver>
+                            <parameters>
+                                <arg attribute="driverEvent" id="nro_documento">common.gui.components.GenericData</arg>
+                                <arg attribute="keySQL">MTSEL0831</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="importValue">tipocontrato</arg>
+                                <arg attribute="exportValue">fechainicio</arg>
+                                <!-- Calculaba fecha fin <arg attribute="sqlCode">MTSEL0798</arg>-->
+                            </parameters>
+                        </component>
+                        <component locate="West">
+                            <driver>common.gui.components.XMLLabel</driver>
+                            <parameters>
+                                <arg attribute="text">Fecha Fin</arg>
+                                <arg attribute="alignment">0</arg>
+                            </parameters>
+                        </component>
+                        <component locate="Center">
+                            <driver id="ffin">common.gui.components.XMLDateField</driver>
+                            <parameters>
+                                <arg attribute="keySQL">MTSEL0832</arg>
+                                <arg attribute="driverEvent" id="nro_documento">common.gui.components.GenericData</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="exportValue">fechafin</arg>
+                            </parameters>
+                        </component>
+                    </panel>
+                </panel>
+            </panel>
+            <panel locate="East" type="BorderLayout">
+                <panel locate="North" type="FlowLayout"/>
+                <panel locate="South" type="FlowLayout"/>
+                <panel locate="East" type="FlowLayout"/>
+                <panel cols="1" locate="West" rows="10" type="GridLayout">
+                    <component locate="Center">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Fecha</arg>
+                            <arg attribute="alignment">0</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Numero</arg>
+                            <arg attribute="alignment">0</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">No. Ref</arg>
+                            <arg attribute="alignment">0</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Cargo</arg>
+                            <arg attribute="alignment">0</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Modelo Contrato</arg>
+                            <arg attribute="alignment">0</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Tipo Salario</arg>
+                            <arg attribute="alignment">0</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Lugar Labores</arg>
+                            <arg attribute="alignment">0</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Depto Elaboración</arg>
+                            <arg attribute="alignment">0</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Ciudad Elaboración</arg>
+                            <arg attribute="alignment">0</arg>
+                        </parameters>
+                    </component>
+                    <panel locate="East" type="FlowLayout"/>
+                </panel>
+                <panel cols="1" locate="Center" rows="10" type="GridLayout">
+                    <component locate="Center">
+                        <driver id="date">common.gui.components.GenericData</driver>
+                        <parameters>
+                            <arg attribute="returnBlankPackage">true</arg>
+                            <arg attribute="driverEvent" id="nro_documento">common.gui.components.GenericData</arg>
+                            <arg attribute="keySQL">DGSEL0130</arg>
+                            <subarg>
+                                <arg attribute="name">DATE</arg>
+                                <arg attribute="format">TEXT</arg>
+                                <arg attribute="exportValue">fechacontrato</arg>
+                                <arg attribute="size">9</arg>
+                                <arg attribute="font">Dialog,0,18</arg>
+                                <arg attribute="maxlength">50</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="return">false</arg>
+                                <arg attribute="alignment">CENTER</arg>
+                                <arg attribute="clean">true</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="nro_documento">common.gui.components.GenericData</driver>
+                        <parameters>
+                            <subarg>
+                                <arg attribute="name">numerodocumento</arg>
+                                <arg attribute="exportValue">numerodocumento</arg>
+                                <arg attribute="format">TEXT</arg>
+                                <arg attribute="size">9</arg>
+                                <arg attribute="maxlength">26</arg>
+                                <arg attribute="enabled">true</arg>
+                                <arg attribute="clean">false</arg>
+                                <arg attribute="foreground">249,87,87</arg>
+                                <arg attribute="background">0,0,0</arg>
+                                <arg attribute="font">Dialog,0,18</arg>
+                                <arg attribute="alignment">RIGHT</arg>
+                                <arg attribute="idDocument">CF</arg>
+                                <arg attribute="constantValue">CF</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="sqlCode">MTSEL0829</arg>
+                                <arg attribute="sqlCode">MTSEL0831</arg>
+                                <arg attribute="sqlCode">MTSEL0832</arg>
+                                <arg attribute="sqlCode">DGSEL0130</arg>
+                                <arg attribute="sqlCode">LCSEL0796</arg>
+                                <arg attribute="sqlCode">DGSEL0021</arg>
+                                <arg attribute="sqlCode">LCSEL0824</arg>                                
+                                <arg attribute="sqlCodeExportValue">MTSEL0830,valor_salario,tipo_contrato,cargo_empleado,modelo_contrato,id_concepto_causacion,tipocontratone,tiposalario_imp,lugarlabor,departamento,municipio,valortiempo,unidadtiempo,valor_aux_transporte,nombrecompletousuario,cedulausuario,numerorefcontrato</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="nro_referencia">common.gui.components.GenericData</driver>
+                        <parameters>
+                            <subarg>
+                                <arg attribute="name">numerorefcontrato</arg>
+                                <arg attribute="getValue">numerorefcontrato</arg>
+                                <arg attribute="format">TEXT</arg>
+                                <arg attribute="size">15</arg>
+                                <arg attribute="maxlength">26</arg>
+                                <arg attribute="printable">true</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="clean">true</arg>
+                                <arg attribute="alignment">RIGHT</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="cargo">client.gui.components.XMLComboBox</driver>
+                        <parameters>
+                            <arg attribute="sqlCombo">MTSEL0795</arg>
+                            <arg attribute="nullValue">true</arg>
+                            <arg attribute="clean">false</arg>
+                            <arg attribute="exportValue">id_cargo</arg>
+                            <arg attribute="getDocument">true</arg>
+                            <arg attribute="preferredLength">170</arg>
+                            <arg attribute="name">cargo</arg>
+                            <arg attribute="nameField">cargo</arg>
+                            <arg attribute="getValue">cargo_empleado</arg>
+                            <arg attribute="enabled">false</arg>
+                            <arg attribute="sqlCode">MTSEL0970</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="mcontrato">client.gui.components.XMLComboBox</driver>
+                        <parameters>
+                            <arg attribute="sqlCombo">MTSEL0797</arg>
+                            <arg attribute="nullValue">true</arg>
+                            <arg attribute="clean">false</arg>
+                            <arg attribute="enabled">false</arg>
+                            <arg attribute="exportValue">mcontrato</arg>
+                            <arg attribute="getValue">modelo_contrato</arg>
+                            <arg attribute="getDocument">true</arg>
+                            <arg attribute="preferredLength">170</arg>
+                            <arg attribute="name">mcontrato</arg>
+                            <arg attribute="nameField">mcontrato</arg>
+                            <arg attribute="sqlCode">LCSEL0795</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="tiposalario">client.gui.components.XMLComboBox</driver>
+                        <parameters>
+                            <arg attribute="getValue">tiposalario_imp</arg>
+                            <arg attribute="sqlCombo">LCSEL0791</arg>
+                            <arg attribute="nullValue">true</arg>
+                            <arg attribute="clean">false</arg>
+                            <arg attribute="enabled">false</arg>
+                            <arg attribute="getDocument">true</arg>
+                            <arg attribute="preferredLength">170</arg>
+                            <arg attribute="name">tiposalario</arg>
+                            <arg attribute="nameField">tiposalario</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="lugarlabores">client.gui.components.XMLComboBox</driver>
+                        <parameters>
+                            <arg attribute="sqlCombo">LCSEL0793</arg>
+                            <arg attribute="getValue">lugarlabor</arg>
+                            <arg attribute="nullValue">true</arg>
+                            <arg attribute="clean">false</arg>
+                            <arg attribute="enabled">false</arg>
+                            <arg attribute="exportValue">lugarlabores</arg>
+                            <arg attribute="getDocument">true</arg>
+                            <arg attribute="preferredLength">170</arg>
+                            <arg attribute="name">lugarlabores</arg>
+                            <arg attribute="nameField">lugarlabores</arg>
+                            <arg attribute="sqlCode">LCSEL0794</arg>
+                        </parameters>
+                    </component>
+                    <component>
+                        <driver id="departamento">common.gui.components.GenericData</driver>
+                        <parameters>
+                            <subarg>
+                                <arg attribute="getValue">departamento</arg>
+                                <arg attribute="format">TEXT</arg>
+                                <arg attribute="size">15</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="maxlength">50</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                    <component>
+                        <driver id="municipio">common.gui.components.GenericData</driver>
+                        <parameters>
+                            <subarg>
+                                <arg attribute="getValue">municipio</arg>
+                                <arg attribute="format">TEXT</arg>
+                                <arg attribute="size">15</arg>
+                                <arg attribute="enabled">false</arg>
+                                <arg attribute="maxlength">150</arg>
+                                <arg attribute="printable">true</arg>
+                            </subarg>
+                        </parameters>
+                    </component>
+                    <panel locate="East" type="FlowLayout"/>
+                </panel>
+            </panel>
+            <panel locate="South" type="BorderLayout">
+                <panel locate="West" type="FlowLayout"/>
+                <panel locate="East" type="FlowLayout"/>
+                <panel type="BorderLayout">
+                    <component locate="North">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Clausulas Adicionales</arg>
+                            <arg attribute="alignment">0</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="parrafouno">common.gui.components.XMLTextArea</driver>
+                        <parameters>
+                            <arg attribute="driverEvent" id="nro_documento">common.gui.components.GenericData</arg>
+                            <arg attribute="keySQL">LCSEL0796</arg>
+                            <arg attribute="rows">80</arg>
+                            <arg attribute="withOutFinalEnter">true</arg>
+                            <arg attribute="cols">270</arg>
+                            <arg attribute="enabled">false</arg>
+                            <arg attribute="printable">true</arg>
+                            <arg attribute="exportValue">parrafouno</arg>
+                        </parameters>
+                    </component>
+                </panel>
+            </panel>
+        </panel>
+        <panel icon="/icons/ico_ingreso_material.png" name="Prorrogas" type="BorderLayout">
+            <panel locate="North" type="FlowLayout"/>
+
+            <panel locate="Center" type="GridLayout" rows="2" cols="1">
+            <panel locate="Center" type="BorderLayout">
+            <component locate="North">
+                <driver id="prorrogas">client.gui.components.TableFindData</driver>
+                <parameters>                    
+                    <arg attribute="keySQL">LCSEL0824</arg>
+                    <arg attribute="driverEvent" id="nro_documento">common.gui.components.GenericData</arg>
+                    <arg attribute="tagData">19</arg>
+                    <!-- <arg attribute="Query">LCSEL0750</arg> -->
+                    <arg attribute="rows">15</arg>
+                    <arg attribute="colorBackground">240,255,240</arg>
+                    <arg attribute="colorSelected">255,255,255</arg>
+                    <arg attribute="protectSelected">true</arg>
+                    <!-- <arg attribute="externalValue">totalValues,client.gui.components.TableDataFields,z</arg>-->
+                    <!-- <arg attribute="totales">e,i,j,k,l,m</arg><arg attribute="exportTotalCol">i,stotal</arg>-->
+                    <subarg>
+                        <!--0 a -->
+                        <arg attribute="name">No</arg>
+                        <arg attribute="length">90</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="enabled">true</arg>
+                        <arg attribute="exportValue">nomprod</arg>
+                        <arg attribute="printable">true</arg>
+                    </subarg>
+                    <subarg>
+                        <!--1 b -->
+                        <arg attribute="name">Fecha Prorroga</arg>
+                        <arg attribute="length">500</arg>
+                        <arg attribute="type">STRING</arg>
+                        <arg attribute="enabled">false</arg>
+                        <arg attribute="queryCol">0</arg>
+                        <arg attribute="printable">true</arg>
+                    </subarg>
+                </parameters>
+            </component>
+        </panel>
+            <panel locate="South" type="BorderLayout">
+                <panel locate="North" type="FlowLayout"/>
+                <panel locate="South" type="FlowLayout"/>
+                <panel align="LEFT" locate="West" type="FlowLayout">
+                    <component locate="West">
+                        <driver>common.gui.components.XMLLabel</driver>
+                        <parameters>
+                            <arg attribute="text">Registrar Fecha Prorroga:</arg>
+                            <arg attribute="alignment">0</arg>
+                            <arg attribute="font">Dialog,0,11</arg>
+                        </parameters>
+                    </component>
+                    <component locate="Center">
+                        <driver id="fechaprorrogas">common.gui.components.XMLDateField</driver>
+                        <parameters>
+                            <arg attribute="exportValue">fechaprorrogas</arg>
+                            <arg attribute="label">DATE</arg>
+                            <arg attribute="printable">true</arg>
+                        </parameters>
+                    </component>
+
+                    <component locate="Center">
+                        <driver id="prorrogas">common.gui.components.ButtonsPanel</driver>
+                        <parameters>
+                            <subarg>
+                                <arg attribute="label">SAVE</arg>
+                                <arg attribute="icon">/icons/ico_guardar.png</arg>
+                            </subarg>
+                            <!-- <subarg>
+                                <arg attribute="label">NEW2</arg>
+                                <arg attribute="icon">/icons/ico_cambio_producto_16x16.png</arg>
+                            </subarg> -->
+                        </parameters>
+                        <events>
+                            <object>
+                                <name>SAVE</name>
+                                <action>
+                                    <type>transaction</type>
+                                    <component>
+                                        <driver id="prorrogas">common.gui.components.ButtonsPanel</driver>
+                                        <method>setEnabled</method>
+                                        <parameters>
+                                            <arg attribute="button">SAVE</arg>
+                                            <arg attribute="state">false</arg>
+                                        </parameters>
+                                    </component>                            
+
+                                    <!-- 00 -->
+                                    <component>
+                                        <driver id="nro_documento">common.gui.components.GenericData</driver>
+                                        <method>getPackage</method>
+                                    </component>
+
+                                    <!-- 0 -->
+                                    <component>
+                                        <driver id="fechaprorrogas">common.gui.components.XMLDateField</driver>
+                                        <method>getPackage</method>
+                                    </component>
+                                   
+                                </action>
+                                                                                
+                            </object>
+                            <!-- <object>
+                                <name>NEW2</name>
+                                <component>
+                                    <driver id="fechaprorrogas">common.gui.components.XMLDateField</driver>
+                                    <method>clean</method>
+                                </component>
+                                <component>
+                                    <driver id="prorrogas">common.gui.components.ButtonsPanel</driver>
+                                    <method>setEnabled</method>
+                                    <parameters>
+                                        <arg attribute="button">SAVE</arg>
+                                        <arg attribute="state">true</arg>
+                                    </parameters>
+                                </component>
+                            </object> -->
+                        </events>
+                    </component>
+                </panel>
+            </panel>
+
+
+        </panel>
+
+        </panel>
+    </tab>
+    <!-- Termina Panel Norte -->
+    <!-- Inicia panel central, se demarca por el tab -->
+    <!-- Termina panel central, delimitado por tab -->
+    <!-- Inicia panel sur, botones -->
+    <panel locate="South" type="BorderLayout">
+        <panel locate="West" type="BorderLayout">
+            <component locate="West">
+                <driver id="estado">common.gui.components.XMLLabel</driver>
+                <parameters>
+                    <arg attribute="keySQL">DGSEL0021</arg>
+                    <arg attribute="driverEvent" id="nro_documento">common.gui.components.GenericData</arg>
+                    <arg attribute="text">:</arg>
+                    <arg attribute="exportValue">estado</arg>
+                    <arg attribute="alignment">LEFT</arg>
+                </parameters>
+            </component>
+        </panel>
+        <panel locate="East" type="BorderLayout">
+            <panel locate="East" type="FlowLayout"/>
+            <panel locate="West" type="FlowLayout"/>
+            <component locate="East">
+                <driver>common.gui.components.ButtonsPanel</driver>
+                <parameters>
+                    <arg>PRINT</arg>
+                    <arg>NEW</arg>
+                    <subarg>
+                        <arg attribute="label">EXIT</arg>
+                        <arg attribute="icon">/icons/ico_salir.png</arg>
+                    </subarg>
+                </parameters>
+                <events>
+                    <object>
+                        <name>PRINT</name>
+                        <action>
+                            <type>printer</type>
+                            <printerTemplate>/graphics/TNContrato.xml</printerTemplate>
+                            <!-- 00 -->
+                            <component>
+                                <driver id="nro_documento">common.gui.components.GenericData</driver>
+                                <method>getPrintPackage</method>
+                            </component>
+                            <!-- 000 ref -->
+                            <component>
+                                <driver id="nro_referencia">common.gui.components.GenericData</driver>
+                                <method>getPrintPackage</method>
+                            </component>
+                            <!-- 0 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">nombrecompleto</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 1 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">direccion</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 2 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">lugarnacimiento</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 2 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">fechanacimiento</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 2 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">nacionalidad</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 3 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">cargoempleadoimp</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 4 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">tiposalario_imp</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 5 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">valor_salario</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 6 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">valor_salario</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 7 -->
+                            <component>
+                                <driver id="finicio">common.gui.components.XMLDateField</driver>
+                                <method>getPrintPackage</method>
+                            </component>
+                            <!-- 8 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">lugarlabores_imp</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 9 -->
+                            <component>
+                                <driver id="municipio">common.gui.components.GenericData</driver>
+                                <method>getPrintPackage</method>
+                            </component>
+                            <!-- 10 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <arg attribute="nullField">true</arg>
+                                    <arg attribute="blankPackage">true</arg>
+                                    <subarg>
+                                        <arg attribute="importValue">valortiempo</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 11 -->
+                            <component>
+                                <driver id="unidadtiempo">client.gui.components.XMLComboBox</driver>
+                                <method>getPrintPackage</method>
+                            </component>
+                            <!-- 12 -->
+                            <component>
+                                <driver id="ffin">common.gui.components.XMLDateField</driver>
+                                <method>getPrintPackage</method>
+                            </component>
+                            <component>
+                                <driver>this</driver>
+                                <method>generateConceptWithQuery</method>
+                                <parameters>
+                                    <arg attribute="importValue">numerodocumento</arg>
+                                    <arg attribute="sqlCode">LCSEL0797</arg>
+                                    <arg attribute="replaceBlankImport">******</arg>
+                                </parameters>
+                            </component>
+                        </action>
+                        <action>
+                            <type>printer</type>
+                            <printerTemplate>/graphics/TNContratoPag2.xml</printerTemplate>
+                            <component>
+                                <driver>this</driver>
+                                <method>generateConceptWithQuery</method>
+                                <parameters>
+                                    <arg attribute="importValue">numerodocumento</arg>
+                                    <arg attribute="sqlCode">LCSEL0799</arg>
+                                    <arg attribute="replaceBlankImport">******</arg>
+                                </parameters>
+                            </component>
+                        </action>
+                        <action>
+                            <type>printer</type>
+                            <printerTemplate>/graphics/TNContratoPag3.xml</printerTemplate>
+                            <!-- 00 -->
+                            <component>
+                                <!-- <driver id="date">common.gui.components.GenericData</driver> -->
+                                <driver id="finicio">common.gui.components.XMLDateField</driver>
+                                <method>getPrintPackage</method>
+                            </component>
+                            <!-- 0 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">nombrecompleto</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 1 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">nitcc</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 2 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">nombrecompletousuario</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <!-- 3 -->
+                            <component>
+                                <driver>this</driver>
+                                <method>getPackage</method>
+                                <parameters>
+                                    <subarg>
+                                        <arg attribute="importValue">cedulausuario</arg>
+                                    </subarg>
+                                </parameters>
+                            </component>
+                            <component>
+                                <driver>this</driver>
+                                <method>generateConceptWithQuery</method>
+                                <parameters>
+                                    <arg attribute="importValue">numerodocumento</arg>
+                                    <arg attribute="sqlCode">LCSEL0801</arg>
+                                    <arg attribute="replaceBlankImport">******</arg>
+                                </parameters>
+                            </component>
+                        </action>
+                    </object>
+                    <object>
+                        <name>EXIT</name>
+                        <component>
+                            <driver>gfforma</driver>
+                            <method>dispose</method>
+                        </component>
+                    </object>
+                    <object>
+                        <name>NEW</name>
+                        <component>
+                            <driver id="nitcc">client.gui.components.EmakuSearchField</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="nombre1">common.gui.components.GenericData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="nombre2">common.gui.components.GenericData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="apellido1">common.gui.components.GenericData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="apellido2">common.gui.components.GenericData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="tipocontrato">client.gui.components.XMLComboBox</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="tipocontratone">client.gui.components.XMLComboBox</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="valortiempo">common.gui.components.GenericData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="unidadtiempo">client.gui.components.XMLComboBox</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="id_concepto_causacion">client.gui.components.XMLComboBox</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="valor_salario">client.gui.components.TableDataFields</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="valor_aux_transporte">client.gui.components.TableDataFields</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="finicio">common.gui.components.XMLDateField</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="ffin">common.gui.components.XMLDateField</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="date">common.gui.components.GenericData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="nro_documento">common.gui.components.GenericData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="cargo">client.gui.components.XMLComboBox</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="mcontrato">client.gui.components.XMLComboBox</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="tiposalario">client.gui.components.XMLComboBox</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="lugarlabores">client.gui.components.XMLComboBox</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="departamento">common.gui.components.GenericData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="municipio">common.gui.components.GenericData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="parrafouno">common.gui.components.XMLTextArea</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="nro_referencia">common.gui.components.GenericData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="estado">common.gui.components.XMLLabel</driver>
+                            <method>clean</method>
+                        </component>
+
+                        <component>
+                            <driver id="prorrogas">client.gui.components.TableFindData</driver>
+                            <method>clean</method>
+                        </component>
+                        <component>
+                            <driver id="fechaprorrogas">common.gui.components.XMLDateField</driver>
+                            <method>clean</method>
+                        </component>
+
+                        <component>
+                            <driver>this</driver>
+                            <method>cleanExternalValues</method>
+                        </component>
+                        <component>
+                            <driver id="prorrogas">common.gui.components.ButtonsPanel</driver>
+                            <method>setEnabled</method>
+                            <parameters>
+                                <arg attribute="button">SAVE</arg>
+                                <arg attribute="state">true</arg>
+                            </parameters>
+                        </component>
+                        <component>
+                            <driver>common.gui.components.ButtonsPanel</driver>
+                            <method>setEnabled</method>
+                            <parameters>
+                                <arg attribute="button">PRINT</arg>
+                                <arg attribute="state">true</arg>
+                            </parameters>
+                        </component>
+                    </object>
+                </events>
+            </component>
+        </panel>
+    </panel>
+    <!-- Termina panel sur, botones -->
+</FORM>

@@ -1,0 +1,309 @@
+<container>
+  <subarg>
+    <arg attribute="idDocument">EA</arg>
+    <arg attribute="consecutive"/>
+    <arg attribute="actionDocument">createDocument</arg>
+    <arg attribute="cash"/>
+  </subarg>
+  <!-- 0 info_documento -->
+  <arg>LCUPD0040</arg>
+  <!-- 1 transporte_mercancias -->
+  <arg>LCINS0091</arg>
+  <!-- 2 observaciones -->
+  <arg>INS0037</arg>
+  <!-- 3 datos_documento -->
+  <arg>LCINS0087</arg>
+  <!-- 4 Se almacena el tercero -->
+  <arg>INS0048</arg>
+<!--  Flete al gasto  -->
+ <LNData>
+         <driver>LNContabilidad</driver>
+         <method>fieldData</method>
+         <parameters>
+                 <arg attribute="CodeAPS">6</arg>
+                 <arg attribute="Concepto">Compra a credito - Flete</arg>
+                 <arg attribute="debuging">true</arg>
+                 <arg attribute="centrocosto">getName</arg>
+                 <subarg>
+                         <!-- <arg attribute="accountField">513550,D</arg> -->
+                         <arg attribute="accountField">52355001,D</arg>
+                 </subarg>
+         </parameters>
+ </LNData>
+<!-- Valor IVA Flete 5 -->
+ <LNData>
+         <driver>LNContabilidad</driver>
+         <method>fieldData</method>
+         <parameters>
+                 <arg attribute="CodeAPS">6</arg>
+                 <arg attribute="Concepto">Compra a credito - IVA Flete 5</arg>
+                 <arg attribute="debuging">true</arg>
+                 <arg attribute="tercero">getName</arg>
+                 <arg attribute="centrocosto">getName</arg>
+                 <subarg>
+                         <!-- <arg attribute="accountField">511570,D</arg> -->
+                         <arg attribute="accountField">24082001,D</arg>
+                 </subarg>
+         </parameters>
+ </LNData>
+ <!-- Valor IVA Flete 19 -->
+ <LNData>
+         <driver>LNContabilidad</driver>
+         <method>fieldData</method>
+         <parameters>
+                 <arg attribute="CodeAPS">6</arg>
+                 <arg attribute="Concepto">Compra a credito - IVA Flete 19</arg>
+                 <arg attribute="debuging">true</arg>
+                 <arg attribute="tercero">getName</arg>
+                 <arg attribute="centrocosto">getName</arg>
+                 <subarg>
+                         <!-- <arg attribute="accountField">511570,D</arg> -->
+                         <arg attribute="accountField">24082002,D</arg>
+                 </subarg>
+         </parameters>
+ </LNData>
+
+  <!-- 5 Ret. Fuente -->
+  <subarg>
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">LCINS0093</arg>
+        <arg attribute="fields">2,3,4,5,1</arg>
+        <arg attribute="discartKey">idTercero</arg>
+        <arg attribute="conditional">B&gt;0</arg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Compras a credito</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="tercero">getName</arg>
+        <arg attribute="centrocosto">getName</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 6 Ret. I.V.A. -->
+  <subarg>
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">LCINS0093</arg>
+        <arg attribute="fields">2,3,4,5,1</arg>
+        <arg attribute="discartKey">idTercero</arg>
+        <arg attribute="conditional">B&gt;0</arg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Compras a credito</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="tercero">getName</arg>
+        <arg attribute="centrocosto">getName</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 7 Ret. I.C.A. -->
+  <subarg>
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">LCINS0093</arg>
+        <arg attribute="fields">2,3,4,5,1</arg>
+        <arg attribute="discartKey">idTercero</arg>
+        <arg attribute="conditional">B&gt;0</arg>
+        <arg attribute="tercero">getName</arg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Compra a credito</arg>
+        <arg attribute="naturaleza">C</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="tercero">getName</arg>
+        <arg attribute="centrocosto">getName</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 8 Información de retencion contrapartida al R. Simplificado reteiva -->
+  <subarg>
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">LCINS0093</arg>
+        <arg attribute="fields">2,3,4,5,1</arg>
+        <arg attribute="discartKey">idTercero</arg>
+        <arg attribute="conditional">B&gt;0</arg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnDataAccount</method>
+      <parameters>
+        <arg attribute="Concepto">Compras a credito</arg>
+        <arg attribute="naturaleza">D</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="tercero">getName</arg>
+        <arg attribute="centrocosto">getName</arg>
+        <subarg>
+          <arg attribute="accountKey">0</arg>
+          <arg attribute="accountData">1</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- 9 adicionando cuenta temporada-->
+  <arg attribute="addKey"/>  
+  <!-- 10 Asiento para pago a credito cuentas proveedores -->
+  <LNData>
+    <driver>LNContabilidad</driver>
+    <method>fieldData</method>
+    <parameters>
+      <arg attribute="CodeAPS">6</arg>
+      <arg attribute="Concepto">Compra a credito</arg>
+      <arg attribute="debuging">true</arg>
+      <arg attribute="centrocosto">getName</arg>
+      <subarg>
+        <arg attribute="accountField">key,C</arg> 
+      </subarg>
+    </parameters>
+  </LNData>  
+
+  <!-- 12 Agregando informacion a cuentas x cobrar | cartera -->
+  <LNData>
+    <driver>LNSelectedField</driver>
+    <method>getFields</method>
+    <parameters>
+      <arg attribute="sql">LCSEL0638</arg>
+      <arg attribute="conditional">c&gt;0</arg>
+      <arg attribute="fields">0,1,2</arg>
+    </parameters>
+  </LNData>
+
+  <!-- 11 remueve llave cuenta -->
+  <arg attribute="removeKey">cuenta</arg>
+
+  <!-- 13 adicionando bodega -->
+  <arg attribute="addKey"/>
+
+  <!-- 14 asientos generados por la tabla, crea tabla npventa -->
+  <arg>MTINS0058</arg>
+
+  <!-- 15 -->
+  <subarg>
+    <!-- guardando informacion del documento -->
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getSubpackage</method>
+      <parameters>
+        <arg attribute="sql">DGINS0016</arg>
+        <!-- Inserta en datos_prod -->
+        <arg attribute="fields">0,1,2,3,4,8,9</arg>
+        <arg attribute="discartKey">idTercero</arg>
+      </parameters>
+    </LNData>
+    <!-- Registro para nuevas listas de precios -->
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getFields</method>
+      <parameters>
+        <arg attribute="sql">DGUPD0004</arg>
+        <!-- Actualiza pcosto en prod_serv -->
+        <arg attribute="fields">2,0,4</arg>
+        <arg attribute="discartKey">idTercero</arg>
+        <arg attribute="discartKey">bodegaEntrante</arg></parameters>
+    </LNData>
+    <LNData>
+      <driver>LNSelectedField</driver>
+      <method>getFields</method>
+      <parameters>
+        <arg attribute="sql">MTINS0059</arg>
+        <!-- Inserta en npventa -->
+        <arg attribute="fields">2,4,0</arg>
+        <arg attribute="discartKey">idTercero</arg>
+        <arg attribute="discartKey">bodegaEntrante</arg>
+      </parameters>
+    </LNData>    
+    <LNData>
+      <driver>LNInventarios</driver>
+      <method>movimientos</method>
+      <parameters>
+        <arg attribute="tipoMovimiento">entrada</arg>
+      </parameters>
+    </LNData>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>columnData</method>
+      <parameters>
+        <arg attribute="Base">0</arg>
+        <arg attribute="CodeAPS">6</arg>
+        <arg attribute="Concepto">Compras a credito</arg>
+        <arg attribute="debuging">true</arg>
+        <arg attribute="centrocosto">getName</arg>
+        <subarg>
+          <arg attribute="accountCol">IdProdServ,0</arg>
+          <!-- mercancia 5% -->
+          <arg attribute="accountCol">1435560501,5</arg>             
+          <!-- mercancia 19% -->
+          <arg attribute="accountCol">1435560502,5</arg>          
+          <!-- mercancia excluida -->
+          <arg attribute="accountCol">14355610,5</arg>        
+
+          <!-- mercancia exenta -->
+          <arg attribute="accountCol">14355615,5</arg>
+
+          <!-- mercancia no gravada -->
+          <arg attribute="accountCol">14352001,5</arg>          
+
+          <!-- iva 5% -->
+          <arg attribute="accountCol">24081001,6</arg>
+          <!-- iva 19% -->
+          <arg attribute="accountCol">24081002,6</arg>
+        </subarg>
+      </parameters>
+    </LNData>
+  </subarg>
+  <!-- <arg>MTUPD0026</arg>-->
+  <!-- 16 Actualiza datos a partir de la tabla creada en MTINS0058 y MTINS0059 pventa -->
+
+
+  <!-- Comentado completamente Marzo 21 2023 -->
+  <!-- <subarg>
+    <LNData>
+      <driver>LNContabilidad</driver>
+      <method>recoverDocument</method>
+    </LNData>
+    <LNData>
+      <driver>LNInventarios</driver>
+      <method>movimientos</method>
+      <parameters>
+        <arg attribute="tipoMovimiento">recoverDocument</arg>
+      </parameters>
+    </LNData>
+  </subarg> -->
+  
+</container>
