@@ -248,7 +248,7 @@
               <arg attribute="type">INTEGER</arg>
               <arg attribute="clean">false</arg>
               <arg attribute="enabled">true</arg>
-              <arg attribute="defaultValue">0</arg>
+              <arg attribute="defaultValue">1</arg>
             </subarg>
             <subarg>
               <!-- 2 c -->
@@ -373,6 +373,7 @@
               <arg attribute="type">STRING</arg>
               <arg attribute="clean">false</arg>
               <arg attribute="enabled">true</arg>
+              <arg attribute="queryCol">14</arg>
             </subarg>
             <subarg>
               <!-- 16 q -->
@@ -381,6 +382,7 @@
               <arg attribute="type">STRING</arg>
               <arg attribute="clean">false</arg>
               <arg attribute="enabled">true</arg>
+              <arg attribute="queryCol">12</arg>
             </subarg>
             <subarg>
               <!-- 17 r -->
@@ -389,6 +391,7 @@
               <arg attribute="type">STRING</arg>
               <arg attribute="clean">false</arg>
               <arg attribute="enabled">true</arg>
+              <arg attribute="queryCol">13</arg>
             </subarg>
           </parameters>
         </component>
