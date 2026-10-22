@@ -1,0 +1,49 @@
+<container>
+    <subarg>
+        <arg attribute="idDocument">GI</arg>
+        <arg attribute="consecutive"/>
+        <arg attribute="actionDocument">createDocument</arg>
+        <arg attribute="cash"/>
+    </subarg>
+    <!-- 0 obs documento -->
+    <arg>INS0037</arg>
+    <!-- 1 info_documento -->
+    <arg>LCUPD0037</arg>
+    <!-- 2 -->
+    <LNData>
+        <driver>LNContabilidad</driver>
+        <method>rowDataAccountSC</method>
+        <parameters>
+            <arg attribute="activo">notData</arg>
+        </parameters>
+    </LNData>
+    <!-- 3 Tercero -->
+    <arg>INS0048</arg>
+    <!-- 4 -->
+    <subarg>
+        <!-- registro_retenciones -->
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getSubpackage</method>
+            <parameters>
+                <arg attribute="sql">LCINS0093</arg>
+                <arg attribute="fields">19,11,12,5,18</arg>
+                <arg attribute="discartKey">idTercero</arg>
+                <arg attribute="discartKey">centrocosto</arg>
+                <arg attribute="conditional">S&gt;0</arg>
+            </parameters>
+        </LNData>
+        <!-- registro_gastos -->
+        <LNData>
+            <driver>LNSelectedField</driver>
+            <method>getFields</method>
+            <parameters>
+                <arg attribute="sql">LCINS0128</arg>
+                <arg attribute="conditional">c&gt;0</arg>
+                <arg attribute="fields">17,8,5,10,1,11,12,13,15,9</arg>
+                <arg attribute="discartKey">idTercero</arg>
+                <arg attribute="discartKey">centrocosto</arg>
+            </parameters>
+        </LNData>
+    </subarg>
+</container>

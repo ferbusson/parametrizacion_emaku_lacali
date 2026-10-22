@@ -1,0 +1,195 @@
+<FORM>
+    <preferences>
+        <size width="1054" height="440" />
+        <name>Editar Sub Conceptos Importación</name>
+        <icon>REPORT</icon>
+        <iconificable />
+        <resizable />
+        <closable />
+    </preferences>
+    <panel locate="North" type="FlowLayout" />
+    <panel locate="West" type="FlowLayout" />
+    <panel locate="East" type="FlowLayout" />
+    <panel locate="Center" type="BorderLayout">
+    <panel locate="North" type="BorderLayout">
+      <component>
+        <driver id="clasificacion">client.gui.components.XMLComboBox</driver>
+        <parameters>
+          <arg attribute="label">Concepto: </arg>
+          <arg attribute="sqlCombo">LCSEL0535</arg>
+          <arg attribute="nameField">clasificacion</arg>
+          <arg attribute="addAttribute">key</arg>
+          <arg attribute="Panel">true</arg>
+          <arg attribute="exportValue">clasificacion</arg>
+          <arg attribute="preferredLength">280</arg>
+          <arg attribute="sqlCode">LCSEL0536</arg>
+          <arg attribute="sqlCode">LCSEL0537</arg>
+          <arg attribute="sqlCode">LCSEL0538</arg>
+        </parameters>
+      </component>
+  </panel>
+    <panel locate="Center" type="BorderLayout">
+    <component locate="Center">
+      <driver id="conceptos">client.gui.components.TableFindData</driver>
+      <parameters>
+        <arg attribute="keySQL">LCSEL0537</arg>
+        <arg attribute="driverEvent" id="clasificacion">client.gui.components.XMLComboBox</arg>
+        <arg attribute="rows">100</arg>
+        <arg attribute="reload">true</arg>
+        <arg attribute="colorBackground">230,243,255</arg>
+        <arg attribute="colorSelected">153,255,255</arg>
+        <arg attribute="protectSelected">true</arg>
+        <arg attribute="rowHeight">20</arg>        
+        <arg attribute="tagData">13</arg>
+        <subarg> <!-- a 0 -->
+          <arg attribute="name">Código</arg>
+          <arg attribute="length">80</arg>
+          <arg attribute="type">STRING</arg>
+          <arg attribute="enabled">true</arg>
+          <arg attribute="printable">true</arg>
+          <arg attribute="returnCol">6</arg>
+        </subarg>
+        <subarg> <!-- b 1 -->
+          <arg attribute="name">DESCRIPCION</arg>
+          <arg attribute="length">270</arg>
+          <arg attribute="type">STRING</arg>
+          <arg attribute="enabled">true</arg>
+          <arg attribute="printable">true</arg>
+          <arg attribute="returnCol">0</arg>
+        </subarg>
+        <subarg><!-- c 2 -->
+          <arg attribute="name">Grupo Impuestos</arg>
+          <arg attribute="length">160</arg>
+          <arg attribute="type">COMBOSQL</arg>
+          <arg attribute="enabled">true</arg>
+          <arg attribute="returnCol">4</arg>
+          <arg attribute="sqlCombo">LCSEL0742</arg>
+          <arg attribute="printable">true</arg>
+        </subarg>
+        <subarg> <!-- d 3 -->
+          <arg attribute="name">CUENTA</arg>
+          <arg attribute="length">98</arg>
+          <arg attribute="type">DATASEARCH</arg>
+          <arg attribute="sqlCombo">SEL0323</arg>
+          <arg attribute="keyDataSearch">searchCuenta</arg>
+          <arg attribute="repeatData">2</arg>
+          <arg attribute="noDataBeep">true</arg>
+          <arg attribute="noDataMessage">No se encontro registros</arg>
+          <arg attribute="selectedIndex">1</arg>
+          <arg attribute="enabled">true</arg>
+          <arg attribute="exportValue">charcta</arg>
+        </subarg>
+        <subarg> <!-- e 4 -->
+          <arg attribute="name">Naturaleza</arg>
+          <arg attribute="length">80</arg>
+          <arg attribute="type">BOOLEAN</arg>
+          <arg attribute="clean">true</arg>
+          <arg attribute="enabled">true</arg>
+          <arg attribute="returnCol">1</arg>
+        </subarg>
+        <subarg> <!-- f 5 -->
+          <arg attribute="name">Cuenta Retención</arg>
+          <arg attribute="length">120</arg>
+          <arg attribute="type">DATASEARCH</arg>
+          <arg attribute="sqlCombo">SEL0323</arg>
+          <arg attribute="keyDataSearch">searchCuentaRete</arg>
+          <arg attribute="repeatData">2</arg>
+          <arg attribute="defaultValue">-1</arg>
+          <arg attribute="noDataBeep">true</arg>
+          <arg attribute="noDataMessage">No se encontro registros</arg>
+          <arg attribute="selectedIndex">1</arg>
+          <arg attribute="enabled">true</arg>
+          <arg attribute="exportValue">charctaretencion</arg>
+        </subarg>
+        <subarg><!-- g 6 -->
+          <arg attribute="name">Categoria Costo</arg>
+          <arg attribute="length">200</arg>
+          <arg attribute="type">COMBOSQL</arg>
+          <arg attribute="enabled">true</arg>
+          <arg attribute="returnCol">7</arg>
+          <arg attribute="sqlCombo">LCSEL0720</arg>
+          <arg attribute="printable">true</arg>
+        </subarg>
+        <subarg><!-- h 7 -->
+          <arg attribute="name">id_cta</arg>
+          <arg attribute="length">0</arg>
+          <arg attribute="type">STRING</arg>
+          <arg attribute="enabled">true</arg>
+          <arg attribute="returnCol">2</arg>
+          <arg attribute="returnNullCol">true</arg>
+          <arg attribute="importValue">charcta</arg>
+          <arg attribute="sqlCombo">GRSEL0002</arg>
+          <arg attribute="exportValue">idcta</arg>
+        </subarg>
+        <subarg><!-- i 8 -->
+          <arg attribute="name">id_cta_retencion</arg>
+          <arg attribute="length">0</arg>
+          <arg attribute="type">STRING</arg>
+          <arg attribute="enabled">true</arg>
+          <arg attribute="returnCol">5</arg>
+          <arg attribute="returnNullCol">true</arg>
+          <arg attribute="importValue">charctaretencion</arg>
+          <arg attribute="sqlCombo">GRSEL0002</arg>
+          <arg attribute="exportValue">idctaretencion</arg>
+        </subarg>
+        <subarg> <!-- j 9 -->
+          <arg attribute="name">id_concepto_imp</arg>
+          <arg attribute="length">0</arg>
+          <arg attribute="type">STRING</arg>
+          <arg attribute="enabled">false</arg>
+          <arg attribute="minValue">0</arg>
+          <arg attribute="returnCol">3</arg>
+          <arg attribute="printable">true</arg>
+        </subarg>
+      </parameters>
+    </component>    
+  </panel>
+  </panel>
+    <component locate="South">
+        <driver>common.gui.components.ButtonsPanel</driver>
+        <parameters>
+            <!-- <subarg>
+              <arg attribute="label">EXCEL</arg>
+              <arg attribute="icon">/icons/ico_excel.png</arg>
+              <arg attribute="keyStroke">F9</arg>
+              <arg attribute="typePackage">XLSREPORTREQUEST</arg>
+              <arg attribute="idReport">XLS0010</arg>
+            </subarg> -->
+            <arg>SAVEAS</arg>
+            <arg>NEW</arg>
+            <arg>EXIT</arg>
+        </parameters>
+        <events>
+        <object>
+        <name>SAVEAS</name>        
+          <component>
+            <driver id="clasificacion">client.gui.components.XMLComboBox</driver>
+            <method>getPackage</method>
+          </component>       
+          <component>
+            <driver id="conceptos">client.gui.components.TableFindData</driver>
+            <method>getPackage</method>
+          </component>       
+          <component>
+            <driver id="conceptos">client.gui.components.TableFindData</driver>
+            <method>getBlankPackage</method>
+          </component>       
+      </object>          
+            <object>
+                <name>NEW</name>
+                <component>
+                  <driver>this</driver>
+                  <method>cleanExternalValues</method>
+                </component>
+                <component>
+                       <driver id="clasificacion">client.gui.components.XMLComboBox</driver>
+                       <method>clean</method>
+                </component>
+                <component>
+                       <driver id="conceptos">client.gui.components.TableFindData</driver>
+                       <method>clean</method>
+                </component>
+            </object>
+        </events>
+    </component>
+</FORM>

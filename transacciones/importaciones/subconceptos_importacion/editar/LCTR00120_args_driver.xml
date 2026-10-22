@@ -1,0 +1,14 @@
+<container>
+    <arg attribute="edit"/>
+    <subarg>
+    <!-- 0 crea aux_act_conceptos_imp -->
+     <arg>LCINS0096</arg>
+     <!-- 1 actualiza item, prod_serv y conceptos_importacion - tambien crea tabla aux_act_conceptos_imp para la siguiente sentencia -->
+     <arg>LCUPD0027</arg>
+     <!-- 2 borra de conceptos_importacion -->
+     <arg>LCDEL0008</arg>
+    </subarg>
+</container>
+
+
+
