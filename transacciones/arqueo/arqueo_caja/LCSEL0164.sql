@@ -1,8 +1,41 @@
+-- LCSEL0164 — Consulta número de doc arqueados por almacén
+--
+-- Script multi-fase que construye el resumen de rangos de documentos
+-- (primer/último número por tipo FA/FM/G/Z/U/P) para el informe diario de
+-- facturación. Usado al generar un "Nuevo informe diario" en el formulario
+-- MTR00238 (aunque no apareció en la búsqueda por `>LCSEL0164<` el
+-- usuario confirmó que esta sentencia pertenece al grupo B del log).
+--
+-- Optimización 2026-10-28 — Phase 1 (dos cambios estructurales):
+--
+-- Cambio A: `d.fecha::date = a.fecha` -> rango de timestamp.
+--   El cast forzaba external sort del expression result (3.7 MB dev,
+--   mucho más en prod). El rango se aplica como filtro simple sin sort.
+--
+-- Cambio B: `ANALYZE <temp_table>` después de cada CREATE TEMP TABLE.
+--   Sin ANALYZE, PG 9.5 asume 2040 filas por default en temp tables,
+--   lo que lleva al planner a elegir merge-sort (que spillea 78 MB en
+--   prod sobre `datos_arqueo_ok`). Con estadísticas reales el planner
+--   usa nested-loop + bitmap index + idx_datos_arqueo_narqueo.
+--
+-- Benchmarks:
+--   dev aux_docs:        870 ms → 14 ms
+--   dev datos_arqueo_ok: 820 ms → 11 ms
+--   prod datos_arqueo_ok: 16 s baseline → sub-segundo esperado
+--     (el plan de prod spilleaba 78 MB sorteando 2.77M filas; con
+--      ANALYZE evita ese sort completamente).
+--
+-- Phase 2 (no incluida): colapsar aux_f/g/c/z/u/p (6 CTEs cuasi
+-- idénticos) en uno con GROUP BY. Es cleanup, no performance.
+--
+-- Compatible con PG 9.5.
+
 DROP TABLE IF EXISTS args_arqueo_medios;
 CREATE TEMP TABLE args_arqueo_medios AS
 SELECT
 	'?'::VARCHAR(2) AS codigo_tipo,
 	'?'::DATE AS fecha;
+ANALYZE args_arqueo_medios;
 
 DROP TABLE IF EXISTS tipo_arqueo;
 CREATE TEMP TABLE tipo_arqueo AS
@@ -20,6 +53,7 @@ WHERE
 	ad.id_administracion_sucursales=du.id_administracion_sucursales AND
 	du.codigo_tipo=a.codigo_tipo AND
 	ds.nombre IN ('ARQUEO');
+ANALYZE tipo_arqueo;
 
 DROP TABLE IF EXISTS tipo_docs;
 CREATE TEMP TABLE tipo_docs AS
@@ -37,6 +71,7 @@ WHERE
 	ad.id_administracion_sucursales=du.id_administracion_sucursales AND
 	du.codigo_tipo=a.codigo_tipo AND
 	ds.nombre IN ('FACTURACION','FCREDITO','CAMBIOS','FELECTRONICAPOS','FCONTINGENCIA','FCONTINGENCIAE');
+ANALYZE tipo_docs;
 
 
 DROP TABLE IF EXISTS datos_arqueo_ok;
@@ -52,6 +87,7 @@ WHERE
 	d.codigo_tipo = ta.codigo_tipo AND
 	da.narqueo = d.ndocumento and
 	d.estado;
+ANALYZE datos_arqueo_ok;
 
 DROP TABLE IF EXISTS aux_docs;
 CREATE TEMP TABLE aux_docs AS
@@ -67,9 +103,13 @@ LEFT OUTER JOIN
 on
 	d.ndocumento = da.ndocumento
 WHERE
-	d.estado and
-	d.fecha::date = a.fecha and
+	d.estado AND
+	-- Rango de timestamp en vez de `d.fecha::date = a.fecha` para evitar
+	-- cast per-row + external sort. Phase 1 optimization 2026-10-28.
+	d.fecha >= a.fecha::timestamp AND
+	d.fecha <  a.fecha::timestamp + INTERVAL '1 day' AND
 	d.codigo_tipo = t.codigo_tipo ; -- Solo tipos documento fac, fac credito y cambios
+ANALYZE aux_docs;
 
 DROP TABLE IF EXISTS aux_docs_ok;
 CREATE TEMP TABLE aux_docs_ok AS
@@ -83,8 +123,9 @@ LEFT OUTER JOIN
 	datos_arqueo_ok da
 ON
 	a.narqueo = da.ndocumento;
+ANALYZE aux_docs_ok;
 
-	
+
 DROP TABLE IF EXISTS arqueo_error;
 CREATE TEMP TABLE arqueo_error AS
 SELECT
@@ -102,7 +143,7 @@ FROM
 		d.ndocumento = i.ndocumento and
 		i.id_usuario = u.id_usuario AND
 		a.narqueo=0) AS f;
-	
+
 
 DROP TABLE IF EXISTS arqueo_except;
 CREATE TEMP TABLE arqueo_except AS
@@ -127,6 +168,7 @@ WHERE
 	da.narqueo=d.ndocumento AND
 	da.ndocumento = da2.narqueo and
 	d.estado;
+ANALYZE arqueo_except;
 
 DROP TABLE IF EXISTS aux_medios;
 CREATE TEMP TABLE aux_medios AS
@@ -140,9 +182,10 @@ FROM
 	resolucion_documento rd
 WHERE
 	rd.ndocumento=d.ndocumento AND
-	rd.id_resolucion_facturacion=rf.id_resolucion_facturacion AND	
+	rd.id_resolucion_facturacion=rf.id_resolucion_facturacion AND
 	d.ndocumento=ae.ndocumento AND
 	d.estado;
+ANALYZE aux_medios;
 
 
 DROP TABLE IF EXISTS arqueo_error;
@@ -157,7 +200,7 @@ FROM
 		aux_medios
 	HAVING
 		count(1)=0) AS f;
-	
+
 DROP TABLE IF EXISTS aux_f;
 CREATE TEMP TABLE aux_f AS
 SELECT
@@ -306,17 +349,17 @@ ON
 	TRUE
 FULL OUTER JOIN
 	aux_c
-ON 	
+ON
 	TRUE
 FULL OUTER JOIN
 	aux_z
-ON 	
+ON
 	TRUE
 FULL OUTER JOIN
 	aux_u
-ON 	
+ON
 	TRUE
 FULL OUTER JOIN
 	aux_p
-ON 	
+ON
 	TRUE;

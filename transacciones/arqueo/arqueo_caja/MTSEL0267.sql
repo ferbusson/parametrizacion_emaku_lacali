@@ -1,4 +1,14 @@
--- CONSULTA VENTAS CON TARJETA CREDITO
+-- MTSEL0267 — Consulta valor venta tarjeta crédito para arqueo
+--
+-- Suma `tarjetas.valor` para los documentos del cajero actual con
+-- `tcredito.tipo = 'CR'` (crédito) que no estén aún en un arqueo activo.
+--
+-- Gemela de MTSEL0268 (débito) — misma estructura, filtro invertido.
+-- En producción esta era la más lenta del grupo A (~74.5s) y causaba un
+-- halt nocturno en el cierre de arqueo (formulario DGTR00082).
+--
+-- Ver [[project-mtsel0268-optim]] para el análisis del patrón.
+
 DROP TABLE IF EXISTS tmp_usuario;
 CREATE TEMP TABLE tmp_usuario AS
 SELECT '?'::VARCHAR(70) AS login;
@@ -19,44 +29,25 @@ WHERE
 	dst.id_documento=ds.id_documento AND
 	au.id_administracion_sucursales=ds.id_administracion_sucursales;
 
-
-SELECT
-	COALESCE(SUM(t.valor),0) AS valor
-FROM
-	tcredito tc,
-	tarjetas t,
-	datos_documento dd,
-	(SELECT
-		d.ndocumento
-	FROM
-		documentos d,
-		info_documento i,
-		tipo_docs td,
-		usuarios u,
-		tmp_usuario t
-	where
-		d.codigo_tipo = td.codigo_tipo and
-		d.estado AND
-		d.ndocumento=i.ndocumento AND
-		i.id_usuario=u.id_usuario AND
-		u.login=t.login
-	EXCEPT
-	SELECT
-		a.ndocumento
-	FROM
-		documentos d,
-		datos_arqueo a,
-		info_documento i,
-		usuarios u,
-		tmp_usuario t
-	WHERE
-		d.ndocumento=a.narqueo AND
-		d.estado AND
-		A.ndocumento=i.ndocumento AND
-		i.id_usuario=u.id_usuario AND
-		u.login=t.login) AS foo
-WHERE
-	foo.ndocumento=t.ndocumento AND
-	foo.ndocumento=dd.ndocumento AND
-	t.id_tcredito = tc.id_tcredito  AND 
-	tc.tipo = 'CR';
+WITH user_docs AS (
+    SELECT t.ndocumento, t.valor
+    FROM   tarjetas         t
+    JOIN   tcredito         tc ON tc.id_tcredito = t.id_tcredito AND tc.tipo = 'CR'    
+    JOIN   documentos       d  ON d.ndocumento   = t.ndocumento
+                              AND d.estado
+                              AND d.fecha        >= CURRENT_DATE - INTERVAL '7 days'
+    join tipo_docs td on td.codigo_tipo = d.codigo_tipo
+    JOIN   info_documento   i  ON i.ndocumento   = t.ndocumento
+    JOIN   usuarios         u  ON u.id_usuario   = i.id_usuario
+    JOIN   tmp_usuario      tu ON tu.login       = u.login
+    JOIN   datos_documento  dd ON dd.ndocumento  = t.ndocumento
+)
+SELECT COALESCE(SUM(ud.valor), 0) AS valor
+FROM   user_docs ud
+WHERE  (
+           SELECT 1
+           FROM   datos_arqueo a
+           JOIN   documentos   da ON da.ndocumento = a.narqueo AND da.estado
+           WHERE  a.ndocumento = ud.ndocumento
+           LIMIT  1
+       ) IS NULL;
