@@ -9,7 +9,7 @@
 -- el flujo de arqueo.
 --
 -- Diferencias con el patrón de MTSEL0268:
---   * El login se interpola directamente (`u.login = '?'`), no vía tmp_usuario.
+--   * El login se interpola directamente (`u.login = 'interrogacion'`), no vía tmp_usuario.
 --   * El EXCEPT original NO filtra por usuario (toma "todos los docs no
 --     arqueados"), el filtro de usuario se aplica al nivel exterior. En el
 --     rewrite el orden se invierte sin cambiar la semántica: filtramos

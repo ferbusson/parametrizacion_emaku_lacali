@@ -1,0 +1,465 @@
+<FORM>
+  <preferences>
+    <size width="820" height="420" />
+    <name>Nuevo item con Barra Manual</name>
+    <icon>NART</icon>
+    <iconificable />
+    <resizable />
+    <closable />
+  </preferences>      
+  <component>
+    <driver id="idasientogenerico">client.gui.components.TableDataFields</driver>
+    <parameters>
+        <arg attribute="linkTable">barras</arg>
+        <arg attribute="keySQL">LCSEL0438</arg>
+        <arg attribute="driverEvent" id="idasiento">client.gui.components.XMLComboBox</arg>          
+      <subarg>
+        <arg attribute="format">NUMERIC</arg>
+        <arg attribute="size">10</arg>
+        <arg attribute="maxlength">26</arg>
+        <arg attribute="alignment">RIGHT</arg>
+        <arg attribute="exportValue">idasientogenerico</arg>
+        <arg attribute="keyExternalValue">aa</arg>
+        <arg attribute="background">196,196,252</arg>
+      </subarg>
+    </parameters>
+  </component>          
+  <panel locate="North" type="FlowLayout" />
+  <panel locate="West" type="FlowLayout" />
+  <panel locate="East" type="FlowLayout" />
+  <tab locate="Center">
+    <panel name="PRODUCTO" icon="/icons/ico_producto_16x16.png" type="BorderLayout">
+      <panel locate="North" type="FlowLayout" />
+      <panel locate="West" type="FlowLayout" />
+      <panel locate="East" type="FlowLayout" />
+      <panel locate="Center" type="BorderLayout">
+        <panel locate="West" type="GridLayout" rows="9" cols="1">
+          <component>
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Sección</arg>
+              <arg attribute="alignment">0</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Grupo</arg>
+              <arg attribute="alignment">0</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Sub Grupo</arg>
+              <arg attribute="alignment">0</arg>
+            </parameters>
+          </component>
+                    <component>
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Asientos</arg>
+              <arg attribute="alignment">0</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Presentación</arg>
+              <arg attribute="alignment">0</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Marca</arg>
+              <arg attribute="alignment">0</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">SubMarca</arg>
+              <arg attribute="alignment">0</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver>common.gui.components.XMLLabel</driver>
+            <parameters>
+              <arg attribute="text">Referencia Prov.</arg>
+              <arg attribute="alignment">0</arg>
+            </parameters>
+          </component>
+          <component>
+              <driver>common.gui.components.XMLLabel</driver>
+              <parameters>
+                  <arg attribute="text">Descripcion</arg>
+                  <arg attribute="alignment">0</arg>
+              </parameters>
+          </component>
+        </panel>
+        <panel locate="Center" type="GridLayout" rows="9" cols="1">
+          <component>
+            <driver id="seccion">client.gui.components.XMLComboBox</driver>
+            <parameters>
+              <arg attribute="sqlCombo">SEL0368</arg>
+              <arg attribute="selectedIndex">0</arg>
+              <arg attribute="exportValue">seccion</arg>
+              <arg attribute="clean">false</arg>
+              <arg attribute="preferredLength">230</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver id="grupo">client.gui.components.XMLComboBox</driver>
+            <parameters>
+              <arg attribute="sqlCombo">SEL0370</arg>
+              <arg attribute="selectedIndex">0</arg>
+              <arg attribute="exportValue">grupo</arg>
+              <arg attribute="importValue">seccion</arg>
+              <arg attribute="clean">false</arg>
+              <arg attribute="preferredLength">230</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver id="subgrupo">client.gui.components.XMLComboBox</driver>
+            <parameters>
+              <arg attribute="sqlCombo">SEL0372</arg>
+              <arg attribute="selectedIndex">0</arg>
+              <arg attribute="importValue">seccion</arg>
+              <arg attribute="importValue">grupo</arg>
+              <arg attribute="exportValue">subgrupo</arg>
+              <arg attribute="clean">false</arg>
+              <arg attribute="preferredLength">230</arg>
+            </parameters>
+          </component>
+          <component>
+              <driver id="idasiento">client.gui.components.XMLComboBox</driver>
+              <parameters>
+                  <arg attribute="sqlCombo">LCSEL0113</arg>
+                  <arg attribute="selectedIndex">0</arg>
+                  <arg attribute="exportValue">idasiento</arg>
+                  <arg attribute="clean">false</arg>
+                  <arg attribute="preferredLength">230</arg>
+                  <arg attribute="nameField">idasiento</arg>
+                  <arg attribute="addAttribute">key</arg>
+                  <arg attribute="sqlCode">LCSEL0438</arg>
+              </parameters>
+          </component>
+          <component>
+            <driver id="presentacion">client.gui.components.XMLComboBox</driver>
+            <parameters>
+              <arg attribute="sqlCombo">MTSEL0032</arg>
+              <arg attribute="selectedIndex">0</arg>
+              <arg attribute="exportValue">presentacion</arg>
+              <arg attribute="clean">false</arg>
+              <arg attribute="preferredLength">230</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver id="marca">client.gui.components.XMLComboBox</driver>
+            <parameters>
+              <arg attribute="sqlCombo">MTSEL0023</arg>
+              <arg attribute="selectedIndex">0</arg>
+              <arg attribute="exportValue">marca</arg>
+              <arg attribute="clean">false</arg>
+              <arg attribute="preferredLength">230</arg>
+            </parameters>
+          </component>
+          <component>
+            <driver id="submarca">client.gui.components.XMLComboBox</driver>
+            <parameters>
+              <arg attribute="sqlCombo">LCSEL0102</arg>
+              <arg attribute="selectedIndex">0</arg>
+              <arg attribute="exportValue">submarca</arg>
+              <arg attribute="clean">false</arg>
+              <arg attribute="preferredLength">230</arg>
+            </parameters>
+          </component>
+          <component locate="North">
+            <driver id="referencia">client.gui.components.EmakuSearchField</driver>
+            <parameters>
+              <arg attribute="size">20</arg>
+              <arg attribute="maxlength">26</arg>
+              <arg attribute="nullValue">true</arg>
+              <arg attribute="exportValue">referencia</arg>
+              <arg attribute="format">TEXT</arg>
+              <arg attribute="sqlCombo">MTSEL0092</arg>
+              <arg attribute="blankArgs">false</arg>
+              <arg attribute="keyDataSearch">searchProd</arg>
+              <arg attribute="repeatData">1</arg>
+              <arg attribute="noDataBeep">true</arg>
+              <arg attribute="noDataMessage">No se encontro registros</arg>
+              <arg attribute="selectedIndex">1</arg>
+              <arg attribute="enabled">true</arg>
+              <arg attribute="clean">true</arg>
+            </parameters>
+          </component>
+          <component>
+              <driver id="desc">common.gui.components.GenericData</driver>
+              <parameters>
+                  <subarg>
+                      <arg attribute="format">TEXT</arg>
+                      <arg attribute="size">30</arg>
+                      <arg attribute="maxlength">150</arg>
+                      <arg attribute="exportValue">descripcion</arg>
+                      <arg attribute="return">true</arg>
+                  </subarg>
+              </parameters>
+          </component>
+        </panel>
+      </panel>
+    </panel>
+    <panel name="Barras" icon="/icons/ico_codigo_barras_16x16.png" type="BorderLayout">
+      <panel locate="North" type="FlowLayout" />
+      <panel locate="West" type="FlowLayout" />
+      <panel locate="East" type="FlowLayout" />
+      <panel locate="Center" type="BorderLayout">
+        <component locate="Center">
+          <driver id="barras">client.gui.components.TableFindData</driver>
+          <parameters>
+            <arg attribute="rows">2</arg>
+            <arg attribute="name">Barras</arg>
+            <arg attribute="externalValue">idasientogenerico,client.gui.components.TableDataFields,aa</arg>
+            <arg attribute="beanshellNQ">f=c!=0?((c/(1+(aa/100))-b)/(c/(1+(aa/100))))*100:0</arg> <!-- utilidad 1 -->
+            <arg attribute="beanshellNQ">g=d!=0?((d/(1+(aa/100))-b)/(d/(1+(aa/100))))*100:0</arg> <!-- utilidad 2 -->
+            <arg attribute="beanshellNQ">h=e!=0?((e/(1+(aa/100))-b)/(e/(1+(aa/100))))*100:0</arg> <!-- utilidad 3 -->
+            <subarg> <!-- a -->
+              <arg attribute="name">Barras</arg>
+              <arg attribute="length">130</arg>
+              <arg attribute="type">STRING</arg>
+              <!-- <arg attribute="queryCol">0</arg> -->
+              <arg attribute="enabled">true</arg>
+              <arg attribute="returnCol">0</arg>
+            </subarg>
+            <subarg> <!-- b -->
+              <arg attribute="name">Costo</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="length">100</arg>
+              <arg attribute="roundDecimal">0</arg>
+              <arg attribute="enabled">false</arg>
+              <arg attribute="returnCol">1</arg>
+              <arg attribute="clean">true</arg>
+            </subarg>
+            <subarg> <!-- c -->
+              <arg attribute="name">Pventa1</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="length">100</arg>
+              <arg attribute="roundDecimal">0</arg>
+              <arg attribute="enabled">true</arg>
+              <arg attribute="returnCol">2</arg>
+              <arg attribute="clean">true</arg>
+            </subarg>
+            <subarg> <!-- d -->
+              <arg attribute="name">Pventa2</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="length">100</arg>
+              <arg attribute="roundDecimal">0</arg>
+              <arg attribute="enabled">true</arg>
+              <arg attribute="returnCol">3</arg>
+              <arg attribute="clean">true</arg>
+            </subarg>
+            <subarg> <!-- e -->
+              <arg attribute="name">Pventa3</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="length">100</arg>
+              <arg attribute="roundDecimal">0</arg>
+              <arg attribute="enabled">true</arg>
+              <arg attribute="returnCol">4</arg>
+              <arg attribute="clean">true</arg>
+            </subarg>
+            <subarg> <!-- f -->
+              <arg attribute="name">%Utilidad1</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="length">75</arg>
+              <arg attribute="roundDecimal">2</arg>
+              <arg attribute="enabled">false</arg>              
+              <arg attribute="clean">true</arg>
+            </subarg>
+            <subarg> <!-- g -->
+              <arg attribute="name">%Utilidad2</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="length">75</arg>
+              <arg attribute="roundDecimal">2</arg>
+              <arg attribute="enabled">false</arg>
+              <arg attribute="clean">true</arg>
+            </subarg>
+            <subarg> <!-- h -->
+              <arg attribute="name">%Utilidad3</arg>
+              <arg attribute="type">DECIMAL</arg>
+              <arg attribute="length">75</arg>
+              <arg attribute="roundDecimal">2</arg>
+              <arg attribute="enabled">false</arg>
+              <arg attribute="clean">true</arg>
+            </subarg>
+          </parameters>
+        </component>
+      </panel>
+    </panel>
+  </tab>
+  <component locate="South">
+    <driver>common.gui.components.ButtonsPanel</driver>
+    <parameters>
+      <arg>SAVE</arg>
+      <arg>NEW</arg>
+      <arg>EXIT</arg>
+    </parameters>
+    <events>
+      <object>
+        <name>NEW</name>
+        <component>
+          <driver id="marca">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="submarca">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="presentacion">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="referencia">client.gui.components.EmakuSearchField</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="subgrupo">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="grupo">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="seccion">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="desc">common.gui.components.GenericData</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="idasiento">client.gui.components.XMLComboBox</driver>
+          <method>clean</method>
+        </component>
+        <component>
+          <driver id="barras">client.gui.components.TableFindData</driver>
+          <method>clean</method>
+        </component>
+
+        <!--  limpiando llaves externas -->
+        <component>
+          <driver>this</driver>
+          <method>cleanExternalValues</method>
+        </component>
+      </object>
+      <object>
+        <name>SAVE</name>
+
+        <component>
+          <driver>this</driver>
+          <method>validMultiPackage</method>
+          <parameters>
+            <driver attribute="driver" id="seccion">client.gui.components.XMLComboBox</driver>
+            <arg attribute="errorMessage">Error, Falta seleccionar la Línea</arg>
+          </parameters>
+        </component>
+        <component>
+          <driver>this</driver>
+          <method>validMultiPackage</method>
+          <parameters>
+            <driver attribute="driver" id="grupo">client.gui.components.XMLComboBox</driver>
+            <arg attribute="errorMessage">Error, Falta seleccionar el Grupo</arg>
+          </parameters>
+        </component>
+        <component>
+          <driver>this</driver>
+          <method>validMultiPackage</method>
+          <parameters>
+            <driver attribute="driver" id="subgrupo">client.gui.components.XMLComboBox</driver>
+            <arg attribute="errorMessage">Error, Falta seleccionar el Subgrupo</arg>
+          </parameters>
+        </component>
+        <component>
+          <driver>this</driver>
+          <method>validMultiPackage</method>
+          <parameters>
+            <driver attribute="driver" id="idasiento">client.gui.components.XMLComboBox</driver>
+            <arg attribute="errorMessage">Error, Falta seleccionar el Asiento Contable</arg>
+          </parameters>
+        </component>
+        <component>
+          <driver>this</driver>
+          <method>validMultiPackage</method>
+          <parameters>
+            <driver attribute="driver" id="presentacion">client.gui.components.XMLComboBox</driver>
+            <arg attribute="errorMessage">Error, Falta seleccionar la Presentación</arg>
+          </parameters>
+        </component>
+
+
+        <component>
+          <driver>this</driver>
+          <method>validMultiPackage</method>
+          <parameters>
+            <driver attribute="driver" id="marca">client.gui.components.XMLComboBox</driver>
+            <arg attribute="errorMessage">Error, Falta seleccionar la Marca</arg>
+          </parameters>
+        </component>
+
+        <component>
+          <driver>this</driver>
+          <method>validMultiPackage</method>
+          <parameters>
+            <driver attribute="driver" id="referencia">client.gui.components.EmakuSearchField</driver>
+            <arg attribute="errorMessage">Error, Falta digitar la información del campo Referencia Prov.</arg>
+          </parameters>
+        </component>
+
+        <component>
+          <driver>this</driver>
+          <method>validMultiPackage</method>
+          <parameters>
+            <driver attribute="driver" id="desc">common.gui.components.GenericData</driver>
+            <arg attribute="errorMessage">Error, Falta digitar la información del campo Descripcion</arg>
+          </parameters>
+        </component>        
+
+        <!-- 0 -->
+        <component>
+          <driver>this</driver>
+          <method>getPackage</method>
+          <parameters>
+            <arg attribute="blankPackage">true</arg>
+            <arg attribute="nullField">true</arg>
+            <subarg>
+              <arg attribute="importValue">seccion</arg>
+              <arg attribute="importValue">grupo</arg>
+              <arg attribute="importValue">subgrupo</arg>
+              <arg attribute="importValue">marca</arg>
+              <arg attribute="importValue">submarca</arg>
+              <arg attribute="importValue">presentacion</arg>
+              <arg attribute="importValue">referencia</arg>
+              <arg attribute="importValue">descripcion</arg>
+            </subarg>
+          </parameters>
+        </component>
+        <!-- 1 -->
+        <component>
+            <driver id="idasiento">client.gui.components.XMLComboBox</driver>
+            <method>getPackage</method>
+        </component>
+        <!-- 2 -->
+        <component>
+          <driver id="barras">client.gui.components.TableFindData</driver>
+          <method>getPackage</method>
+        </component>
+        <!-- 3 inserta en items_pendientes_traslado para ser enviado por el cron -->
+        <component>
+          <driver id="barras">client.gui.components.TableFindData</driver>
+          <method>getBlankPackage</method>
+        </component>
+      </object>
+    </events>
+  </component>
+</FORM>

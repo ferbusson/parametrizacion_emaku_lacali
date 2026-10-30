@@ -1,0 +1,1 @@
+SELECT id_prod_serv FROM prod_serv WHERE id_tipo_prod_serv = '002'

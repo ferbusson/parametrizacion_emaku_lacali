@@ -52,28 +52,35 @@ WHERE
 
 /** HORA EXTRA ORDINARIA **/
 
+DROP TABLE IF EXISTS aux_ultimo_registro_horas_extra_por_mes;
+CREATE TEMP TABLE aux_ultimo_registro_horas_extra_por_mes AS
+SELECT
+	max(re.ndocumento) as ndocumento
+FROM
+	documentos d,
+	registro_extras_nomina re,
+	args_nomina a
+WHERE
+	d.ndocumento=re.ndocumento and
+	d.estado AND
+	EXTRACT(YEAR FROM a.fecha::DATE)=EXTRACT(YEAR FROM d.fecha) AND
+	EXTRACT(MONTH FROM a.fecha::DATE)=EXTRACT(MONTH FROM d.fecha);
+
+
 DROP TABLE IF EXISTS registro_extras_nomina_rangos;
 CREATE TEMP TABLE registro_extras_nomina_rangos AS
 SELECT
-  re.ndocumento,
-  re.id_tercero,
-  re.fecha,
-  re.hora_inicio_extra,
-  re.tiempo_extra,
-  re.hora_inicio_recargo,
-  re.tiempo_recargo
+	re.ndocumento,
+	re.id_tercero,
+	re.fecha,
+	re.hora_inicio_extra,
+	re.tiempo_extra,
+	re.hora_inicio_recargo,
+	re.tiempo_recargo
 FROM
-  documentos d,
-  info_documento id,
-  registro_extras_nomina re,
-  args_nomina a
-WHERE
-  d.ndocumento=re.ndocumento AND
-  d.ndocumento=id.ndocumento and
-  id.rf_documento is null and
-  d.estado AND
-  EXTRACT(YEAR FROM a.fecha::DATE)=EXTRACT(YEAR FROM d.fecha) AND
-  EXTRACT(MONTH FROM a.fecha::DATE)=EXTRACT(MONTH FROM d.fecha);
+	registro_extras_nomina re
+where
+	re.ndocumento in (select ndocumento from aux_ultimo_registro_horas_extra_por_mes);
 
 /** BASE PARSEADA CON GRUPOS PREPARADOS */
 

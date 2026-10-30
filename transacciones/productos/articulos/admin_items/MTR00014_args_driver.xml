@@ -1,0 +1,13 @@
+<container>
+     <arg attribute="reload"/>
+      <subarg>
+           <!-- 0 -->
+           <arg>MTINS0009</arg>
+           <!-- 1 asiento generico-->
+           <arg attribute="addKey" /> 
+           <!-- 2 -->
+           <arg>LCINS0072</arg>
+           <!-- 3 inserta en items_pendientes_traslado para ser enviado por el cron -->
+           <arg>LCINS0111</arg>
+      </subarg>
+</container>

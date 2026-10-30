@@ -1,0 +1,19 @@
+INSERT INTO
+	item(
+	id_linea,
+	id_grupo,
+	id_sgrupo,
+	id_marca,
+       id_submarca,
+	id_presentacion,
+        ref_proveedor,
+        nombre)
+VALUES(
+	'?',
+	'?',
+	'?',
+	'?',
+	'?',
+	'?',
+        '?',
+        '?')
